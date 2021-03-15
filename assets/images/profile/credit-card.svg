@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12">
+  <g id="credit-card" transform="translate(0 -85.333)">
+    <g id="Group_1793" data-name="Group 1793" transform="translate(0 85.333)">
+      <g id="Group_1792" data-name="Group 1792" transform="translate(0 0)">
+        <path id="Path_4249" data-name="Path 4249" d="M16.125,85.333H1.875A1.878,1.878,0,0,0,0,87.208v8.25a1.878,1.878,0,0,0,1.875,1.875h14.25A1.878,1.878,0,0,0,18,95.458v-8.25A1.878,1.878,0,0,0,16.125,85.333ZM17.25,95.458a1.126,1.126,0,0,1-1.125,1.125H1.875A1.126,1.126,0,0,1,.75,95.458v-8.25a1.126,1.126,0,0,1,1.125-1.125h14.25a1.126,1.126,0,0,1,1.125,1.125v8.25Z" transform="translate(0 -85.333)" fill="#f2ae2e"/>
+      </g>
+    </g>
+    <g id="Group_1795" data-name="Group 1795" transform="translate(0 87.583)">
+      <g id="Group_1794" data-name="Group 1794" transform="translate(0 0)">
+        <path id="Path_4250" data-name="Path 4250" d="M17.625,149.333H.375a.375.375,0,0,0-.375.375v2.25a.375.375,0,0,0,.375.375h17.25a.375.375,0,0,0,.375-.375v-2.25A.375.375,0,0,0,17.625,149.333Zm-.375,2.25H.75v-1.5h16.5v1.5Z" transform="translate(0 -149.333)" fill="#f2ae2e"/>
+      </g>
+    </g>
+    <g id="Group_1797" data-name="Group 1797" transform="translate(2.25 92.833)">
+      <g id="Group_1796" data-name="Group 1796" transform="translate(0 0)">
+        <path id="Path_4251" data-name="Path 4251" d="M68.875,298.667h-4.5a.375.375,0,1,0,0,.75h4.5a.375.375,0,1,0,0-.75Z" transform="translate(-64 -298.667)" fill="#f2ae2e"/>
+      </g>
+    </g>
+    <g id="Group_1799" data-name="Group 1799" transform="translate(2.25 94.333)">
+      <g id="Group_1798" data-name="Group 1798" transform="translate(0 0)">
+        <path id="Path_4252" data-name="Path 4252" d="M68.875,341.333h-4.5a.375.375,0,1,0,0,.75h4.5a.375.375,0,0,0,0-.75Z" transform="translate(-64 -341.333)" fill="#f2ae2e"/>
+      </g>
+    </g>
+    <g id="Group_1801" data-name="Group 1801" transform="translate(12.75 92.083)">
+      <g id="Group_1800" data-name="Group 1800" transform="translate(0 0)">
+        <path id="Path_4253" data-name="Path 4253" d="M364.542,277.333h-.75a1.126,1.126,0,0,0-1.125,1.125v.75a1.126,1.126,0,0,0,1.125,1.125h.75a1.126,1.126,0,0,0,1.125-1.125v-.75A1.126,1.126,0,0,0,364.542,277.333Zm.375,1.875a.375.375,0,0,1-.375.375h-.75a.375.375,0,0,1-.375-.375v-.75a.375.375,0,0,1,.375-.375h.75a.375.375,0,0,1,.375.375Z" transform="translate(-362.667 -277.333)" fill="#f2ae2e"/>
+      </g>
+    </g>
+  </g>
+</svg>

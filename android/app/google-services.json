@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "561933397033",
+    "project_id": "cadeau-boutique",
+    "storage_bucket": "cadeau-boutique.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561933397033:android:55f8172339dad4695fc038",
+        "android_client_info": {
+          "package_name": "com.smarttouch.cadeaue_boutique"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561933397033-uor7ds9s9efes8plk3154j0evk0n5mto.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smarttouch.cadeaue_boutique",
+            "certificate_hash": "7f59ca47671eff88edaebe2f073716396523a3e0"
+          }
+        },
+        {
+          "client_id": "561933397033-bn3bo6qq6jamu0o34cb42e2ohcbee1qi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJnduWyPCEgCDYPMMS3vLtRaFlvkd0HIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561933397033-bn3bo6qq6jamu0o34cb42e2ohcbee1qi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

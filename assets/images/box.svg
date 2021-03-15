@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130.414" height="106.859" viewBox="0 0 130.414 106.859">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1.966" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0.084" stop-color="#f2e9a5"/>
+      <stop offset="1" stop-color="#f0ae2f"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.057" y1="0.735" x2="0.945" y2="0.226" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f0d34f"/>
+      <stop offset="1" stop-color="#f0ae2f"/>
+    </linearGradient>
+    <filter id="Path_384" x="0" y="6.315" width="68.192" height="100.544" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-3" x1="-0.043" y1="0.96" x2="0.99" y2="-0.009" xlink:href="#linear-gradient-2"/>
+    <filter id="Path_385" x="43.464" y="13.608" width="86.95" height="91.002" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-4" x1="-12.338" y1="0.676" x2="-12.338" y2="-0.393" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#b7b7a6" stop-opacity="0"/>
+      <stop offset="0.14" stop-color="#b7b7a6" stop-opacity="0.024"/>
+      <stop offset="0.288" stop-color="#b7b7a6" stop-opacity="0.094"/>
+      <stop offset="0.44" stop-color="#b7b7a6" stop-opacity="0.208"/>
+      <stop offset="0.595" stop-color="#b7b7a6" stop-opacity="0.373"/>
+      <stop offset="0.751" stop-color="#b7b7a6" stop-opacity="0.58"/>
+      <stop offset="0.908" stop-color="#b7b7a6" stop-opacity="0.831"/>
+      <stop offset="1" stop-color="#b7b7a6"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_565" data-name="Group 565" transform="translate(-981.064 103.009) rotate(-3)">
+    <path id="Path_382" data-name="Path 382" d="M1039.98-15.041,993.729-36.379l55.191-9.035,52.963,19.635Z" transform="translate(-0.192 0)" fill="#efc443"/>
+    <g id="Group_560" data-name="Group 560" transform="translate(1047.053 -45.377)">
+      <path id="Path_383" data-name="Path 383" d="M1098.2-45.344l-1.774,29.107,54.638-9.508Z" transform="translate(-1096.422 45.344)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Group_563" data-name="Group 563" transform="translate(993.328 -36.347)">
+      <g id="Group_562" data-name="Group 562" transform="translate(0)">
+        <g id="Group_561" data-name="Group 561">
+          <g transform="matrix(1, 0.05, -0.05, 1, -8.22, -15.18)" filter="url(#Path_384)">
+            <path id="Path_384-2" data-name="Path 384" d="M1036.3,52.229l3.086-59.6L993.328-28.015l2.416,58.746Z" transform="translate(-981.5 94.69) rotate(-3)" fill="url(#linear-gradient-2)"/>
+          </g>
+          <g transform="matrix(1, 0.05, -0.05, 1, -8.22, -15.18)" filter="url(#Path_385)">
+            <path id="Path_385-2" data-name="Path 385" d="M1141.177-7.735l-9.286,58.892L1075.784,61.94l3.086-59.6Z" transform="translate(-1021.44 87.06) rotate(-3)" fill="url(#linear-gradient-3)"/>
+          </g>
+        </g>
+      </g>
+      <path id="Path_386" data-name="Path 386" d="M1134.327.737,1131.269,59.8,1121,61.924l3.146-59.342Z" transform="translate(-1054.465 14.246)" fill="#ebf1e5"/>
+      <path id="Path_387" data-name="Path 387" d="M1141.661-5.935,1140.3,2.137l-62.186,38.68,1.874-36.2Z" transform="translate(-1033.928 17.441)" fill="url(#linear-gradient-4)" style="mix-blend-mode: multiply;isolation: isolate"/>
+      <path id="Path_388" data-name="Path 388" d="M1029.451,48.663l3.039-57.74-10.072-4.581L1019.4,43.284Z" transform="translate(-1005.811 21.139)" fill="#ebf1e5"/>
+    </g>
+  </g>
+</svg>

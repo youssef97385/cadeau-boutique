@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="488.259" height="199.695" viewBox="0 0 488.259 199.695">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-1.146" y1="1.944" x2="-1.146" y2="3.595" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f2d750"/>
+      <stop offset="0.17" stop-color="#f2d750"/>
+      <stop offset="0.35" stop-color="#f2ae2e"/>
+      <stop offset="0.5" stop-color="#f2ae2e"/>
+      <stop offset="0.65" stop-color="#f2ae2e"/>
+      <stop offset="0.83" stop-color="#f2d750"/>
+      <stop offset="1" stop-color="#f2d750"/>
+    </linearGradient>
+    <filter id="Path_116" x="95.521" y="86.205" width="195.663" height="113.49" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-2" x1="-1.251" y1="2.402" x2="-1.407" y2="3.883" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f2ae2e"/>
+      <stop offset="0.12" stop-color="#f2d750"/>
+      <stop offset="0.31" stop-color="#f2ae2e"/>
+      <stop offset="0.5" stop-color="#f2ae2e"/>
+      <stop offset="0.69" stop-color="#f2ae2e"/>
+      <stop offset="0.88" stop-color="#f2d750"/>
+      <stop offset="1" stop-color="#f2d750"/>
+    </linearGradient>
+    <filter id="Path_117" x="0" y="89.641" width="173.505" height="87.572" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-3" x1="0.215" y1="0.963" x2="0.893" y2="0.027" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f2ae2e"/>
+      <stop offset="0.12" stop-color="#f2ae2e"/>
+      <stop offset="0.31" stop-color="#f2d750"/>
+      <stop offset="0.5" stop-color="#f2d750"/>
+      <stop offset="0.69" stop-color="#f2d750"/>
+      <stop offset="0.88" stop-color="#f2ae2e"/>
+      <stop offset="1" stop-color="#f2ae2e"/>
+    </linearGradient>
+    <filter id="Path_118" x="203.815" y="0" width="284.444" height="195.89" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2" transform="matrix(0.998, -0.07, 0.07, 0.998, 8.759, 42.344)">
+    <g id="Layer_1" data-name="Layer 1">
+      <g transform="matrix(1, 0.07, -0.07, 1, -5.78, -42.85)" filter="url(#Path_116)">
+        <path id="Path_116-2" data-name="Path 116" d="M217.563,124.736C174.6,87.727,137.346,77.93,109.28,85.588,127.479,91.7,147.528,103.4,169,121.906c27.219,23.447,66.367,42.885,104.091,34.528C252.344,150.051,233.037,138.035,217.563,124.736Z" transform="matrix(1, -0.07, 0.07, 1, -5.79, 32.8)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="matrix(1, 0.07, -0.07, 1, -5.78, -42.85)" filter="url(#Path_117)">
+        <path id="Path_117-2" data-name="Path 117" d="M56.587,80.178C30.267,83.331,10.636,100.682,0,125.7l48.605,2.821c19.648-46.282,53.556-49.155,94.713-40.728C107.82,74.127,71.825,77.681,56.587,80.178Z" transform="matrix(1, -0.07, 0.07, 1, 8.07, 32.5)" fill="url(#linear-gradient-2)"/>
+      </g>
+      <g transform="matrix(1, 0.07, -0.07, 1, -5.78, -42.85)" filter="url(#Path_118)">
+        <path id="Path_118-2" data-name="Path 118" d="M486.854,0a171.059,171.059,0,0,0-26.136,4.043c-45.077,9.422-72.392,58.211-97.07,95.3-20.216,30.389-51.094,41.453-74.1,46.553a118.535,118.535,0,0,1-50.133-2.96c10.182-1.947,106.161,43.165,163.3-51.461,17.36-28.756,42.064-64.821,78.339-74.113a78.716,78.716,0,0,1,4.646-14.8C486.051,1.685,486.452.873,486.854,0Z" transform="matrix(1, -0.07, 0.07, 1, -21.51, 44.46)" fill="url(#linear-gradient-3)"/>
+      </g>
+    </g>
+  </g>
+</svg>
