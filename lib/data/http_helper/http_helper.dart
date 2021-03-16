@@ -14,6 +14,7 @@ import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/core/error/error.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cadeaue_boutique/model/category_model/base_category.dart';
@@ -539,6 +540,42 @@ class HttpHelper implements IHttpHelper {
       print(e.toString());
       throw NetworkException();
     }
+  }
+
+  @override
+  Future<WrapItem> getWrapByid({int id}) async{
+    print("wrap888");
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('app/wrap/$id/get');
+      print('wrap Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+
+        final BaseResponse<WrapItem> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                const FullType(WrapItem),
+              ],
+            ));
+
+        print("wrap status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+
   }
 
 

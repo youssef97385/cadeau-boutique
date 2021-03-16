@@ -14,6 +14,7 @@ part 'wrap_item.g.dart';
 abstract class WrapItem implements Built<WrapItem, WrapItemBuilder> {
   // fields go here
 
+  @nullable
   int get id;
 
   @BuiltValueField(wireName: "name_ar")

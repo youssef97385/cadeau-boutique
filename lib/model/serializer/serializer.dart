@@ -31,7 +31,8 @@ part 'serializer.g.dart';
   BaseWrap,
   ProductModel,
   ColorModel,
-  SizeModel
+  SizeModel,
+  WrapItem
 
 ])
 final Serializers serializers = (_$serializers.toBuilder()
@@ -71,6 +72,15 @@ final Serializers serializers = (_$serializers.toBuilder()
         ],
       )),
           () => BaseResponseBuilder<ProductModel>())
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          const FullType(WrapItem),
+        ],
+      )),
+          () => BaseResponseBuilder<WrapItem>())
+
   ..addBuilderFactory(
       (FullType(
         BaseResponse,

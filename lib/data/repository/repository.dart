@@ -14,6 +14,7 @@ import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
+import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 
 import 'irepository.dart';
@@ -114,6 +115,12 @@ class Repository implements IRepository {
   Future<BuiltList<ProductModel>> getAllProducts() async{
     final products = await _ihttpHelper.getAllProducts();
     return products;
+  }
+
+  @override
+  Future<WrapItem> getWrapByid({int id}) async{
+    final wrap = await _ihttpHelper.getWrapByid(id: id);
+    return wrap;
   }
 
 }

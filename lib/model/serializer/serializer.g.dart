@@ -24,6 +24,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ProductModel.serializer)
       ..add(SizeModel.serializer)
       ..add(ColorModel.serializer)
+      ..add(WrapItem.serializer)
 
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SliderModel)]),

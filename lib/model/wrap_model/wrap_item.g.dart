@@ -17,11 +17,14 @@ class _$WrapItemSerializer implements StructuredSerializer<WrapItem> {
   @override
   Iterable<Object> serialize(Serializers serializers, WrapItem object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
-    ];
+    final result = <Object>[];
     Object value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.nameAr;
     if (value != null) {
       result
@@ -146,9 +149,7 @@ class _$WrapItem extends WrapItem {
       this.mainPrice,
       this.sizes,
       this.colors})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'WrapItem', 'id');
-  }
+      : super._();
 
   @override
   WrapItem rebuild(void Function(WrapItemBuilder) updates) =>
@@ -265,7 +266,7 @@ class WrapItemBuilder implements Builder<WrapItem, WrapItemBuilder> {
     try {
       _$result = _$v ??
           new _$WrapItem._(
-              id: BuiltValueNullFieldError.checkNotNull(id, 'WrapItem', 'id'),
+              id: id,
               nameAr: nameAr,
               nameEn: nameEn,
               image: image,

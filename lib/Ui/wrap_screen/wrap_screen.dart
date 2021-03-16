@@ -1,28 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
-import 'package:cadeaue_boutique/core/constent.dart';
-import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:cadeaue_boutique/Ui/wrap_alert_dialog/wrap_dialog.dart';
-import 'package:cadeaue_boutique/injectoin.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_event.dart';
-import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_state.dart';
+import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_event.dart';
+import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_state.dart';
+import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
+import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
+import 'package:cadeaue_boutique/core/constent.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
-class ProductScreen extends StatefulWidget {
+import '../../injectoin.dart';
+import 'bloc/wrap_bloc.dart';
+class WrapScreen extends StatefulWidget {
+
   int id;
 
-  ProductScreen({this.id});
-
+  WrapScreen({this.id});
 
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  _WrapScreenState createState() => _WrapScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _WrapScreenState extends State<WrapScreen> {
 
-  final _bloc = sl<ProductBloc>();
 
 
   List<String> sizes = ["S", "M", "L"];
@@ -39,11 +39,13 @@ class _ProductScreenState extends State<ProductScreen> {
 
   bool imageChanged = false;
 
+  final _bloc = sl<WrapBloc>();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _bloc.add(GetProduct((b) =>
+    _bloc.add(GetWrap((b) =>
     b
       ..id = widget.id));
   }
@@ -55,16 +57,16 @@ class _ProductScreenState extends State<ProductScreen> {
         .size;
     return BlocBuilder(
       cubit: _bloc,
-      builder: (BuildContext context, ProductState state) {
-        print("my product "+ (state.product.image == null).toString() + "   "+state.product.toString() );
+      builder: (BuildContext context, WrapState state) {
+        print("my product "+ (state.wrap.image == null).toString() + "   "+state.wrap.toString() );
         return Stack(
           children: [
             Scaffold(
                 body:
-                state.product.image == null?Container():
+                state.wrap.image == null?Container():
                 SingleChildScrollView(
                   child:
-                      // state.product==null?Container():
+                  // state.product==null?Container():
                   Column(
 
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +86,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             borderRadius: BorderRadius.only(bottomRight: Radius
                                 .circular(14), bottomLeft: Radius.circular(14)),
                             child: Image.network(
-                              imageChanged?BaseImgUrl+selectedImage:BaseImgUrl+state.product.image, fit: BoxFit.fill,)),
+                              imageChanged?BaseImgUrl+selectedImage:BaseImgUrl+state.wrap.image, fit: BoxFit.fill,)),
                       ),
                       SizedBox(height: 20,),
 
@@ -104,7 +106,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                   size: 12.0,),
                                 SizedBox(height: 10,),
                                 baseText(color: AppColor.darkTextColor,
-                                    title: state.product.nameEn,
+                                    title: state.wrap.nameEn,
                                     size: 18.0,
                                     fontWeight: FontWeight.bold),
 
@@ -137,41 +139,41 @@ class _ProductScreenState extends State<ProductScreen> {
                             Row(
                               children: [
                                 baseText(color: AppColor.darkTextColor,
-                                    title: "\$ "+state.product.mainPrice,
+                                    title: "\$ "+state.wrap.mainPrice,
                                     size: 20.0,
                                     decoration: TextDecoration.lineThrough),
-                                SizedBox(width: 10,),
-                                baseText(color: AppColor.darkYellow,
-                                    title: "\$ "+state.product.salePrice,
-                                    size: 20.0),
+                                // SizedBox(width: 10,),
+                                // baseText(color: AppColor.darkYellow,
+                                //     title: "\$ "+state.wrap.salePrice,
+                                //     size: 20.0),
                               ],
                             ),
-                            Row(
-                              children: [
-                                SvgPicture.asset("assets/images/favourite.svg"),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                baseText(color: AppColor.darkTextColor,
-                                  title: state.product.likes.toString(),
-                                  size: 16.0,),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     SvgPicture.asset("assets/images/favourite.svg"),
+                            //     SizedBox(
+                            //       width: 5,
+                            //     ),
+                            //     baseText(color: AppColor.darkTextColor,
+                            //       title: state.wrap.likes.toString(),
+                            //       size: 16.0,),
+                            //   ],
+                            // ),
 
                           ],
                         ),
                       ),
-                      SizedBox(height: 20,),
-
-                      ///description
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 24.0, right: 46),
-                        child: baseText(
-                            title: state.product.description == null ?"":state.product.description,
-                            color: AppColor.textColor,
-                            size: 16.0, height: 2.0),
-                      ),
+                      // SizedBox(height: 20,),
+                      //
+                      // ///description
+                      //
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 24.0, right: 46),
+                      //   child: baseText(
+                      //       title: state.wrap.description == null ?"":state.wrap.description,
+                      //       color: AppColor.textColor,
+                      //       size: 16.0, height: 2.0),
+                      // ),
 
                       SizedBox(
                         height: 20,
@@ -179,7 +181,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
 
                       ///size
-                      state.product.sizes.isEmpty?Container():
+                      state.wrap.sizes.isEmpty?Container():
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: baseText(title: "Size:",
@@ -189,14 +191,14 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
 
                       SizedBox(height: 10,),
-                      state.product.sizes.isEmpty?Container():
+                      state.wrap.sizes.isEmpty?Container():
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: Container(
                           height: 40,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.product.sizes.length,
+                              itemCount: state.wrap.sizes.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(right: 24.0),
@@ -225,7 +227,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                         ],
                                       ),
                                       child: Center(child: baseText(
-                                          title: state.product.sizes[index].size,
+                                          title: state.wrap.sizes[index].size,
                                           color: AppColor.darkTextColor,
                                           size: 18.0)),
                                     ),
@@ -239,7 +241,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                       ///color
 
-                      state.product.colors.isEmpty?Container():
+                      state.wrap.colors.isEmpty?Container():
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: baseText(title: "Color:",
@@ -249,14 +251,14 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
 
                       SizedBox(height: 10,),
-                      state.product.colors.isEmpty?Container():
+                      state.wrap.colors.isEmpty?Container():
                       Padding(
                         padding: const EdgeInsets.only(left: 24.0),
                         child: Container(
                           height: 40,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.product.colors.length,
+                              itemCount: state.wrap.colors.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(right: 24.0),
@@ -264,7 +266,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       onTap: () {
                                         setState(() {
                                           selectedColor = index;
-                                          selectedImage = state.product.colors[index].image;
+                                          selectedImage = state.wrap.colors[index].image;
                                           imageChanged = true;
                                         });
                                       },
@@ -288,7 +290,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                               ),
                                             ],
                                             shape: BoxShape.circle,
-                                            color: hexToColor(state.product.colors[index].color)
+                                            color: hexToColor(state.wrap.colors[index].color)
 
                                         ),
                                         child: selectedColor != index
@@ -311,43 +313,43 @@ class _ProductScreenState extends State<ProductScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
 
                           children: [
-                            Container(
-                              // margin: EdgeInsets.only(bottom: 80),
-                              height: size.height * 0.07,
-                              width: size.width * .3,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(1, 1),
-                                    color: Colors.grey.withOpacity(0.6),
-                                    blurRadius: 5,
-                                    spreadRadius: 3,
-                                  ),
-                                ],
-
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              child: FlatButton(
-                                // splashColor: Colors.red,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => FunkyOverlay(),
-                                  );
-                                },
-                                child: Text(
-                                  'Add Wrap',
-                                  style: TextStyle(
-                                    color: AppColor.textColor,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(width: 20,),
+                            // Container(
+                            //   // margin: EdgeInsets.only(bottom: 80),
+                            //   height: size.height * 0.07,
+                            //   width: size.width * .3,
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     boxShadow: [
+                            //       BoxShadow(
+                            //         offset: Offset(1, 1),
+                            //         color: Colors.grey.withOpacity(0.6),
+                            //         blurRadius: 5,
+                            //         spreadRadius: 3,
+                            //       ),
+                            //     ],
+                            //
+                            //     borderRadius: BorderRadius.circular(40),
+                            //   ),
+                            //   child: FlatButton(
+                            //     // splashColor: Colors.red,
+                            //     onPressed: () {
+                            //       showDialog(
+                            //         context: context,
+                            //         builder: (_) => FunkyOverlay(),
+                            //       );
+                            //     },
+                            //     child: Text(
+                            //       'Add Wrap',
+                            //       style: TextStyle(
+                            //         color: AppColor.textColor,
+                            //         fontSize: 13,
+                            //         fontWeight: FontWeight.w500,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            //
+                            // SizedBox(width: 20,),
                             Container(
                               // margin: EdgeInsets.only(bottom: 80),
                               height: size.height * 0.07,

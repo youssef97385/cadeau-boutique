@@ -1,5 +1,6 @@
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
+import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -64,4 +65,8 @@ Future iniGetIt() async {
   ///Producstbloc
 
   sl.registerFactory(() => ProductsBloc(sl()));
+
+  ///Wraploc
+
+  sl.registerFactory(() => WrapBloc(sl()));
 }
