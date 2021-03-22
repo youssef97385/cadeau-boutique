@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
 import 'package:cadeaue_boutique/Ui/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +8,10 @@ import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/Ui/categories_screen/categories_screen.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
 class MainDrawer extends StatelessWidget {
+  bool isLogin;
+
+  MainDrawer({this.isLogin});
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -111,7 +117,34 @@ class MainDrawer extends StatelessWidget {
                         ),
 
                         GestureDetector(
-                          onTap: (){  Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));},
+                          onTap: (){
+
+                            if(isLogin){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
+                            }else{
+                              AwesomeDialog(
+                                context: context,
+                                customHeader: Container(
+                                  child: Icon(
+                                    Icons.error_outline,
+                                    size: 100,
+                                    color: AppColor.darkYellow,
+                                  ),
+                                ),
+                                btnOkColor: AppColor.darkYellow,
+                                dialogType: DialogType.INFO,
+                                animType: AnimType.BOTTOMSLIDE,
+                                title: 'Login',
+                                desc: 'You must be logged in',
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () {
+                                  WidgetsBinding.instance.addPostFrameCallback((_) =>
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) => SigninScreen())));
+                                },
+                              )..show();
+                            }
+                           },
                             child: singleDrawerItem("assets/images/drawer/heart.svg", "Wishlist")),
                         SizedBox(
                           height: 30,

@@ -20,6 +20,7 @@ import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/color_model/color_model.dart';
 import 'package:cadeaue_boutique/model/sizeModel/size_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 part 'serializer.g.dart';
 
 @SerializersFor(const [
@@ -33,7 +34,6 @@ part 'serializer.g.dart';
   ColorModel,
   SizeModel,
   WrapItem
-
 ])
 final Serializers serializers = (_$serializers.toBuilder()
   ..addPlugin(StandardJsonPlugin())
@@ -196,6 +196,14 @@ final Serializers serializers = (_$serializers.toBuilder()
         ],
       )),
           () => BaseResponseBuilder<BuiltList<ProductModel>>())
+  ..addBuilderFactory(
+      (FullType(
+        BuiltList,
+        [
+          const FullType(RelationModel),
+        ],
+      )),
+          () => ListBuilder<RelationModel>())
 
 )
     .build();

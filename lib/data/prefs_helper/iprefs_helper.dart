@@ -6,6 +6,8 @@ abstract class IPrefsHelper {
 
   Future<bool> getIsLogin();
 
+  Future<String> getToken();
+
   Future<int> getAppLanguage();
 
   Future<void> setAppLanguage(int value);

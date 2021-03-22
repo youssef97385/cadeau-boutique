@@ -20,6 +20,7 @@ abstract class HomeState
   bool get success;
   bool get isLoading;
   String get error;
+  bool get loginState;
 
   BuiltList<SliderModel> get sliders;
   BuiltList<OccasionModel> get occasions;
@@ -39,6 +40,7 @@ abstract class HomeState
       ..error = ""
       ..isLoading = false
       ..success = false
+      ..loginState=false
         ..sliders.replace([])
         ..occasions.replace([])
         ..categories.replace([])

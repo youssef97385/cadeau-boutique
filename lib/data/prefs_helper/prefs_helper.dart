@@ -26,7 +26,13 @@ class PrefsHelper implements IPrefsHelper {
 
   @override
   Future<void> saveToken(String token) async{
+    print("my token "+ token);
     (await getPrefs()).setString(ACCESS_TOKEN, token);
+    (await getPrefs()).setBool(IS_LOGIN, true);
+  }
 
+  @override
+  Future<String> getToken() async{
+    return ((await getPrefs()).getString(ACCESS_TOKEN));
   }
 }

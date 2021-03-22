@@ -5,6 +5,7 @@ import 'package:cadeaue_boutique/core/base_widget/animated_background.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/Ui/home_screen/home_Screen.dart';
 import 'package:cadeaue_boutique/Ui/home/page/home.dart';
+import 'package:cadeaue_boutique/core/base_widget/filter_bar.dart';
 import 'dart:async';
 class WelcomePage extends StatefulWidget {
   @override
@@ -94,7 +95,7 @@ class _WelcomePageState extends State<WelcomePage>  with TickerProviderStateMixi
           SingleChildScrollView(
             child: Column(
               children: [
-                 baseAppBar(size , context),
+                 filterBar(size , context),
                 SizedBox(
                   height: size.height*0.05,
                 ),

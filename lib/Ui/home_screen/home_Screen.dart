@@ -103,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // print ("home state "+state2.categories.toString());
+    _bloc.add(IniEvent());
     _bloc.add(GetSlider());
     _bloc.add(GetOccasion());
     _bloc.add(GetCategory());
@@ -134,15 +135,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return BlocBuilder(
       cubit: _bloc,
       builder: (BuildContext context, HomeState state) {
+
         return Scaffold(
             backgroundColor: Colors.white,
             key: _drawerKey,
-            drawer: MainDrawer(),
+            drawer: MainDrawer(isLogin: state.loginState,),
             body: Stack(
               children: [
                 SingleChildScrollView(
@@ -699,7 +707,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 id: state
                                                                     .products[
                                                                 index]
-                                                                    .id)));
+                                                                    .id,img:state
+                                                                .products[
+                                                            index]
+                                                                .image)));
                                                   },
                                                   child: Column(
                                                     children: [
@@ -744,14 +755,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         BorderRadius.all(
                                                                             Radius.circular(
                                                                                 12)),
-                                                                    child: Image
-                                                                        .network(
-                                                                      BaseImgUrl +
-                                                                          state
-                                                                              .products[index]
-                                                                              .image,
-                                                                      fit: BoxFit
-                                                                          .fill,
+                                                                    child: Hero(
+                                                                      tag: "${state
+                                                                          .products[
+                                                                      index]
+                                                                          .id}",
+                                                                      child: Image
+                                                                          .network(
+                                                                        BaseImgUrl +
+                                                                            state
+                                                                                .products[index]
+                                                                                .image,
+                                                                        fit: BoxFit
+                                                                            .fill,
+                                                                      ),
                                                                     ),
                                                                   )),
                                                             ),
@@ -1087,7 +1104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       id: state
                                                                           .products[
                                                                               0]
-                                                                          .id)));
+                                                                          .id, img: state.products[0].image,)));
                                                         },
                                                         child: Container(
                                                           width:
@@ -1213,7 +1230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                                 .products[
                                                                             1]
                                                                                 .id,
-                                                                          )));
+                                                                          img: state.products[1].image)));
                                                         },
                                                         child: Container(
                                                           width:
@@ -1343,7 +1360,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             id: state
                                                                                 .products[
                                                                             2]
-                                                                                .id,
+                                                                                .id,img: state.products[2].image
                                                                           )));
                                                         },
                                                         child: Container(
@@ -1469,7 +1486,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             id: state
                                                                                 .products[
                                                                             3]
-                                                                                .id,
+                                                                                .id,img: state.products[3].image
                                                                           )));
                                                         },
                                                         child: Container(
@@ -1662,7 +1679,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 width: size.width,
                                 // height: 300,
-                                child: Image.asset("assets/images/barcode.png",
+                                child: Image.asset("assets/images/scan-1.png",
                                     fit: BoxFit.fill),
                               ),
 
@@ -1675,13 +1692,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : Align(
                                       alignment: Alignment.centerLeft,
                                       child: Container(
-                                        width: size.width * 0.9,
+                                        width: size.width ,
                                         height: 280,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              bottomRight: Radius.circular(20)),
+
                                           boxShadow: [
                                             BoxShadow(
                                               color:
@@ -1743,6 +1758,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     fontSize:
                                                                         18),
                                                               ),
+                                                              SizedBox(height: 2,),
                                                               wrapIndex == index
                                                                   ? Container(
                                                                       width: 10,

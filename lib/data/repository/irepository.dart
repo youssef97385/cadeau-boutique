@@ -11,6 +11,7 @@ import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
+import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 abstract class IRepository {
 
   Future<bool> getIsLogin();
@@ -47,5 +48,13 @@ abstract class IRepository {
   Future<BuiltList<ProductModel>> getProducts({int id , String type});
 
   Future<BuiltList<ProductModel>> getAllProducts();
+
+  Future<BuiltList<RelationModel>> getRelations();
+
+  Future<BuiltList<ProductModel>> getFavourites();
+
+  Future<bool> addToFavourite({int id});
+
+  Future<bool> removeFavourite({int id});
 
 }

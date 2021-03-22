@@ -10,6 +10,7 @@ import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/core/error/error.dart';
@@ -200,6 +201,7 @@ class HttpHelper implements IHttpHelper {
 
   @override
   Future<BaseOccasion> getOccasions({int page}) async{
+    print("picker2");
     try {
 
       _dio.interceptors.add(CookieManager(cookieJar));
@@ -577,6 +579,149 @@ class HttpHelper implements IHttpHelper {
     }
 
   }
+
+  @override
+  Future<BuiltList<RelationModel>> getRelation() async{
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('data/get/main_relations/without/paginate');
+      print('relation Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+
+        final BaseResponse<BuiltList<RelationModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(RelationModel),
+                  ],
+                ),
+              ],
+            ));
+
+        print("relation status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<bool> addToFav({int productId, String token}) async{
+    try {
+
+      final formData = {
+        "gift_id": productId,
+      };
+      print("add1 "+ productId.toString() +" "+ token);
+
+
+      _dio.interceptors.add(CookieManager(cookieJar));
+      String myType;
+      _dio.options.headers["authorization"] = "token ${token}";
+
+      final response = await _dio.post('app/gift/add/favorite',data:formData,options: Options(headers: {"Authorization": 'Bearer '+token}));
+      print('add favourites Response StatusCode ${response.statusCode}');
+
+      print("add2 "+response.toString());
+      if (response.statusCode == 200) {
+
+       return true;
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<BuiltList<ProductModel>> getFavourites({String token}) async{
+    try {
+
+
+      _dio.interceptors.add(CookieManager(cookieJar));
+      String myType;
+
+      final response = await _dio.get('app/gift/get/favorite',options: Options(headers: {"Authorization": 'Bearer '+token}));
+      print('favourites Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<ProductModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(ProductModel),
+                  ],
+                ),
+              ],
+            ));
+
+        print("favourites list status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<bool> removeFavourite({int productId, String token}) async{
+    try {
+
+      final formData = {
+        "gift_id": productId,
+      };
+
+
+
+      _dio.interceptors.add(CookieManager(cookieJar));
+      String myType;
+      _dio.options.headers["authorization"] = "token ${token}";
+
+      final response = await _dio.post('app/gift/remove/favorite',data:formData,options: Options(headers: {"Authorization": 'Bearer '+token}));
+      print('add favourites Response StatusCode ${response.statusCode}');
+
+      print("add2 "+response.toString());
+      if (response.statusCode == 200) {
+
+        return true;
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
 
 
 }

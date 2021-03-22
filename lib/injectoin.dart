@@ -17,6 +17,8 @@ import 'data/db_helper/db_helper.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/bloc/signin_bloc.dart';
 import 'package:cadeaue_boutique/Ui/signup_screen/bloc/signup_bloc.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
+import 'package:cadeaue_boutique/Ui/picker_screen/bloc/filter_bloc.dart';
+import 'package:cadeaue_boutique/Ui/wishlist_screen/bloc/favourite_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -69,4 +71,15 @@ Future iniGetIt() async {
   ///Wraploc
 
   sl.registerFactory(() => WrapBloc(sl()));
+
+  ///FilterBloc
+
+  sl.registerFactory(() => FilterBloc(sl()));
+
+  ///FavBloc
+
+  sl.registerFactory(() => FavouriteBloc(sl()));
+
+
+
 }

@@ -11,6 +11,7 @@ import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
@@ -65,6 +66,7 @@ class Repository implements IRepository {
 
   @override
   Future<BaseOccasion> getOccasions({int page}) async{
+    print("picker1");
     final occasion = await _ihttpHelper.getOccasions(page: page);
     return occasion;
   }
@@ -121,6 +123,34 @@ class Repository implements IRepository {
   Future<WrapItem> getWrapByid({int id}) async{
     final wrap = await _ihttpHelper.getWrapByid(id: id);
     return wrap;
+  }
+
+  @override
+  Future<BuiltList<RelationModel>> getRelations() async{
+    final relations = await _ihttpHelper.getRelation();
+    return relations;
+  }
+
+  @override
+  Future<BuiltList<ProductModel>> getFavourites() async{
+    final token = await _iprefHelper.getToken();
+      final favourites = await _ihttpHelper.getFavourites(token: token);
+      return favourites;
+
+  }
+
+  @override
+  Future<bool> addToFavourite({int id}) async{
+    final token = await _iprefHelper.getToken();
+    final favourites = await _ihttpHelper.addToFav(productId: id , token: token);
+    return favourites;
+  }
+
+  @override
+  Future<bool> removeFavourite({int id}) async{
+    final token = await _iprefHelper.getToken();
+    final favourites = await _ihttpHelper.removeFavourite(productId: id , token: token);
+    return favourites;
   }
 
 }

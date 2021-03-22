@@ -17,3 +17,15 @@ implements Built<GetProduct, GetProductBuilder> {
 
   factory GetProduct([updates(GetProductBuilder b)]) = _$GetProduct;
 }
+
+abstract class AddToFavourite extends ProductEvent
+    implements Built<AddToFavourite, AddToFavouriteBuilder> {
+
+  //fields go here
+
+  int get id;
+
+  AddToFavourite._();
+
+  factory AddToFavourite([updates(AddToFavouriteBuilder b)]) = _$AddToFavourite;
+}

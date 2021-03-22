@@ -59,6 +59,7 @@ class _AppState extends State<App> {
               builder: (context, snapshotLanguage) {
               return MaterialApp(
                   debugShowCheckedModeBanner: false,
+
                   title: "App",color: Color.fromRGBO(16, 150, 141, 1),
                 theme: ThemeData(primarySwatch: createMaterialColor(Color(0xFF10968D)),
                     fontFamily: 'FontsFree-Net-SFProDisplay'),

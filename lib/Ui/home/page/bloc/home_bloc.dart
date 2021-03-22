@@ -252,7 +252,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       }
     }
+    if (event is IniEvent) {
+      final result = await _iRepository.getIsLogin();
+      yield state.rebuild((b) => b..loginState = result);
+    }
   }
+
 
 
 }

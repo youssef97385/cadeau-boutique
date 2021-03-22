@@ -15,6 +15,7 @@ import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 
 
 
@@ -61,5 +62,19 @@ Future<WrapItem> getWrapByid({int id});
 Future<BuiltList<ProductModel>> getProducts({int id , String type});
 
 Future<BuiltList<ProductModel>> getAllProducts();
+
+Future<BuiltList<RelationModel>> getRelation();
+
+
+Future<BuiltList<ProductModel>> getFavourites({String token});
+
+Future<bool> addToFav({
+ int productId,
+  String token
+});
+Future<bool> removeFavourite({
+ int productId,
+  String token
+});
 
 }

@@ -14,6 +14,8 @@ class _$HomeState extends HomeState {
   @override
   final String error;
   @override
+  final bool loginState;
+  @override
   final BuiltList<SliderModel> sliders;
   @override
   final BuiltList<OccasionModel> occasions;
@@ -37,6 +39,7 @@ class _$HomeState extends HomeState {
       {this.success,
       this.isLoading,
       this.error,
+      this.loginState,
       this.sliders,
       this.occasions,
       this.nearbyOccasions,
@@ -49,6 +52,8 @@ class _$HomeState extends HomeState {
     BuiltValueNullFieldError.checkNotNull(success, 'HomeState', 'success');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'HomeState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'HomeState', 'error');
+    BuiltValueNullFieldError.checkNotNull(
+        loginState, 'HomeState', 'loginState');
     BuiltValueNullFieldError.checkNotNull(sliders, 'HomeState', 'sliders');
     BuiltValueNullFieldError.checkNotNull(occasions, 'HomeState', 'occasions');
     BuiltValueNullFieldError.checkNotNull(
@@ -75,6 +80,7 @@ class _$HomeState extends HomeState {
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
+        loginState == other.loginState &&
         sliders == other.sliders &&
         occasions == other.occasions &&
         nearbyOccasions == other.nearbyOccasions &&
@@ -96,9 +102,11 @@ class _$HomeState extends HomeState {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, success.hashCode),
-                                            isLoading.hashCode),
-                                        error.hashCode),
+                                        $jc(
+                                            $jc($jc(0, success.hashCode),
+                                                isLoading.hashCode),
+                                            error.hashCode),
+                                        loginState.hashCode),
                                     sliders.hashCode),
                                 occasions.hashCode),
                             nearbyOccasions.hashCode),
@@ -115,6 +123,7 @@ class _$HomeState extends HomeState {
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
+          ..add('loginState', loginState)
           ..add('sliders', sliders)
           ..add('occasions', occasions)
           ..add('nearbyOccasions', nearbyOccasions)
@@ -141,6 +150,10 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   String _error;
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
+
+  bool _loginState;
+  bool get loginState => _$this._loginState;
+  set loginState(bool loginState) => _$this._loginState = loginState;
 
   ListBuilder<SliderModel> _sliders;
   ListBuilder<SliderModel> get sliders =>
@@ -194,6 +207,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _success = $v.success;
       _isLoading = $v.isLoading;
       _error = $v.error;
+      _loginState = $v.loginState;
       _sliders = $v.sliders.toBuilder();
       _occasions = $v.occasions.toBuilder();
       _nearbyOccasions = $v.nearbyOccasions.toBuilder();
@@ -230,6 +244,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
                   isLoading, 'HomeState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'HomeState', 'error'),
+              loginState: BuiltValueNullFieldError.checkNotNull(
+                  loginState, 'HomeState', 'loginState'),
               sliders: sliders.build(),
               occasions: occasions.build(),
               nearbyOccasions: nearbyOccasions.build(),

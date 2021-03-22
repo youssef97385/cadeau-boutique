@@ -97,3 +97,12 @@ abstract class GetAllProducts extends HomeEvent
 
   factory GetAllProducts([updates(GetAllProductsBuilder b)]) = _$GetAllProducts;
 }
+
+abstract class IniEvent extends HomeEvent
+    implements Built<IniEvent, IniEventBuilder> {
+  // fields go here
+
+  IniEvent._();
+
+  factory IniEvent([updates(IniEventBuilder b)]) = _$IniEvent;
+}

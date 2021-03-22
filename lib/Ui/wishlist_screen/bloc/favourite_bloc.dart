@@ -1,53 +1,51 @@
 import 'package:bloc/bloc.dart';
-import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_event.dart';
-import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_state.dart';
+import 'package:cadeaue_boutique/Ui/wishlist_screen/bloc/favourite_event.dart';
+import 'package:cadeaue_boutique/Ui/wishlist_screen/bloc/favourite_state.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
 
-class ProductBloc extends Bloc<ProductEvent, ProductState> {
+class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   IRepository _iRepository;
-
-
-  ProductBloc(this._iRepository) : super(ProductState.initail());
+  FavouriteBloc(this._iRepository) : super(FavouriteState.initail());
 
   @override
-  ProductState get initialState => ProductState.initail();
+  FavouriteState get initialState => FavouriteState.initail();
 
   @override
-  Stream<ProductState> mapEventToState(
-    ProductEvent event,
+  Stream<FavouriteState> mapEventToState(
+    FavouriteEvent event,
   ) async* {
-    if(event is GetProduct){
+    if(event is GetFavourites){
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
           ..error = ""
           ..success = false
-          ..product = null
+          ..products.replace([])
         );
 
-        final data = await _iRepository.getProductByid(id: event.id);
+        final data = await _iRepository.getFavourites();
 
-        print('get product Success data ${data}');
+        print('get favourites Success data ${data}');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""
           ..success = true
-          ..product.replace(data)
+          ..products.replace(data)
         );
 
       } catch (e) {
-        print('GetPRoduct Error $e');
+        print('favourites Error $e');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = "Something went wrong"
           ..success = false
-          ..product.replace(null)
+          ..products.replace([])
         );
 
       }
     }
 
-    if(event is AddToFavourite){
+    if(event is RemoveFavourite){
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
@@ -55,9 +53,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ..success = false
         );
 
-        final data = await _iRepository.addToFavourite(id: event.id);
+        final data = await _iRepository.removeFavourite(id: event.id);
 
-        print('add Success data ${data}');
+        print('remove Success data ${data}');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""
@@ -65,7 +63,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
 
       } catch (e) {
-        print('add Error $e');
+        print('remobve Error $e');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = "Something went wrong"
