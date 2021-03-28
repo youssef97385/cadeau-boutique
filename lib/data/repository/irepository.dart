@@ -12,6 +12,7 @@ import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
+import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 abstract class IRepository {
 
   Future<bool> getIsLogin();
@@ -56,5 +57,35 @@ abstract class IRepository {
   Future<bool> addToFavourite({int id});
 
   Future<bool> removeFavourite({int id});
+
+
+
+  Future<CartModel> addToCart({
+    int giftId,
+    int giftColorId,
+    int wrapId,
+    int wrapColorId,
+
+  });
+
+  Future<CartModel> addSong({
+    String song,
+
+  });
+
+  Future<CartModel> removeSong();
+
+
+  Future<CartModel> addGlobalWrap({
+    int wrapId,
+    int wrapColor,
+
+  });
+
+  Future<CartModel> removeGlobalWrap();
+
+  Future<CartModel> getCartInfo();
+
+  Future<CartModel> removeCartItem({int cartItemId});
 
 }

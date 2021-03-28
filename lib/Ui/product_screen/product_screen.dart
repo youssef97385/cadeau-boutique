@@ -386,7 +386,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                  child: FlatButton(
                                    // splashColor: Colors.red,
                                    onPressed: () {
-                                     Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                                     _bloc.add(AddToCart((b)=> b..giftId = widget.id ));
+                                     // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                                    },
                                    child: Text(
                                      'Add To Cart',

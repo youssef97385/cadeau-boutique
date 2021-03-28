@@ -25,3 +25,14 @@ abstract class GetRelations extends FilterEvent
 
   factory GetRelations([updates(GetRelationsBuilder b)]) = _$GetRelations;
 }
+
+
+abstract class GetMainOccasions extends FilterEvent
+    implements Built<GetMainOccasions, GetMainOccasionsBuilder> {
+
+  //fields go here
+
+  GetMainOccasions._();
+
+  factory GetMainOccasions([updates(GetMainOccasionsBuilder b)]) = _$GetMainOccasions;
+}

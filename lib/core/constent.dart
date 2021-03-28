@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
- const String BaseUrl = "http://apis.cadeauboutique.com/api/";
-// const String BaseUrl = "http://192.168.43.229:8000/api/";
+  const String BaseUrl = "http://apis.cadeauboutique.com/api/";
+ // const String BaseUrl = "http://192.168.1.108:7000/api/";
 
- const String BaseImgUrl = "http://apis.cadeauboutique.com/";
-// const String BaseImgUrl = "http://192.168.43.229:8000/";
+  const String BaseImgUrl = "http://apis.cadeauboutique.com/";
+ // const String BaseImgUrl = "http://192.168.1.108:7000/";
 
 const String ImageUrl = "";
 

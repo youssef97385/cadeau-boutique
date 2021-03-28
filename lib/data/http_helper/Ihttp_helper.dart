@@ -16,6 +16,7 @@ import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
+import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 
 
 
@@ -76,5 +77,39 @@ Future<bool> removeFavourite({
  int productId,
   String token
 });
+
+Future<CartModel> addToCart({
+int giftId,
+  int giftColorId,
+  int wrapId,
+  int wrapColorId,
+  String token
+});
+
+Future<CartModel> addSong({
+String song,
+  String token
+});
+
+Future<CartModel> removeSong({String token});
+
+
+Future<CartModel> addGlobalWrap({
+  int wrapId,
+  int wrapColor,
+  String token
+});
+
+Future<CartModel> removeGlobalWrap({String token});
+
+Future<CartModel> getCartInfo({String token});
+
+Future<CartModel> removeCartItem({int cartItemId,String token});
+
+
+
+
+
+
 
 }

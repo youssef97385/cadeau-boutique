@@ -40,8 +40,8 @@ class _PickerScreenState extends State<PickerScreen> {
     // TODO: implement initState
     super.initState();
 
-    // _bloc.add(GetRelations());
-    _bloc.add(GetOccasions());
+    _bloc.add(GetRelations());
+    _bloc.add(GetMainOccasions());
   }
 
   @override

@@ -19,6 +19,7 @@ import 'package:cadeaue_boutique/Ui/signup_screen/bloc/signup_bloc.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
 import 'package:cadeaue_boutique/Ui/picker_screen/bloc/filter_bloc.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/bloc/favourite_bloc.dart';
+import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -79,6 +80,10 @@ Future iniGetIt() async {
   ///FavBloc
 
   sl.registerFactory(() => FavouriteBloc(sl()));
+
+  ///CartBloc
+
+  sl.registerFactory(() => CartBloc(sl()));
 
 
 

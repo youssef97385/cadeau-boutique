@@ -6,6 +6,7 @@ import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
 import 'package:cadeaue_boutique/data/http_helper/Ihttp_helper.dart';
 import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
+import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
@@ -151,6 +152,56 @@ class Repository implements IRepository {
     final token = await _iprefHelper.getToken();
     final favourites = await _ihttpHelper.removeFavourite(productId: id , token: token);
     return favourites;
+  }
+
+  @override
+  Future<CartModel> addGlobalWrap({int wrapId, int wrapColor}) async{
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.addGlobalWrap(wrapColor: wrapColor,wrapId: wrapId , token: token);
+    return cart;
+  }
+
+  @override
+  Future<CartModel> addSong({String song}) async{
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.addSong(token: token);
+    return cart;
+  }
+
+  @override
+  Future<CartModel> addToCart({int giftId, int giftColorId, int wrapId, int wrapColorId}) async{
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.addToCart(giftId: giftId,wrapId: wrapId,giftColorId: giftColorId ,wrapColorId: wrapColorId , token: token);
+    return cart;
+  }
+
+  @override
+  Future<CartModel> getCartInfo() async {
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.getCartInfo( token: token);
+    return cart;
+  }
+
+  @override
+  Future<CartModel> removeCartItem({int cartItemId}) async{
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.removeCartItem(cartItemId:cartItemId , token: token);
+    return cart;
+  }
+
+  @override
+  Future<CartModel> removeGlobalWrap() async{
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.removeGlobalWrap(token: token);
+    return cart;
+  }
+
+  @override
+  Future<CartModel> removeSong()
+  async{
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.removeSong( token: token);
+    return cart;
   }
 
 }

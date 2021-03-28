@@ -4,6 +4,8 @@ import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
+import 'package:cadeaue_boutique/model/cart_model/cart_item.dart';
+import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
@@ -204,6 +206,15 @@ final Serializers serializers = (_$serializers.toBuilder()
         ],
       )),
           () => ListBuilder<RelationModel>())
+
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          const FullType(CartModel),
+        ],
+      )),
+          () => BaseResponseBuilder<CartModel>())
 
 )
     .build();
