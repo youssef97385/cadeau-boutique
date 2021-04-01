@@ -57,14 +57,14 @@ class _SigninScreenState extends State<SigninScreen> {
 
   /// googe signin
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+ // final GoogleSignIn _googleSignIn = GoogleSignIn();
+//  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   SharedPreferences prefs;
 
   bool isLoading = false;
   bool isLoggedIn = false;
-  FirebaseUser currentUser;
+ // FirebaseUser currentUser;
 
   @override
   void initState() {
@@ -89,7 +89,7 @@ class _SigninScreenState extends State<SigninScreen> {
     //   isLoading = false;
     // });
   }
-
+/*
   Future<FirebaseUser> _handleSignIn() async {
     print("google 1");
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -163,7 +163,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
     print("////// "+firebaseUser.toString());
     return firebaseUser;
-  }
+  }*/
 
 
   bool _isLoggedIn = false;
@@ -171,7 +171,7 @@ class _SigninScreenState extends State<SigninScreen> {
    final facebookLogin = FacebookLogin();
 
   // fl.FacebookLogin facebookLogin = new fl.FacebookLogin();
-  _loginWithFb() async{
+  /*_loginWithFb() async{
     final result = await facebookLogin.logIn(['email']);
 
     switch (result.status) {
@@ -202,7 +202,7 @@ class _SigninScreenState extends State<SigninScreen> {
         setState(() => _isLoggedIn = false );
         break;
     }
-  }
+  }*/
 
   final signinKey = new GlobalKey<FormState>();
   String firstName, email, confirmPassword, lastName;
@@ -587,7 +587,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                               children: [
                                                 GestureDetector(
                                                   onTap:(){
-                                                    _loginWithFb();
+                                                  ///  _loginWithFb();
                                                   },
                                                   child: Container(
                                                       height: 38,
@@ -617,7 +617,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 ),
                                                 GestureDetector(
                                                   onTap:(){
-                                                    _handleSignIn();
+                                                  //  _handleSignIn();
                                                   },
                                                   child: Container(
                                                       height: 38,
