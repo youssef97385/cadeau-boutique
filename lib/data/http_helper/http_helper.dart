@@ -162,19 +162,7 @@ class HttpHelper implements IHttpHelper {
       print('slider Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {
-        // final BaseResponse<BuiltList<SliderModel>> baseResponse =
-        // serializers.deserialize(json.decode(response.data),
-        //     specifiedType: FullType(
-        //       BaseResponse,
-        //       [
-        //         FullType(
-        //           BuiltList,
-        //           [
-        //             const FullType(SliderModel),
-        //           ],
-        //         ),
-        //       ],
-        //     ));
+
 
         final BaseResponse<BuiltList<SliderModel>> baseResponse =
             serializers.deserialize(json.decode(response.data),
