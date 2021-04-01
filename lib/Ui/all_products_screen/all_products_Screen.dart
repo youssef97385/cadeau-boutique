@@ -109,7 +109,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                           return GestureDetector(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context)=>ProductScreen(id: state.products[index].id,)
+                                  builder: (context)=>ProductScreen(id: state.products[index].id,img: state.products[index].image,)
                               ));
                             },
                             child: Padding(
