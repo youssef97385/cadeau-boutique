@@ -25,6 +25,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SignupResponse.serializer)
       ..add(SizeModel.serializer)
       ..add(SliderModel.serializer)
+      ..add(UserInfoModel.serializer)
       ..add(WrapItem.serializer)
       ..add(WrapModel.serializer)
       ..addBuilderFactory(

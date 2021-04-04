@@ -99,7 +99,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
               child: Center(
                 child: TextFormField(
 
-                  validator: emptyFieldVAlidator(giftTo),
+                  validator: emptyFieldVAlidator(giftTo,context),
                   keyboardType: TextInputType.name,
                   obscureText: false,
                   decoration: InputDecoration(
@@ -190,7 +190,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
               child: Center(
                 child: TextFormField(
 
-                  validator: emptyFieldVAlidator(deliveryAddress),
+                  validator: emptyFieldVAlidator(deliveryAddress,context),
                   keyboardType: TextInputType.name,
                   obscureText: false,
                   decoration: InputDecoration(
@@ -307,7 +307,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         width: size.width*0.5,
                         child: TextFormField(
 
-                          validator: emptyFieldVAlidator(state),
+                          validator: emptyFieldVAlidator(state,context),
                           keyboardType: TextInputType.name,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -360,7 +360,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
               child: Center(
                 child: TextFormField(
 
-                  validator: emptyFieldVAlidator(zipCode),
+                  validator: emptyFieldVAlidator(zipCode,context),
                   keyboardType: TextInputType.name,
                   obscureText: false,
                   decoration: InputDecoration(

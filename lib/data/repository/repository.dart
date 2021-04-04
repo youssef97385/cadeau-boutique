@@ -15,6 +15,7 @@ import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
@@ -202,6 +203,27 @@ class Repository implements IRepository {
     final token = await _iprefHelper.getToken();
     final cart = await _ihttpHelper.removeSong( token: token);
     return cart;
+  }
+
+  @override
+  Future<UserInfoModel> editProfileRQ({
+    String countryCode, String phone, String gender,
+    String name, String email, String date})async {
+
+    final token = await _iprefHelper.getToken();
+
+
+    final userInfoModel=await _ihttpHelper.editProfileRQ(
+      token: token,
+      countryCode: countryCode,
+      date: date,
+      email: email,
+      gender:gender,
+      name: name,
+      phone: phone
+    );
+
+    return userInfoModel;
   }
 
 }

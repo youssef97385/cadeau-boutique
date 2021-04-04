@@ -6,6 +6,7 @@ import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
@@ -87,5 +88,16 @@ abstract class IRepository {
   Future<CartModel> getCartInfo();
 
   Future<CartModel> removeCartItem({int cartItemId});
+
+
+  Future<UserInfoModel> editProfileRQ({
+    String countryCode ,
+    String phone ,
+    String gender ,
+    String name ,
+    String email,
+    String date,
+  });
+
 
 }

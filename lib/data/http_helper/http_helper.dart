@@ -15,6 +15,7 @@ import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/core/error/error.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -914,6 +915,54 @@ class HttpHelper implements IHttpHelper {
 
       if (response.statusCode == 200) {
         return baseResponse.data;
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
+   static var editProfileRQType=FullType(BaseResponse,[FullType(UserInfoModel)]);
+  @override
+  Future<UserInfoModel> editProfileRQ({
+    String token,
+    String countryCode,
+    String phone,
+    String gender,
+    String name,
+    String email,
+    String date}) async {
+    try {
+      final formData = {
+        "country_code": countryCode,
+        "phone_number": phone,
+        "gender": gender,
+        "name": name,
+        "email": email,
+        "date_of_birth": date,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response =
+      await _dio.post(
+          'setting/edit/info?lang=en',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}),
+          data: formData);
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<UserInfoModel> baseResponse = serializers.deserialize(
+            json.decode(response.data),
+            specifiedType: editProfileRQType);
+
+        print("signup status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
       } else {
         throw NetworkException();
       }

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:cadeaue_boutique/data/http_helper/http_helper.dart';
 import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
 import 'package:cadeaue_boutique/model/category_model/category_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
@@ -32,6 +33,9 @@ import 'package:cadeaue_boutique/model/color_model/color_model.dart';
 import 'package:cadeaue_boutique/model/sizeModel/size_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
+
+
 
 part 'serializer.g.dart';
 
@@ -55,7 +59,9 @@ part 'serializer.g.dart';
   BaseCategory,
   BaseOccasion,
   RelationModel,
-  SliderModel
+  SliderModel,
+  UserInfoModel
+
 
 
 
@@ -315,5 +321,8 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<CartModel>())
+
+    ..addBuilderFactory(HttpHelper.editProfileRQType,
+            ()=>BaseResponseBuilder<UserInfoModel>() )
 
 ).build();

@@ -4,5 +4,20 @@
   "username": "Username",
   "password": "Password",
   "save": "Save",
-  "cancel": "cancel"
+  "cancel": "cancel",
+  "empty_hint":"This Field Should Not be empty",
+  "valid_email": "Please Provide a valid email address",
+  "password_hint": "Password is not matching",
+  "password_lenght_hint": "password should be at least be 6 characters",
+  "full_name": "Full Name",
+  "phone_number": "Phone Number",
+  "email_address": "Email Address",
+  "date_Of_birth": "Date Of Birth",
+  "male": "Male",
+  "female": "Female",
+  "plz_select_date_of_birth": "Please Select Date Of Birth",
+  "empty_hint_name": "Name Should Not be empty",
+  "empty_hint_phone": "Phone Should Not be empty"
+
+
 }

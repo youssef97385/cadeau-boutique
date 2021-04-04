@@ -152,7 +152,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                   child: Center(
                                     child: TextFormField(
 
-                                      validator: emptyFieldVAlidator(city),
+                                      validator: emptyFieldVAlidator(city,context),
                                       keyboardType: TextInputType.name,
                                       obscureText: false,
                                       decoration: InputDecoration(
@@ -202,7 +202,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                   child: Center(
                                     child: TextFormField(
 
-                                      validator: emptyFieldVAlidator(state),
+                                      validator: emptyFieldVAlidator(state,context),
                                       keyboardType: TextInputType.name,
                                       obscureText: false,
                                       decoration: InputDecoration(
@@ -252,7 +252,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                   child: Center(
                                     child: TextFormField(
 
-                                      validator: emptyFieldVAlidator(zipCode),
+                                      validator: emptyFieldVAlidator(zipCode,context),
                                       keyboardType: TextInputType.name,
                                       obscureText: false,
                                       decoration: InputDecoration(

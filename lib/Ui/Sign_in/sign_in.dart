@@ -398,7 +398,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                     child: TextFormField(
                                                       validator:
                                                           emptyFieldVAlidator(
-                                                              phone),
+                                                              phone,context),
                                                       keyboardType:
                                                           TextInputType.number,
                                                       obscureText: false,
@@ -456,7 +456,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 ]),
                                             child: Center(
                                               child: TextFormField(
-                                                validator: passwordValidator(),
+                                                validator: passwordValidator(context),
                                                 keyboardType: TextInputType.text,
                                                 obscureText: true,
                                                 decoration: InputDecoration(

@@ -11,6 +11,7 @@ import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/brand_model/brand_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
@@ -108,6 +109,16 @@ Future<CartModel> removeCartItem({int cartItemId,String token});
 
 
 
+
+Future<UserInfoModel> editProfileRQ({
+  String token,
+  String countryCode ,
+  String phone ,
+  String gender ,
+  String name ,
+  String email,
+  String date,
+   });
 
 
 
