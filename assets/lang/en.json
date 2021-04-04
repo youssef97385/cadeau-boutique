@@ -2,5 +2,7 @@
   "skip": "Skip",
   "signInText": "All the shops in your hands now, enjoy a phenomenal shopping experience",
   "username": "Username",
-  "password": "Password"
+  "password": "Password",
+  "save": "Save",
+  "cancel": "cancel"
 }

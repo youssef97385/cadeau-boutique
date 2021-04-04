@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -364,71 +365,73 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  // margin: EdgeInsets.only(bottom: 80),
-                                  height: size.height * 0.07,
-                                  width: size.width * .41,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: Offset(1, 1),
-                                        color: Colors.grey.withOpacity(0.6),
-                                        blurRadius: 5,
-                                        spreadRadius: 3,
-                                      ),
-                                    ],
+                                Expanded(
+                                  child: Container(
+                                    // margin: EdgeInsets.only(bottom: 80),
+                                    height: size.height * 0.07,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(1, 1),
+                                          color: Colors.grey.withOpacity(0.6),
+                                          blurRadius: 5,
+                                          spreadRadius: 3,
+                                        ),
+                                      ],
 
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  child: FlatButton(
-                                    // splashColor: Colors.red,
-                                    onPressed: () {
-                                    },
-                                    child: Text(
-                                      'cancel',
-                                      style: TextStyle(
-                                        color: AppColor.textColor,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child: FlatButton(
+                                      // splashColor: Colors.red,
+                                      onPressed: () {
+                                      },
+                                      child: Text(
+                                        AppLocalizations.of(context).translate('cancel'),
+                                        style: TextStyle(
+                                          color: AppColor.textColor,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 SizedBox(width: size.width*0.03,),
-                                Container(
-                                  // margin: EdgeInsets.only(bottom: 80),
-                                  height: size.height * 0.07,
-                                  width: size.width * .41,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        AppColor.darkYellow,
-                                        AppColor.lightYellow
-                                      ],
-                                      stops: [0.1, 0.96],
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: Offset(1, 1),
-                                        color: Colors.grey.withOpacity(0.6),
-                                        blurRadius: 5,
-                                        spreadRadius: 3,
+                                Expanded(
+                                  child: Container(
+                                    // margin: EdgeInsets.only(bottom: 80),
+                                    height: size.height * 0.07,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          AppColor.darkYellow,
+                                          AppColor.lightYellow
+                                        ],
+                                        stops: [0.1, 0.96],
                                       ),
-                                    ],
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(1, 1),
+                                          color: Colors.grey.withOpacity(0.6),
+                                          blurRadius: 5,
+                                          spreadRadius: 3,
+                                        ),
+                                      ],
 
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  child: FlatButton(
-                                    // splashColor: Colors.red,
-                                    onPressed: () {
-                                    },
-                                    child: Text(
-                                      'Save',
-                                      style: TextStyle(
-                                        color: AppColor.textColor,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child: FlatButton(
+                                      // splashColor: Colors.red,
+                                      onPressed: () {
+                                      },
+                                      child: Text(
+                                        AppLocalizations.of(context).translate('save'),
+                                        style: TextStyle(
+                                          color: AppColor.textColor,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ),
