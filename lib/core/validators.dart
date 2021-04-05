@@ -104,4 +104,9 @@ String emptyFieldVAlidatorV2(String text,BuildContext context){
 
 }
 
+bool IsNullOrEmpty(String txt){
+
+  return (txt==null||txt.isEmpty);
+}
+
 

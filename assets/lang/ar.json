@@ -17,7 +17,14 @@
   "female": "انثى",
   "plz_select_date_of_birth": "الرجاء اختيار تاريخ الولادة",
   "empty_hint_name": "يجب ألا يكون الاسم  فارغًا",
-  "empty_hint_phone": "يجب ألا يكون رقم الهاتف  فارغًا"
+  "empty_hint_phone": "يجب ألا يكون رقم الهاتف  فارغًا",
+  "city": "المدينة",
+  "state": "المنطقة",
+  "zip_code": "Zip Code",
+  "address_details": "عنوان تفصيلي",
+  "add": "اضافة",
+  "successful_operation": "عملية ناجحة",
+  "plz_fill_all_fields": "الرجاء تعبئة جميع الحقول"
 
 
 }

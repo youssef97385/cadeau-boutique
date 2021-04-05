@@ -17,7 +17,14 @@
   "female": "Female",
   "plz_select_date_of_birth": "Please Select Date Of Birth",
   "empty_hint_name": "Name Should Not be empty",
-  "empty_hint_phone": "Phone Should Not be empty"
+  "empty_hint_phone": "Phone Should Not be empty",
+  "city": "City",
+  "state": "State",
+  "zip_code": "Zip Code",
+  "address_details": "Detailed address",
+  "add": "Add",
+  "successful_operation": "Successful operation",
+  "plz_fill_all_fields": "Please fill in all fields"
 
 
 }

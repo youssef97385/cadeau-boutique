@@ -123,4 +123,13 @@ Future<UserInfoModel> editProfileRQ({
 
 
 
+Future<bool> editAddress({
+  String token,
+  String city ,
+  String state ,
+  String address_details ,
+  String zip_code ,
+
+});
+
 }

@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ));*/
 
-          error("sdsa");
+          error(AppLocalizations.of(context).translate("successful_operation"));
         }
         return Scaffold(
             backgroundColor: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
+import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_bloc.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -90,6 +91,9 @@ Future iniGetIt() async {
   /// Edit Profile
 
   sl.registerFactory(() => EditProfileBloc(sl()));
+
+  ///  Profile Address
+  sl.registerFactory(() => ProfileAddressBloc(sl()));
 
 
 

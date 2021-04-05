@@ -226,4 +226,19 @@ class Repository implements IRepository {
     return userInfoModel;
   }
 
+  @override
+  Future<bool> editAddress({
+    String city, String state,
+    String address_details, String zip_code}) async {
+    final token = await _iprefHelper.getToken();
+    final item=await _ihttpHelper.editAddress(
+     token: token,
+     address_details: address_details,
+      city: city,
+      state: state,
+      zip_code: zip_code
+    );
+
+  }
+
 }

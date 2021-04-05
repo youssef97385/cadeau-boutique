@@ -971,4 +971,40 @@ class HttpHelper implements IHttpHelper {
       throw NetworkException();
     }
   }
+
+  @override
+  Future<bool> editAddress({
+    String token,
+    String city, String
+    state, String address_details, String zip_code}) async {
+    try {
+      final formData = {
+        "city": city,
+        "state": state,
+        "address_details": address_details,
+        "zip_code": zip_code,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response =
+      await _dio.post(
+          'setting/edit/details?lang=en',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}),
+          data: formData);
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        /*final BaseResponse<UserInfoModel> baseResponse = serializers.deserialize(
+            json.decode(response.data),
+            specifiedType: editProfileRQType);*/
+
+        print("status : ${true}");
+
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
 }

@@ -100,4 +100,16 @@ abstract class IRepository {
   });
 
 
+
+
+
+
+  Future<bool> editAddress({
+    String city ,
+    String state ,
+    String address_details ,
+    String zip_code ,
+  });
+
+
 }
