@@ -19,6 +19,8 @@ import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 
 import 'irepository.dart';
 
@@ -239,6 +241,16 @@ class Repository implements IRepository {
       zip_code: zip_code
     );
 
+    return item;
+
+  }
+
+  @override
+  Future<BuiltList<TrackModel>> getTracksHome() async {
+    final token = await _iprefHelper.getToken();
+    final item=await _ihttpHelper.getTracksHome(token: token);
+
+    return item;
   }
 
 }

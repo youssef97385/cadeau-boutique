@@ -1,4 +1,13 @@
+import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart';
+import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
+import 'package:cadeaue_boutique/data/http_helper/Ihttp_helper.dart';
+import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
+import 'package:cadeaue_boutique/data/repository/irepository.dart';
+import 'package:cadeaue_boutique/data/repository/repository.dart';
+import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timeline/model/timeline_model.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -6,18 +15,32 @@ import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timeline/timeline.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
+import 'package:cadeaue_boutique/model/track_home_model/Data.dart';
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_state.dart';
+import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_event.dart';
+import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_bloc.dart';
+
+
+import '../../injectoin.dart';
+
 
 class TrackScreen extends StatefulWidget {
-  final int ticks;
-
-  TrackScreen({@required this.ticks});
 
   @override
   _TrackScreenState createState() => _TrackScreenState();
+
+
 }
 
 class _TrackScreenState extends State<TrackScreen> {
   int current_step = 0;
+  bool loading=true;
+  int ticks=2;
+
+
+  final _bloc = sl<TrackScreenBloc>();
+  List<Data> trackHomeModelList;
 
   // List<Step> steps = [
   //   Step(
@@ -48,321 +71,252 @@ class _TrackScreenState extends State<TrackScreen> {
   // ];
 
   @override
+  void initState() {
+
+
+    ticks=2;
+    loading=true;
+
+
+   super.initState();
+
+    _bloc.add(GetTracks());
+  /*  if(mounted)
+      getData();*/
+
+
+
+  }
+
+ /* Future<void> getData() async {
+    var response= await widget.getTracksHome();
+    if(response.statusCode==200){
+
+      TrackHomeModel trackHomeModel=response.object;
+      setState(() {
+
+
+        trackHomeModelList=trackHomeModel.data;
+        loading=false;
+      });
+
+      print("-----------------------");
+    }
+    else{
+      trackHomeModelList=[];
+      loading=false;
+    }
+
+  }*/
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery
         .of(context)
         .size;
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            baseAppBar(size, context),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: size.height * 0.3,
-              width: size.width * 0.9,
-              decoration: BoxDecoration(
-                  borderRadius:
-                  BorderRadius.all(Radius.circular(12)),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                    ),
-                  ]),
-
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: size.height * 0.06,
-                      width: size.width * 0.9,
-
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          baseText(title: "Watch",
-                              color: AppColor.darkYellow,
-                              size: 18.0),
-                        ],
+    return BlocBuilder(
+        cubit: _bloc,
+        builder: (BuildContext context , TrackScreenState state) {
+          return Scaffold(
+              backgroundColor: Colors.white,
+              body: Stack(
+                children: [
+                  Column(
+                    children: [
+                      baseAppBar(size, context),
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    Container(
 
-                      height: size.height * 0.08,
-                      width: size.width * 0.9,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              baseText(title: "You",
-                                  size: 16.0,
-                                  color: AppColor.darkTextColor),
-                              baseText(title: "12/01/2021",
-                                  size: 12.0,
-                                  color: AppColor.textColor),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              baseText(title: "Mary",
-                                  size: 16.0,
-                                  color: AppColor.darkTextColor),
-                              baseText(title: "12/02/2021",
-                                  size: 12.0,
-                                  color: AppColor.textColor),
-                            ],)
-                        ],
-                      ),
-                    ),
-                    Container(
 
-                      height: size.height * 0.06,
-                      width: size.width * 0.9,
-                      child: //
-                      Row(
-                        children: <Widget>[
-                          tick1(size: size),
+                      Flexible(
+                        child: ListView.builder(
 
-                          line(size,true),
+                          itemCount: state.tracks.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
 
-                          tick2(size: size),
+                            var carIndex=0;
+                            if(state.tracks[index].orderStatus=="new")
+                              carIndex=0;
+                            else if(state.tracks[index].orderStatus=="start")
+                              carIndex=1;
+                                else
+                                  carIndex=2;
+                            return  Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 12),
+                              child: Container(
+                                height: size.height * 0.3,
+                                width: size.width * 0.9,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(1, 1),
+                                        color: Colors.grey.withOpacity(0.6),
+                                        blurRadius: 5,
+                                        spreadRadius: 3,
+                                      ),
+                                    ]),
 
-                          line(size , true),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        height: size.height * 0.06,
+                                        width: size.width * 0.9,
 
-                          tick3(size: size),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            baseText(title: "",
+                                                color: AppColor.darkYellow,
+                                                size: 18.0),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
 
-                          line(size , false),
+                                        height: size.height * 0.08,
+                                        width: size.width * 0.9,
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                baseText(title: "You",
+                                                    size: 16.0,
+                                                    color: AppColor.darkTextColor),
+                                                baseText(title:state.tracks[index].createdAt.substring(0,10),
+                                                    size: 12.0,
+                                                    color: AppColor.textColor),
+                                              ],
+                                            ),
+                                            Flexible(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  baseText(title: state.tracks[index].giftTo,
+                                                      size: 16.0,
+                                                      color: AppColor.darkTextColor),
+                                                  baseText(title: state.tracks[index].deliveryDate,
+                                                      size: 12.0,
+                                                      color: AppColor.textColor),
+                                                ],),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
 
-                          tick4(size: size),
-                        ],
-                      ),
-                    ),
-                    Container(
+                                        height: size.height * 0.06,
+                                        width: size.width * 0.9,
+                                        child: //
+                                        Row(
+                                          children: <Widget>[
+                                            tickHassan1(size: size,stepNumber: 0,carIndex: carIndex),
 
-                      height: size.height * 0.1,
+                                            line(size,0,carIndex),
 
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          baseText(title: "Order will be delivered",
-                              size: 16.0,
-                              color: AppColor.darkTextColor),
-                          SizedBox(height: 5,),
-                          Container(
-                            // margin: EdgeInsets.only(bottom: 80),
-                            height: 26,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  AppColor.darkYellow,
-                                  AppColor.lightYellow
-                                ],
-                                stops: [0.1, 0.96],
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(1, 1),
-                                  color: Colors.grey.withOpacity(0.6),
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                ),
-                              ],
+                                            tickHassan1(size: size,stepNumber: 1,carIndex: carIndex),
 
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: FlatButton(
-                              // splashColor: Colors.red,
-                              onPressed: () {
-                              },
-                              child: Text(
-                                'Details',
-                                style: TextStyle(
-                                  color: AppColor.textColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
+                                            line(size , 1,carIndex),
 
-                        ],
-                      ),
-                    ),
+                                            tickHassan1(size: size,stepNumber: 2,carIndex: carIndex),
+/*
+                                      line(size , false),
 
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: size.height * 0.3,
-              width: size.width * 0.9,
-              decoration: BoxDecoration(
-                  borderRadius:
-                  BorderRadius.all(Radius.circular(12)),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                    ),
-                  ]),
+                                      tick4(size: size),*/
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
 
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: size.height * 0.06,
-                      width: size.width * 0.9,
+                                        height: size.height * 0.1,
 
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          baseText(title: "Watch",
-                              color: AppColor.darkYellow,
-                              size: 18.0),
-                        ],
-                      ),
-                    ),
-                    Container(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            baseText(title: "Order will be delivered",
+                                                size: 16.0,
+                                                color: AppColor.darkTextColor),
+                                            SizedBox(height: 5,),
+                                            Container(
+                                              // margin: EdgeInsets.only(bottom: 80),
+                                              height: 26,
+                                              width: 80,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    AppColor.darkYellow,
+                                                    AppColor.lightYellow
+                                                  ],
+                                                  stops: [0.1, 0.96],
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    offset: Offset(1, 1),
+                                                    color: Colors.grey.withOpacity(0.6),
+                                                    blurRadius: 3,
+                                                    spreadRadius: 1,
+                                                  ),
+                                                ],
 
-                      height: size.height * 0.08,
-                      width: size.width * 0.9,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              baseText(title: "You",
-                                  size: 16.0,
-                                  color: AppColor.darkTextColor),
-                              baseText(title: "12/01/2021",
-                                  size: 12.0,
-                                  color: AppColor.textColor),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              baseText(title: "Mary",
-                                  size: 16.0,
-                                  color: AppColor.darkTextColor),
-                              baseText(title: "12/02/2021",
-                                  size: 12.0,
-                                  color: AppColor.textColor),
-                            ],)
-                        ],
-                      ),
-                    ),
-                    Container(
+                                                borderRadius: BorderRadius.circular(40),
+                                              ),
+                                              child: FlatButton(
+                                                // splashColor: Colors.red,
+                                                onPressed: () {
+                                                },
+                                                child: Text(
+                                                  'Details',
+                                                  style: TextStyle(
+                                                    color: AppColor.textColor,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
 
-                      height: size.height * 0.06,
-                      width: size.width * 0.9,
-                      child: //
-                      Row(
-                        children: <Widget>[
-                          tick1(size: size),
+                                          ],
+                                        ),
+                                      ),
 
-                          line(size,true),
-
-                          tick2(size: size),
-
-                          line(size , true),
-
-                          tick3(size: size),
-
-                          line(size , false),
-
-                          tick4(size: size),
-                        ],
-                      ),
-                    ),
-                    Container(
-
-                      height: size.height * 0.1,
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          baseText(title: "Order will be delivered",
-                              size: 16.0,
-                              color: AppColor.darkTextColor),
-                          SizedBox(height: 5,),
-                          Container(
-                            // margin: EdgeInsets.only(bottom: 80),
-                            height: 26,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  AppColor.darkYellow,
-                                  AppColor.lightYellow
-                                ],
-                                stops: [0.1, 0.96],
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(1, 1),
-                                  color: Colors.grey.withOpacity(0.6),
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                ),
-                              ],
-
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: FlatButton(
-                              // splashColor: Colors.red,
-                              onPressed: () {
-                              },
-                              child: Text(
-                                'Details',
-                                style: TextStyle(
-                                  color: AppColor.textColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
 
-                        ],
+                          },
+
+
+                        ),
                       ),
-                    ),
 
-                  ],
-                ),
-              ),
-            ),
-          ],
-        )
+                      state.isLoading ? Center(child: CircularProgressIndicator(
+                        backgroundColor: AppColor.darkYellow,)) : Container(),
 
-    );
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                    ],
+                  ),
+                ],
+              )
+
+          );
+        } );
   }
 
   Widget tick(bool isChecked ,Size size ,  bool containIcon) {
@@ -402,19 +356,36 @@ class _TrackScreenState extends State<TrackScreen> {
   }
 
   Widget tick1({Size size}) {
-    return widget.ticks > 0 ? tick(true ,size , false) : tick(false,size ,false);
+    return ticks > 0 ? tick(true ,size , false) : tick(false,size ,false);
+  }
+  Widget tickHassan1({Size size,int stepNumber,int carIndex}) {
+    if(carIndex==stepNumber)
+      return tick(true ,size , true);
+    if(carIndex>stepNumber)
+      return tick(true ,size , false);
+    else   return tick(false ,size , false);
+
+    return ticks == 0 ? tick(true ,size , true) : tick(false,size ,false);
+  }
+
+  Widget tickHassan2({Size size}) {
+    return ticks == 1 ? tick(true ,size , true) : tick(false,size ,false);
+  }
+
+  Widget tickHassan3({Size size}) {
+    return ticks == 2 ? tick(true ,size , true) : tick(false,size ,false);
   }
 
   Widget tick2({Size size}) {
-    return widget.ticks > 1 ? tick(true,size,false) : tick(false,size,false);
+    return ticks > 1 ? tick(true,size,false) : tick(false,size,false);
   }
 
   Widget tick3({Size size}) {
-    return widget.ticks > 2 ? tick(true,size,true) : tick(false,size,false);
+    return ticks > 2 ? tick(true,size,true) : tick(false,size,false);
   }
 
   Widget tick4({Size size}) {
-    return widget.ticks > 3 ? tick(true,size,false) : tick(false,size,false);
+    return ticks > 3 ? tick(true,size,false) : tick(false,size,false);
   }
 
   Widget spacer() {
@@ -423,11 +394,13 @@ class _TrackScreenState extends State<TrackScreen> {
     );
   }
 
-  Widget line(Size size , bool isChecked) {
+  Widget line(Size size , int numberSteps,int carIndex ) {
+    bool isChecked=carIndex>=numberSteps;
     return Container(
-      color: isChecked? AppColor.darkYellow:AppColor.darkTextColor,
+       color: isChecked? AppColor.darkYellow:AppColor.darkTextColor,
+      //  color: isChecked? AppColor.darkYellow:AppColor.darkYellow,
       height: 2.0,
-      width: size.width * 0.21,
+      width: size.width * 0.32,
     );
   }
 }

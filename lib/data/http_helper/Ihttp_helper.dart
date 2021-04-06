@@ -18,6 +18,9 @@ import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 
 
@@ -131,5 +134,12 @@ Future<bool> editAddress({
   String zip_code ,
 
 });
+
+
+
+Future<BuiltList<TrackModel>> getTracksHome({
+  String token,
+});
+
 
 }

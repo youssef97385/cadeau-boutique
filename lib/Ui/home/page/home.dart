@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
 
   var pages = [
     CartScreen(),
-    TrackScreen(ticks: 3,),
+    TrackScreen(),
    HomeScreen(),
     ProfileScreen(),
     PickerScreen(),

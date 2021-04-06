@@ -23,6 +23,9 @@ import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
+import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 import 'Ihttp_helper.dart';
 
@@ -1007,4 +1010,49 @@ class HttpHelper implements IHttpHelper {
       throw NetworkException();
     }
   }
+
+  @override
+  Future<BuiltList<TrackModel>> getTracksHome({String token}) async {
+
+
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      String myType;
+
+      final response = await _dio.get('order/new',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<TrackModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(TrackModel),
+                  ],
+                ),
+              ],
+            ));
+
+        print(" list status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
+
 }

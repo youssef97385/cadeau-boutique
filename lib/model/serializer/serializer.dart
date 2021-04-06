@@ -34,6 +34,7 @@ import 'package:cadeaue_boutique/model/sizeModel/size_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 
 
@@ -60,7 +61,8 @@ part 'serializer.g.dart';
   BaseOccasion,
   RelationModel,
   SliderModel,
-  UserInfoModel
+  UserInfoModel,
+  TrackModel
 
 
 
@@ -324,5 +326,28 @@ final Serializers serializers =
 
     ..addBuilderFactory(HttpHelper.editProfileRQType,
             ()=>BaseResponseBuilder<UserInfoModel>() )
+
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          FullType(
+            BuiltList,
+            [
+              const FullType(TrackModel),
+            ],
+          ),
+        ],
+      )),
+          () => BaseResponseBuilder<BuiltList<TrackModel>>())
+
+  ..addBuilderFactory(
+      (FullType(
+        BuiltList,
+        [
+          const FullType(TrackModel),
+        ],
+      )),
+          () => ListBuilder<TrackModel>())
 
 ).build();

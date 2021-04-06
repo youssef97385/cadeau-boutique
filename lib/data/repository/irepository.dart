@@ -14,6 +14,8 @@ import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 abstract class IRepository {
 
   Future<bool> getIsLogin();
@@ -110,6 +112,8 @@ abstract class IRepository {
     String address_details ,
     String zip_code ,
   });
+
+  Future<BuiltList<TrackModel>> getTracksHome();
 
 
 }
