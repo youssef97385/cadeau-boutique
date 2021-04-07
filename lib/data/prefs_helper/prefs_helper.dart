@@ -35,4 +35,10 @@ class PrefsHelper implements IPrefsHelper {
   Future<String> getToken() async{
     return ((await getPrefs()).getString(ACCESS_TOKEN));
   }
+
+  @override
+  Future<void> logout() async {
+    (await getPrefs()).setString(ACCESS_TOKEN, "");
+    (await getPrefs()).setBool(IS_LOGIN, false);
+  }
 }

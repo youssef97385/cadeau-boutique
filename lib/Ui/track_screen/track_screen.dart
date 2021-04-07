@@ -6,6 +6,7 @@ import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
 import 'package:cadeaue_boutique/data/repository/repository.dart';
 import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timeline/model/timeline_model.dart';
@@ -70,12 +71,27 @@ class _TrackScreenState extends State<TrackScreen> {
   //   TimelineModel(id: "2", description: "", title: "")
   // ];
 
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   void initState() {
 
 
     ticks=2;
     loading=true;
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage1: $message");
+        _bloc.add(GetTracks());
+        print("------------------: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
 
 
    super.initState();
@@ -164,8 +180,10 @@ class _TrackScreenState extends State<TrackScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
+
+
                                       Container(
                                         height: size.height * 0.06,
                                         width: size.width * 0.9,
@@ -173,9 +191,20 @@ class _TrackScreenState extends State<TrackScreen> {
                                         child: Row(
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                            baseText(title: "",
+                                        /*    baseText(title: "",
                                                 color: AppColor.darkYellow,
-                                                size: 18.0),
+                                                size: 18.0),*/
+
+                                            carIndex==2?
+                                            Expanded(
+                                              child: Container(
+
+                                                child: Padding(
+                                                  padding:  EdgeInsets.all(6),
+                                                  child: SvgPicture.asset("assets/images/delivered.svg"),
+                                                ),
+                                              ),
+                                            ):Container(),
                                           ],
                                         ),
                                       ),
@@ -322,15 +351,15 @@ class _TrackScreenState extends State<TrackScreen> {
   Widget tick(bool isChecked ,Size size ,  bool containIcon) {
     return containIcon?
     Container(
-      width:size.width*0.07,
-      height:size.width*0.07,
+      width:size.width*0.10,
+      height:size.width*0.10,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: AppColor.darkYellow,
 
       ),
       child: Padding(
-        padding:  EdgeInsets.all(4),
+        padding:  EdgeInsets.all(6),
         child: SvgPicture.asset("assets/images/13-car.svg"),
       ),
     ):

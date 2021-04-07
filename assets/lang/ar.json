@@ -24,7 +24,10 @@
   "address_details": "عنوان تفصيلي",
   "add": "اضافة",
   "successful_operation": "عملية ناجحة",
-  "plz_fill_all_fields": "الرجاء تعبئة جميع الحقول"
+  "plz_fill_all_fields": "الرجاء تعبئة جميع الحقول",
+  "logout": "تسجيل الخروج",
+  "do_you_want_to_logout": "هل تريد تسجيل الدخول",
+  "plz_wait": "الرجاء الانتظار"
 
 
 }

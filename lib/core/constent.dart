@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-const String BaseUrl = "http://apis.cadeauboutique.com/api/";
-// const String BaseUrl = "http://192.168.1.108:7000/api/";
+//const String BaseUrl = "http://apis.cadeauboutique.com/api/";
+ const String BaseUrl = "http://192.168.1.108:7000/api/";
 
-const String BaseImgUrl = "http://apis.cadeauboutique.com/";
-// const String BaseImgUrl = "http://192.168.1.108:7000/";
+//const String BaseImgUrl = "http://apis.cadeauboutique.com/";
+ const String BaseImgUrl = "http://192.168.1.108:7000/";
 
 const String ImageUrl = "";
 
@@ -16,6 +16,7 @@ class AppColor {
   static const Color darkYellow = Color(0xFFf2ae2e);
 
   static const Color lightYellow = Color(0xFFf2d750);
+  static const Color lightYellow1 = Color(0xFFEEEEEE);
 
   static const Color darkTextColor = Color(0xFF393741);
 

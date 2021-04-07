@@ -1,17 +1,30 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
 import 'package:cadeaue_boutique/Ui/settings_screen/settings_screen.dart';
+import 'package:cadeaue_boutique/Ui/splash_screen/splash_screen.dart';
+import 'package:cadeaue_boutique/Ui/welcome_page/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/Ui/categories_screen/categories_screen.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
-class MainDrawer extends StatelessWidget {
+import 'package:cadeaue_boutique/Ui/Dialog/WaitDilaog/WaitDialog.dart';
+
+import '../../injectoin.dart';
+class MainDrawer extends StatefulWidget {
   bool isLogin;
 
   MainDrawer({this.isLogin});
 
+  @override
+  _MainDrawerState createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends State<MainDrawer> {
+
+  final _bloc = sl<HomeBloc>();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -119,7 +132,7 @@ class MainDrawer extends StatelessWidget {
                         GestureDetector(
                           onTap: (){
 
-                            if(isLogin){
+                            if(widget.isLogin){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
                             }else{
                               AwesomeDialog(
@@ -136,7 +149,7 @@ class MainDrawer extends StatelessWidget {
                                 animType: AnimType.BOTTOMSLIDE,
                                 title: 'Login',
                                 desc: 'You must be logged in',
-                                btnCancelOnPress: () {},
+                                btnCancelOnPress: () { },
                                 btnOkOnPress: () {
                                   WidgetsBinding.instance.addPostFrameCallback((_) =>
                                       Navigator.of(context).push(
@@ -220,6 +233,31 @@ class MainDrawer extends StatelessWidget {
                     child: FlatButton(
                       // splashColor: Colors.red,
                       onPressed: () {
+
+
+                        AwesomeDialog(
+                          context: context,
+
+                          btnOkColor: AppColor.darkYellow,
+                          dialogType: DialogType.QUESTION,
+                          animType: AnimType.BOTTOMSLIDE,
+                          title: 'Logout',
+                          desc: 'do you want to logout',
+                          btnCancelOnPress: () { },
+                          btnOkOnPress: () async {
+
+                     var state=   await  openLogout(context);
+                     print("------------------ ");
+                     Navigator.pushAndRemoveUntil(
+                         context,
+                         MaterialPageRoute(
+                             builder: (context) => SigninScreen()
+                         ),
+                         ModalRoute.withName("/signin_screen")
+                     );
+
+                          },
+                        )..show();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -248,6 +286,7 @@ class MainDrawer extends StatelessWidget {
       ],
     );
   }
+
   Widget singleDrawerItem(String icon , String title){
     return  Row(
       children: [
@@ -257,5 +296,14 @@ class MainDrawer extends StatelessWidget {
       ],
     );
   }
+
+  Future<bool> openLogout(BuildContext context,) async {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return WaitDialog();
+      },
+    );}
 }
 

@@ -7,7 +7,7 @@ import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-Widget baseAppBar(Size size , BuildContext context , [Function openDrawer]){
+Widget baseAppBar(Size size , BuildContext context , [Function openDrawer,showHum=false]){
   return
     Container(
       height: size.height*0.1,
@@ -39,7 +39,7 @@ Widget baseAppBar(Size size , BuildContext context , [Function openDrawer]){
                   // height: 40,
                     width: 60,
                       color: Colors.transparent,
-                    child: Center(child: SvgPicture.asset("assets/images/humberger.svg")))),
+                    child:showHum? Center(child: SvgPicture.asset("assets/images/humberger.svg")):Container())),
           ],
         ),
       ),

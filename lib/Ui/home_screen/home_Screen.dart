@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      baseAppBar(size, context, openDrawer),
+                      baseAppBar(size, context, openDrawer,true),
                       Center(
                         child: Directionality(
                           textDirection: TextDirection.ltr,

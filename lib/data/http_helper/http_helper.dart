@@ -1053,6 +1053,59 @@ class HttpHelper implements IHttpHelper {
     }
   }
 
+  @override
+  Future<bool> saveFirebaseToken(String fireToken,String serverToken)async {
 
 
+    try {
+      final formData = {
+        "token": fireToken
+      };
+
+      _dio.interceptors.add(CookieManager(cookieJar));
+
+
+      final response = await _dio.post('fire_base/token/set',
+          options: Options(headers: {"Authorization": 'Bearer ' + serverToken}),
+        data: formData
+      );
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        return true;
+
+        }
+       else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
+  @override
+  Future<bool> logoutRQ(String token)async {
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('auth/app/logout',
+          options: Options(headers: {"Authorization": 'Bearer ' + token})
+
+      );
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        return true;
+
+      }
+      else {
+        throw NetworkException();
+
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
 }

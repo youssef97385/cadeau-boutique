@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="216" height="63.818" viewBox="0 0 216 63.818">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.929" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f2d750"/>
+      <stop offset="1" stop-color="#f2ae2e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="2.212" y1="-2.693" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f2ae2e"/>
+      <stop offset="1" stop-color="#f2d750"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_2034" data-name="Group 2034" transform="translate(-133.783 -419.844)">
+    <path id="Path_4536" data-name="Path 4536" d="M329.33,423.365H139.212l10.5,23.518-10.5,23.511H329.33l-10.5-23.511ZM158.4,449.934a3.054,3.054,0,1,1,3.053-3.056A3.053,3.053,0,0,1,158.4,449.934Zm151.455,0a3.054,3.054,0,1,1,3.056-3.056A3.05,3.05,0,0,1,309.852,449.934Z" transform="translate(7.511 4.871)" fill="url(#linear-gradient)"/>
+    <path id="Path_4537" data-name="Path 4537" d="M349.783,483.662h-216l14.241-31.908-14.241-31.91h216l-14.241,31.91Zm-209.529-4.2H343.312l-12.37-27.708,12.37-27.718H140.254l12.368,27.718Z" transform="translate(0)" fill="url(#linear-gradient-2)"/>
+    <text id="DELIVERED" transform="translate(173.283 459.251)" fill="#fffefe" font-size="22" font-family="Poppins-Bold, Poppins" font-weight="700" letter-spacing="0.124em"><tspan x="0" y="0">DELIVERED</tspan></text>
+  </g>
+</svg>

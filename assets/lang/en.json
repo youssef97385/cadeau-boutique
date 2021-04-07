@@ -24,7 +24,10 @@
   "address_details": "Detailed address",
   "add": "Add",
   "successful_operation": "Successful operation",
-  "plz_fill_all_fields": "Please fill in all fields"
+  "plz_fill_all_fields": "Please fill in all fields",
+  "logout": "Logout",
+  "do_you_want_to_logout": "Do You want to logout?",
+  "plz_wait": "Please Wait..."
 
 
 }

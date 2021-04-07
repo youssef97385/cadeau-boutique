@@ -25,6 +25,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       final language = await _repository.getAppLanguage();
       yield state.rebuild((b) => b..appLanguage = language);
       changeAppLanguage(state.appLanguage);
+
+
+    }
+
+    if(event is SaveTokenFirebase){
+      var item= await _repository.saveFirebaseToken(event.fireToken);
+
     }
   }
 }

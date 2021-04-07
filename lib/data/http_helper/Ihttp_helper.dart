@@ -142,4 +142,10 @@ Future<BuiltList<TrackModel>> getTracksHome({
 });
 
 
+Future<bool>  saveFirebaseToken(String fireToken,String serverToken);
+
+
+Future<bool> logoutRQ(String token);
+
+
 }

@@ -115,5 +115,9 @@ abstract class IRepository {
 
   Future<BuiltList<TrackModel>> getTracksHome();
 
+  Future<bool> saveFirebaseToken(String fireToken);
+
+  Future<bool> logoutRQ();
+
 
 }

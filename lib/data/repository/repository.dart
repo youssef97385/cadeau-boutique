@@ -253,4 +253,27 @@ class Repository implements IRepository {
     return item;
   }
 
+  @override
+  Future<bool> saveFirebaseToken(String fireToken) async {
+   String token = await _iprefHelper.getToken();
+   if(token==null ||token.isEmpty) return false;
+   else{
+
+     final item=await _ihttpHelper.saveFirebaseToken(fireToken, token);
+     return true;
+   }
+  }
+
+  Future<bool> logoutRQ() async{
+    String token = await _iprefHelper.getToken();
+    if(token==null ||token.isEmpty) return false;
+    else{
+      final item=await _ihttpHelper.logoutRQ(token);
+
+      if(item!=null &&item) _iprefHelper.logout();
+      return item;
+    }
+
+  }
+
 }
