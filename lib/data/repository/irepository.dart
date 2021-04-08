@@ -1,4 +1,5 @@
 
+import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
@@ -40,7 +41,7 @@ abstract class IRepository {
 
   Future<BaseCoupon> getCoupon({int page});
 
-  Future<BuiltList<WrapModel>> getWraps();
+  Future<BuiltList<WrapModel>> getWraps({bool isGlobalWrap});
 
   Future<ProductModel> getProductByid({int id});
 
@@ -88,4 +89,19 @@ abstract class IRepository {
 
   Future<CartModel> removeCartItem({int cartItemId});
 
+
+  Future<BuiltList<ProductModel>> filter({
+    int occasionId ,
+    int relationId ,
+    String gender ,
+    String minPrice ,
+    String maxPrice ,
+    String age});
+
+  Future<bool> checkoutMultieGift({
+    BuiltList<RecieverModel> recieverModel ,
+    String total,
+
+  });
 }
+

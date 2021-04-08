@@ -16,16 +16,18 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   Stream<FilterState> mapEventToState(
     FilterEvent event,
   ) async* {
-    if (event is GetOccasions) {
-      print("picker3");
+    if (event is GetMainOccasions) {
+
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
           ..error = ""
           ..occasions.replace([]));
 
-        print("picker4");
+
         final data = await _iRepository.getOccasions(page: 1);
+
+
 
         print('getOccasion Success data ${data}');
         yield state.rebuild((b) => b
@@ -33,7 +35,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
           ..error = ""
           ..occasions.replace(data.data));
       } catch (e) {
-        print("picker5");
+
         print('getoccasion Error $e');
         yield state.rebuild((b) => b
           ..isLoading = false

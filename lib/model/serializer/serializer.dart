@@ -32,7 +32,7 @@ import 'package:cadeaue_boutique/model/color_model/color_model.dart';
 import 'package:cadeaue_boutique/model/sizeModel/size_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
-
+import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 part 'serializer.g.dart';
 
 @SerializersFor(const [
@@ -55,7 +55,8 @@ part 'serializer.g.dart';
   BaseCategory,
   BaseOccasion,
   RelationModel,
-  SliderModel
+  SliderModel,
+
 
 
 
@@ -297,6 +298,19 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<RelationModel>())
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          FullType(
+            BuiltList,
+            [
+              const FullType(RelationModel),
+            ],
+          ),
+        ],
+      )),
+          () => BaseResponseBuilder<BuiltList<RelationModel>>())
 
 
   ..addBuilderFactory(

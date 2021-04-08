@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
@@ -19,6 +20,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   int selectedWrap = -1;
+  int wrapId = -1;
   List<Color> colors = [
     Color(0xffffffff),
     Color(0xffA6B7E8),
@@ -60,6 +62,7 @@ class _CartScreenState extends State<CartScreen> {
     // TODO: implement initState
     super.initState();
     _bloc.add(GetCartInfo());
+    _bloc.add(GetGlobalWraps());
   }
 
 
@@ -81,6 +84,7 @@ class _CartScreenState extends State<CartScreen> {
                     SizedBox(
                       height: 20,
                     ),
+                    state.cartList.isEmpty?Container():
                     Center(
                       child: Container(
                         width: size.width * 0.85,
@@ -89,7 +93,9 @@ class _CartScreenState extends State<CartScreen> {
                             physics: ScrollPhysics(),
                             itemCount: state.cartList.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Container(
+                              return
+
+                                state.cartList[index].gift == null?Container():Container(
                                 width: size.width * 0.9,
                                 height: size.height * 0.3,
                                 // color: Colors.red,
@@ -132,12 +138,12 @@ class _CartScreenState extends State<CartScreen> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(12)),
                                                 child:
-                                                Image.network(BaseImgUrl+state.cartList[index].gift.image),
+                                                Image.network(BaseImgUrl+state.cartList[index].gift.image,fit: BoxFit.fill,),
                                               ),
                                             ),
                                           ),
                                           SizedBox(
-                                            width: size.width * 0.1,
+                                            width: size.width * 0.05,
                                           ),
 
                                           ///price
@@ -148,55 +154,67 @@ class _CartScreenState extends State<CartScreen> {
                                                 width: size.width * 0.3,
                                                 // color: Colors.amberAccent,
                                                 child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                   children: [
                                                     Row(
                                                       mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceBetween,
+                                                          .start,
                                                       children: [
                                                         baseText(
                                                             color: AppColor
                                                                 .darkTextColor,
                                                             title: state.cartList[index].gift.nameEn,
-                                                            size: 18.0,
+                                                            size: size.width*0.04,
                                                             fontWeight:
                                                             FontWeight.bold),
                                                         baseText(
                                                             color:
                                                             AppColor.darkYellow,
-                                                            title: "\$ "+state.cartList[index].gift.mainPrice,
+                                                            title: " \$"+state.cartList[index].gift.mainPrice,
                                                             size: 16.0),
+
                                                       ],
                                                     ),
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
+                                                    // SizedBox(
+                                                    //   height: 20,
+                                                    // ),
 
+
+                                                    // SizedBox(
+                                                    //   height: 20,
+                                                    // ),
                                                     state.cartList[index].wrap == null ?Container():
                                                     Row(
                                                       mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceBetween,
+                                                          .start,
                                                       children: [
                                                         baseText(
                                                             color: AppColor
                                                                 .darkTextColor,
                                                             title: state.cartList[index].wrap.nameEn,
-                                                            size: 18.0,
+                                                            size: size.width*0.04,
                                                             fontWeight:
                                                             FontWeight.bold),
                                                         baseText(
                                                             color:
                                                             AppColor.darkYellow,
-                                                            title: "\$ 200",
-                                                            size: 20.0),
+                                                            title: " \$"+state.cartList[index].wrap.mainPrice,
+                                                          size: size.width*0.04,),
                                                       ],
                                                     )
                                                   ],
                                                 )),
                                           ),
 
+
+                                          SizedBox(
+                                            width: size.width*0.05,
+                                          ),
                                           ///delete and fav icons
+
                                           Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: size.height * 0.02),
@@ -205,31 +223,36 @@ class _CartScreenState extends State<CartScreen> {
                                               // color: Colors.blue,
                                               child: Column(
                                                 children: [
-                                                  Container(
-                                                    height: 26,
-                                                    width: 33,
+                                                  InkWell(
+                                                    onTap:(){
+                                                      _bloc.add(RemoveItem((b)=>b..id = state.cartList[index].id));
+                                                    },
                                                     child: Container(
+                                                      height: 26,
+                                                      width: 33,
+                                                      child: Container(
 // color: Colors.blueAccent,
-                                                        child: Image.asset(
-                                                            "assets/images/delete.png")),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          offset: Offset(1, 1),
-                                                          color: Colors.grey
-                                                              .withOpacity(0.6),
-                                                          blurRadius: 2,
-                                                          spreadRadius: 1,
-                                                        ),
-                                                      ],
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          AppColor.darkYellow,
-                                                          AppColor.lightYellow
+                                                          child: Image.asset(
+                                                              "assets/images/delete.png")),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10)),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            offset: Offset(1, 1),
+                                                            color: Colors.grey
+                                                                .withOpacity(0.6),
+                                                            blurRadius: 2,
+                                                            spreadRadius: 1,
+                                                          ),
                                                         ],
-                                                        stops: [0.1, 0.96],
+                                                        gradient: LinearGradient(
+                                                          colors: [
+                                                            AppColor.darkYellow,
+                                                            AppColor.lightYellow
+                                                          ],
+                                                          stops: [0.1, 0.96],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -386,6 +409,7 @@ class _CartScreenState extends State<CartScreen> {
                         SizedBox(
                           height: 10,
                         ),
+                        state.wraps.isEmpty?Container():
                         Container(
                           width: size.width,
                           child: Row(
@@ -396,12 +420,13 @@ class _CartScreenState extends State<CartScreen> {
                                 width: size.width * 0.8,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 2,
+                                    itemCount: state.wraps[0].wrapItems.length,
                                     itemBuilder: (BuildContext context, int index) {
                                       return GestureDetector(
                                         onTap: () {
                                           setState(() {
                                             selectedWrap = index;
+                                            wrapId = state.wraps[0].wrapItems[index].id;
                                           });
                                         },
                                         child: Container(
@@ -449,13 +474,13 @@ class _CartScreenState extends State<CartScreen> {
                                                         child: Container(
                                                             width: 122,
                                                             height: 100,
-                                                            child: Image.asset(
-                                                              wrapItems[index],
+                                                            child: Image.network(
+                                                              BaseImgUrl+state.wraps[0].wrapItems[index].image,
                                                               fit: BoxFit.fill,
                                                             )),
                                                       ),
                                                       Text(
-                                                        "200" + "\$",
+                                                         state.wraps[0] .wrapItems[index].mainPrice+ "\$",
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 24,
@@ -561,12 +586,32 @@ class _CartScreenState extends State<CartScreen> {
                             child: FlatButton(
                               // splashColor: Colors.red,
                               onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => CheckoutAddress(
-                                //           ticks: 1,
-                                //         )));
+                                if(selectedWrap == -1){
+                                  AwesomeDialog(
+                                    context: context,
+                                    customHeader: Container(
+                                      child: Icon(
+                                        Icons.error_outline,
+                                        size: 100,
+                                        color: AppColor.darkYellow,
+                                      ),
+                                    ),
+                                    btnOkColor: AppColor.darkYellow,
+                                    dialogType: DialogType.INFO,
+                                    animType: AnimType.BOTTOMSLIDE,
+                                    title: 'Add Wrap',
+                                    desc: 'Please Choose Wrap First',
+                                    btnCancelOnPress: () {},
+                                    btnOkOnPress: () {
+                                      // WidgetsBinding.instance.addPostFrameCallback((_) =>
+                                      //     Navigator.of(context).push(
+                                      //         MaterialPageRoute(builder: (context) => SigninScreen())));
+                                    },
+                                  )..show();
+                                }else{
+                                  _bloc.add(AddGlobalWrap((b)=>b..wrapId = wrapId));
+                                }
+
                               },
                               child: Text(
                                 'Add Wrap For All Products ',
@@ -763,6 +808,32 @@ class _CartScreenState extends State<CartScreen> {
                         ],
                       ),
                     ),
+
+                  state.cart.songLink == null?Container():
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            baseText(
+                                title: "Song",
+                                color: AppColor.darkTextColor,
+                                size: 16.0),
+                            baseText(
+                                title: "\$"+state.cart.songPrice.toString(),
+                                color: AppColor.darkYellow,
+                                size: 16.0),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
                     SizedBox(
                       height: 10,
                     ),

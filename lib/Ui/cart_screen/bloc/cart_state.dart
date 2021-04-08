@@ -4,6 +4,7 @@ import 'package:built_value/built_value.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_item.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 
 part 'cart_state.g.dart';
 
@@ -19,6 +20,7 @@ implements Built<CartState, CartStateBuilder> {
 
   CartModel get cart;
   BuiltList<CartItem> get cartList;
+  BuiltList<WrapModel> get wraps;
 
 
   CartState._();

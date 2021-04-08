@@ -169,7 +169,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ..wraps.replace([])
         );
 
-        final data = await _iRepository.getWraps();
+        final data = await _iRepository.getWraps(isGlobalWrap: false);
 
         print('get wraps Success data ${data}');
         yield state.rebuild((b) => b

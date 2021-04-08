@@ -10,6 +10,7 @@ import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
@@ -323,10 +324,10 @@ class HttpHelper implements IHttpHelper {
   }
 
   @override
-  Future<BuiltList<WrapModel>> getWraps() async {
+  Future<BuiltList<WrapModel>> getWraps({bool isGlobalWrap}) async {
     try {
       _dio.interceptors.add(CookieManager(cookieJar));
-      final response = await _dio.get('data/get/wraps');
+      final response = await _dio.get(isGlobalWrap?'data/get/wraps/without/paginate?wrap_type=global':'data/get/wraps/without/paginate');
       print('wrap Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {
@@ -543,6 +544,7 @@ class HttpHelper implements IHttpHelper {
 
   @override
   Future<BuiltList<RelationModel>> getRelation() async {
+    print("relation3");
     try {
       _dio.interceptors.add(CookieManager(cookieJar));
       final response =
@@ -550,6 +552,7 @@ class HttpHelper implements IHttpHelper {
       print('relation Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {
+        print("relation4");
         final BaseResponse<BuiltList<RelationModel>> baseResponse =
             serializers.deserialize(json.decode(response.data),
                 specifiedType: FullType(
@@ -568,12 +571,15 @@ class HttpHelper implements IHttpHelper {
         if (baseResponse != null) {
           return baseResponse.data;
         } else {
+          print("relation5");
           throw NetworkException();
         }
       } else {
+        print("relation6");
         throw NetworkException();
       }
     } catch (e) {
+      print("relation7$e");
       print(e.toString());
       throw NetworkException();
     }
@@ -796,6 +802,7 @@ class HttpHelper implements IHttpHelper {
 
   @override
   Future<CartModel> getCartInfo({String token}) async {
+    print("cart info1");
     try {
       _dio.interceptors.add(CookieManager(cookieJar));
 
@@ -922,4 +929,133 @@ class HttpHelper implements IHttpHelper {
       throw NetworkException();
     }
   }
+
+  @override
+  Future<BuiltList<ProductModel>> filter({int occasionId,
+    int relationId, String gender,
+    String minPrice, String maxPrice,
+    String age}) async{
+    try {
+
+
+      print("filter vars : occasionId:$occasionId   relationId $relationId  genderId $gender  minPrics $minPrice  macPrice $maxPrice  age $age");
+      _dio.interceptors.add(CookieManager(cookieJar));
+
+      String url ="";
+
+      ///un comment when data ready
+      ///
+      ///
+      /// *****
+
+
+      if(minPrice != "null"){
+
+         url ="app/gift/search?min_price=$minPrice";
+      }else{
+
+         url ="app/gift/search?min_price=0";
+      }
+
+      if(occasionId != null){
+
+        url  = url +"&relation_id=$relationId";
+      }
+      if(occasionId != null){
+
+        url = url+"&occasions_id=$occasionId";
+      }
+      if(gender != null){
+
+        url = url +"&gender=$gender";
+      }
+      if(maxPrice != "null"){
+
+        url = url + "&max_price=$maxPrice";
+      }
+      if(age != null){
+
+        url = url + "&age=$age";
+      }
+
+      print("final url : $url");
+
+      final response = await _dio.get(url);
+      print('products Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<ProductModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(ProductModel),
+                  ],
+                ),
+              ],
+            ));
+
+        print("filter list status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<bool> checkoutMultieGift({BuiltList<RecieverModel> recieverModel , String total , String token}) async{
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      var body = {
+        "gift_to[0]":recieverModel[0].giftTo,
+        "delivery_date[0]":recieverModel[0].deliveryDate,
+        "country_code[0]":recieverModel[0].countryCode,
+        "phone_number[0]":recieverModel[0].phoneNumber,
+        "total_cost":total
+      };
+      final response = await _dio.post('cart/checkout',data: body,  options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print('checkout Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<OccasionModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(OccasionModel),
+                  ],
+                ),
+              ],
+            ));
+
+
+        if (response.statusCode == 200) {
+          return true;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+
+  }
+
 }

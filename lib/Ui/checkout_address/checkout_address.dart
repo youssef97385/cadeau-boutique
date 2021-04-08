@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -6,8 +8,15 @@ import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
 import 'package:cadeaue_boutique/Ui/checkout_payment/checkout_payment.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/Ui/checkout_address/checkout_address.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../injectoin.dart';
+import 'bloc/checkout_state.dart';
+import 'bloc/checkout_bloc.dart';
+import 'bloc/checkout_event.dart';
 
 class CheckoutAddress extends StatefulWidget {
   final int ticks;
@@ -19,8 +28,18 @@ class CheckoutAddress extends StatefulWidget {
 
 class _CheckoutAddressState extends State<CheckoutAddress> {
   String giftTo , deliveryAddress , state , zipCode , city ;
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.utc(2019,1,1);
   bool _dateSelected = false;
+
+  String  countryCode = '+966', phone;
+
+  final _bloc = sl<CheckoutBloc>();
+
+
+  void _onCountryChange(String countryCode) {
+    //TODO : manipulate the selected country code here
+    print("New Country selected: " + countryCode.toString());
+  }
 
   // PersonalInfoProvider personalInfoProvider = PersonalInfoProvider();
 
@@ -40,377 +59,150 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            baseAppBar(size, context),
+    return BlocBuilder(
+        cubit: _bloc,
+        builder: (BuildContext context , CheckoutState state){
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              baseAppBar(size, context),
 
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  tick1(size: size),
-
-                  line(size,false),
-
-                  tick2(size: size),
-
-                  line(size , false),
-
-                  tick3(size: size),
-
-
-
-                ],
+              SizedBox(
+                height: 20,
               ),
-            ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    tick1(size: size),
 
-            SizedBox(
-              height: 20,
-            ),
-            baseText(
-              title: "Address",color: AppColor.darkTextColor,size:20.0
-            ),
+                    line(size,false),
 
-            SizedBox(
-              height: size.height*0.07,
-            ),
-            ///giftTo
-            Container(
-              height: size.height * 0.07,
-              width:
-              MediaQuery.of(context).size.width * .85,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 1,
-                      spreadRadius: 2,
-                    ),
-                  ]),
-              child: Center(
-                child: TextFormField(
+                    tick2(size: size),
 
-                  validator: emptyFieldVAlidator(giftTo),
-                  keyboardType: TextInputType.name,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    hintText: "Gift To",
-                    contentPadding:
-                    EdgeInsets.only(left:16 , top:size.height*0.02 , ),
-                    suffixIcon: false
-                        ? Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.red,
-                    )
-                        : Container(
-                      width: 10,
-                    ),
-                  ),
-                  onChanged: (val) {
-                    setState(() => giftTo = val);
-                  },
-                  onSaved: (value) => giftTo = value,
+                    line(size , false),
+
+                    tick3(size: size),
+                  ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: size.height * 0.04,
-            ),
 
-            ///deleveryDate
-            Container(
-              height: size.height * 0.07,
-              width:
-              MediaQuery.of(context).size.width * .85,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                    ),
-                  ]),
-              child: Center(
-                child:  GestureDetector(
-                  onTap: () {
-                    _selectDate(context);
-                  },
-                  child: Container(
-                    width: size.width*0.85,
-                    height: size.height*0.07,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding:  EdgeInsets.only(left:16.0 ,top: size.height*0.02),
-                      child: Text(
-                        _dateSelected? selectedDate.toString().substring(0, 10):"Date Of Birth"
-                        ,style: TextStyle(color: AppColor.textColor ,fontSize: 14),
+              SizedBox(
+                height: 20,
+              ),
+              baseText(
+                  title: "Address",color: AppColor.darkTextColor,size:20.0
+              ),
+
+
+             state.recievers.isEmpty?Container():
+             Column(
+               children: [
+                 SizedBox(
+                   height: size.height*0.05,
+                 ),
+                 Container(
+                   height: 70,
+                   child: ListView.builder(
+                       scrollDirection: Axis.horizontal,
+                       itemCount: state.recievers.length,
+                       itemBuilder: (BuildContext context , int index){
+
+                         return Padding(
+                           padding: const EdgeInsets.symmetric(horizontal:8.0),
+                           child: Column(
+                             children: [
+                               Image.asset("assets/images/user (2).png"),
+                               baseText(title: state.recievers[index].giftTo , color: AppColor.textColor , size: 18.0)
+                             ],
+                           ),
+                         );
+
+
+                       }),
+                 ),
+                 SizedBox(
+                   height: size.height*0.05,
+                 ),
+                 Container(
+                   width: size.width*0.85,
+                   child: Row(
+                     children: [
+                       baseText(size: 14.0,title:"Number of added people" ,color:Color(0xff464646) ),
+                       baseText(color: AppColor.darkYellow,title: " (${state.recievers.length})",size: 14.0),
+                     ],
+                   ),
+                 ),
+                 SizedBox(
+                   height: size.height*0.01,
+                 ),
+                 Container(
+                   height: 2,
+                   width: size.width*0.85,
+                   color: Color(0xffB1B1B1),
+                 ),
+               ],
+             ),
+              SizedBox(
+                height: size.height*0.03,
+              ),
+
+              ///giftTo
+              Container(
+                height: size.height * 0.07,
+                width:
+                MediaQuery.of(context).size.width * .85,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(1, 1),
+                        color: Colors.grey.withOpacity(0.6),
+                        blurRadius: 1,
+                        spreadRadius: 2,
+                      ),
+                    ]),
+                child: Center(
+                  child: TextFormField(
+
+                    validator: emptyFieldVAlidator(giftTo),
+                    keyboardType: TextInputType.name,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      hintText: "Gift To",
+                      contentPadding:
+                      EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                      suffixIcon: false
+                          ? Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.red,
+                      )
+                          : Container(
+                        width: 10,
                       ),
                     ),
+                    onChanged: (val) {
+                      setState(() => giftTo = val);
+                    },
+                    onSaved: (value) => giftTo = value,
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: size.height*0.04,
-            ),
-            ///deliveryAddress
-            Container(
-              height: size.height * 0.07,
-              width:
-              MediaQuery.of(context).size.width * .85,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 1,
-                      spreadRadius: 2,
-                    ),
-                  ]),
-              child: Center(
-                child: TextFormField(
-
-                  validator: emptyFieldVAlidator(deliveryAddress),
-                  keyboardType: TextInputType.name,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    hintText: "Delivery Address",
-                    contentPadding:
-                    EdgeInsets.only(left:16 , top:size.height*0.02 , ),
-                    suffixIcon: false
-                        ? Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.red,
-                    )
-                        : Container(
-                      width: 10,
-                    ),
-                  ),
-                  onChanged: (val) {
-                    setState(() => deliveryAddress = val);
-                  },
-                  onSaved: (value) => deliveryAddress = value,
-                ),
+              SizedBox(
+                height: size.height * 0.04,
               ),
-            ),
-
-            SizedBox(
-              height: size.height * 0.04,
-            ),
-            ///city & state
-            Container(
-              height: size.height * 0.07,
-              width: size.width * .85,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 1,
-                      spreadRadius: 2,
-                    ),
-                  ]),
-              child: Center(
-                child: Padding(
-                  padding:
-                  const EdgeInsets.only(left: 16.0),
-                  child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.start,
-                    children: [
-
-                      Container(
-                        // width: size.width * .3,
-                        // color: Colors.green,
-                        child: DropdownButton<String>(
-                          // focusColor: AppColor.darkYellow,
-                          //   iconEnabledColor:AppColor.darkYellow ,
-                          //   iconDisabledColor: AppColor.darkYellow,
-                          //   dropdownColor: AppColor.darkYellow,
-                            focusColor: AppColor.darkYellow,
-                            onTap: (){},
-                            value: city,
-                            icon: Container(
-                              // width: size.width * 0.45,
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
-                                children: [
-                                  Container(
-                                    height: 10,
-                                    width: 10,
-                                    color: Colors.white,
-                                  ),
-                                  Icon(Icons
-                                      .keyboard_arrow_down_outlined),
-                                ],
-                              ),
-                            ),
-                            iconSize: 30,
-                            hint: Text("City"),
-                            underline: SizedBox(),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                city = newValue;
-                              });
-                            },
-                            items: <String>[
-                              'latakia',
-                              'damascus'
-                            ].map<
-                                DropdownMenuItem<
-                                    String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<
-                                      String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical:8.0 , horizontal: 8.0),
-                        child: Container(
-                          width: 2,
-                          height: double.maxFinite,
-                          color:AppColor.darkTextColor,
-                        ),
-                      ),
-                      Container
-                        (
-                        width: size.width*0.5,
-                        child: TextFormField(
-
-                          validator: emptyFieldVAlidator(state),
-                          keyboardType: TextInputType.name,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            hintText: "State",
-                            contentPadding:
-                            EdgeInsets.only(left:16 , top:size.height*0.02 , ),
-                            suffixIcon: false
-                                ? Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.red,
-                            )
-                                : Container(
-                              width: 10,
-                            ),
-                          ),
-                          onChanged: (val) {
-                            setState(() => state = val);
-                          },
-                          onSaved: (value) => state = value,
-                        ),
-                      ),
-                      // Icon(Icons.keyboard_arrow_down_outlined)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: size.height * 0.04,
-            ),
-            ///zipCode
-            Container(
-              height: size.height * 0.07,
-              width:
-              MediaQuery.of(context).size.width * .85,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.6),
-                      blurRadius: 1,
-                      spreadRadius: 2,
-                    ),
-                  ]),
-              child: Center(
-                child: TextFormField(
-
-                  validator: emptyFieldVAlidator(zipCode),
-                  keyboardType: TextInputType.name,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    hintText: "Zip Code",
-                    contentPadding:
-                    EdgeInsets.only(left:16 , top:size.height*0.02 , ),
-                    suffixIcon: false
-                        ? Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.red,
-                    )
-                        : Container(
-                      width: 10,
-                    ),
-                  ),
-                  onChanged: (val) {
-                    setState(() => zipCode = val);
-                  },
-                  onSaved: (value) => zipCode = value,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: size.height*0.04,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  // margin: EdgeInsets.only(bottom: 80),
-                  height: size.height * 0.07,
-                  width: size.width * .41,
-
-                ),
-                SizedBox(width: size.width*0.03,),
-                Container(
-                  // margin: EdgeInsets.only(bottom: 80),
-                  height: size.height * 0.07,
-                  width: size.width * .41,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColor.darkYellow,
-                        AppColor.lightYellow
-                      ],
-                      stops: [0.1, 0.96],
-                    ),
+              Container(
+                height: size.height * 0.07,
+                width: size.width * .85,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
                         offset: Offset(1, 1),
@@ -418,35 +210,302 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         blurRadius: 5,
                         spreadRadius: 3,
                       ),
-                    ],
-
-                    borderRadius: BorderRadius.circular(40),
+                    ]),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: size.height * 0.07,
+                          width: size.width * .2,
+                          child: CountryCodePicker(
+                            onChanged: (value) {
+                              setState(() {
+                                countryCode =
+                                    value.toString();
+                                _onCountryChange(
+                                    countryCode);
+                              });
+                            },
+                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                            initialSelection: 'Sa',
+                            // favorite: ['+39', 'FR'],
+                            // optional. Shows only country name and flag
+                            showCountryOnly: false,
+                            // optional. Shows only country name and flag when popup is closed.
+                            showOnlyCountryWhenClosed:
+                            false,
+                            // optional. aligns the flag and the Text left
+                            alignLeft: false,
+                          ),
+                        ),
+                        Container(
+                          // height: size.height * 0.07,
+                          width: size.width * .5,
+                          // color:Colors.red,
+                          child: TextFormField(
+                            validator:
+                            emptyFieldVAlidator(phone),
+                            keyboardType:
+                            TextInputType.number,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              enabledBorder:
+                              InputBorder.none,
+                              focusedBorder:
+                              InputBorder.none,
+                              disabledBorder:
+                              InputBorder.none,
+                              // labelText: "Phone Number",
+                              hintText: "Phone Number",
+                              contentPadding:
+                              EdgeInsets.all( 12),
+                              suffixIcon: false
+                                  ? Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.red,
+                              )
+                                  : Container(
+                                width: 10,
+                              ),
+                            ),
+                            onChanged: (val) {
+                              setState(() => phone = val);
+                            },
+                            onSaved: (value) =>
+                            phone = value,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: FlatButton(
-                    // splashColor: Colors.red,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(pageBuilder: (_, __, ___) => CheckoutPayment()),
-                      );
-                      // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.04,
+              ),
+
+              ///dateOfBirth
+              Container(
+                height: size.height * 0.07,
+                width:
+                MediaQuery.of(context).size.width * .85,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(1, 1),
+                        color: Colors.grey.withOpacity(0.6),
+                        blurRadius: 5,
+                        spreadRadius: 3,
+                      ),
+                    ]),
+                child: Center(
+                  child:  GestureDetector(
+                    onTap: () {
+                      _selectDate(context);
                     },
-                    child: Text(
-                      'Payment',
-                      style: TextStyle(
-                        color: AppColor.textColor,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
+                    child: Container(
+                      width: size.width*0.85,
+                      height: size.height*0.07,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding:  EdgeInsets.only(left:16.0 ,top: size.height*0.02),
+                        child: Text(
+                          _dateSelected? selectedDate.toString().substring(0, 10):"Delivery Date"
+                          ,style: TextStyle(color: AppColor.textColor ,fontSize: 14),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(
+                height: size.height*0.04,
+              ),
+              ///deliveryAddress
+              Container(
+                height: size.height * 0.07,
+                width:
+                MediaQuery.of(context).size.width * .85,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(1, 1),
+                        color: Colors.grey.withOpacity(0.6),
+                        blurRadius: 1,
+                        spreadRadius: 2,
+                      ),
+                    ]),
+                child: Center(
+                  child: TextFormField(
+
+                    validator: emptyFieldVAlidator(deliveryAddress),
+                    keyboardType: TextInputType.name,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      hintText: "Delivery Address",
+                      contentPadding:
+                      EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                      suffixIcon: false
+                          ? Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.red,
+                      )
+                          : Container(
+                        width: 10,
+                      ),
+                    ),
+                    onChanged: (val) {
+                      setState(() => deliveryAddress = val);
+                    },
+                    onSaved: (value) => deliveryAddress = value,
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                height: size.height * 0.04,
+              ),
+
+              Container(
+                // margin: EdgeInsets.only(bottom: 80),
+                height: size.height * 0.07,
+                width: size.width * .85,
+                decoration: BoxDecoration(
+                  color: Color(0xffB1B1B1),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(1, 1),
+                      color: Colors.grey.withOpacity(0.6),
+                      blurRadius: 5,
+                      spreadRadius: 3,
+                    ),
+                  ],
+
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: FlatButton(
+                  // splashColor: Colors.red,
+                  onPressed: () {
+
+
+                    if(giftTo == null || !_dateSelected || phone == null){
+                      AwesomeDialog(
+                        context: context,
+                        customHeader: Container(
+                          child: Icon(
+                            Icons.error_outline,
+                            size: 100,
+                            color: AppColor.darkYellow,
+                          ),
+                        ),
+                        btnOkColor: AppColor.darkYellow,
+                        dialogType: DialogType.INFO,
+                        animType: AnimType.BOTTOMSLIDE,
+                        title: 'check out',
+                        desc: 'Please fill all the'
+                            ' fields',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+
+                        },
+                      )..show();
+                    }else{
+                      _bloc.add(AddReciever((b)=> b
+                        ..giftTo = giftTo
+                        ..countryCode=countryCode
+                        ..deliveryDate =selectedDate.toString().substring(0,10)
+                        ..phoneNumber = phone
+                      ));
+                    }
+
+                  },
+                  child: Text(
+                    'Add',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.04,
+              ),
+
+
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    // margin: EdgeInsets.only(bottom: 80),
+                    height: size.height * 0.07,
+                    width: size.width * .41,
+
+                  ),
+                  SizedBox(width: size.width*0.03,),
+                  Container(
+                    // margin: EdgeInsets.only(bottom: 80),
+                    height: size.height * 0.07,
+                    width: size.width * .41,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColor.darkYellow,
+                          AppColor.lightYellow
+                        ],
+                        stops: [0.1, 0.96],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(1, 1),
+                          color: Colors.grey.withOpacity(0.6),
+                          blurRadius: 5,
+                          spreadRadius: 3,
+                        ),
+                      ],
+
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: FlatButton(
+                      // splashColor: Colors.red,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(pageBuilder: (_, __, ___) => CheckoutPayment()),
+                        );
+                        // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
+                      },
+                      child: Text(
+                        'Payment',
+                        style: TextStyle(
+                          color: AppColor.textColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
 
