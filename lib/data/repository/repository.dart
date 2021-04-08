@@ -56,6 +56,19 @@ class Repository implements IRepository {
         countryCode: countryCode,
         phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+    final email= await _iprefHelper.setEmail(user.user.email);
+    final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+
+    print("000000000 ${user.user.name}");
+    print("00000000000 ${user.user.countryCode}");
     return user;
   }
 
@@ -65,6 +78,20 @@ class Repository implements IRepository {
     final user = await _ihttpHelper.signIn(
         password: password, countryCode: countryCode, phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+    final email= await _iprefHelper.setEmail(user.user.email);
+    final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+    print("000000000 ${user.user.name}");
+    print("00000000000 ${user.user.countryCode}");
     return user;
   }
 
@@ -247,6 +274,12 @@ class Repository implements IRepository {
       phone: phone
     );
 
+     await _iprefHelper.setEmail(email);
+     await _iprefHelper.setDate(date);
+     await _iprefHelper.setPhoneNumber(int.parse(phone));
+     await _iprefHelper.setGender(gender);
+     await _iprefHelper.setCountryCode(countryCode);
+
     return userInfoModel;
   }
 
@@ -322,5 +355,36 @@ class Repository implements IRepository {
     final token = await _iprefHelper.getToken();
     final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total);
     return succsess;
+  }
+
+  @override
+  Future<String> getCountryCode()  async{
+    return await _iprefHelper.getCountryCode();
+  }
+
+  @override
+  Future<String> getDate()async {
+    return await _iprefHelper.getDate();
+  }
+
+  @override
+  Future<String> getEmail()async {
+    return await _iprefHelper.getEmail();
+  }
+
+  @override
+  Future<String> getGender() async{
+    return await _iprefHelper.getGender();
+  }
+
+  @override
+  Future<String> getNameUser() async{
+    return await _iprefHelper.getNameUser();
+
+  }
+
+  @override
+  Future<int> getPhoneNumber() async{
+    return await _iprefHelper.getPhoneNumber();
   }
 }

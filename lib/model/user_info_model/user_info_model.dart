@@ -9,26 +9,31 @@ part 'user_info_model.g.dart';
 
 abstract class UserInfoModel implements Built<UserInfoModel, UserInfoModelBuilder> {
 
-
+  @nullable
   String get name;
+  @nullable
   String get email;
   @BuiltValueField(wireName: "user_type")
   String get userType;
-
+  @nullable
   String get gender;
 
   @BuiltValueField(wireName: "country_code")
+  @nullable
   String get countryCode;
 
   @BuiltValueField(wireName: "account_status")
+  @nullable
   String get accountStatus;
 
 
   @BuiltValueField(wireName: "phone_number")
+  @nullable
   int get phoneNumber;
 
 
   @BuiltValueField(wireName: "date_of_birth")
+  @nullable
   String get dateBirth;
 
 

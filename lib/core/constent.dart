@@ -71,3 +71,14 @@ const String APP_CURRENCY = "app_currency";
 const APP_COUNTRY_FLAG = "app_country_flag";
 const String APP_LANGUAGE = "App_language";
 const String ACCESS_TOKEN = "Acess_token";
+
+const String FULL_NAME="full_name";
+const String COUNTRY_CODE="county_code";
+const String PHONE_NUMBER="phone_number";
+const String DATE_OF_BIRTH="date_of_birth";
+const String GENDER="gender";
+
+const String CITY="city";
+const String STATE="state";
+const String DETAISL_ADDRESS="details";
+const String ZIP_CODE="zip_code";

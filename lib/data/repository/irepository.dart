@@ -135,5 +135,12 @@ abstract class IRepository {
     String total,
 
   });
+
+  Future<String>getNameUser();
+  Future<String>getCountryCode();
+  Future<int>getPhoneNumber();
+  Future<String>getEmail();
+  Future<String>getDate();
+  Future<String>getGender();
 }
 

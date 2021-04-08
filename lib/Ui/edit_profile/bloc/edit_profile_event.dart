@@ -32,6 +32,15 @@ TryEditProfile._();
 factory TryEditProfile([updates(TryEditProfileBuilder b)]) = _$TryEditProfile;
 }
 
+
+
+abstract class InitEvent extends EditProfileEvent
+    implements Built<InitEvent, InitEventBuilder> {
+// fields go here
+InitEvent._();
+
+factory InitEvent([updates(InitEventBuilder b)]) = _$InitEvent;
+}
 abstract class ClearError extends EditProfileEvent
     implements Built<ClearError, ClearErrorBuilder> {
   // fields go here

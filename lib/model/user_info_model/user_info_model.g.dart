@@ -19,31 +19,59 @@ class _$UserInfoModelSerializer implements StructuredSerializer<UserInfoModel> {
   Iterable<Object> serialize(Serializers serializers, UserInfoModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'email',
-      serializers.serialize(object.email,
-          specifiedType: const FullType(String)),
       'user_type',
       serializers.serialize(object.userType,
           specifiedType: const FullType(String)),
-      'gender',
-      serializers.serialize(object.gender,
-          specifiedType: const FullType(String)),
-      'country_code',
-      serializers.serialize(object.countryCode,
-          specifiedType: const FullType(String)),
-      'account_status',
-      serializers.serialize(object.accountStatus,
-          specifiedType: const FullType(String)),
-      'phone_number',
-      serializers.serialize(object.phoneNumber,
-          specifiedType: const FullType(int)),
-      'date_of_birth',
-      serializers.serialize(object.dateBirth,
-          specifiedType: const FullType(String)),
     ];
-
+    Object value;
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.email;
+    if (value != null) {
+      result
+        ..add('email')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.gender;
+    if (value != null) {
+      result
+        ..add('gender')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.countryCode;
+    if (value != null) {
+      result
+        ..add('country_code')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.accountStatus;
+    if (value != null) {
+      result
+        ..add('account_status')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.phoneNumber;
+    if (value != null) {
+      result
+        ..add('phone_number')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.dateBirth;
+    if (value != null) {
+      result
+        ..add('date_of_birth')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -129,19 +157,8 @@ class _$UserInfoModel extends UserInfoModel {
       this.phoneNumber,
       this.dateBirth})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, 'UserInfoModel', 'name');
-    BuiltValueNullFieldError.checkNotNull(email, 'UserInfoModel', 'email');
     BuiltValueNullFieldError.checkNotNull(
         userType, 'UserInfoModel', 'userType');
-    BuiltValueNullFieldError.checkNotNull(gender, 'UserInfoModel', 'gender');
-    BuiltValueNullFieldError.checkNotNull(
-        countryCode, 'UserInfoModel', 'countryCode');
-    BuiltValueNullFieldError.checkNotNull(
-        accountStatus, 'UserInfoModel', 'accountStatus');
-    BuiltValueNullFieldError.checkNotNull(
-        phoneNumber, 'UserInfoModel', 'phoneNumber');
-    BuiltValueNullFieldError.checkNotNull(
-        dateBirth, 'UserInfoModel', 'dateBirth');
   }
 
   @override
@@ -266,22 +283,15 @@ class UserInfoModelBuilder
   _$UserInfoModel build() {
     final _$result = _$v ??
         new _$UserInfoModel._(
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, 'UserInfoModel', 'name'),
-            email: BuiltValueNullFieldError.checkNotNull(
-                email, 'UserInfoModel', 'email'),
+            name: name,
+            email: email,
             userType: BuiltValueNullFieldError.checkNotNull(
                 userType, 'UserInfoModel', 'userType'),
-            gender: BuiltValueNullFieldError.checkNotNull(
-                gender, 'UserInfoModel', 'gender'),
-            countryCode: BuiltValueNullFieldError.checkNotNull(
-                countryCode, 'UserInfoModel', 'countryCode'),
-            accountStatus: BuiltValueNullFieldError.checkNotNull(
-                accountStatus, 'UserInfoModel', 'accountStatus'),
-            phoneNumber: BuiltValueNullFieldError.checkNotNull(
-                phoneNumber, 'UserInfoModel', 'phoneNumber'),
-            dateBirth: BuiltValueNullFieldError.checkNotNull(
-                dateBirth, 'UserInfoModel', 'dateBirth'));
+            gender: gender,
+            countryCode: countryCode,
+            accountStatus: accountStatus,
+            phoneNumber: phoneNumber,
+            dateBirth: dateBirth);
     replace(_$result);
     return _$result;
   }

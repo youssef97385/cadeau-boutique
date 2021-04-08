@@ -23,9 +23,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   var formKeyValidation = GlobalKey<FormState>();
   String password, name, countryCode = '+966', phone, gender , email;
   int _groupValue = 0;
+
   int _selectedGender = -1;
   DateTime selectedDate = DateTime.now().subtract(Duration(days: 1));
   bool _dateSelected = false;
+
+
+  bool first=false;
+
+
 
   // PersonalInfoProvider personalInfoProvider = PersonalInfoProvider();
 
@@ -44,16 +50,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       });
   }
 
+  final _bloc = sl<EditProfileBloc>();
   @override
   void initState() {
     formKeyValidation = GlobalKey<FormState>();
     super.initState();
+
+
+    _bloc.add(InitEvent());
+
+
   }
+
+  TextEditingController controllerName=TextEditingController();
+  TextEditingController controllerPhone=TextEditingController();
+  TextEditingController controlleremail=TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
-    final _bloc = sl<EditProfileBloc>();
+
+
     var size = MediaQuery.of(context).size;
+
+
+
+
 
     return BlocBuilder(
       cubit: _bloc,
@@ -69,6 +91,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
           error(AppLocalizations.of(context).translate("successful_operation"));
         }
+
+
+        print("${state.name}");
+
+   /*     if(!first){
+          print("----");
+          controllerName.text=state.name;
+          controllerPhone.text=state.phoneNumber.toString();
+          controlleremail.text=state.email;
+          if(state.gender=="male")
+            _groupValue=0;
+          else _groupValue=1;
+
+          first=true;
+
+
+        }else{
+          print("111111");
+        }*/
+
         return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
@@ -145,6 +187,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                     ///fullname
                                     Container(
+
                                       height: size.height * 0.07,
                                       width:
                                       MediaQuery.of(context).size.width * .85,
@@ -162,6 +205,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       child: Center(
                                         child: TextFormField(
 
+
+                                          controller: controllerName,
                                           validator:(String text) {
 
 
@@ -194,10 +239,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               width: 10,
                                             ),
                                           ),
-                                          onChanged: (val) {
+                                  /*        onChanged: (val) {
                                             setState(() => name = val);
                                           },
-                                          onSaved: (value) => name = value,
+                                          onSaved: (value) => name = value,*/
                                         ),
                                       ),
                                     ),
@@ -253,6 +298,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 // color:Colors.red,
 
                                                 child: TextFormField(
+                                                  controller: controllerPhone,
                                                   validator:(String text){
                                                     if(text==null|| text.isEmpty){
                                                       return AppLocalizations.of(context).translate('empty_hint');
@@ -285,11 +331,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                       width: 10,
                                                     ),
                                                   ),
-                                                  onChanged: (val) {
+                                           /*       onChanged: (val) {
                                                     setState(() => phone = val);
                                                   },
                                                   onSaved: (value) =>
-                                                  phone = value,
+                                                  phone = value,*/
                                                 ),
                                               ),
                                             ],
@@ -319,6 +365,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       child: Center(
                                         child: TextFormField(
 
+                                          controller: controlleremail,
                                           validator:(String text){
 
                                             if ( text==null|| !EmailValidator.validate(text, true)) {
@@ -351,10 +398,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               width: 10,
                                             ),
                                           ),
-                                          onChanged: (val) {
+                                       /*   onChanged: (val) {
                                             setState(() => email = val);
                                           },
-                                          onSaved: (value) => email = value,
+                                          onSaved: (value) => email = value,*/
                                         ),
                                       ),
                                     ),
@@ -497,7 +544,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 print("00000000000000");
 
 
-                                                if(name==null|| name.isEmpty){
+                                                if(controllerName.text==null|| controllerName.text.isEmpty){
                                                   error(AppLocalizations.of(context).translate('empty_hint_name'));
 
                                                   return null;
@@ -505,15 +552,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                                                 }
 
-                                                if(phone==null|| phone.isEmpty){
+                                                if(controllerPhone.text==null|| controllerPhone.text.isEmpty){
                                                   error(AppLocalizations.of(context).translate('empty_hint_phone'));
 
                                                 }
 
 
-                                                else if ( email==null|| !EmailValidator.validate(email, true)) {
+                                                else if ( controlleremail.text==null|| !EmailValidator.validate(controlleremail.text, true)) {
                                                   error(AppLocalizations.of(context).translate('valid_email'));
-                                                } else if(email.isEmpty){
+                                                } else if(controlleremail.text.isEmpty){
                                                   error(AppLocalizations.of(context).translate('valid_email'));
                                                 }
 
@@ -539,11 +586,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                                                   _bloc.add(TryEditProfile((b) => b
                                                     ..date_of_birth = selectedDate.toString().substring(0, 10)
-                                                    ..name = name
+                                                    ..name = controllerName.text
                                                     ..countryCode = countryCode
-                                                    ..phone = phone
+                                                    ..phone = controllerPhone.text
                                                     ..gender = gender
-                                                     ..email=email));
+                                                     ..email=controlleremail.text));
                                                 }
 
 

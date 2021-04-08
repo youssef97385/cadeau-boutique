@@ -1,3 +1,5 @@
+import 'package:cadeaue_boutique/Ui/track_screen/track_screen.dart';
+import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:flutter/material.dart';
 
@@ -112,21 +114,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // SizedBox(
                         //   height: size.height*0.04,
                         // ),
-                        singleProfileItem(title: "Wishlist",icon: "assets/images/drawer/heart.svg",size: size),
+                        GestureDetector(
 
-                        // SizedBox(
-                        //   height: size.height*0.04,
-                        // ),
-                        singleProfileItem(title: "Order History",icon: "assets/images/profile/history.svg",size: size),
+                          onTap:(){
+                        Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=>WishlistScreen()
+                        ));
+                        },
+                            child: singleProfileItem(title: "Wishlist",icon: "assets/images/drawer/heart.svg",size: size)),
 
                         // SizedBox(
                         //   height: size.height*0.04,
                         // ),
                         GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context)=>TrackScreen()
+                            ));
+                          },
+
+
+                            child: singleProfileItem(title: "Order History",icon: "assets/images/profile/history.svg",size: size)),
+
+                        // SizedBox(
+                        //   height: size.height*0.04,
+                        // ),
+                   /*     GestureDetector(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>MycardsScreen()));
                             },
-                            child: singleProfileItem(title: "My Cards",icon: "assets/images/profile/credit-card.svg",size: size))
+                            child: singleProfileItem(title: "My Cards",icon: "assets/images/profile/credit-card.svg",size: size))*/
                       ],
                     ),
                   )
