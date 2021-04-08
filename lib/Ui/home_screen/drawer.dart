@@ -43,6 +43,7 @@ class _MainDrawerState extends State<MainDrawer> {
     return BlocBuilder(
         cubit: _bloc,
         builder: (BuildContext context, HomeState state) {
+
     return Stack(
       children: [
         Container(
@@ -150,7 +151,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           onTap: (){
 
                             _bloc.add(IniEvent());
-                            if(state.isLoading){
+                            if(state.loginState){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
                             }else{
                               AwesomeDialog(
@@ -184,7 +185,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         GestureDetector(
                             onTap: (){
                               _bloc.add(IniEvent());
-    if(state.isLoading){
+    if(state.loginState){
 
 
                               Navigator.push(context, MaterialPageRoute(
