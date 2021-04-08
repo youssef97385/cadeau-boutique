@@ -51,20 +51,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   final _bloc = sl<EditProfileBloc>();
+
+  TextEditingController controllerName;
+  TextEditingController controllerPhone;
+  TextEditingController controlleremail;
   @override
   void initState() {
     formKeyValidation = GlobalKey<FormState>();
     super.initState();
-
 
     _bloc.add(InitEvent());
 
 
   }
 
-  TextEditingController controllerName=TextEditingController();
-  TextEditingController controllerPhone=TextEditingController();
-  TextEditingController controlleremail=TextEditingController();
 
 
   @override

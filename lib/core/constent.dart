@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 const String BaseUrl = "http://apis.cadeauboutique.com/api/";
@@ -8,7 +9,11 @@ const String BaseImgUrl = "http://apis.cadeauboutique.com/";
 
 const String ImageUrl = "";
 
+
+
 class AppColor {
+
+  static UserInfoModel UserInfoModelGlobal=UserInfoModel();
   static const Color textColor = Color(0xFF515A6B);
 
   static const Color lightTextColor = Color(0xFF596273);

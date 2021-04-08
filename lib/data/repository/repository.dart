@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:built_collection/src/list.dart';
+import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
 import 'package:cadeaue_boutique/data/http_helper/Ihttp_helper.dart';
 import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
@@ -65,6 +66,8 @@ class Repository implements IRepository {
     final email= await _iprefHelper.setEmail(user.user.email);
     final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
 
+
+    AppColor.UserInfoModelGlobal=user.user;
 
 
     print("000000000 ${user.user.name}");
