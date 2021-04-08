@@ -168,7 +168,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                 child: Center(
                   child: TextFormField(
 
-                    validator: emptyFieldVAlidator(giftTo),
+                    validator: emptyFieldVAlidator(giftTo,context),
                     keyboardType: TextInputType.name,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -246,7 +246,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           // color:Colors.red,
                           child: TextFormField(
                             validator:
-                            emptyFieldVAlidator(phone),
+                            emptyFieldVAlidator(phone,context),
                             keyboardType:
                             TextInputType.number,
                             obscureText: false,
@@ -347,7 +347,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                 child: Center(
                   child: TextFormField(
 
-                    validator: emptyFieldVAlidator(deliveryAddress),
+                    validator: emptyFieldVAlidator(deliveryAddress,context),
                     keyboardType: TextInputType.name,
                     obscureText: false,
                     decoration: InputDecoration(

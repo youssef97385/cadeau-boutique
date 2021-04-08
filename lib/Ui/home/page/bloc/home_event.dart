@@ -104,3 +104,12 @@ abstract class IniEvent extends HomeEvent
 
   factory IniEvent([updates(IniEventBuilder b)]) = _$IniEvent;
 }
+
+
+abstract class LogoutEvent extends HomeEvent
+    implements Built<LogoutEvent, LogoutEventBuilder> {
+// fields go here
+LogoutEvent._();
+
+factory LogoutEvent([updates(LogoutEventBuilder b)]) = _$LogoutEvent;
+}

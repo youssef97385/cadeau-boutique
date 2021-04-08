@@ -18,3 +18,15 @@ abstract class IniEvent extends AppEvent
 
   factory IniEvent([updates(IniEventBuilder b)]) = _$IniEvent;
 }
+
+
+abstract class SaveTokenFirebase extends AppEvent
+    implements Built<SaveTokenFirebase, SaveTokenFirebaseBuilder> {
+
+
+  @nullable
+  String get fireToken;
+SaveTokenFirebase._();
+
+factory SaveTokenFirebase([updates(SaveTokenFirebaseBuilder b)]) = _$SaveTokenFirebase;
+}

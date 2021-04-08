@@ -27,6 +27,7 @@ class AllProductsScreen extends StatefulWidget {
 
 class _AllProductsScreenState extends State<AllProductsScreen> {
 
+   List<int> vals = <int>[];
 
   List<TopSeller> topSellers = [
     TopSeller(
@@ -200,8 +201,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                   ],
                 ),
               ),
-              state.isLoading?Center(child: CircularProgressIndicator(backgroundColor: AppColor.darkYellow,)):Container
-                ()            ],
+              state.isLoading?Center(child: CircularProgressIndicator(backgroundColor: AppColor.darkYellow,)):Container()            ],
           )
         );
       },

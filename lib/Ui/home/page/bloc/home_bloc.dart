@@ -256,6 +256,35 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final result = await _iRepository.getIsLogin();
       yield state.rebuild((b) => b..loginState = result);
     }
+
+    if(event is LogoutEvent){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+        );
+
+        final data = await _iRepository.logoutRQ();
+
+        print('get all products Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+        );
+
+      } catch (e) {
+        print('all products Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+
+        );
+
+      }
+    }
   }
 
 

@@ -12,12 +12,16 @@ import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/brand_model/brand_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 
 
@@ -124,7 +128,39 @@ Future<bool> checkoutMultieGift({
   String token
 });
 
+Future<UserInfoModel> editProfileRQ({
+  String token,
+  String countryCode ,
+  String phone ,
+  String gender ,
+  String name ,
+  String email,
+  String date,
+   });
 
+
+
+
+Future<bool> editAddress({
+  String token,
+  String city ,
+  String state ,
+  String address_details ,
+  String zip_code ,
+
+});
+
+
+
+Future<BuiltList<TrackModel>> getTracksHome({
+  String token,
+});
+
+
+Future<bool>  saveFirebaseToken(String fireToken,String serverToken);
+
+
+Future<bool> logoutRQ(String token);
 
 
 }

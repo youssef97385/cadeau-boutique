@@ -16,6 +16,7 @@ import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/core/error/error.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -23,6 +24,9 @@ import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
+import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 import 'Ihttp_helper.dart';
 
@@ -923,6 +927,188 @@ class HttpHelper implements IHttpHelper {
         return baseResponse.data;
       } else {
         throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
+   static var editProfileRQType=FullType(BaseResponse,[FullType(UserInfoModel)]);
+  @override
+  Future<UserInfoModel> editProfileRQ({
+    String token,
+    String countryCode,
+    String phone,
+    String gender,
+    String name,
+    String email,
+    String date}) async {
+    try {
+      final formData = {
+        "country_code": countryCode,
+        "phone_number": phone,
+        "gender": gender,
+        "name": name,
+        "email": email,
+        "date_of_birth": date,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response =
+      await _dio.post(
+          'setting/edit/info?lang=en',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}),
+          data: formData);
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<UserInfoModel> baseResponse = serializers.deserialize(
+            json.decode(response.data),
+            specifiedType: editProfileRQType);
+
+        print("signup status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<bool> editAddress({
+    String token,
+    String city, String
+    state, String address_details, String zip_code}) async {
+    try {
+      final formData = {
+        "city": city,
+        "state": state,
+        "address_details": address_details,
+        "zip_code": zip_code,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response =
+      await _dio.post(
+          'setting/edit/details?lang=en',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}),
+          data: formData);
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        /*final BaseResponse<UserInfoModel> baseResponse = serializers.deserialize(
+            json.decode(response.data),
+            specifiedType: editProfileRQType);*/
+
+        print("status : ${true}");
+
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<BuiltList<TrackModel>> getTracksHome({String token}) async {
+
+
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      String myType;
+
+      final response = await _dio.get('order/new',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<TrackModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(TrackModel),
+                  ],
+                ),
+              ],
+            ));
+
+        print(" list status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<bool> saveFirebaseToken(String fireToken,String serverToken)async {
+
+
+    try {
+      final formData = {
+        "token": fireToken
+      };
+
+      _dio.interceptors.add(CookieManager(cookieJar));
+
+
+      final response = await _dio.post('fire_base/token/set',
+          options: Options(headers: {"Authorization": 'Bearer ' + serverToken}),
+        data: formData
+      );
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        return true;
+
+        }
+       else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
+  @override
+  Future<bool> logoutRQ(String token)async {
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('auth/app/logout',
+          options: Options(headers: {"Authorization": 'Bearer ' + token})
+
+      );
+      print(' Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        return true;
+
+      }
+      else {
+        throw NetworkException();
+
       }
     } catch (e) {
       print(e.toString());

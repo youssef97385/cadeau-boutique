@@ -1,6 +1,7 @@
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
 import 'package:cadeaue_boutique/Ui/filter_result/bloc/search_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
+import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_bloc.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -22,6 +23,8 @@ import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
 import 'package:cadeaue_boutique/Ui/picker_screen/bloc/filter_bloc.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/bloc/favourite_bloc.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
+import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_bloc.dart';
+import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_bloc.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/bloc/checkout_success_bloc.dart';
 
 final sl = GetIt.instance;
@@ -101,5 +104,14 @@ Future iniGetIt() async {
   sl.registerFactory(() => SuccessCheckBloc(sl()));
 
 
+  /// Edit Profile
 
+  sl.registerFactory(() => EditProfileBloc(sl()));
+
+  ///  Profile Address
+  sl.registerFactory(() => ProfileAddressBloc(sl()));
+
+
+  ///  Profile Address
+  sl.registerFactory(() => TrackScreenBloc(sl()));
 }

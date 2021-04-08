@@ -16,9 +16,12 @@ import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 
 import 'irepository.dart';
 
@@ -224,6 +227,75 @@ class Repository implements IRepository {
     final token = await _iprefHelper.getToken();
     final cart = await _ihttpHelper.removeSong(token: token);
     return cart;
+  }
+
+  @override
+  Future<UserInfoModel> editProfileRQ({
+    String countryCode, String phone, String gender,
+    String name, String email, String date})async {
+
+    final token = await _iprefHelper.getToken();
+
+
+    final userInfoModel=await _ihttpHelper.editProfileRQ(
+      token: token,
+      countryCode: countryCode,
+      date: date,
+      email: email,
+      gender:gender,
+      name: name,
+      phone: phone
+    );
+
+    return userInfoModel;
+  }
+
+  @override
+  Future<bool> editAddress({
+    String city, String state,
+    String address_details, String zip_code}) async {
+    final token = await _iprefHelper.getToken();
+    final item=await _ihttpHelper.editAddress(
+     token: token,
+     address_details: address_details,
+      city: city,
+      state: state,
+      zip_code: zip_code
+    );
+
+    return item;
+
+  }
+
+  @override
+  Future<BuiltList<TrackModel>> getTracksHome() async {
+    final token = await _iprefHelper.getToken();
+    final item=await _ihttpHelper.getTracksHome(token: token);
+
+    return item;
+  }
+
+  @override
+  Future<bool> saveFirebaseToken(String fireToken) async {
+   String token = await _iprefHelper.getToken();
+   if(token==null ||token.isEmpty) return false;
+   else{
+
+     final item=await _ihttpHelper.saveFirebaseToken(fireToken, token);
+     return true;
+   }
+  }
+
+  Future<bool> logoutRQ() async{
+    String token = await _iprefHelper.getToken();
+    if(token==null ||token.isEmpty) return false;
+    else{
+      final item=await _ihttpHelper.logoutRQ(token);
+
+      if(item!=null &&item) _iprefHelper.logout();
+      return item;
+    }
+
   }
 
   @override

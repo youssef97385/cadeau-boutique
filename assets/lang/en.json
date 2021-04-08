@@ -2,5 +2,32 @@
   "skip": "Skip",
   "signInText": "All the shops in your hands now, enjoy a phenomenal shopping experience",
   "username": "Username",
-  "password": "Password"
+  "password": "Password",
+  "save": "Save",
+  "cancel": "cancel",
+  "empty_hint":"This Field Should Not be empty",
+  "valid_email": "Please Provide a valid email address",
+  "password_hint": "Password is not matching",
+  "password_lenght_hint": "password should be at least be 6 characters",
+  "full_name": "Full Name",
+  "phone_number": "Phone Number",
+  "email_address": "Email Address",
+  "date_Of_birth": "Date Of Birth",
+  "male": "Male",
+  "female": "Female",
+  "plz_select_date_of_birth": "Please Select Date Of Birth",
+  "empty_hint_name": "Name Should Not be empty",
+  "empty_hint_phone": "Phone Should Not be empty",
+  "city": "City",
+  "state": "State",
+  "zip_code": "Zip Code",
+  "address_details": "Detailed address",
+  "add": "Add",
+  "successful_operation": "Successful operation",
+  "plz_fill_all_fields": "Please fill in all fields",
+  "logout": "Logout",
+  "do_you_want_to_logout": "Do You want to logout?",
+  "plz_wait": "Please Wait..."
+
+
 }

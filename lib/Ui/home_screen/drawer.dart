@@ -1,20 +1,48 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
+import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
+import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
 import 'package:cadeaue_boutique/Ui/settings_screen/settings_screen.dart';
+import 'package:cadeaue_boutique/Ui/splash_screen/splash_screen.dart';
+import 'package:cadeaue_boutique/Ui/track_screen/track_screen.dart';
+import 'package:cadeaue_boutique/Ui/welcome_page/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/Ui/categories_screen/categories_screen.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
-class MainDrawer extends StatelessWidget {
+import 'package:cadeaue_boutique/Ui/Dialog/WaitDilaog/WaitDialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../injectoin.dart';
+class MainDrawer extends StatefulWidget {
   bool isLogin;
 
   MainDrawer({this.isLogin});
 
   @override
+  _MainDrawerState createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends State<MainDrawer> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _bloc.add(IniEvent());
+    super.initState();
+  }
+
+  final _bloc = sl<HomeBloc>();
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    return BlocBuilder(
+        cubit: _bloc,
+        builder: (BuildContext context, HomeState state) {
     return Stack(
       children: [
         Container(
@@ -71,27 +99,29 @@ class MainDrawer extends StatelessWidget {
                       SizedBox(width: 15,),
                       Container(
                         height:90,
+                        alignment: Alignment.center,
                         width: 90,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
 
                         ),
-                        child: Image.asset("assets/images/drawer/profile pic.png",fit: BoxFit.fill,)
+                       // child: Image.asset("assets/images/drawer/profile pic.png",fit: BoxFit.fill,)
+                        child: SvgPicture.asset("assets/images/logo.svg",height: 40,width: 40,)
                         ,
                       ),
                       SizedBox(width: 15,),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          baseText(title: "Name",size:30.0 ,color:AppColor.lightTextColor,fontWeight:FontWeight.bold ),
+                         // baseText(title: "Name",size:30.0 ,color:AppColor.lightTextColor,fontWeight:FontWeight.bold ),
                           SizedBox(
                             height: 5,
                           ),
                           Row(
                             children: [
-                              SvgPicture.asset("assets/images/drawer/edit.svg"),
-                              SizedBox(width: 10,),
-                              baseText(title: "Edit Profile",size:14.0 ,color:AppColor.lightTextColor,)
+                            //  SvgPicture.asset("assets/images/drawer/edit.svg"),
+                            //  SizedBox(width: 10,),
+                            // baseText(title: "Edit Profile",size:14.0 ,color:AppColor.lightTextColor,)
                             ],
                           )
                         ],
@@ -119,7 +149,8 @@ class MainDrawer extends StatelessWidget {
                         GestureDetector(
                           onTap: (){
 
-                            if(isLogin){
+                            _bloc.add(IniEvent());
+                            if(state.isLoading){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
                             }else{
                               AwesomeDialog(
@@ -136,7 +167,7 @@ class MainDrawer extends StatelessWidget {
                                 animType: AnimType.BOTTOMSLIDE,
                                 title: 'Login',
                                 desc: 'You must be logged in',
-                                btnCancelOnPress: () {},
+                                btnCancelOnPress: () { },
                                 btnOkOnPress: () {
                                   WidgetsBinding.instance.addPostFrameCallback((_) =>
                                       Navigator.of(context).push(
@@ -150,7 +181,45 @@ class MainDrawer extends StatelessWidget {
                           height: 30,
                         ),
 
-                        singleDrawerItem("assets/images/drawer/delivery.svg", "Track Order"),
+                        GestureDetector(
+                            onTap: (){
+                              _bloc.add(IniEvent());
+    if(state.isLoading){
+
+
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context)=>TrackScreen()
+                              ));
+    }
+    else{
+      AwesomeDialog(
+        context: context,
+        customHeader: Container(
+          child: Icon(
+            Icons.error_outline,
+            size: 100,
+            color: AppColor.darkYellow,
+          ),
+        ),
+        btnOkColor: AppColor.darkYellow,
+        dialogType: DialogType.INFO,
+        animType: AnimType.BOTTOMSLIDE,
+        title: 'Login',
+        desc: 'You must be logged in',
+        btnCancelOnPress: () { },
+        btnOkOnPress: () {
+          Navigator.of(context).pop();
+          WidgetsBinding.instance.addPostFrameCallback((_) =>
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SigninScreen())));
+        },
+      )..show();
+    }
+
+
+
+                            },
+                            child: singleDrawerItem("assets/images/drawer/delivery.svg", "Track Order")),
                         SizedBox(
                           height: 30,
                         ),
@@ -220,6 +289,31 @@ class MainDrawer extends StatelessWidget {
                     child: FlatButton(
                       // splashColor: Colors.red,
                       onPressed: () {
+
+
+                        AwesomeDialog(
+                          context: context,
+
+                          btnOkColor: AppColor.darkYellow,
+                          dialogType: DialogType.QUESTION,
+                          animType: AnimType.BOTTOMSLIDE,
+                          title: 'Logout',
+                          desc: 'do you want to logout',
+                          btnCancelOnPress: () { },
+                          btnOkOnPress: () async {
+
+                     var state=   await  openLogout(context);
+                     print("------------------ ");
+                     Navigator.pushAndRemoveUntil(
+                         context,
+                         MaterialPageRoute(
+                             builder: (context) => SigninScreen()
+                         ),
+                         ModalRoute.withName("/signin_screen")
+                     );
+
+                          },
+                        )..show();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -247,7 +341,9 @@ class MainDrawer extends StatelessWidget {
 
       ],
     );
+        });
   }
+
   Widget singleDrawerItem(String icon , String title){
     return  Row(
       children: [
@@ -256,6 +352,29 @@ class MainDrawer extends StatelessWidget {
         baseText(title: title ,size:17.0 ,color:AppColor.lightTextColor,)
       ],
     );
+  }
+
+  Future<bool> openLogout(BuildContext context,) async {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return WaitDialog();
+      },
+    );}
+
+  void error(String errorCode) {
+    if (errorCode.isNotEmpty) {
+      Fluttertoast.showToast(
+          msg: errorCode,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          //timeInSecForIos: 1,
+          backgroundColor: Colors.red.withOpacity(0.8),
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+    }
   }
 }
 

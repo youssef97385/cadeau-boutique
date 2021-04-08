@@ -357,7 +357,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   child: Padding(
                                                     padding: const EdgeInsets.all(6.0),
                                                     child: TextFormField(
-                                                      validator: emptyFieldVAlidator(name),
+                                                      validator: emptyFieldVAlidator(name,context),
                                                       keyboardType: TextInputType.name,
                                                       obscureText: false,
                                                       decoration: InputDecoration(
@@ -522,7 +522,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                           // color:Colors.red,
                                                           child: TextFormField(
                                                             validator:
-                                                            emptyFieldVAlidator(phone),
+                                                            emptyFieldVAlidator(phone,context),
                                                             keyboardType:
                                                             TextInputType.number,
                                                             obscureText: false,
@@ -579,7 +579,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   child: Padding(
                                                     padding: const EdgeInsets.all(6.0),
                                                     child: TextFormField(
-                                                      validator: passwordValidator(),
+                                                      validator: passwordValidator(context),
                                                       keyboardType: TextInputType.text,
                                                       obscureText: true,
                                                       decoration: InputDecoration(

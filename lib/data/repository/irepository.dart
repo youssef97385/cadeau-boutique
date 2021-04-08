@@ -7,6 +7,7 @@ import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
@@ -14,6 +15,8 @@ import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 abstract class IRepository {
 
   Future<bool> getIsLogin();
@@ -88,6 +91,35 @@ abstract class IRepository {
   Future<CartModel> getCartInfo();
 
   Future<CartModel> removeCartItem({int cartItemId});
+
+
+  Future<UserInfoModel> editProfileRQ({
+    String countryCode ,
+    String phone ,
+    String gender ,
+    String name ,
+    String email,
+    String date,
+  });
+
+
+
+
+
+
+  Future<bool> editAddress({
+    String city ,
+    String state ,
+    String address_details ,
+    String zip_code ,
+  });
+
+  Future<BuiltList<TrackModel>> getTracksHome();
+
+  Future<bool> saveFirebaseToken(String fireToken);
+
+  Future<bool> logoutRQ();
+
 
 
   Future<BuiltList<ProductModel>> filter({

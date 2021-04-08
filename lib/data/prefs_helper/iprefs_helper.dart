@@ -13,4 +13,6 @@ abstract class IPrefsHelper {
   Future<void> setAppLanguage(int value);
 
   Future<void> saveToken(String token);
+
+  Future<void> logout();
 }

@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -16,6 +19,11 @@ import 'package:cadeaue_boutique/Ui/track_screen/track_screen.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../../injectoin.dart';
+import 'bloc/home_bloc.dart';
+import 'bloc/home_event.dart';
+import 'bloc/home_state.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -24,6 +32,17 @@ class Home extends StatefulWidget {
 var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _HomeState extends State<Home> {
+  final _bloc = sl<HomeBloc>();
+
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc.add(IniEvent());
+
+
+
+  }
 
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -87,8 +106,8 @@ class _HomeState extends State<Home> {
 
   var pages = [
     CartScreen(),
-    TrackScreen(ticks: 3,),
-   HomeScreen(),
+    TrackScreen(),
+     HomeScreen(),
     ProfileScreen(),
     PickerScreen(),
 
@@ -96,13 +115,19 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+
+
+    return BlocBuilder(
+        cubit: _bloc,
+        builder: (BuildContext context, HomeState state) {
+
+      return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         key: scaffoldKey,
         body: pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped,
+          onTap: (index){onTabTapped(index,state.loginState); },
           items: [
             BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/bottom-icons/bottom-bag.svg',color: Colors.black,),
@@ -166,10 +191,36 @@ class _HomeState extends State<Home> {
           // },
         ),
       ),
-    );
+    );});
   }
 
-  void onTabTapped(int index) {
+  void onTabTapped(int index,isLogin) {
+
+    if((index==1||index==3) &&  !(isLogin) ){
+      AwesomeDialog(
+        context: context,
+        customHeader: Container(
+          child: Icon(
+            Icons.error_outline,
+            size: 100,
+            color: AppColor.darkYellow,
+          ),
+        ),
+        btnOkColor: AppColor.darkYellow,
+        dialogType: DialogType.INFO,
+        animType: AnimType.BOTTOMSLIDE,
+        title: 'Login',
+        desc: 'You must be logged in',
+        btnCancelOnPress: () { },
+        btnOkOnPress: () {
+          WidgetsBinding.instance.addPostFrameCallback((_) =>
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SigninScreen())));
+        },
+      )..show();
+    }
+
+    else
     setState(() {
       _currentIndex = index;
     });
