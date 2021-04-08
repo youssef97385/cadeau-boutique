@@ -94,11 +94,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 shape: BoxShape.circle,
 
                               ),
-                              child: Image.asset("assets/images/drawer/profile pic.png",fit: BoxFit.fill,)
+                              child: SvgPicture.asset("assets/images/logo.svg",height: 40,width: 40,)
                               ,
                             ),
 
-                            baseText(title: "User name" , color: AppColor.textColor , size: 20.0),
+                           // baseText(title: "User name" , color: AppColor.textColor , size: 20.0),
 
 
                           ],
