@@ -12,6 +12,7 @@ import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
@@ -42,168 +43,189 @@ class Repository implements IRepository {
   }
 
   @override
-  Future<SignupResponse> signup({String countryCode, String phone, String gender, String name, String password}) async{
-    final user = await _ihttpHelper.signup(name: name , gender: gender , password: password , countryCode: countryCode , phone: phone);
+  Future<SignupResponse> signup(
+      {String countryCode,
+      String phone,
+      String gender,
+      String name,
+      String password}) async {
+    final user = await _ihttpHelper.signup(
+        name: name,
+        gender: gender,
+        password: password,
+        countryCode: countryCode,
+        phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
     return user;
   }
 
   @override
-  Future<SignupResponse> signin({String countryCode, String phone, String password}) async{
-    final user = await _ihttpHelper.signIn( password: password , countryCode: countryCode , phone: phone);
+  Future<SignupResponse> signin(
+      {String countryCode, String phone, String password}) async {
+    final user = await _ihttpHelper.signIn(
+        password: password, countryCode: countryCode, phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
     return user;
   }
 
   @override
-  Future<SignupResponse> socialSignin({String phoneNumber, String name, String socialToken}) async{
-    final user = await _ihttpHelper.socialSignin( phoneNumber: phoneNumber , name: name , socialToken: socialToken);
+  Future<SignupResponse> socialSignin(
+      {String phoneNumber, String name, String socialToken}) async {
+    final user = await _ihttpHelper.socialSignin(
+        phoneNumber: phoneNumber, name: name, socialToken: socialToken);
     final save = await _iprefHelper.saveToken(user.token);
     return user;
   }
 
   @override
-  Future<BuiltList<SliderModel>> getSlider() async{
+  Future<BuiltList<SliderModel>> getSlider() async {
     final slider = await _ihttpHelper.getSlider();
     return slider;
   }
 
   @override
-  Future<BaseOccasion> getOccasions({int page}) async{
+  Future<BaseOccasion> getOccasions({int page}) async {
     print("picker1");
     final occasion = await _ihttpHelper.getOccasions(page: page);
     return occasion;
   }
 
   @override
-  Future<BaseCategory> getCategory({int page}) async{
+  Future<BaseCategory> getCategory({int page}) async {
     final category = await _ihttpHelper.getCategory(page: page);
     return category;
   }
 
   @override
-  Future<BaseBrand> getBrands({int page}) async{
+  Future<BaseBrand> getBrands({int page}) async {
     final brand = await _ihttpHelper.getBrands(page: page);
     return brand;
   }
 
   @override
-  Future<BaseCoupon> getCoupon({int page}) async{
+  Future<BaseCoupon> getCoupon({int page}) async {
     final coupon = await _ihttpHelper.getCoupon(page: page);
     return coupon;
   }
 
   @override
-  Future<BuiltList<WrapModel>> getWraps() async{
-    final wraps = await _ihttpHelper.getWraps();
+  Future<BuiltList<WrapModel>> getWraps({bool isGlobalWrap}) async {
+    final wraps = await _ihttpHelper.getWraps(isGlobalWrap: isGlobalWrap);
     return wraps;
   }
 
   @override
-  Future<ProductModel> getProductByid({int id}) async{
+  Future<ProductModel> getProductByid({int id}) async {
     final product = await _ihttpHelper.getProductByid(id: id);
     return product;
   }
 
   @override
-  Future<BuiltList<ProductModel>> getProducts({int id, String type}) async{
-    final products = await _ihttpHelper.getProducts(id: id , type: type);
+  Future<BuiltList<ProductModel>> getProducts({int id, String type}) async {
+    final products = await _ihttpHelper.getProducts(id: id, type: type);
     return products;
   }
 
   @override
-  Future<BuiltList<OccasionModel>> getNearOccasions() async{
+  Future<BuiltList<OccasionModel>> getNearOccasions() async {
     final near = await _ihttpHelper.getNearbyOccasions();
     return near;
   }
 
   @override
-  Future<BuiltList<ProductModel>> getAllProducts() async{
+  Future<BuiltList<ProductModel>> getAllProducts() async {
     final products = await _ihttpHelper.getAllProducts();
     return products;
   }
 
   @override
-  Future<WrapItem> getWrapByid({int id}) async{
+  Future<WrapItem> getWrapByid({int id}) async {
     final wrap = await _ihttpHelper.getWrapByid(id: id);
     return wrap;
   }
 
   @override
-  Future<BuiltList<RelationModel>> getRelations() async{
+  Future<BuiltList<RelationModel>> getRelations() async {
     final relations = await _ihttpHelper.getRelation();
     return relations;
   }
 
   @override
-  Future<BuiltList<ProductModel>> getFavourites() async{
+  Future<BuiltList<ProductModel>> getFavourites() async {
     final token = await _iprefHelper.getToken();
-      final favourites = await _ihttpHelper.getFavourites(token: token);
-      return favourites;
-
-  }
-
-  @override
-  Future<bool> addToFavourite({int id}) async{
-    final token = await _iprefHelper.getToken();
-    final favourites = await _ihttpHelper.addToFav(productId: id , token: token);
+    final favourites = await _ihttpHelper.getFavourites(token: token);
     return favourites;
   }
 
   @override
-  Future<bool> removeFavourite({int id}) async{
+  Future<bool> addToFavourite({int id}) async {
     final token = await _iprefHelper.getToken();
-    final favourites = await _ihttpHelper.removeFavourite(productId: id , token: token);
+    final favourites = await _ihttpHelper.addToFav(productId: id, token: token);
     return favourites;
   }
 
   @override
-  Future<CartModel> addGlobalWrap({int wrapId, int wrapColor}) async{
+  Future<bool> removeFavourite({int id}) async {
     final token = await _iprefHelper.getToken();
-    final cart = await _ihttpHelper.addGlobalWrap(wrapColor: wrapColor,wrapId: wrapId , token: token);
+    final favourites =
+        await _ihttpHelper.removeFavourite(productId: id, token: token);
+    return favourites;
+  }
+
+  @override
+  Future<CartModel> addGlobalWrap({int wrapId, int wrapColor}) async {
+    final token = await _iprefHelper.getToken();
+    final cart = await _ihttpHelper.addGlobalWrap(
+        wrapColor: wrapColor, wrapId: wrapId, token: token);
     return cart;
   }
 
   @override
-  Future<CartModel> addSong({String song}) async{
+  Future<CartModel> addSong({String song}) async {
     final token = await _iprefHelper.getToken();
     final cart = await _ihttpHelper.addSong(token: token);
     return cart;
   }
 
   @override
-  Future<CartModel> addToCart({int giftId, int giftColorId, int wrapId, int wrapColorId}) async{
+  Future<CartModel> addToCart(
+      {int giftId, int giftColorId, int wrapId, int wrapColorId}) async {
     final token = await _iprefHelper.getToken();
-    final cart = await _ihttpHelper.addToCart(giftId: giftId,wrapId: wrapId,giftColorId: giftColorId ,wrapColorId: wrapColorId , token: token);
+    final cart = await _ihttpHelper.addToCart(
+        giftId: giftId,
+        wrapId: wrapId,
+        giftColorId: giftColorId,
+        wrapColorId: wrapColorId,
+        token: token);
     return cart;
   }
 
   @override
   Future<CartModel> getCartInfo() async {
     final token = await _iprefHelper.getToken();
-    final cart = await _ihttpHelper.getCartInfo( token: token);
+    final cart = await _ihttpHelper.getCartInfo(token: token);
     return cart;
   }
 
   @override
-  Future<CartModel> removeCartItem({int cartItemId}) async{
+  Future<CartModel> removeCartItem({int cartItemId}) async {
     final token = await _iprefHelper.getToken();
-    final cart = await _ihttpHelper.removeCartItem(cartItemId:cartItemId , token: token);
+    final cart =
+        await _ihttpHelper.removeCartItem(cartItemId: cartItemId, token: token);
     return cart;
   }
 
   @override
-  Future<CartModel> removeGlobalWrap() async{
+  Future<CartModel> removeGlobalWrap() async {
     final token = await _iprefHelper.getToken();
     final cart = await _ihttpHelper.removeGlobalWrap(token: token);
     return cart;
   }
 
   @override
-  Future<CartModel> removeSong()
-  async{
+  Future<CartModel> removeSong() async {
     final token = await _iprefHelper.getToken();
-    final cart = await _ihttpHelper.removeSong( token: token);
+    final cart = await _ihttpHelper.removeSong(token: token);
     return cart;
   }
 
@@ -276,4 +298,29 @@ class Repository implements IRepository {
 
   }
 
+  @override
+  Future<BuiltList<ProductModel>> filter(
+      {int occasionId,
+      int relationId,
+      String gender,
+      String minPrice,
+      String maxPrice,
+      String age}) async{
+
+    final filteredProducts = await _ihttpHelper.filter(
+        age: age,
+        gender: gender,
+        maxPrice: maxPrice,
+        minPrice: minPrice,
+        occasionId: occasionId,
+        relationId: relationId);
+    return filteredProducts;
+  }
+
+  @override
+  Future<bool> checkoutMultieGift({BuiltList<RecieverModel> recieverModel, String total}) async{
+    final token = await _iprefHelper.getToken();
+    final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total);
+    return succsess;
+  }
 }

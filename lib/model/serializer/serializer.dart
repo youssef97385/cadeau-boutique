@@ -38,6 +38,7 @@ import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 
 
+import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 part 'serializer.g.dart';
 
 @SerializersFor(const [
@@ -305,6 +306,19 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<RelationModel>())
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          FullType(
+            BuiltList,
+            [
+              const FullType(RelationModel),
+            ],
+          ),
+        ],
+      )),
+          () => BaseResponseBuilder<BuiltList<RelationModel>>())
 
 
   ..addBuilderFactory(

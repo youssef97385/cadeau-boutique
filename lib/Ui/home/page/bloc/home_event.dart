@@ -91,8 +91,6 @@ abstract class GetAllProducts extends HomeEvent
 
   //fields go here
 
-
-
   GetAllProducts._();
 
   factory GetAllProducts([updates(GetAllProductsBuilder b)]) = _$GetAllProducts;

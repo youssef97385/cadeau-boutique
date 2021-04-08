@@ -17,7 +17,10 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
   @override
   Iterable<Object> serialize(Serializers serializers, CartItem object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
+    final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+    ];
     Object value;
     value = object.gift;
     if (value != null) {
@@ -61,6 +64,10 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
       iterator.moveNext();
       final Object value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'gift':
           result.gift.replace(serializers.deserialize(value,
               specifiedType: const FullType(ProductModel)) as ProductModel);
@@ -86,6 +93,8 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
 
 class _$CartItem extends CartItem {
   @override
+  final int id;
+  @override
   final ProductModel gift;
   @override
   final ColorModel giftColor;
@@ -97,8 +106,10 @@ class _$CartItem extends CartItem {
   factory _$CartItem([void Function(CartItemBuilder) updates]) =>
       (new CartItemBuilder()..update(updates)).build();
 
-  _$CartItem._({this.gift, this.giftColor, this.wrap, this.wrapColor})
-      : super._();
+  _$CartItem._({this.id, this.gift, this.giftColor, this.wrap, this.wrapColor})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'CartItem', 'id');
+  }
 
   @override
   CartItem rebuild(void Function(CartItemBuilder) updates) =>
@@ -111,6 +122,7 @@ class _$CartItem extends CartItem {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is CartItem &&
+        id == other.id &&
         gift == other.gift &&
         giftColor == other.giftColor &&
         wrap == other.wrap &&
@@ -120,13 +132,15 @@ class _$CartItem extends CartItem {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, gift.hashCode), giftColor.hashCode), wrap.hashCode),
+        $jc($jc($jc($jc(0, id.hashCode), gift.hashCode), giftColor.hashCode),
+            wrap.hashCode),
         wrapColor.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('CartItem')
+          ..add('id', id)
           ..add('gift', gift)
           ..add('giftColor', giftColor)
           ..add('wrap', wrap)
@@ -137,6 +151,10 @@ class _$CartItem extends CartItem {
 
 class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
   _$CartItem _$v;
+
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   ProductModelBuilder _gift;
   ProductModelBuilder get gift => _$this._gift ??= new ProductModelBuilder();
@@ -161,6 +179,7 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
   CartItemBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _gift = $v.gift?.toBuilder();
       _giftColor = $v.giftColor?.toBuilder();
       _wrap = $v.wrap?.toBuilder();
@@ -187,6 +206,7 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
     try {
       _$result = _$v ??
           new _$CartItem._(
+              id: BuiltValueNullFieldError.checkNotNull(id, 'CartItem', 'id'),
               gift: _gift?.build(),
               giftColor: _giftColor?.build(),
               wrap: _wrap?.build(),

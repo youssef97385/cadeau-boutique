@@ -16,6 +16,8 @@ abstract class CartItem implements Built<CartItem, CartItemBuilder> {
   // fields go here
 
 
+  int get id;
+
   @nullable
   ProductModel get gift;
 

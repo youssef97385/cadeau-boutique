@@ -36,7 +36,8 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
     if (value != null) {
       result
         ..add('song_price')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.status;
     if (value != null) {
@@ -109,7 +110,7 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
           break;
         case 'song_price':
           result.songPrice = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'status':
           result.status = serializers.deserialize(value,
@@ -154,7 +155,7 @@ class _$CartModel extends CartModel {
   @override
   final String songLink;
   @override
-  final int songPrice;
+  final String songPrice;
   @override
   final String status;
   @override
@@ -257,9 +258,9 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
   String get songLink => _$this._songLink;
   set songLink(String songLink) => _$this._songLink = songLink;
 
-  int _songPrice;
-  int get songPrice => _$this._songPrice;
-  set songPrice(int songPrice) => _$this._songPrice = songPrice;
+  String _songPrice;
+  String get songPrice => _$this._songPrice;
+  set songPrice(String songPrice) => _$this._songPrice = songPrice;
 
   String _status;
   String get status => _$this._status;

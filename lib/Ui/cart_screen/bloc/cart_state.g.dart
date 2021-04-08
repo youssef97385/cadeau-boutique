@@ -17,18 +17,26 @@ class _$CartState extends CartState {
   final CartModel cart;
   @override
   final BuiltList<CartItem> cartList;
+  @override
+  final BuiltList<WrapModel> wraps;
 
   factory _$CartState([void Function(CartStateBuilder) updates]) =>
       (new CartStateBuilder()..update(updates)).build();
 
   _$CartState._(
-      {this.success, this.isLoading, this.error, this.cart, this.cartList})
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.cart,
+      this.cartList,
+      this.wraps})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'CartState', 'success');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'CartState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'CartState', 'error');
     BuiltValueNullFieldError.checkNotNull(cart, 'CartState', 'cart');
     BuiltValueNullFieldError.checkNotNull(cartList, 'CartState', 'cartList');
+    BuiltValueNullFieldError.checkNotNull(wraps, 'CartState', 'wraps');
   }
 
   @override
@@ -46,17 +54,20 @@ class _$CartState extends CartState {
         isLoading == other.isLoading &&
         error == other.error &&
         cart == other.cart &&
-        cartList == other.cartList;
+        cartList == other.cartList &&
+        wraps == other.wraps;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
-                error.hashCode),
-            cart.hashCode),
-        cartList.hashCode));
+            $jc(
+                $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                    error.hashCode),
+                cart.hashCode),
+            cartList.hashCode),
+        wraps.hashCode));
   }
 
   @override
@@ -66,7 +77,8 @@ class _$CartState extends CartState {
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('cart', cart)
-          ..add('cartList', cartList))
+          ..add('cartList', cartList)
+          ..add('wraps', wraps))
         .toString();
   }
 }
@@ -95,6 +107,11 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
       _$this._cartList ??= new ListBuilder<CartItem>();
   set cartList(ListBuilder<CartItem> cartList) => _$this._cartList = cartList;
 
+  ListBuilder<WrapModel> _wraps;
+  ListBuilder<WrapModel> get wraps =>
+      _$this._wraps ??= new ListBuilder<WrapModel>();
+  set wraps(ListBuilder<WrapModel> wraps) => _$this._wraps = wraps;
+
   CartStateBuilder();
 
   CartStateBuilder get _$this {
@@ -105,6 +122,7 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
       _error = $v.error;
       _cart = $v.cart.toBuilder();
       _cartList = $v.cartList.toBuilder();
+      _wraps = $v.wraps.toBuilder();
       _$v = null;
     }
     return this;
@@ -134,7 +152,8 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'CartState', 'error'),
               cart: cart.build(),
-              cartList: cartList.build());
+              cartList: cartList.build(),
+              wraps: wraps.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -142,6 +161,8 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
         cart.build();
         _$failedField = 'cartList';
         cartList.build();
+        _$failedField = 'wraps';
+        wraps.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'CartState', _$failedField, e.toString());

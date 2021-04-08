@@ -1,10 +1,12 @@
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
+import 'package:cadeaue_boutique/Ui/filter_result/bloc/search_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
 import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_bloc.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import 'Ui/checkout_address/bloc/checkout_bloc.dart';
 import 'app/bloc/app_bloc.dart';
 import 'core/constent.dart';
 import 'data/http_helper/Ihttp_helper.dart';
@@ -23,6 +25,7 @@ import 'package:cadeaue_boutique/Ui/wishlist_screen/bloc/favourite_bloc.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
 import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_bloc.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_bloc.dart';
+import 'package:cadeaue_boutique/Ui/checkout_success/bloc/checkout_success_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -87,6 +90,18 @@ Future iniGetIt() async {
   ///CartBloc
 
   sl.registerFactory(() => CartBloc(sl()));
+
+  ///SearchBloc
+
+  sl.registerFactory(() => SearchBloc(sl()));
+
+ ///checkoutBloc
+
+  sl.registerFactory(() => CheckoutBloc());
+
+  ///check
+
+  sl.registerFactory(() => SuccessCheckBloc(sl()));
 
 
   /// Edit Profile

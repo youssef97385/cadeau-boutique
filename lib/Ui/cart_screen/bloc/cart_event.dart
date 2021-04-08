@@ -28,3 +28,40 @@ abstract class AddSong extends CartEvent
 
   factory AddSong([updates(AddSongBuilder b)]) = _$AddSong;
 }
+
+abstract class RemoveItem extends CartEvent
+    implements Built<RemoveItem, RemoveItemBuilder> {
+
+  //fields go here
+
+  int get id;
+
+  RemoveItem._();
+
+  factory RemoveItem([updates(RemoveItemBuilder b)]) = _$RemoveItem;
+}
+
+abstract class GetGlobalWraps extends CartEvent
+    implements Built<GetGlobalWraps, GetGlobalWrapsBuilder> {
+
+  //fields go here
+
+  GetGlobalWraps._();
+
+  factory GetGlobalWraps([updates(GetGlobalWrapsBuilder b)]) = _$GetGlobalWraps;
+}
+
+abstract class AddGlobalWrap extends CartEvent
+    implements Built<AddGlobalWrap, AddGlobalWrapBuilder> {
+
+  //fields go here
+
+  int get wrapId;
+
+  @nullable
+  int get wrapColorId;
+
+  AddGlobalWrap._();
+
+  factory AddGlobalWrap([updates(AddGlobalWrapBuilder b)]) = _$AddGlobalWrap;
+}
