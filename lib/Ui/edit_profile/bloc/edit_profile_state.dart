@@ -49,6 +49,7 @@ factory EditProfileState([updates(EditProfileStateBuilder b)]) = _$EditProfileSt
       ..name=""
       ..accountStatus
        ..gender=""
+        ..dateBirth=""
     );
   }
 }

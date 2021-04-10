@@ -51,6 +51,7 @@ class EditProfileBloc  extends Bloc<EditProfileEvent,EditProfileState>{
       int phone = await _irepository.getPhoneNumber();
       String email = await _irepository.getEmail();
       String gender = await _irepository.getGender();
+      String dateBirthUser = await _irepository.getDate();
 
 
       print("$name");
@@ -66,7 +67,8 @@ class EditProfileBloc  extends Bloc<EditProfileEvent,EditProfileState>{
       ..name=name
       ..email=email
       ..phoneNumber=phone
-      ..countryCode=country);
+      ..countryCode=country
+      ..dateBirth=dateBirthUser);
     }
 
     if(event is ClearError){
