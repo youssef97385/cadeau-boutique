@@ -10,6 +10,7 @@ import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
 import 'package:cadeaue_boutique/model/category_model/category_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/checkout_body/check_body.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:built_collection/built_collection.dart';
@@ -39,6 +40,8 @@ import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 
 
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
+
+import '../wrap_model/wrap_item.dart';
 part 'serializer.g.dart';
 
 @SerializersFor(const [
@@ -63,7 +66,9 @@ part 'serializer.g.dart';
   RelationModel,
   SliderModel,
   UserInfoModel,
-  TrackModel
+  TrackModel,
+  CheckBody,
+
 
 
 
@@ -95,6 +100,23 @@ final Serializers serializers =
       )),
           () => BaseResponseBuilder<BuiltList<SliderModel>>())
 
+
+
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          FullType(
+            BuiltList,
+            [
+              const FullType(WrapItem),
+            ],
+          ),
+        ],
+      )),
+          () => BaseResponseBuilder<BuiltList<WrapItem>>())
+
+
   ..addBuilderFactory(
       (FullType(
         BaseResponse,
@@ -116,14 +138,17 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<OccasionModel>())
+
+
   ..addBuilderFactory(
       (FullType(
         BaseResponse,
         [
-          const FullType(ProductModel),
+          const FullType(BaseWrap),
         ],
       )),
-          () => BaseResponseBuilder<ProductModel>())
+          () => BaseResponseBuilder<BaseWrap>())
+
   ..addBuilderFactory(
       (FullType(
         BaseResponse,
@@ -132,6 +157,7 @@ final Serializers serializers =
         ],
       )),
           () => BaseResponseBuilder<WrapItem>())
+
 
   ..addBuilderFactory(
       (FullType(
@@ -269,14 +295,7 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<WrapItem>())
-  ..addBuilderFactory(
-      (FullType(
-        BuiltList,
-        [
-          const FullType(WrapItem),
-        ],
-      )),
-          () => ListBuilder<WrapItem>())
+
   ..addBuilderFactory(
       (FullType(
         BaseResponse,
@@ -355,6 +374,8 @@ final Serializers serializers =
       )),
           () => BaseResponseBuilder<BuiltList<TrackModel>>())
 
+
+
   ..addBuilderFactory(
       (FullType(
         BuiltList,
@@ -363,5 +384,7 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<TrackModel>())
+
+
 
 ).build();

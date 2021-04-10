@@ -271,4 +271,81 @@ class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
   }
 }
 
+class _$GetWrapByGift extends GetWrapByGift {
+  @override
+  final int giftId;
+
+  factory _$GetWrapByGift([void Function(GetWrapByGiftBuilder) updates]) =>
+      (new GetWrapByGiftBuilder()..update(updates)).build();
+
+  _$GetWrapByGift._({this.giftId}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(giftId, 'GetWrapByGift', 'giftId');
+  }
+
+  @override
+  GetWrapByGift rebuild(void Function(GetWrapByGiftBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetWrapByGiftBuilder toBuilder() => new GetWrapByGiftBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetWrapByGift && giftId == other.giftId;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, giftId.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('GetWrapByGift')..add('giftId', giftId))
+        .toString();
+  }
+}
+
+class GetWrapByGiftBuilder
+    implements Builder<GetWrapByGift, GetWrapByGiftBuilder> {
+  _$GetWrapByGift _$v;
+
+  int _giftId;
+  int get giftId => _$this._giftId;
+  set giftId(int giftId) => _$this._giftId = giftId;
+
+  GetWrapByGiftBuilder();
+
+  GetWrapByGiftBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _giftId = $v.giftId;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GetWrapByGift other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetWrapByGift;
+  }
+
+  @override
+  void update(void Function(GetWrapByGiftBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GetWrapByGift build() {
+    final _$result = _$v ??
+        new _$GetWrapByGift._(
+            giftId: BuiltValueNullFieldError.checkNotNull(
+                giftId, 'GetWrapByGift', 'giftId'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -125,7 +125,11 @@ Future<BuiltList<ProductModel>> filter({
 Future<bool> checkoutMultieGift({
   BuiltList<RecieverModel> recieverModel ,
   String total,
-  String token
+  String token,
+  BuiltList<String> giftTo ,
+  BuiltList<String> deliveryDate ,
+  BuiltList<String> countryCode ,
+  BuiltList<String> phone ,
 });
 
 Future<UserInfoModel> editProfileRQ({
@@ -162,5 +166,7 @@ Future<bool>  saveFirebaseToken(String fireToken,String serverToken);
 
 Future<bool> logoutRQ(String token);
 
+
+Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId , String token});
 
 }

@@ -19,6 +19,9 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
+
+
   int selectedWrap = -1;
   int wrapId = -1;
   List<Color> colors = [
@@ -87,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
                     state.cartList.isEmpty?Container():
                     Center(
                       child: Container(
-                        width: size.width * 0.85,
+                        width: size.width * 0.9,
                         child: ListView.builder(
                             shrinkWrap: true,
                             physics: ScrollPhysics(),
@@ -157,24 +160,33 @@ class _CartScreenState extends State<CartScreen> {
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                   children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .start,
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        baseText(
-                                                            color: AppColor
-                                                                .darkTextColor,
-                                                            title: state.cartList[index].gift.nameEn,
-                                                            size: size.width*0.04,
-                                                            fontWeight:
-                                                            FontWeight.bold),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            baseText(
+                                                                color: AppColor
+                                                                    .darkTextColor,
+                                                                title: state.cartList[index].gift.nameEn,
+                                                                size: size.width*0.04,
+                                                                fontWeight:
+                                                                FontWeight.bold),
+
+
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: size.height*0.005,
+                                                        ),
                                                         baseText(
                                                             color:
                                                             AppColor.darkYellow,
                                                             title: " \$"+state.cartList[index].gift.mainPrice,
                                                             size: 16.0),
-
                                                       ],
                                                     ),
                                                     // SizedBox(
@@ -186,22 +198,31 @@ class _CartScreenState extends State<CartScreen> {
                                                     //   height: 20,
                                                     // ),
                                                     state.cartList[index].wrap == null ?Container():
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .start,
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            baseText(
+                                                                color: AppColor
+                                                                    .darkTextColor,
+                                                                title: state.cartList[index].wrap.nameEn,
+                                                                size: size.width*0.04,
+                                                                fontWeight:
+                                                                FontWeight.bold),
+
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: size.height*0.005,
+                                                        ),
                                                         baseText(
-                                                            color: AppColor
-                                                                .darkTextColor,
-                                                            title: state.cartList[index].wrap.nameEn,
-                                                            size: size.width*0.04,
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                        baseText(
-                                                            color:
-                                                            AppColor.darkYellow,
-                                                            title: " \$"+state.cartList[index].wrap.mainPrice,
+                                                          color:
+                                                          AppColor.darkYellow,
+                                                          title: " \$"+state.cartList[index].wrap.mainPrice,
                                                           size: size.width*0.04,),
                                                       ],
                                                     )
@@ -308,73 +329,73 @@ class _CartScreenState extends State<CartScreen> {
                                                 title: "Total",
                                                 color: AppColor.darkTextColor,
                                                 size: 18.0),
-                                            Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 20,
-                                                  height: 20,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 3,
-                                                        offset: Offset(0,
-                                                            3), // changes position of shadow
-                                                      ),
-                                                    ],
-                                                    shape: BoxShape.circle,
-                                                    color: Color(0xffb1b1b1),
-                                                  ),
-                                                  child: Center(
-                                                      child: Icon(
-                                                        Icons.remove,
-                                                        color: Colors.white,
-                                                        size: 12,
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Text(
-                                                  "1",
-                                                  style: TextStyle(
-                                                    color: AppColor.darkYellow,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Container(
-                                                  width: 20,
-                                                  height: 20,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 3,
-                                                        offset: Offset(0,
-                                                            3), // changes position of shadow
-                                                      ),
-                                                    ],
-                                                    shape: BoxShape.circle,
-                                                    color: AppColor.darkYellow,
-                                                  ),
-                                                  child: Center(
-                                                      child: Icon(
-                                                        Icons.add,
-                                                        color: Colors.white,
-                                                        size: 12,
-                                                      )),
-                                                ),
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //   MainAxisAlignment.start,
+                                            //   children: [
+                                            //     Container(
+                                            //       width: 20,
+                                            //       height: 20,
+                                            //       decoration: BoxDecoration(
+                                            //         boxShadow: [
+                                            //           BoxShadow(
+                                            //             color: Colors.grey
+                                            //                 .withOpacity(0.5),
+                                            //             spreadRadius: 2,
+                                            //             blurRadius: 3,
+                                            //             offset: Offset(0,
+                                            //                 3), // changes position of shadow
+                                            //           ),
+                                            //         ],
+                                            //         shape: BoxShape.circle,
+                                            //         color: Color(0xffb1b1b1),
+                                            //       ),
+                                            //       child: Center(
+                                            //           child: Icon(
+                                            //             Icons.remove,
+                                            //             color: Colors.white,
+                                            //             size: 12,
+                                            //           )),
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 15,
+                                            //     ),
+                                            //     Text(
+                                            //       "1",
+                                            //       style: TextStyle(
+                                            //         color: AppColor.darkYellow,
+                                            //         fontSize: 16,
+                                            //       ),
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 15,
+                                            //     ),
+                                            //     Container(
+                                            //       width: 20,
+                                            //       height: 20,
+                                            //       decoration: BoxDecoration(
+                                            //         boxShadow: [
+                                            //           BoxShadow(
+                                            //             color: Colors.grey
+                                            //                 .withOpacity(0.5),
+                                            //             spreadRadius: 2,
+                                            //             blurRadius: 3,
+                                            //             offset: Offset(0,
+                                            //                 3), // changes position of shadow
+                                            //           ),
+                                            //         ],
+                                            //         shape: BoxShape.circle,
+                                            //         color: AppColor.darkYellow,
+                                            //       ),
+                                            //       child: Center(
+                                            //           child: Icon(
+                                            //             Icons.add,
+                                            //             color: Colors.white,
+                                            //             size: 12,
+                                            //           )),
+                                            //     ),
+                                            //   ],
+                                            // ),
                                             baseText(
                                                 color: AppColor.darkYellow,
                                                 title: "\$ 400",
@@ -614,7 +635,7 @@ class _CartScreenState extends State<CartScreen> {
 
                               },
                               child: Text(
-                                'Add Wrap For All Products ',
+                                'Add Wrap For All Gifts ',
                                 style: TextStyle(
                                   color: AppColor.textColor,
                                   fontSize: 13,
@@ -754,7 +775,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                               ),
                               baseText(
-                                  title: "\$ 200",
+                                  title: "\$ 100",
                                   color: AppColor.darkYellow,
                                   size: 26.0),
                             ],
@@ -797,10 +818,15 @@ class _CartScreenState extends State<CartScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          baseText(
-                              title: "Wrap",
-                              color: AppColor.darkTextColor,
-                              size: 16.0),
+                          GestureDetector(
+                            onTap:(){
+                              print("cart song value ${state.cart.songPrice}");
+                          },
+                            child: baseText(
+                                title: "Wrap",
+                                color: AppColor.darkTextColor,
+                                size: 16.0),
+                          ),
                           baseText(
                               title: "\$ 200",
                               color: AppColor.darkYellow,
@@ -809,7 +835,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
 
-                  state.cart.songLink == null?Container():
+                  state.cart.songPrice == null?Container():
                   Column(
                     children: [
                       SizedBox(

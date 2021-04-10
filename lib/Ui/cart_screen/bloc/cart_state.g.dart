@@ -19,6 +19,12 @@ class _$CartState extends CartState {
   final BuiltList<CartItem> cartList;
   @override
   final BuiltList<WrapModel> wraps;
+  @override
+  final int productsCost;
+  @override
+  final int wrapsCost;
+  @override
+  final int totalCosts;
 
   factory _$CartState([void Function(CartStateBuilder) updates]) =>
       (new CartStateBuilder()..update(updates)).build();
@@ -29,7 +35,10 @@ class _$CartState extends CartState {
       this.error,
       this.cart,
       this.cartList,
-      this.wraps})
+      this.wraps,
+      this.productsCost,
+      this.wrapsCost,
+      this.totalCosts})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'CartState', 'success');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'CartState', 'isLoading');
@@ -55,7 +64,10 @@ class _$CartState extends CartState {
         error == other.error &&
         cart == other.cart &&
         cartList == other.cartList &&
-        wraps == other.wraps;
+        wraps == other.wraps &&
+        productsCost == other.productsCost &&
+        wrapsCost == other.wrapsCost &&
+        totalCosts == other.totalCosts;
   }
 
   @override
@@ -63,11 +75,19 @@ class _$CartState extends CartState {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
-                    error.hashCode),
-                cart.hashCode),
-            cartList.hashCode),
-        wraps.hashCode));
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc($jc(0, success.hashCode),
+                                    isLoading.hashCode),
+                                error.hashCode),
+                            cart.hashCode),
+                        cartList.hashCode),
+                    wraps.hashCode),
+                productsCost.hashCode),
+            wrapsCost.hashCode),
+        totalCosts.hashCode));
   }
 
   @override
@@ -78,7 +98,10 @@ class _$CartState extends CartState {
           ..add('error', error)
           ..add('cart', cart)
           ..add('cartList', cartList)
-          ..add('wraps', wraps))
+          ..add('wraps', wraps)
+          ..add('productsCost', productsCost)
+          ..add('wrapsCost', wrapsCost)
+          ..add('totalCosts', totalCosts))
         .toString();
   }
 }
@@ -112,6 +135,18 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
       _$this._wraps ??= new ListBuilder<WrapModel>();
   set wraps(ListBuilder<WrapModel> wraps) => _$this._wraps = wraps;
 
+  int _productsCost;
+  int get productsCost => _$this._productsCost;
+  set productsCost(int productsCost) => _$this._productsCost = productsCost;
+
+  int _wrapsCost;
+  int get wrapsCost => _$this._wrapsCost;
+  set wrapsCost(int wrapsCost) => _$this._wrapsCost = wrapsCost;
+
+  int _totalCosts;
+  int get totalCosts => _$this._totalCosts;
+  set totalCosts(int totalCosts) => _$this._totalCosts = totalCosts;
+
   CartStateBuilder();
 
   CartStateBuilder get _$this {
@@ -123,6 +158,9 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
       _cart = $v.cart.toBuilder();
       _cartList = $v.cartList.toBuilder();
       _wraps = $v.wraps.toBuilder();
+      _productsCost = $v.productsCost;
+      _wrapsCost = $v.wrapsCost;
+      _totalCosts = $v.totalCosts;
       _$v = null;
     }
     return this;
@@ -153,7 +191,10 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
                   error, 'CartState', 'error'),
               cart: cart.build(),
               cartList: cartList.build(),
-              wraps: wraps.build());
+              wraps: wraps.build(),
+              productsCost: productsCost,
+              wrapsCost: wrapsCost,
+              totalCosts: totalCosts);
     } catch (_) {
       String _$failedField;
       try {

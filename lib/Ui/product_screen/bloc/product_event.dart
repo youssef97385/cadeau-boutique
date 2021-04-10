@@ -53,3 +53,15 @@ abstract class AddToCart extends ProductEvent
 
   factory AddToCart([updates(AddToCartBuilder b)]) = _$AddToCart;
 }
+
+abstract class GetWrapByGift extends ProductEvent
+    implements Built<GetWrapByGift, GetWrapByGiftBuilder> {
+
+  //fields go here
+
+  int get giftId;
+
+  GetWrapByGift._();
+
+  factory GetWrapByGift([updates(GetWrapByGiftBuilder b)]) = _$GetWrapByGift;
+}

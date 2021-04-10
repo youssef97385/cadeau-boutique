@@ -53,7 +53,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..isLoading = true
           ..error = ""
           ..success = false
+
+
         );
+
 
         final data = await _iRepository.addSong(song: event.song);
 
@@ -62,7 +65,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..isLoading = false
           ..error = ""
           ..success = true
+          ..cartList.replace(data.details)
+            ..cart.replace(data)
         );
+
 
       } catch (e) {
         print('add song Error $e');
@@ -150,6 +156,8 @@ if(event is GetGlobalWraps){
         final data = await _iRepository.addGlobalWrap(wrapId: event.wrapId , wrapColor: event.wrapColorId);
 
         print('add global wraps Success data ${data}');
+
+
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""

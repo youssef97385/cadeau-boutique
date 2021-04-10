@@ -30,9 +30,9 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
 
         );
 
-        final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: "100");
+        final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: "100",phone: event.phoneNumber,countryCode: event.countryCode,deliveryDate: event.deliveryDate,giftTo: event.giftTo);
 
-        print('get slider Success data ${data}');
+        print('check Success data ${data}');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""
@@ -41,7 +41,7 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
         );
 
       } catch (e) {
-        print('GetSlider Error $e');
+        print('check Error $e');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = "Something went wrong"

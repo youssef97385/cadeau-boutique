@@ -30,7 +30,14 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
                   ..countryCode = event.countryCode
                   ..deliveryDate = event.deliveryDate
 
-          ))
+          )
+
+          )
+            ..giftTo.add(event.giftTo)
+            ..phoneNumber.add(event.phoneNumber)
+            ..countryCode.add(event.countryCode)
+            ..deliveryDate.add(event.deliveryDate)
+
         );
 
       } catch (e) {

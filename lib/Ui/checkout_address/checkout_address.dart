@@ -12,7 +12,8 @@ import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/Ui/checkout_address/checkout_address.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
+import 'package:country_picker/country_picker.dart';
 import '../../injectoin.dart';
 import 'bloc/checkout_state.dart';
 import 'bloc/checkout_bloc.dart';
@@ -34,6 +35,10 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
   String  countryCode = '+966', phone;
 
   final _bloc = sl<CheckoutBloc>();
+
+  var _giftToController = TextEditingController();
+  var _phoneController = TextEditingController();
+  var _addressController = TextEditingController();
 
 
   void _onCountryChange(String countryCode) {
@@ -106,17 +111,20 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                  Container(
                    height: 70,
                    child: ListView.builder(
+                     shrinkWrap: true,
                        scrollDirection: Axis.horizontal,
                        itemCount: state.recievers.length,
                        itemBuilder: (BuildContext context , int index){
 
-                         return Padding(
-                           padding: const EdgeInsets.symmetric(horizontal:8.0),
-                           child: Column(
-                             children: [
-                               Image.asset("assets/images/user (2).png"),
-                               baseText(title: state.recievers[index].giftTo , color: AppColor.textColor , size: 18.0)
-                             ],
+                         return Center(
+                           child: Padding(
+                             padding: const EdgeInsets.symmetric(horizontal:8.0),
+                             child: Column(
+                               children: [
+                                 Image.asset("assets/images/user (2).png"),
+                                 baseText(title: state.recievers[index].giftTo , color: AppColor.textColor , size: 18.0)
+                               ],
+                             ),
                            ),
                          );
 
@@ -167,6 +175,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                     ]),
                 child: Center(
                   child: TextFormField(
+                    controller: _giftToController,
 
                     validator: emptyFieldVAlidator(giftTo,context),
                     keyboardType: TextInputType.name,
@@ -217,40 +226,51 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                     child: Row(
                       children: [
                         Container(
+
                           height: size.height * 0.07,
                           width: size.width * .2,
-                          child: CountryCodePicker(
-                            onChanged: (value) {
-                              setState(() {
-                                countryCode =
-                                    value.toString();
-                                _onCountryChange(
-                                    countryCode);
-                              });
-                            },
-                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                            initialSelection: 'Sa',
-                            // favorite: ['+39', 'FR'],
-                            // optional. Shows only country name and flag
-                            showCountryOnly: false,
-                            // optional. Shows only country name and flag when popup is closed.
-                            showOnlyCountryWhenClosed:
-                            false,
-                            // optional. aligns the flag and the Text left
-                            alignLeft: false,
+                          child:Center(
+                            child: ElevatedButton(
+
+                              onPressed: () {
+                                showCountryPicker(
+                                  countryListTheme: CountryListThemeData(
+                                    flagSize: 25,
+                                    backgroundColor: Colors.white,
+                                    textStyle: TextStyle(fontSize: 16, color: Colors.blueGrey),
+                                  ),
+
+                                  context: context,
+                                  //Optional.  Can be used to exclude(remove) one ore more country from the countries list (optional).
+
+                                  //Optional. Shows phone code before the country name.
+                                  showPhoneCode: true,
+                                  onSelect: (Country country) {
+                                    print('Select country: ${country.phoneCode}');
+                                    setState(() {
+                                      countryCode = country.phoneCode;
+                                    });
+                                  },
+                                );
+                              },
+                              child:  Text("+"+countryCode),
+                            ),
                           ),
-                        ),
+                    ),
                         Container(
                           // height: size.height * 0.07,
                           width: size.width * .5,
                           // color:Colors.red,
                           child: TextFormField(
+controller: _phoneController,
+
                             validator:
                             emptyFieldVAlidator(phone,context),
                             keyboardType:
                             TextInputType.number,
                             obscureText: false,
                             decoration: InputDecoration(
+
                               enabledBorder:
                               InputBorder.none,
                               focusedBorder:
@@ -346,6 +366,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                     ]),
                 child: Center(
                   child: TextFormField(
+                    controller: _addressController,
 
                     validator: emptyFieldVAlidator(deliveryAddress,context),
                     keyboardType: TextInputType.name,
@@ -422,12 +443,19 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         },
                       )..show();
                     }else{
-                      _bloc.add(AddReciever((b)=> b
+                      _bloc.add(
+                          AddReciever((b)=> b
                         ..giftTo = giftTo
                         ..countryCode=countryCode
                         ..deliveryDate =selectedDate.toString().substring(0,10)
                         ..phoneNumber = phone
-                      ));
+                      )
+
+
+                      );
+                      _giftToController.clear();
+                      _addressController.clear();
+                      _phoneController.clear();
                     }
 
                   },
@@ -485,12 +513,19 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          PageRouteBuilder(pageBuilder: (_, __, ___) => CheckoutPayment()),
+                          PageRouteBuilder(pageBuilder: (_, __, ___) => CheckoutSuccess(
+
+                              gifftTo: state.giftTo,
+                            countryCode: state.countryCode,
+                            deleviryDate: state.deliveryDate,
+                            phone: state.phoneNumber,
+
+                          )),
                         );
                         // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
                       },
                       child: Text(
-                        'Payment',
+                        'Proceed',
                         style: TextStyle(
                           color: AppColor.textColor,
                           fontSize: 13,

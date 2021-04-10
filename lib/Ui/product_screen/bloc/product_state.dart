@@ -3,6 +3,10 @@ library product_state;
 import 'package:built_value/built_value.dart';
 
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
+
+import '../../../model/wrap_model/wrap_item.dart';
+import '../../../model/wrap_model/wrap_model.dart';
+import 'package:built_collection/built_collection.dart';
 part 'product_state.g.dart';
 
 
@@ -15,6 +19,8 @@ implements Built<ProductState, ProductStateBuilder> {
   String get error;
   ProductModel get product;
 
+  BuiltList<WrapItem> get wraps;
+
   ProductState._();
 
   factory ProductState([updates(ProductStateBuilder b)]) = _$ProductState;
@@ -25,6 +31,7 @@ implements Built<ProductState, ProductStateBuilder> {
       ..isLoading = false
       ..success = false
      ..product = null
+        ..wraps.replace([])
     );
   }
 }

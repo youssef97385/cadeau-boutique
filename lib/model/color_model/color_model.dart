@@ -16,6 +16,7 @@ abstract class ColorModel implements Built<ColorModel, ColorModelBuilder> {
   String get color;
 
   @BuiltValueField(wireName: "media_path")
+  @nullable
   String get image;
 
 

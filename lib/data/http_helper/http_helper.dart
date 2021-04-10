@@ -7,6 +7,7 @@ import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
+import 'package:cadeaue_boutique/model/checkout_body/check_body.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
@@ -27,7 +28,9 @@ import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/model/checkout_body/checkout_body.dart';
 
+import '../../model/wrap_model/wrap_item.dart';
 import 'Ihttp_helper.dart';
 
 import 'dart:io';
@@ -1200,33 +1203,58 @@ class HttpHelper implements IHttpHelper {
   }
 
   @override
-  Future<bool> checkoutMultieGift({BuiltList<RecieverModel> recieverModel , String total , String token}) async{
+  Future<bool> checkoutMultieGift({
+
+    BuiltList<RecieverModel> recieverModel , String total , String token,
+    BuiltList<String> giftTo ,
+    BuiltList<String> deliveryDate ,
+    BuiltList<String> countryCode ,
+    BuiltList<String> phone ,
+  }) async{
     try {
+
       _dio.interceptors.add(CookieManager(cookieJar));
-      var body = {
-        "gift_to[0]":recieverModel[0].giftTo,
-        "delivery_date[0]":recieverModel[0].deliveryDate,
-        "country_code[0]":recieverModel[0].countryCode,
-        "phone_number[0]":recieverModel[0].phoneNumber,
-        "total_cost":total
-      };
+
+      print("check vars: ${giftTo.toString()}");
+      // CheckoutBody checkoutBody = CheckoutBody(total: total,
+      // countryCode: countryCode,deliveryDate: deliveryDate,giftTo: giftTo,phoneNumber: phone);
+
+      CheckBody checkBody = CheckBody((b)=>b
+
+        ..gift_to = giftTo.toBuilder()
+          ..delivery_date = deliveryDate.toBuilder()
+          ..country_code = countryCode.toBuilder()
+          ..phone_number = phone.toBuilder()
+          ..total_cost = total
+
+
+      );
+
+      var body = checkBody.toJson();
+
+
+
+      // var body =checkoutBody.toJson();
+      //
+      print("json body"+body.toString());
+
       final response = await _dio.post('cart/checkout',data: body,  options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('checkout Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {
-        final BaseResponse<BuiltList<OccasionModel>> baseResponse =
-        serializers.deserialize(json.decode(response.data),
-            specifiedType: FullType(
-              BaseResponse,
-              [
-                FullType(
-                  BuiltList,
-                  [
-                    const FullType(OccasionModel),
-                  ],
-                ),
-              ],
-            ));
+        // final BaseResponse<BuiltList<OccasionModel>> baseResponse =
+        // serializers.deserialize(json.decode(response.data),
+        //     specifiedType: FullType(
+        //       BaseResponse,
+        //       [
+        //         FullType(
+        //           BuiltList,
+        //           [
+        //             const FullType(OccasionModel),
+        //           ],
+        //         ),
+        //       ],
+        //     ));
 
 
         if (response.statusCode == 200) {
@@ -1243,5 +1271,44 @@ class HttpHelper implements IHttpHelper {
     }
 
   }
+
+  @override
+  Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId , String token}) async{
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('cart/get/wraps/by/gift/$giftId', options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print('wrap Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<WrapItem>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(WrapItem),
+                  ],
+                ),
+              ],
+            ));
+
+        print("wrap status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+
 
 }

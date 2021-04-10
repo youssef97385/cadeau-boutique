@@ -18,6 +18,12 @@ implements Built<CheckoutState, CheckoutStateBuilder> {
 
   BuiltList<RecieverModel> get recievers;
 
+  BuiltList<String> get giftTo;
+  BuiltList<String> get deliveryDate;
+  BuiltList<String> get countryCode;
+  BuiltList<String> get phoneNumber;
+  String get total;
+
   CheckoutState._();
 
   factory CheckoutState([updates(CheckoutStateBuilder b)]) = _$CheckoutState;
@@ -27,6 +33,12 @@ implements Built<CheckoutState, CheckoutStateBuilder> {
       ..isLoading = false
       ..success = false
       ..recievers.replace([])
+      ..giftTo.replace([])
+      ..deliveryDate.replace([])
+      ..countryCode.replace([])
+      ..phoneNumber.replace([])
+        ..total = "0"
+
     );
   }
 }

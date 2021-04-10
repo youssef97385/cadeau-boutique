@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -10,11 +11,19 @@ import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_event.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+
+import 'bloc/product_event.dart';
 
 class ProductScreen extends StatefulWidget {
   int id;
   String img;
+
   ProductScreen({this.id,this.img});
+
+
+
+
 
 
   @override
@@ -22,6 +31,11 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+
+
+
+
+  int myWrapId = -1;
 
   final _bloc = sl<ProductBloc>();
 
@@ -40,10 +54,16 @@ class _ProductScreenState extends State<ProductScreen> {
 
   bool imageChanged = false;
 
+  int getWrapId(){
+    setState(() {
+
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _bloc.add(GetWrapByGift((b)=>b..giftId = widget.id));
     _bloc.add(GetProduct((b) =>
     b
       ..id = widget.id));
@@ -120,7 +140,32 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                GestureDetector(
                                  onTap: (){
-                                   _bloc.add(AddToFavourite((b)=>b..id = widget.id));
+                                   if(state.wraps.isEmpty){
+                                     AwesomeDialog(
+                                       context: context,
+                                       customHeader: Container(
+                                         child: Icon(
+                                           Icons.error_outline,
+                                           size: 100,
+                                           color: AppColor.darkYellow,
+                                         ),
+                                       ),
+                                       btnOkColor: AppColor.darkYellow,
+                                       dialogType: DialogType.INFO,
+                                       animType: AnimType.BOTTOMSLIDE,
+                                       title: 'Login',
+                                       desc: 'You must be logged in',
+                                       btnCancelOnPress: () { },
+                                       btnOkOnPress: () {
+                                         WidgetsBinding.instance.addPostFrameCallback((_) =>
+                                             Navigator.of(context).push(
+                                                 MaterialPageRoute(builder: (context) => SigninScreen())));
+                                       },
+                                     )..show();
+                                   }else{
+                                     _bloc.add(AddToFavourite((b)=>b..id = widget.id));
+                                   }
+
                                  },
                                  child: Container(
                                    width: 36,
@@ -159,6 +204,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                        size: 20.0),
                                  ],
                                ),
+
+                               state.product.likes==0?Container():
                                Row(
                                  children: [
                                    SvgPicture.asset("assets/images/favourite.svg"),
@@ -324,6 +371,7 @@ class _ProductScreenState extends State<ProductScreen> {
                              mainAxisAlignment: MainAxisAlignment.start,
 
                              children: [
+
                                Container(
                                  // margin: EdgeInsets.only(bottom: 80),
                                  height: size.height * 0.07,
@@ -342,12 +390,44 @@ class _ProductScreenState extends State<ProductScreen> {
                                    borderRadius: BorderRadius.circular(40),
                                  ),
                                  child: FlatButton(
+
                                    // splashColor: Colors.red,
                                    onPressed: () {
-                                     showDialog(
-                                       context: context,
-                                       builder: (_) => FunkyOverlay(),
-                                     );
+                                    if(state.wraps.isEmpty){
+                                      AwesomeDialog(
+                                        context: context,
+                                        customHeader: Container(
+                                          child: Icon(
+                                            Icons.error_outline,
+                                            size: 100,
+                                            color: AppColor.darkYellow,
+                                          ),
+                                        ),
+                                        btnOkColor: AppColor.darkYellow,
+                                        dialogType: DialogType.INFO,
+                                        animType: AnimType.BOTTOMSLIDE,
+                                        title: 'Login',
+                                        desc: 'You must be logged in',
+                                        btnCancelOnPress: () { },
+                                        btnOkOnPress: () {
+                                          WidgetsBinding.instance.addPostFrameCallback((_) =>
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(builder: (context) => SigninScreen())));
+                                        },
+                                      )..show();
+                                    }
+                                     else{
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) => FunkyOverlay(wraps: state.wraps,wrapIdCallBack: (wrapId){
+                                          setState(() {
+                                            myWrapId = wrapId;
+
+                                          });
+                                        },),
+
+                                      );
+                                    }
                                    },
                                    child: Text(
                                      'Add Wrap',
@@ -386,7 +466,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                  child: FlatButton(
                                    // splashColor: Colors.red,
                                    onPressed: () {
-                                     _bloc.add(AddToCart((b)=> b..giftId = widget.id ));
+
+                                     _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId));
                                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                                    },
                                    child: Text(

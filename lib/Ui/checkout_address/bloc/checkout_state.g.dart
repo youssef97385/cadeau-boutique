@@ -15,11 +15,30 @@ class _$CheckoutState extends CheckoutState {
   final String error;
   @override
   final BuiltList<RecieverModel> recievers;
+  @override
+  final BuiltList<String> giftTo;
+  @override
+  final BuiltList<String> deliveryDate;
+  @override
+  final BuiltList<String> countryCode;
+  @override
+  final BuiltList<String> phoneNumber;
+  @override
+  final String total;
 
   factory _$CheckoutState([void Function(CheckoutStateBuilder) updates]) =>
       (new CheckoutStateBuilder()..update(updates)).build();
 
-  _$CheckoutState._({this.success, this.isLoading, this.error, this.recievers})
+  _$CheckoutState._(
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.recievers,
+      this.giftTo,
+      this.deliveryDate,
+      this.countryCode,
+      this.phoneNumber,
+      this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'CheckoutState', 'success');
     BuiltValueNullFieldError.checkNotNull(
@@ -27,6 +46,14 @@ class _$CheckoutState extends CheckoutState {
     BuiltValueNullFieldError.checkNotNull(error, 'CheckoutState', 'error');
     BuiltValueNullFieldError.checkNotNull(
         recievers, 'CheckoutState', 'recievers');
+    BuiltValueNullFieldError.checkNotNull(giftTo, 'CheckoutState', 'giftTo');
+    BuiltValueNullFieldError.checkNotNull(
+        deliveryDate, 'CheckoutState', 'deliveryDate');
+    BuiltValueNullFieldError.checkNotNull(
+        countryCode, 'CheckoutState', 'countryCode');
+    BuiltValueNullFieldError.checkNotNull(
+        phoneNumber, 'CheckoutState', 'phoneNumber');
+    BuiltValueNullFieldError.checkNotNull(total, 'CheckoutState', 'total');
   }
 
   @override
@@ -43,14 +70,32 @@ class _$CheckoutState extends CheckoutState {
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
-        recievers == other.recievers;
+        recievers == other.recievers &&
+        giftTo == other.giftTo &&
+        deliveryDate == other.deliveryDate &&
+        countryCode == other.countryCode &&
+        phoneNumber == other.phoneNumber &&
+        total == other.total;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode),
-        recievers.hashCode));
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc($jc(0, success.hashCode),
+                                    isLoading.hashCode),
+                                error.hashCode),
+                            recievers.hashCode),
+                        giftTo.hashCode),
+                    deliveryDate.hashCode),
+                countryCode.hashCode),
+            phoneNumber.hashCode),
+        total.hashCode));
   }
 
   @override
@@ -59,7 +104,12 @@ class _$CheckoutState extends CheckoutState {
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
-          ..add('recievers', recievers))
+          ..add('recievers', recievers)
+          ..add('giftTo', giftTo)
+          ..add('deliveryDate', deliveryDate)
+          ..add('countryCode', countryCode)
+          ..add('phoneNumber', phoneNumber)
+          ..add('total', total))
         .toString();
   }
 }
@@ -86,6 +136,33 @@ class CheckoutStateBuilder
   set recievers(ListBuilder<RecieverModel> recievers) =>
       _$this._recievers = recievers;
 
+  ListBuilder<String> _giftTo;
+  ListBuilder<String> get giftTo =>
+      _$this._giftTo ??= new ListBuilder<String>();
+  set giftTo(ListBuilder<String> giftTo) => _$this._giftTo = giftTo;
+
+  ListBuilder<String> _deliveryDate;
+  ListBuilder<String> get deliveryDate =>
+      _$this._deliveryDate ??= new ListBuilder<String>();
+  set deliveryDate(ListBuilder<String> deliveryDate) =>
+      _$this._deliveryDate = deliveryDate;
+
+  ListBuilder<String> _countryCode;
+  ListBuilder<String> get countryCode =>
+      _$this._countryCode ??= new ListBuilder<String>();
+  set countryCode(ListBuilder<String> countryCode) =>
+      _$this._countryCode = countryCode;
+
+  ListBuilder<String> _phoneNumber;
+  ListBuilder<String> get phoneNumber =>
+      _$this._phoneNumber ??= new ListBuilder<String>();
+  set phoneNumber(ListBuilder<String> phoneNumber) =>
+      _$this._phoneNumber = phoneNumber;
+
+  String _total;
+  String get total => _$this._total;
+  set total(String total) => _$this._total = total;
+
   CheckoutStateBuilder();
 
   CheckoutStateBuilder get _$this {
@@ -95,6 +172,11 @@ class CheckoutStateBuilder
       _isLoading = $v.isLoading;
       _error = $v.error;
       _recievers = $v.recievers.toBuilder();
+      _giftTo = $v.giftTo.toBuilder();
+      _deliveryDate = $v.deliveryDate.toBuilder();
+      _countryCode = $v.countryCode.toBuilder();
+      _phoneNumber = $v.phoneNumber.toBuilder();
+      _total = $v.total;
       _$v = null;
     }
     return this;
@@ -123,12 +205,26 @@ class CheckoutStateBuilder
                   isLoading, 'CheckoutState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'CheckoutState', 'error'),
-              recievers: recievers.build());
+              recievers: recievers.build(),
+              giftTo: giftTo.build(),
+              deliveryDate: deliveryDate.build(),
+              countryCode: countryCode.build(),
+              phoneNumber: phoneNumber.build(),
+              total: BuiltValueNullFieldError.checkNotNull(
+                  total, 'CheckoutState', 'total'));
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'recievers';
         recievers.build();
+        _$failedField = 'giftTo';
+        giftTo.build();
+        _$failedField = 'deliveryDate';
+        deliveryDate.build();
+        _$failedField = 'countryCode';
+        countryCode.build();
+        _$failedField = 'phoneNumber';
+        phoneNumber.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'CheckoutState', _$failedField, e.toString());

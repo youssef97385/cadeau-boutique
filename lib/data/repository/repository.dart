@@ -318,9 +318,23 @@ class Repository implements IRepository {
   }
 
   @override
-  Future<bool> checkoutMultieGift({BuiltList<RecieverModel> recieverModel, String total}) async{
+  Future<bool> checkoutMultieGift({
+
+    BuiltList<RecieverModel> recieverModel, String total,
+    BuiltList<String> giftTo ,
+    BuiltList<String> deliveryDate ,
+    BuiltList<String> countryCode ,
+    BuiltList<String> phone ,
+  }) async{
     final token = await _iprefHelper.getToken();
-    final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total);
+    final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total , giftTo: giftTo ,deliveryDate: deliveryDate ,countryCode: countryCode,phone: phone);
     return succsess;
+  }
+
+  @override
+  Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId}) async{
+    final token = await _iprefHelper.getToken();
+    final wraps = await _ihttpHelper.getWrapsBygiftId(giftId: giftId , token: token);
+    return wraps;
   }
 }

@@ -33,7 +33,7 @@ class _PickerScreenState extends State<PickerScreen> {
   int index = 1;
   int value = 50;
 
-  String genderValue;
+  String genderValue , selectedOccasion , selectedRelation;
   String age;
   int maxPrice;
   int minPrice;
@@ -219,6 +219,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               setState(() {
                                 pickedOccasion = index;
                                 occasionId = state.occasions[index].id;
+                                selectedOccasion = state.occasions[index].enName;
                               });
                             },
                             child: singleOccasion(
@@ -233,10 +234,19 @@ class _PickerScreenState extends State<PickerScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FilterResult(occasionId: 1,)));
+                            builder: (context) => FilterResult(occasionId: occasionId ,
+                              age: age ,
+                              gender: genderValue,
+                              maxPrice: maxPrice.toString(),
+                              minPrice: minPrice.toString(),
+                              relationId: relationId,
+                              occasionName:selectedOccasion,
+                              relationName: selectedRelation,
+
+                            )));
                   },
                   child: Container(
                     height: 30,
@@ -377,6 +387,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               setState(() {
                                 pickedRelation = index;
                                 relationId = state.relations[index].id;
+                                selectedRelation = state.relations[index].enName;
                               });
                             },
                             child: singleOccasion(
@@ -391,10 +402,19 @@ class _PickerScreenState extends State<PickerScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FilterResult()));
+                            builder: (context) => FilterResult(occasionId: occasionId ,
+                              age: age ,
+                              gender: genderValue,
+                              maxPrice: maxPrice.toString(),
+                              minPrice: minPrice.toString(),
+                              relationId: relationId,
+                              occasionName:selectedOccasion,
+                              relationName: selectedRelation,
+
+                            )));
                   },
                   child: Container(
                     height: 30,
@@ -606,10 +626,19 @@ class _PickerScreenState extends State<PickerScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FilterResult()));
+                            builder: (context) => FilterResult(occasionId: occasionId ,
+                              age: age ,
+                              gender: genderValue,
+                              maxPrice: maxPrice.toString(),
+                              minPrice: minPrice.toString(),
+                              relationId: relationId,
+                              occasionName:selectedOccasion,
+                              relationName: selectedRelation,
+
+                            )));
                   },
                   child: Container(
                     height: 30,
@@ -801,10 +830,19 @@ class _PickerScreenState extends State<PickerScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FilterResult()));
+                            builder: (context) => FilterResult(occasionId: occasionId ,
+                              age: age ,
+                              gender: genderValue,
+                              maxPrice: maxPrice.toString(),
+                              minPrice: minPrice.toString(),
+                              relationId: relationId,
+                              occasionName:selectedOccasion,
+                              relationName: selectedRelation,
+
+                            )));
                   },
                   child: Container(
                     height: 30,
@@ -1159,6 +1197,8 @@ class _PickerScreenState extends State<PickerScreen> {
                                   maxPrice: maxPrice.toString(),
                                     minPrice: minPrice.toString(),
                                     relationId: relationId,
+                                    occasionName:selectedOccasion,
+                                    relationName: selectedRelation,
 
                                   )));
                         },
