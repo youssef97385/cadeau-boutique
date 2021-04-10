@@ -163,6 +163,60 @@ class TryEditProfileBuilder
   }
 }
 
+class _$InitEvent extends InitEvent {
+  factory _$InitEvent([void Function(InitEventBuilder) updates]) =>
+      (new InitEventBuilder()..update(updates)).build();
+
+  _$InitEvent._() : super._();
+
+  @override
+  InitEvent rebuild(void Function(InitEventBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  InitEventBuilder toBuilder() => new InitEventBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is InitEvent;
+  }
+
+  @override
+  int get hashCode {
+    return 631190438;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('InitEvent').toString();
+  }
+}
+
+class InitEventBuilder implements Builder<InitEvent, InitEventBuilder> {
+  _$InitEvent _$v;
+
+  InitEventBuilder();
+
+  @override
+  void replace(InitEvent other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$InitEvent;
+  }
+
+  @override
+  void update(void Function(InitEventBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$InitEvent build() {
+    final _$result = _$v ?? new _$InitEvent._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ClearError extends ClearError {
   factory _$ClearError([void Function(ClearErrorBuilder) updates]) =>
       (new ClearErrorBuilder()..update(updates)).build();

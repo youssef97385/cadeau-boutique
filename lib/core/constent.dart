@@ -1,3 +1,6 @@
+import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
+import 'package:cadeaue_boutique/model/UserInfoV2.dart';
+import 'package:cadeaue_boutique/model/DetailsUserV2.dart';
 import 'package:flutter/material.dart';
 
 const String BaseUrl = "http://apis.cadeauboutique.com/api/";
@@ -8,7 +11,12 @@ const String BaseImgUrl = "http://apis.cadeauboutique.com/";
 
 const String ImageUrl = "";
 
+
+
 class AppColor {
+
+  static UserInfoV2 UserInfoModelGlobal=UserInfoV2();
+  static DetailsUserV2 UserAddressV2=DetailsUserV2();
   static const Color textColor = Color(0xFF515A6B);
 
   static const Color lightTextColor = Color(0xFF596273);
@@ -71,3 +79,14 @@ const String APP_CURRENCY = "app_currency";
 const APP_COUNTRY_FLAG = "app_country_flag";
 const String APP_LANGUAGE = "App_language";
 const String ACCESS_TOKEN = "Acess_token";
+
+const String FULL_NAME="full_name";
+const String COUNTRY_CODE="county_code";
+const String PHONE_NUMBER="phone_number";
+const String DATE_OF_BIRTH="date_of_birth";
+const String GENDER="gender";
+
+const String CITY="city";
+const String STATE="state";
+const String DETAISL_ADDRESS="details";
+const String ZIP_CODE="zip_code";

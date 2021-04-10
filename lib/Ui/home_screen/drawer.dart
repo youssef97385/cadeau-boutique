@@ -278,7 +278,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       ],
                     ),
                   ),
-                  Container(
+                 state.loginState? Container(
                     // margin: EdgeInsets.only(bottom: 80),
                     height: size.height * 0.07,
                     width: size.width * .5,
@@ -318,6 +318,8 @@ class _MainDrawerState extends State<MainDrawer> {
 
                      var state=   await  openLogout(context);
                      print("------------------ ");
+
+                     Navigator.of(context).pop();
                      Navigator.pushAndRemoveUntil(
                          context,
                          MaterialPageRoute(
@@ -345,7 +347,59 @@ class _MainDrawerState extends State<MainDrawer> {
                         ],
                       ),
                     ),
-                  ),
+                  ): Container(
+                   // margin: EdgeInsets.only(bottom: 80),
+                   height: size.height * 0.07,
+                   width: size.width * .5,
+                   decoration: BoxDecoration(
+                     boxShadow: [
+                       BoxShadow(
+                         offset: Offset(1, 1),
+                         color: Colors.grey.withOpacity(0.6),
+                         blurRadius: 5,
+                         spreadRadius: 3,
+                       ),
+                     ],
+                     gradient: LinearGradient(
+                       colors: [
+                         AppColor.darkYellow,
+                         AppColor.lightYellow
+                       ],
+                       stops: [0.1, 0.96],
+                     ),
+                     borderRadius: BorderRadius.circular(40),
+                   ),
+                   child: FlatButton(
+                     // splashColor: Colors.red,
+                     onPressed: () {
+
+                       Navigator.of(context).pop();
+                       Navigator.pushAndRemoveUntil(
+                           context,
+                           MaterialPageRoute(
+                               builder: (context) => SigninScreen()
+                           ),
+                           ModalRoute.withName("/signin_screen")
+                       );
+
+                     },
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         SvgPicture.asset("assets/images/drawer/logout.svg"),
+                         SizedBox(width:10),
+                         Text(
+                           'Login',
+                           style: TextStyle(
+                             color: AppColor.textColor,
+                             fontSize: 18,
+                             fontWeight: FontWeight.w500,
+                           ),
+                         ),
+                       ],
+                     ),
+                   ),
+                 )
                 ],
               ),
             )

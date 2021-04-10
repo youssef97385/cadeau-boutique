@@ -132,14 +132,8 @@ abstract class IRepository {
 
   Future<bool> checkoutMultieGift({
     BuiltList<RecieverModel> recieverModel ,
-    BuiltList<String> giftTo ,
-    BuiltList<String> deliveryDate ,
-    BuiltList<String> countryCode ,
-    BuiltList<String> phone ,
     String total,
 
   });
-
-  Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId});
 }
 

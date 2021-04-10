@@ -12,6 +12,27 @@ abstract class EditProfileState implements Built<EditProfileState, EditProfileSt
   bool get success;
   bool get isLoading;
   String get error;
+
+
+  @nullable
+  String get name;
+  @nullable
+  String get email;
+  @nullable
+  String get gender;
+  @nullable
+  String get countryCode;
+
+  @nullable
+  String get accountStatus;
+
+  @nullable
+  int get phoneNumber;
+
+
+
+  @nullable
+  String get dateBirth;
 EditProfileState._();
 
 factory EditProfileState([updates(EditProfileStateBuilder b)]) = _$EditProfileState;
@@ -21,6 +42,14 @@ factory EditProfileState([updates(EditProfileStateBuilder b)]) = _$EditProfileSt
       ..error = ""
       ..isLoading = false
       ..success = false
+      ..dateBirth=""
+      ..phoneNumber=0
+      ..countryCode=""
+      ..email=""
+      ..name=""
+      ..accountStatus
+       ..gender=""
+        ..dateBirth=""
     );
   }
 }

@@ -24,7 +24,21 @@ class _$SignupResponseSerializer
       serializers.serialize(object.token,
           specifiedType: const FullType(String)),
     ];
-
+    Object value;
+    value = object.user;
+    if (value != null) {
+      result
+        ..add('user')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(UserInfoModel)));
+    }
+    value = object.detaisl;
+    if (value != null) {
+      result
+        ..add('details')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DetailsUser)));
+    }
     return result;
   }
 
@@ -44,6 +58,14 @@ class _$SignupResponseSerializer
           result.token = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'user':
+          result.user.replace(serializers.deserialize(value,
+              specifiedType: const FullType(UserInfoModel)) as UserInfoModel);
+          break;
+        case 'details':
+          result.detaisl.replace(serializers.deserialize(value,
+              specifiedType: const FullType(DetailsUser)) as DetailsUser);
+          break;
       }
     }
 
@@ -54,11 +76,15 @@ class _$SignupResponseSerializer
 class _$SignupResponse extends SignupResponse {
   @override
   final String token;
+  @override
+  final UserInfoModel user;
+  @override
+  final DetailsUser detaisl;
 
   factory _$SignupResponse([void Function(SignupResponseBuilder) updates]) =>
       (new SignupResponseBuilder()..update(updates)).build();
 
-  _$SignupResponse._({this.token}) : super._() {
+  _$SignupResponse._({this.token, this.user, this.detaisl}) : super._() {
     BuiltValueNullFieldError.checkNotNull(token, 'SignupResponse', 'token');
   }
 
@@ -73,17 +99,24 @@ class _$SignupResponse extends SignupResponse {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SignupResponse && token == other.token;
+    return other is SignupResponse &&
+        token == other.token &&
+        user == other.user &&
+        detaisl == other.detaisl;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, token.hashCode));
+    return $jf(
+        $jc($jc($jc(0, token.hashCode), user.hashCode), detaisl.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SignupResponse')..add('token', token))
+    return (newBuiltValueToStringHelper('SignupResponse')
+          ..add('token', token)
+          ..add('user', user)
+          ..add('detaisl', detaisl))
         .toString();
   }
 }
@@ -96,12 +129,23 @@ class SignupResponseBuilder
   String get token => _$this._token;
   set token(String token) => _$this._token = token;
 
+  UserInfoModelBuilder _user;
+  UserInfoModelBuilder get user => _$this._user ??= new UserInfoModelBuilder();
+  set user(UserInfoModelBuilder user) => _$this._user = user;
+
+  DetailsUserBuilder _detaisl;
+  DetailsUserBuilder get detaisl =>
+      _$this._detaisl ??= new DetailsUserBuilder();
+  set detaisl(DetailsUserBuilder detaisl) => _$this._detaisl = detaisl;
+
   SignupResponseBuilder();
 
   SignupResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _token = $v.token;
+      _user = $v.user?.toBuilder();
+      _detaisl = $v.detaisl?.toBuilder();
       _$v = null;
     }
     return this;
@@ -120,10 +164,27 @@ class SignupResponseBuilder
 
   @override
   _$SignupResponse build() {
-    final _$result = _$v ??
-        new _$SignupResponse._(
-            token: BuiltValueNullFieldError.checkNotNull(
-                token, 'SignupResponse', 'token'));
+    _$SignupResponse _$result;
+    try {
+      _$result = _$v ??
+          new _$SignupResponse._(
+              token: BuiltValueNullFieldError.checkNotNull(
+                  token, 'SignupResponse', 'token'),
+              user: _user?.build(),
+              detaisl: _detaisl?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'user';
+        _user?.build();
+        _$failedField = 'detaisl';
+        _detaisl?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SignupResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
