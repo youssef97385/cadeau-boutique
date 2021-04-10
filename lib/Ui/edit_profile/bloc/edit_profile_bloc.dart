@@ -44,6 +44,33 @@ class EditProfileBloc  extends Bloc<EditProfileEvent,EditProfileState>{
 
 
 
+    if(event is InitEvent){
+
+      String name = await _irepository.getNameUser();
+      String country = await _irepository.getCountryCode();
+      int phone = await _irepository.getPhoneNumber();
+      String email = await _irepository.getEmail();
+      String gender = await _irepository.getGender();
+      String dateBirthUser = await _irepository.getDate();
+
+
+      print("$name");
+      print("$country");
+      print("$phone");
+      print("$email");
+      print("------------------------------------");
+      yield state.rebuild((b) => b
+        ..isLoading = false
+        ..error = ""
+        ..success = false
+      ..gender=gender
+      ..name=name
+      ..email=email
+      ..phoneNumber=phone
+      ..countryCode=country
+      ..dateBirth=dateBirthUser);
+    }
+
     if(event is ClearError){
       yield state.rebuild((b) => b..error = "");
     }

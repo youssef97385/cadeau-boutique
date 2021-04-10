@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:built_collection/src/list.dart';
+import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
 import 'package:cadeaue_boutique/data/http_helper/Ihttp_helper.dart';
 import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
@@ -56,6 +57,27 @@ class Repository implements IRepository {
         countryCode: countryCode,
         phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+    final email= await _iprefHelper.setEmail(user.user.email);
+    final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+  //  AppColor.UserInfoModelGlobal=user.user;
+
+
+    final city= await _iprefHelper.setCity(user.detaisl.city);
+    final state= await _iprefHelper.setCity(user.detaisl.state);
+    final address= await _iprefHelper.setCity(user.detaisl.addressDetails);
+    final zip= await _iprefHelper.setCity(user.detaisl.zip);
+
+
+    print("000000000 ${user.user.name}");
+    print("00000000000 ${user.user.countryCode}");
     return user;
   }
 
@@ -65,6 +87,25 @@ class Repository implements IRepository {
     final user = await _ihttpHelper.signIn(
         password: password, countryCode: countryCode, phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+    final email= await _iprefHelper.setEmail(user.user.email);
+    final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+    print("000000000 ${user.user.name}");
+    print("00000000000 ${user.user.countryCode}");
+
+    final city= await _iprefHelper.setCity(user.detaisl.city);
+    final state= await _iprefHelper.setCity(user.detaisl.state);
+    final address= await _iprefHelper.setCity(user.detaisl.addressDetails);
+    final zip= await _iprefHelper.setCity(user.detaisl.zip);
     return user;
   }
 
@@ -247,6 +288,20 @@ class Repository implements IRepository {
       phone: phone
     );
 
+     await _iprefHelper.setEmail(email);
+     await _iprefHelper.setNameUser(name);
+     await _iprefHelper.setDate(date);
+     await _iprefHelper.setPhoneNumber(int.parse(phone));
+     await _iprefHelper.setGender(gender);
+     await _iprefHelper.setCountryCode(countryCode);
+
+
+    AppColor.UserInfoModelGlobal.phone=phone.toString();
+    AppColor.UserInfoModelGlobal.gender=gender;
+    AppColor.UserInfoModelGlobal.countryCode=countryCode;
+    AppColor.UserInfoModelGlobal.name=name;
+    AppColor.UserInfoModelGlobal.dateOf=date;
+
     return userInfoModel;
   }
 
@@ -262,6 +317,19 @@ class Repository implements IRepository {
       state: state,
       zip_code: zip_code
     );
+
+
+
+    await _iprefHelper.setCity(city);
+    final stateItem= await _iprefHelper.setState(state);
+    final address= await _iprefHelper.setDetaislAddress(address_details);
+    final zip= await _iprefHelper.setZIP(zip_code);
+
+
+    AppColor.UserAddressV2.city=city.toString();
+    AppColor.UserAddressV2.state=state;
+    AppColor.UserAddressV2.address=address_details;
+    AppColor.UserAddressV2.zip=zip_code;
 
     return item;
 
@@ -322,5 +390,57 @@ class Repository implements IRepository {
     final token = await _iprefHelper.getToken();
     final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total);
     return succsess;
+  }
+
+  @override
+  Future<String> getCountryCode()  async{
+    return await _iprefHelper.getCountryCode();
+  }
+
+  @override
+  Future<String> getDate()async {
+    return await _iprefHelper.getDate();
+  }
+
+  @override
+  Future<String> getEmail()async {
+    return await _iprefHelper.getEmail();
+  }
+
+  @override
+  Future<String> getGender() async{
+    return await _iprefHelper.getGender();
+  }
+
+  @override
+  Future<String> getNameUser() async{
+    return await _iprefHelper.getNameUser();
+
+  }
+
+  @override
+  Future<int> getPhoneNumber() async{
+    return await _iprefHelper.getPhoneNumber();
+  }
+
+  @override
+  Future<String> getAddress()async {
+    return await _iprefHelper.getDetaislAddress();
+
+  }
+
+  @override
+  Future<String> getCity() async{
+    return await _iprefHelper.getCity();
+  }
+
+  @override
+  Future<String> getState()async {
+    return await _iprefHelper.getState();
+  }
+
+  @override
+  Future<String> getZip() async{
+    return await _iprefHelper.getZIP();
   }
 }

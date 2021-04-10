@@ -20,6 +20,30 @@ class ProfileAddressBloc  extends Bloc<ProfileAddressEvent,ProfileAddressState>{
       ) async*{
 
 
+
+    if(event is InitEventBloc){
+      String city = await _irepository.getCity();
+      String stateUser = await _irepository.getState();
+
+      String address = await _irepository.getAddress();
+      String zip = await _irepository.getZip();
+
+
+
+
+
+
+      yield state.rebuild((b) => b
+        ..isLoading = false
+        ..error = ""
+        ..success = false
+        ..city=city
+        ..stateUser=stateUser
+        ..address=address
+        ..zip=zip
+        );
+    }
+
     if(event is ProfileAddressRequset){
       try {
         yield state.rebuild((b) => b

@@ -13,12 +13,27 @@ class _$ProfileAddressState extends ProfileAddressState {
   final bool isLoading;
   @override
   final String error;
+  @override
+  final String city;
+  @override
+  final String stateUser;
+  @override
+  final String address;
+  @override
+  final String zip;
 
   factory _$ProfileAddressState(
           [void Function(ProfileAddressStateBuilder) updates]) =>
       (new ProfileAddressStateBuilder()..update(updates)).build();
 
-  _$ProfileAddressState._({this.success, this.isLoading, this.error})
+  _$ProfileAddressState._(
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.city,
+      this.stateUser,
+      this.address,
+      this.zip})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         success, 'ProfileAddressState', 'success');
@@ -43,13 +58,25 @@ class _$ProfileAddressState extends ProfileAddressState {
     return other is ProfileAddressState &&
         success == other.success &&
         isLoading == other.isLoading &&
-        error == other.error;
+        error == other.error &&
+        city == other.city &&
+        stateUser == other.stateUser &&
+        address == other.address &&
+        zip == other.zip;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                        error.hashCode),
+                    city.hashCode),
+                stateUser.hashCode),
+            address.hashCode),
+        zip.hashCode));
   }
 
   @override
@@ -57,7 +84,11 @@ class _$ProfileAddressState extends ProfileAddressState {
     return (newBuiltValueToStringHelper('ProfileAddressState')
           ..add('success', success)
           ..add('isLoading', isLoading)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('city', city)
+          ..add('stateUser', stateUser)
+          ..add('address', address)
+          ..add('zip', zip))
         .toString();
   }
 }
@@ -78,6 +109,22 @@ class ProfileAddressStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  String _city;
+  String get city => _$this._city;
+  set city(String city) => _$this._city = city;
+
+  String _stateUser;
+  String get stateUser => _$this._stateUser;
+  set stateUser(String stateUser) => _$this._stateUser = stateUser;
+
+  String _address;
+  String get address => _$this._address;
+  set address(String address) => _$this._address = address;
+
+  String _zip;
+  String get zip => _$this._zip;
+  set zip(String zip) => _$this._zip = zip;
+
   ProfileAddressStateBuilder();
 
   ProfileAddressStateBuilder get _$this {
@@ -86,6 +133,10 @@ class ProfileAddressStateBuilder
       _success = $v.success;
       _isLoading = $v.isLoading;
       _error = $v.error;
+      _city = $v.city;
+      _stateUser = $v.stateUser;
+      _address = $v.address;
+      _zip = $v.zip;
       _$v = null;
     }
     return this;
@@ -111,7 +162,11 @@ class ProfileAddressStateBuilder
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, 'ProfileAddressState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(
-                error, 'ProfileAddressState', 'error'));
+                error, 'ProfileAddressState', 'error'),
+            city: city,
+            stateUser: stateUser,
+            address: address,
+            zip: zip);
     replace(_$result);
     return _$result;
   }

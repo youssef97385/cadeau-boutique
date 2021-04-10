@@ -35,6 +35,7 @@ import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/model/details_user/details_user.dart';
 
 
 
@@ -63,7 +64,8 @@ part 'serializer.g.dart';
   RelationModel,
   SliderModel,
   UserInfoModel,
-  TrackModel
+  TrackModel,
+  DetailsUser
 
 
 
@@ -363,5 +365,7 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<TrackModel>())
+
+
 
 ).build();

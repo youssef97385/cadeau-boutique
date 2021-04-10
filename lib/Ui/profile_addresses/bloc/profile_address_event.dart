@@ -10,6 +10,8 @@ abstract class ProfileAddressEvent{}
 
 
 
+
+
 abstract class ProfileAddressRequset  extends ProfileAddressEvent
     implements Built<ProfileAddressRequset, ProfileAddressRequsetBuilder> {
 
@@ -24,6 +26,17 @@ abstract class ProfileAddressRequset  extends ProfileAddressEvent
 ProfileAddressRequset._();
 
 factory ProfileAddressRequset([updates(ProfileAddressRequsetBuilder b)]) = _$ProfileAddressRequset;
+}
+
+
+
+
+abstract class InitEventBloc extends ProfileAddressEvent
+    implements Built<InitEventBloc, InitEventBlocBuilder> {
+// fields go here
+InitEventBloc._();
+
+factory InitEventBloc([updates(InitEventBlocBuilder b)]) = _$InitEventBloc;
 }
 
 abstract class ClearError extends ProfileAddressEvent implements Built<ClearError, ClearErrorBuilder> {
