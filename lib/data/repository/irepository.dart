@@ -141,6 +141,19 @@ abstract class IRepository {
   });
 
   Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId});
+
+  Future<String>getNameUser();
+  Future<String>getCountryCode();
+  Future<int>getPhoneNumber();
+  Future<String>getEmail();
+  Future<String>getDate();
+  Future<String>getGender();
+
+
+  Future<String>getCity();
+  Future<String>getState();
+  Future<String>getAddress();
+  Future<String>getZip();
 }
 
 ///

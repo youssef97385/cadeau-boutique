@@ -15,4 +15,35 @@ abstract class IPrefsHelper {
   Future<void> saveToken(String token);
 
   Future<void> logout();
+
+  Future<void>setNameUser(String txt);
+  Future<void>setCountryCode(String txt);
+  Future<void>setPhoneNumber(int txt);
+  Future<void>setEmail(String txt);
+  Future<void>setDate(String txt);
+  Future<void>setGender(String txt);
+
+
+  Future<void>setCity(String txt);
+  Future<void>setState(String txt);
+  Future<void>setDetaislAddress(String txt);
+  Future<void>setZIP(String txt);
+
+
+
+  Future<String>getNameUser();
+  Future<String>getCountryCode();
+  Future<int>getPhoneNumber();
+  Future<String>getEmail();
+  Future<String>getDate();
+  Future<String>getGender();
+
+
+
+  Future<String>getCity();
+  Future<String>getState();
+  Future<String>getDetaislAddress();
+  Future<String>getZIP();
+
+
 }

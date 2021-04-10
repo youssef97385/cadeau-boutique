@@ -13,6 +13,16 @@ import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_state
 import '../../injectoin.dart';
 import 'bloc/profile_address_bloc.dart';
 class ProfileAddressesScreen extends StatefulWidget {
+
+  String cityUser;
+  String stateUser;
+  String addressUser;
+  String zipUser;
+
+
+  ProfileAddressesScreen({
+      this.cityUser, this.stateUser, this.addressUser, this.zipUser});
+
   @override
   _ProfileAddressesScreenState createState() => _ProfileAddressesScreenState();
 }
@@ -20,6 +30,24 @@ class ProfileAddressesScreen extends StatefulWidget {
 class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
   int _groupValue = -1;
   String city , stateValue ,zipCode,addressDetails;
+
+
+
+  TextEditingController cityController;
+  TextEditingController stateController;
+  TextEditingController addressController;
+  TextEditingController zipController;
+
+
+  @override
+  void initState() {
+
+    super.initState();
+    cityController=TextEditingController(text: widget.cityUser);
+    stateController=TextEditingController(text: widget.stateUser);
+    addressController=TextEditingController(text: widget.addressUser);
+    zipController=TextEditingController(text: widget.zipUser);
+  }
   @override
   Widget build(BuildContext context) {
     final _bloc = sl<ProfileAddressBloc>();
@@ -158,8 +186,9 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                       SizedBox(
                                         height: size.height*0.02,
                                       ),
-                                      ///city
+                                      ///cityController.text
                                       Container(
+
                                         height: size.height * 0.07,
                                         width:
                                         MediaQuery.of(context).size.width * .85,
@@ -177,7 +206,8 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                         child: Center(
                                           child: TextFormField(
 
-                                            validator: emptyFieldVAlidator(city,context),
+                                            controller: cityController,
+                                            validator: emptyFieldVAlidator(cityController.text,context),
                                             keyboardType: TextInputType.name,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -196,10 +226,10 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                                 width: 10,
                                               ),
                                             ),
-                                            onChanged: (val) {
+                                   /*         onChanged: (val) {
                                               setState(() => city = val);
                                             },
-                                            onSaved: (value) => city = value,
+                                            onSaved: (value) => city = value,*/
                                           ),
                                         ),
                                       ),
@@ -227,7 +257,8 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                         child: Center(
                                           child: TextFormField(
 
-                                            validator: emptyFieldVAlidator(stateValue,context),
+                                            controller: stateController,
+                                            validator: emptyFieldVAlidator(stateController.text,context),
                                             keyboardType: TextInputType.name,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -246,10 +277,10 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                                 width: 10,
                                               ),
                                             ),
-                                            onChanged: (val) {
+                                        /*    onChanged: (val) {
                                               setState(() => stateValue = val);
                                             },
-                                            onSaved: (value) => stateValue = value,
+                                            onSaved: (value) => stateValue = value,*/
                                           ),
                                         ),
                                       ),
@@ -280,7 +311,8 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                         child: Center(
                                           child: TextFormField(
 
-                                            validator: emptyFieldVAlidator(stateValue,context),
+                                            controller: addressController,
+                                            validator: emptyFieldVAlidator(addressController.text,context),
                                             keyboardType: TextInputType.name,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -299,10 +331,10 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                                 width: 10,
                                               ),
                                             ),
-                                            onChanged: (val) {
+                                       /*     onChanged: (val) {
                                               setState(() => addressDetails = val);
                                             },
-                                            onSaved: (value) => addressDetails = value,
+                                            onSaved: (value) => addressDetails = value,*/
                                           ),
                                         ),
                                       ),
@@ -329,7 +361,8 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                         child: Center(
                                           child: TextFormField(
 
-                                            validator: emptyFieldVAlidator(zipCode,context),
+                                            controller: zipController,
+                                            validator: emptyFieldVAlidator(zipController.text,context),
                                             keyboardType: TextInputType.name,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -348,10 +381,10 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                                 width: 10,
                                               ),
                                             ),
-                                            onChanged: (val) {
+                                         /*   onChanged: (val) {
                                               setState(() => zipCode = val);
                                             },
-                                            onSaved: (value) => zipCode = value,
+                                            onSaved: (value) => zipCode = value,*/
                                           ),
                                         ),
                                       ),
@@ -398,10 +431,10 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                               onPressed: () {
 
                                                 if(
-                                                    IsNullOrEmpty(city)||
-                                                    IsNullOrEmpty(stateValue)||
-                                                    IsNullOrEmpty(zipCode)||
-                                                    IsNullOrEmpty(addressDetails))
+                                                    IsNullOrEmpty(cityController.text)||
+                                                    IsNullOrEmpty(stateController.text)||
+                                                    IsNullOrEmpty(zipController.text)||
+                                                    IsNullOrEmpty(addressController.text))
                                                 {
 
                                                   error(AppLocalizations.of(context).translate("plz_fill_all_fields"));
@@ -410,10 +443,10 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                                 else{
 
                                                   _bloc.add(ProfileAddressRequset((b) => b
-                                                    ..address =addressDetails
-                                                    ..state = stateValue
-                                                    ..zip_code = zipCode
-                                                    ..city = city));
+                                                    ..address =addressController.text
+                                                    ..state = stateController.text
+                                                    ..zip_code = zipController.text
+                                                    ..city = cityController.text));
 
                                                 }
                                               },

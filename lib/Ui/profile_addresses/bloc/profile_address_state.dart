@@ -10,6 +10,15 @@ abstract class ProfileAddressState implements Built<ProfileAddressState, Profile
   bool get success;
   bool get isLoading;
   String get error;
+
+ @nullable
+  String get city;
+  @nullable
+  String get stateUser;
+  @nullable
+  String get address;
+  @nullable
+  String get zip;
 ProfileAddressState._();
 
 factory ProfileAddressState([updates(ProfileAddressStateBuilder b)]) = _$ProfileAddressState;
@@ -19,6 +28,10 @@ factory ProfileAddressState([updates(ProfileAddressStateBuilder b)]) = _$Profile
       ..error = ""
       ..isLoading = false
       ..success = false
+        ..city= ""
+        ..address=""
+        ..zip=""
+        ..stateUser=""
     );
   }
 }

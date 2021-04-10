@@ -337,4 +337,56 @@ class Repository implements IRepository {
     final wraps = await _ihttpHelper.getWrapsBygiftId(giftId: giftId , token: token);
     return wraps;
   }
+
+  @override
+  Future<String> getCountryCode()  async{
+    return await _iprefHelper.getCountryCode();
+  }
+
+  @override
+  Future<String> getDate()async {
+    return await _iprefHelper.getDate();
+  }
+
+  @override
+  Future<String> getEmail()async {
+    return await _iprefHelper.getEmail();
+  }
+
+  @override
+  Future<String> getGender() async{
+    return await _iprefHelper.getGender();
+  }
+
+  @override
+  Future<String> getNameUser() async{
+    return await _iprefHelper.getNameUser();
+
+  }
+
+  @override
+  Future<int> getPhoneNumber() async{
+    return await _iprefHelper.getPhoneNumber();
+  }
+
+  @override
+  Future<String> getAddress()async {
+    return await _iprefHelper.getDetaislAddress();
+
+  }
+
+  @override
+  Future<String> getCity() async{
+    return await _iprefHelper.getCity();
+  }
+
+  @override
+  Future<String> getState()async {
+    return await _iprefHelper.getState();
+  }
+
+  @override
+  Future<String> getZip() async{
+    return await _iprefHelper.getZIP();
+  }
 }

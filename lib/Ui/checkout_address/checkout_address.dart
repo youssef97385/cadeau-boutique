@@ -32,6 +32,11 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
   DateTime selectedDate = DateTime.utc(2019,1,1);
   bool _dateSelected = false;
 
+
+
+
+
+
   String  countryCode = '+966', phone;
 
   final _bloc = sl<CheckoutBloc>();
