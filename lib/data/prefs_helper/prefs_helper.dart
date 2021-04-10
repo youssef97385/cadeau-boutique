@@ -72,11 +72,44 @@ class PrefsHelper implements IPrefsHelper {
 
   }
 
+
+
   @override
   Future<int> getPhoneNumber() async{
     return ((await getPrefs()).getInt(PHONE_NUMBER));
 
   }
+
+
+
+
+  @override
+  Future<String> getCity()  async{
+    return ((await getPrefs()).getString(CITY));
+
+  }
+
+  @override
+  Future<String> getState() async{
+
+    return ((await getPrefs()).getString(STATE));
+  }
+
+  @override
+  Future<String> getDetaislAddress() async{
+    return ((await getPrefs()).getString(DETAISL_ADDRESS));
+
+  }
+
+  @override
+  Future<String> getZIP() async{
+
+    return ((await getPrefs()).getString(ZIP_CODE));
+
+  }
+
+
+  //-----------------------------------------------------------//
 
   @override
   Future<void> setCountryCode(String txt)async {
@@ -114,4 +147,30 @@ class PrefsHelper implements IPrefsHelper {
     (await getPrefs()).setInt(PHONE_NUMBER, txt);
 
   }
+
+
+  @override
+  Future<void> setCity(String txt)  async{
+
+    (await getPrefs()).setString(CITY, txt);
+  }
+
+  @override
+  Future<void> setState(String txt)  async{
+    (await getPrefs()).setString(STATE, txt);
+
+  }
+
+  @override
+  Future<void> setDetaislAddress(String txt) async{
+    (await getPrefs()).setString(DETAISL_ADDRESS, txt);
+
+  }
+
+  @override
+  Future<void> setZIP(String txt) async {
+    (await getPrefs()).setString(ZIP_CODE, txt);
+
+  }
+
 }

@@ -32,6 +32,13 @@ class _$SignupResponseSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(UserInfoModel)));
     }
+    value = object.detaisl;
+    if (value != null) {
+      result
+        ..add('details')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DetailsUser)));
+    }
     return result;
   }
 
@@ -55,6 +62,10 @@ class _$SignupResponseSerializer
           result.user.replace(serializers.deserialize(value,
               specifiedType: const FullType(UserInfoModel)) as UserInfoModel);
           break;
+        case 'details':
+          result.detaisl.replace(serializers.deserialize(value,
+              specifiedType: const FullType(DetailsUser)) as DetailsUser);
+          break;
       }
     }
 
@@ -67,11 +78,13 @@ class _$SignupResponse extends SignupResponse {
   final String token;
   @override
   final UserInfoModel user;
+  @override
+  final DetailsUser detaisl;
 
   factory _$SignupResponse([void Function(SignupResponseBuilder) updates]) =>
       (new SignupResponseBuilder()..update(updates)).build();
 
-  _$SignupResponse._({this.token, this.user}) : super._() {
+  _$SignupResponse._({this.token, this.user, this.detaisl}) : super._() {
     BuiltValueNullFieldError.checkNotNull(token, 'SignupResponse', 'token');
   }
 
@@ -88,19 +101,22 @@ class _$SignupResponse extends SignupResponse {
     if (identical(other, this)) return true;
     return other is SignupResponse &&
         token == other.token &&
-        user == other.user;
+        user == other.user &&
+        detaisl == other.detaisl;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, token.hashCode), user.hashCode));
+    return $jf(
+        $jc($jc($jc(0, token.hashCode), user.hashCode), detaisl.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SignupResponse')
           ..add('token', token)
-          ..add('user', user))
+          ..add('user', user)
+          ..add('detaisl', detaisl))
         .toString();
   }
 }
@@ -117,6 +133,11 @@ class SignupResponseBuilder
   UserInfoModelBuilder get user => _$this._user ??= new UserInfoModelBuilder();
   set user(UserInfoModelBuilder user) => _$this._user = user;
 
+  DetailsUserBuilder _detaisl;
+  DetailsUserBuilder get detaisl =>
+      _$this._detaisl ??= new DetailsUserBuilder();
+  set detaisl(DetailsUserBuilder detaisl) => _$this._detaisl = detaisl;
+
   SignupResponseBuilder();
 
   SignupResponseBuilder get _$this {
@@ -124,6 +145,7 @@ class SignupResponseBuilder
     if ($v != null) {
       _token = $v.token;
       _user = $v.user?.toBuilder();
+      _detaisl = $v.detaisl?.toBuilder();
       _$v = null;
     }
     return this;
@@ -148,12 +170,15 @@ class SignupResponseBuilder
           new _$SignupResponse._(
               token: BuiltValueNullFieldError.checkNotNull(
                   token, 'SignupResponse', 'token'),
-              user: _user?.build());
+              user: _user?.build(),
+              detaisl: _detaisl?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'user';
         _user?.build();
+        _$failedField = 'detaisl';
+        _detaisl?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'SignupResponse', _$failedField, e.toString());

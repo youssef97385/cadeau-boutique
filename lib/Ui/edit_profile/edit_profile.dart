@@ -15,6 +15,17 @@ import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_event.dart';
 
 import '../../injectoin.dart';
 class EditProfileScreen extends StatefulWidget {
+
+  String nameUser;
+  String emailUser;
+  String phoneUser;
+  String genderUser;
+  String dateUser;
+
+
+  EditProfileScreen(
+  {this.nameUser, this.emailUser, this.phoneUser, this.genderUser,this.dateUser});
+
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
@@ -47,6 +58,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
         selectedDate = picked;
         _dateSelected = true;
+
+        widget.dateUser=selectedDate.toString().substring(0, 10);
       });
   }
 
@@ -61,6 +74,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
 
     _bloc.add(InitEvent());
+
+    controllerName=TextEditingController(text: widget.nameUser);
+    controllerPhone=TextEditingController(text: widget.phoneUser);
+    controlleremail=TextEditingController(text: widget.emailUser);
+
+    if(widget.genderUser=="male")
+      _groupValue=0;
+    else _groupValue=1;
+    setState(() {
+
+    });
 
 
   }
@@ -90,6 +114,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ));*/
 
           error(AppLocalizations.of(context).translate("successful_operation"));
+          Navigator.of(context).pop({"info":"ok"});
         }
 
 
@@ -437,8 +462,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             ),
                                             child: Padding(
                                               padding:  EdgeInsets.only(left:16.0 ,top: size.height*0.02),
+                                              // child: Text(
+                                              //   _dateSelected? selectedDate.toString().substring(0, 10):AppLocalizations.of(context).translate("date_Of_birth")
+                                              //   ,style: TextStyle(color: AppColor.textColor ,fontSize: 14),
+                                              //
+                                              // ),
+
                                               child: Text(
-                                                _dateSelected? selectedDate.toString().substring(0, 10):AppLocalizations.of(context).translate("date_Of_birth")
+                                                (widget.dateUser==null||widget.dateUser.isEmpty)?AppLocalizations.of(context).translate("date_Of_birth") :widget.dateUser
                                                 ,style: TextStyle(color: AppColor.textColor ,fontSize: 14),
 
                                               ),
@@ -568,7 +599,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
 
-                                                else if(!_dateSelected) {
+                                                else if(widget.dateUser==null||widget.dateUser.isEmpty) {
                                                   error(AppLocalizations.of(context).translate("plz_select_date_of_birth"));
 
                                                 }

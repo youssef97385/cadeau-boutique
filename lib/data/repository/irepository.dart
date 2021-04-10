@@ -142,5 +142,11 @@ abstract class IRepository {
   Future<String>getEmail();
   Future<String>getDate();
   Future<String>getGender();
+
+
+  Future<String>getCity();
+  Future<String>getState();
+  Future<String>getAddress();
+  Future<String>getZip();
 }
 

@@ -24,6 +24,12 @@ abstract class IPrefsHelper {
   Future<void>setGender(String txt);
 
 
+  Future<void>setCity(String txt);
+  Future<void>setState(String txt);
+  Future<void>setDetaislAddress(String txt);
+  Future<void>setZIP(String txt);
+
+
 
   Future<String>getNameUser();
   Future<String>getCountryCode();
@@ -32,6 +38,12 @@ abstract class IPrefsHelper {
   Future<String>getDate();
   Future<String>getGender();
 
+
+
+  Future<String>getCity();
+  Future<String>getState();
+  Future<String>getDetaislAddress();
+  Future<String>getZIP();
 
 
 }

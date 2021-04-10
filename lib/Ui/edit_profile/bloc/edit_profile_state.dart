@@ -26,7 +26,6 @@ abstract class EditProfileState implements Built<EditProfileState, EditProfileSt
   @nullable
   String get accountStatus;
 
-
   @nullable
   int get phoneNumber;
 

@@ -132,6 +132,61 @@ class ProfileAddressRequsetBuilder
   }
 }
 
+class _$InitEventBloc extends InitEventBloc {
+  factory _$InitEventBloc([void Function(InitEventBlocBuilder) updates]) =>
+      (new InitEventBlocBuilder()..update(updates)).build();
+
+  _$InitEventBloc._() : super._();
+
+  @override
+  InitEventBloc rebuild(void Function(InitEventBlocBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  InitEventBlocBuilder toBuilder() => new InitEventBlocBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is InitEventBloc;
+  }
+
+  @override
+  int get hashCode {
+    return 448681142;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('InitEventBloc').toString();
+  }
+}
+
+class InitEventBlocBuilder
+    implements Builder<InitEventBloc, InitEventBlocBuilder> {
+  _$InitEventBloc _$v;
+
+  InitEventBlocBuilder();
+
+  @override
+  void replace(InitEventBloc other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$InitEventBloc;
+  }
+
+  @override
+  void update(void Function(InitEventBlocBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$InitEventBloc build() {
+    final _$result = _$v ?? new _$InitEventBloc._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ClearError extends ClearError {
   factory _$ClearError([void Function(ClearErrorBuilder) updates]) =>
       (new ClearErrorBuilder()..update(updates)).build();
