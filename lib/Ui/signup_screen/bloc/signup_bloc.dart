@@ -34,7 +34,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           ..success = true);
 
       } catch (e) {
-        print('TrySignup Error $e');
+        print('TrySignup Error222 $e');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = "Something went wrong"
@@ -58,7 +58,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           ..success = true);
 
       } catch (e) {
-        print('TrySocial Error $e');
+        print('TrySocial Error11 $e');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = "Something went wrong"

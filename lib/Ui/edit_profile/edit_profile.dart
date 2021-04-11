@@ -76,6 +76,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _bloc.add(InitEvent());
 
     controllerName=TextEditingController(text: widget.nameUser);
+    if(widget.phoneUser==null||widget.phoneUser=="0")
+    controllerPhone=TextEditingController(text: "");
+    else
     controllerPhone=TextEditingController(text: widget.phoneUser);
     controlleremail=TextEditingController(text: widget.emailUser);
 
@@ -532,6 +535,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             child: FlatButton(
                                               // splashColor: Colors.red,
                                               onPressed: () {
+
+                                                Navigator.of(context).pop();
                                               },
                                               child: Text(
                                                 AppLocalizations.of(context).translate('cancel'),

@@ -54,6 +54,7 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen> {
 
+  final facebookLogin = FacebookLogin();
 
   /// googe signin
 
@@ -90,6 +91,65 @@ class _SigninScreenState extends State<SigninScreen> {
     });
   }
 
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
+  void signOutGoogle() async {
+    await googleSignIn.signOut();
+
+    print("User Sign Out");
+  }
+
+  Future<bool> logOutFacebook() async {
+    try {
+      await facebookLogin.logOut();
+      return true;
+    } catch (error) {
+      print(error);
+      return false;
+    }
+  }
+
+
+  Future<void> loginGmail() async{
+    signOutGoogle();
+
+
+    try{
+    await googleSignIn.signIn();
+    if(googleSignIn.currentUser != null){
+
+
+      _bloc.add(TrySocialSignin((b) => b
+        ..phoneNumber = '${DateTime.now().microsecondsSinceEpoch}'
+        ..socialToken = googleSignIn.currentUser.id
+        ..name = googleSignIn.currentUser.displayName));
+
+
+      await prefs.setString('id', googleSignIn.currentUser.id);
+      await prefs.setString('nickname', googleSignIn.currentUser.displayName);
+      await prefs.setString('photoUrl', googleSignIn.currentUser.photoUrl);
+      await prefs.setString(FULL_NAME, googleSignIn.currentUser.displayName);
+
+
+      Fluttertoast.showToast(msg: "Sign in success");
+ /*     this.setState(() {
+        isLoading = false;
+      });*/
+
+      print("TEST_TEST ${googleSignIn.currentUser.displayName}");}
+
+
+    } catch (error) {
+      print("TEST_TEST $error");
+
+    }
+  }
+
   Future<FirebaseUser> _handleSignIn() async {
     print("google 1");
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -115,7 +175,7 @@ class _SigninScreenState extends State<SigninScreen> {
     if (firebaseUser != null) {
       print("******");
       _bloc.add(TrySocialSignin((b) => b
-        ..phoneNumber = ''
+        ..phoneNumber = '0'
         ..socialToken = firebaseUser.uid
         ..name = firebaseUser.displayName));
       // Check is already sign up
@@ -168,12 +228,80 @@ class _SigninScreenState extends State<SigninScreen> {
 
   bool _isLoggedIn = false;
   Map userProfile;
-   final facebookLogin = FacebookLogin();
+  // final facebookLogin = FacebookLogin();
+
+
 
   // fl.FacebookLogin facebookLogin = new fl.FacebookLogin();
+
+
+  _loginWithFBHassan() async {
+
+    await  logOutFacebook();
+    try {
+      final result = await facebookLogin.logIn(['email']);
+
+
+      print("------111111111-------");
+      print(result.errorMessage);
+      switch (result.status) {
+        case FacebookLoginStatus.loggedIn:
+          final token = result.accessToken.token;
+          final graphResponse = await http.get(
+              Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${token}'));
+
+          final profile = JSON.jsonDecode(graphResponse.body);
+
+
+          //userProfileFacebook = profile;
+          print("--------------------------");
+        //  print(userProfileFacebook);
+          print("--------------------------");
+          print(profile);
+
+          String id = profile['id'];
+          print(id);
+          String email = profile['email'];
+          print(email);
+          String name = profile['name'];
+          print(name);
+          String imagePath = profile['picture']['data']['url'];
+          print(imagePath);
+
+          if (email == null) {
+            email = id + '@gmail.com';
+          }
+
+          setState(() {
+            isLoading = true;
+          });
+          //Response res = await createAccountSocial(initMapSocial(name, email, FACEBOOK, id, imagePath));
+          break;
+
+        case FacebookLoginStatus.cancelledByUser:
+          break;
+        case FacebookLoginStatus.error:
+
+          break;
+      }
+    } catch (exceptopn) {
+
+      print('error  $exceptopn');
+      /*  setState(() {
+        _isLoading = false;
+      });*/
+
+
+    }
+  }
+
+
   _loginWithFb() async{
+
+    await  logOutFacebook();
     final result = await facebookLogin.logIn(['email']);
 
+    print("-----");
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
         final token = result.accessToken.token;
@@ -184,7 +312,7 @@ class _SigninScreenState extends State<SigninScreen> {
         if(token != null){
           print("//////////////////////////"+profile['name']);
           _bloc.add(TrySocialSignin((b) => b
-            ..phoneNumber = '987'
+            ..phoneNumber = "${DateTime.now().microsecondsSinceEpoch}"
             ..socialToken = token
             ..name = profile['name']));
         }
@@ -200,6 +328,8 @@ class _SigninScreenState extends State<SigninScreen> {
         break;
       case FacebookLoginStatus.error:
         setState(() => _isLoggedIn = false );
+
+        print("${FacebookLoginStatus.error.toString()}");
         break;
     }
   }
@@ -617,7 +747,9 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 ),
                                                 GestureDetector(
                                                   onTap:(){
-                                                    _handleSignIn();
+                                                  //  _handleSignIn();
+
+                                                    loginGmail();
                                                   },
                                                   child: Container(
                                                       height: 38,

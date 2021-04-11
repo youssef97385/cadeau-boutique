@@ -18,11 +18,7 @@ class _$UserInfoModelSerializer implements StructuredSerializer<UserInfoModel> {
   @override
   Iterable<Object> serialize(Serializers serializers, UserInfoModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'user_type',
-      serializers.serialize(object.userType,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object>[];
     Object value;
     value = object.name;
     if (value != null) {
@@ -35,6 +31,13 @@ class _$UserInfoModelSerializer implements StructuredSerializer<UserInfoModel> {
     if (value != null) {
       result
         ..add('email')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.userType;
+    if (value != null) {
+      result
+        ..add('user_type')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -156,10 +159,7 @@ class _$UserInfoModel extends UserInfoModel {
       this.accountStatus,
       this.phoneNumber,
       this.dateBirth})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        userType, 'UserInfoModel', 'userType');
-  }
+      : super._();
 
   @override
   UserInfoModel rebuild(void Function(UserInfoModelBuilder) updates) =>
@@ -285,8 +285,7 @@ class UserInfoModelBuilder
         new _$UserInfoModel._(
             name: name,
             email: email,
-            userType: BuiltValueNullFieldError.checkNotNull(
-                userType, 'UserInfoModel', 'userType'),
+            userType: userType,
             gender: gender,
             countryCode: countryCode,
             accountStatus: accountStatus,

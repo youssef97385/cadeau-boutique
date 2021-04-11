@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/model/UserInfoV2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -40,6 +41,35 @@ class PrefsHelper implements IPrefsHelper {
   Future<void> logout() async {
     (await getPrefs()).setString(ACCESS_TOKEN, "");
     (await getPrefs()).setBool(IS_LOGIN, false);
+
+
+
+    AppColor.UserInfoModelGlobal.phone="";
+    AppColor.UserInfoModelGlobal.gender="male";
+    AppColor.UserInfoModelGlobal.countryCode="+966";
+    AppColor.UserInfoModelGlobal.name="";
+    AppColor.UserInfoModelGlobal.email="";
+    AppColor.UserInfoModelGlobal.dateOf="";
+
+
+    AppColor.UserAddressV2.city="";
+    AppColor.UserAddressV2.state="";
+    AppColor.UserAddressV2.address="";
+    AppColor.UserAddressV2.zip="";
+
+    (await getPrefs()).setString(COUNTRY_CODE, "");
+    (await getPrefs()).setString(DATE_OF_BIRTH, "");
+    (await getPrefs()).setString(EMAIL, "");
+    (await getPrefs()).setString(GENDER, "");
+    (await getPrefs()).setString(FULL_NAME, "");
+    (await getPrefs()).setInt(PHONE_NUMBER, 0);
+    (await getPrefs()).setString(CITY, "");
+    (await getPrefs()).setString(STATE, "");
+    (await getPrefs()).setString(DETAISL_ADDRESS, "");
+    (await getPrefs()).setString(ZIP_CODE, "");
+
+
+
   }
 
   @override

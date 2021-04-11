@@ -152,7 +152,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             AppColor.UserInfoModelGlobal.countryCode=state.countryCode;
                             AppColor.UserInfoModelGlobal.name=state.name;
                             AppColor.UserInfoModelGlobal.email=state.email;
-                            AppColor.UserInfoModelGlobal.dateOf=state.dateBirth;}
+                            AppColor.UserInfoModelGlobal.dateOf=state.dateBirth;
+                            print(state.email);
+
+                            print("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
+                            }
 
 
 
@@ -189,6 +193,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     AppColor.UserAddressV2.state=state.stateUser;
                                     AppColor.UserAddressV2.address=state.address;
                                     AppColor.UserAddressV2.zip=state.zip;
+
+                                    print("--------");
+                                    print("${state.address}");
+                                    print("--------");
+                                    print("${state.zip}");
+                                    print("--------");
                                 ;}
 
                                   Navigator.push(context,

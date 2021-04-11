@@ -101,7 +101,7 @@ class _SignupScreenState extends State<SignupScreen> {
     print("google sign 4 : "+firebaseUser.uid);
     if (firebaseUser != null) {
       _bloc.add(TrySocialSignin((b) => b
-        ..phoneNumber = ''
+        ..phoneNumber = "${DateTime.now().microsecondsSinceEpoch}"
         ..socialToken = firebaseUser.uid
         ..name = firebaseUser.displayName));
       // Check is already sign up
@@ -149,14 +149,71 @@ class _SignupScreenState extends State<SignupScreen> {
     print("////// "+firebaseUser.toString());
     return firebaseUser;
   }
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
+  void signOutGoogle() async {
+    await googleSignIn.signOut();
+
+    print("User Sign Out");
+  }
 
   bool _isLoggedIn = false;
   Map userProfile;
   final facebookLogin = FacebookLogin();
 
+  Future<bool> logOutFacebook() async {
+    try {
+      await facebookLogin.logOut();
+      return true;
+    } catch (error) {
+      print(error);
+      return false;
+    }
+  }
+
+  Future<void> loginGmail() async{
+    signOutGoogle();
+
+
+    try{
+      await googleSignIn.signIn();
+      if(googleSignIn.currentUser != null){
+
+
+        _bloc.add(TrySocialSignin((b) => b
+          ..phoneNumber = '${DateTime.now().microsecondsSinceEpoch}'
+          ..socialToken = googleSignIn.currentUser.id
+          ..name = googleSignIn.currentUser.displayName));
+
+
+        await prefs.setString('id', googleSignIn.currentUser.id);
+        await prefs.setString('nickname', googleSignIn.currentUser.displayName);
+        await prefs.setString('photoUrl', googleSignIn.currentUser.photoUrl);
+        await prefs.setString(FULL_NAME, googleSignIn.currentUser.displayName);
+
+
+        Fluttertoast.showToast(msg: "Sign in success");
+        /*     this.setState(() {
+        isLoading = false;
+      });*/
+
+        print("TEST_TEST ${googleSignIn.currentUser.displayName}");}
+
+
+    } catch (error) {
+      print("TEST_TEST $error");
+
+    }
+  }
+
   // fl.FacebookLogin facebookLogin = new fl.FacebookLogin();
   _loginWithFb() async{
+    await  logOutFacebook();
     final result = await facebookLogin.logIn(['email']);
 
     switch (result.status) {
@@ -169,7 +226,7 @@ class _SignupScreenState extends State<SignupScreen> {
         if(token != null){
           print("//////////////////////////");
           _bloc.add(TrySocialSignin((b) => b
-            ..phoneNumber = ''
+            ..phoneNumber = '${DateTime.now().microsecondsSinceEpoch}'
             ..socialToken = token
             ..name = profile['name']));
         }
@@ -671,7 +728,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   children: [
                                                     GestureDetector(
                                                       onTap:(){
-                                                       _loginWithFb();
+                                                      _loginWithFb();
+                                                      // loginGmail();
                                                       },
                                                       child: Container(
                                                           height: 38,
@@ -701,7 +759,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     ),
                                                     GestureDetector(
                                                       onTap:(){
-                                                        _handleSignIn();
+                                                     //   _handleSignIn();
+
+                                                        loginGmail();
                                                       },
                                                       child: Container(
                                                           height: 38,

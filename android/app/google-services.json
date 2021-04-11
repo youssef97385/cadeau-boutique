@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "561933397033-br71jhmsc2ur9i67lb33ampbabpid7u7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smarttouch.cadeaue_boutique",
+            "certificate_hash": "808f1258f4d6cdd1dd5cf05e1e44d3d67ee5a077"
+          }
+        },
+        {
           "client_id": "561933397033-uor7ds9s9efes8plk3154j0evk0n5mto.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

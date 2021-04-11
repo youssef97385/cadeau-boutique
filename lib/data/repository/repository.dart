@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:built_collection/src/list.dart';
+import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
 import 'package:cadeaue_boutique/data/http_helper/Ihttp_helper.dart';
 import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
@@ -56,7 +57,30 @@ class Repository implements IRepository {
         countryCode: countryCode,
         phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+      final email= await _iprefHelper.setEmail(user.user.email);
+      final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+    print("000000000 ${user.user.name}");
+    // print("00000000000 ${user.user.countryCode}");
+    if(user.detaisl!=null){
+    if(user.detaisl.city!=null)
+      final city= await _iprefHelper.setCity(user.detaisl.city);
+    if(user.detaisl.state!=null)
+      final state= await _iprefHelper.setState(user.detaisl.state);
+    if(user.detaisl.addressDetails!=null)
+      final address= await _iprefHelper.setDetaislAddress(user.detaisl.addressDetails);
+    if(user.detaisl.zip!=null)
+      final zip= await _iprefHelper.setZIP(user.detaisl.zip);
+    }
     return user;
+
   }
 
   @override
@@ -65,6 +89,35 @@ class Repository implements IRepository {
     final user = await _ihttpHelper.signIn(
         password: password, countryCode: countryCode, phone: phone);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+    if(user.user.email!=null)
+    final email= await _iprefHelper.setEmail(user.user.email);
+    if(user.user.dateBirth!=null)
+    final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+
+
+    print("000000000 ${user.user.name}");
+
+   // print("00000000000 ${user.user.countryCode}");
+
+   if(user.detaisl!=null){
+     if(user.detaisl.city!=null)
+       final city= await _iprefHelper.setCity(user.detaisl.city);
+     if(user.detaisl.state!=null)
+       final state= await _iprefHelper.setState(user.detaisl.state);
+     if(user.detaisl.addressDetails!=null)
+       final address= await _iprefHelper.setDetaislAddress(user.detaisl.addressDetails);
+     if(user.detaisl.zip!=null)
+       final zip= await _iprefHelper.setZIP(user.detaisl.zip);
+   }
+    return user;
+
     return user;
   }
 
@@ -74,6 +127,31 @@ class Repository implements IRepository {
     final user = await _ihttpHelper.socialSignin(
         phoneNumber: phoneNumber, name: name, socialToken: socialToken);
     final save = await _iprefHelper.saveToken(user.token);
+
+
+    final nameuser= await _iprefHelper.setNameUser(user.user.name);
+    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final phoneCode= await _iprefHelper.setPhoneNumber(0);
+    if(user.user.email!=null) final email= await _iprefHelper.setEmail(user.user.email);
+    if(user.user.dateBirth!=null) final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
+
+
+
+
+    print("000000000 ${user.user.name}");
+    // print("00000000000 ${user.user.countryCode}");
+
+    if(user.detaisl!=null){
+      if(user.detaisl.city!=null)
+        final city= await _iprefHelper.setCity(user.detaisl.city);
+      if(user.detaisl.state!=null)
+        final state= await _iprefHelper.setState(user.detaisl.state);
+      if(user.detaisl.addressDetails!=null)
+        final address= await _iprefHelper.setDetaislAddress(user.detaisl.addressDetails);
+      if(user.detaisl.zip!=null)
+        final zip= await _iprefHelper.setZIP(user.detaisl.zip);
+    }
+//    print("000000000 ${user.detaisl.zip}");
     return user;
   }
 
@@ -247,6 +325,24 @@ class Repository implements IRepository {
       phone: phone
     );
 
+    await _iprefHelper.setEmail(email);
+    await _iprefHelper.setNameUser(name);
+    await _iprefHelper.setDate(date);
+    await _iprefHelper.setPhoneNumber(int.parse(phone));
+    await _iprefHelper.setGender(gender);
+    await _iprefHelper.setCountryCode(countryCode);
+
+
+    AppColor.UserInfoModelGlobal.phone=phone.toString();
+    AppColor.UserInfoModelGlobal.gender=gender;
+    AppColor.UserInfoModelGlobal.countryCode=countryCode;
+    AppColor.UserInfoModelGlobal.name=name;
+    AppColor.UserInfoModelGlobal.dateOf=date;
+    AppColor.UserInfoModelGlobal.email=email;
+
+
+    print("editProfileRQ");
+
     return userInfoModel;
   }
 
@@ -262,6 +358,21 @@ class Repository implements IRepository {
       state: state,
       zip_code: zip_code
     );
+
+
+
+    await _iprefHelper.setCity(city);
+    await _iprefHelper.setState(state);
+    await _iprefHelper.setDetaislAddress(address_details);
+    await _iprefHelper.setZIP(zip_code);
+
+
+
+    AppColor.UserAddressV2.city=city.toString();
+    AppColor.UserAddressV2.state=state;
+    AppColor.UserAddressV2.address=address_details;
+    AppColor.UserAddressV2.zip=zip_code;
+
 
     return item;
 
@@ -292,7 +403,10 @@ class Repository implements IRepository {
     else{
       final item=await _ihttpHelper.logoutRQ(token);
 
-      if(item!=null &&item) _iprefHelper.logout();
+      if(item!=null &&item) {_iprefHelper.logout();
+
+      print("LOOOOGOOOOGGOOOOGOUUUUT");
+      }
       return item;
     }
 

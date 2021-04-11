@@ -15,6 +15,7 @@ abstract class UserInfoModel implements Built<UserInfoModel, UserInfoModelBuilde
   @nullable
   String get email;
   @BuiltValueField(wireName: "user_type")
+  @nullable
   String get userType;
   @nullable
   String get gender;
