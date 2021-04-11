@@ -32,6 +32,10 @@ abstract class CartItem implements Built<CartItem, CartItemBuilder> {
   @nullable
   ColorModel get wrapColor;
 
+  @BuiltValueField(wireName: "total_price")
+  @nullable
+  int get totalPrice;
+
 
 
 

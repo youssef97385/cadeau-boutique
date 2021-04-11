@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/cart_screen.dart';
+import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -92,24 +93,65 @@ class _ProductScreenState extends State<ProductScreen> {
                     children: [
                       baseAppBar(size, context),
 
-                      Container(
-                        height: 250,
-                        width: size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(bottomRight: Radius
-                              .circular(14), bottomLeft: Radius.circular(14)),
 
-                        ),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.only(bottomRight: Radius
-                                .circular(14), bottomLeft: Radius.circular(14)),
-                            child: Hero(
-                              tag: "${widget.id}",
-                              child: Image.network(
-                                imageChanged?BaseImgUrl+selectedImage:BaseImgUrl+widget.img, fit: BoxFit.fill,),
-                            )),
-                      ),
+                     Stack(
+
+                       children: [
+                         Container(
+                           height: 250,
+                           width: size.width,
+                           decoration: BoxDecoration(
+                             color: Colors.white,
+                             borderRadius: BorderRadius.only(bottomRight: Radius
+                                 .circular(14), bottomLeft: Radius.circular(14)),
+
+                           ),
+                           child: ClipRRect(
+                               borderRadius: BorderRadius.only(bottomRight: Radius
+                                   .circular(14), bottomLeft: Radius.circular(14)),
+                               child: Hero(
+                                 tag: "${widget.id}",
+                                 child: Image.network(
+                                   imageChanged?BaseImgUrl+selectedImage:BaseImgUrl+widget.img, fit: BoxFit.fill,),
+                               )),
+                         ),
+                         myWrapId == -1 ?Container():
+                        Positioned(
+                          right: 0,
+                          top: 20,
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WrapScreen(
+                                          id:  myWrapId)));
+                            },
+                            child: Positioned(
+
+                              child: Stack(
+
+                                children: [
+                                  Container(
+                                    width: 35,
+                                    height:35,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(14),bottomLeft: Radius.circular(14))
+                                    ),
+                                  ),
+                                  Positioned(
+                                      top: 10,
+                                      left: 10,
+                                      child: SvgPicture.asset("assets/images/gift-box (1).svg")),
+                                  // SvgPicture.asset("assets/images/check wrap.svg")
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                       ],
+                     ),
                       SizedBox(height: 20,),
 
                       state.product.image == null?Container():
@@ -127,10 +169,10 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
-                                   baseText(color: AppColor.darkTextColor,
-                                     title: "Rolex",
-                                     size: 12.0,),
-                                   SizedBox(height: 10,),
+                                   // baseText(color: AppColor.darkTextColor,
+                                   //   title: "Rolex",
+                                   //   size: 12.0,),
+                                   // SizedBox(height: 10,),
                                    baseText(color: AppColor.darkTextColor,
                                        title: state.product.nameEn,
                                        size: 18.0,

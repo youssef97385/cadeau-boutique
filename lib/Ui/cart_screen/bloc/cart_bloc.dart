@@ -167,6 +167,7 @@ if(event is GetGlobalWraps){
           ..error = ""
           ..success = true
           ..cartList.replace(data.details)
+            ..cart.replace(data)
 
         );
 
@@ -181,6 +182,41 @@ if(event is GetGlobalWraps){
 
       }
     }
+    if(event is RemoveGlobalWrap){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+
+        );
+
+        final data = await _iRepository.removeGlobalWrap();
+
+        print('remove global wraps Success data ${data}');
+
+
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+          ..cartList.replace(data.details)
+          ..cart.replace(data)
+
+        );
+
+      } catch (e) {
+        print('remove global wraps Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+
+        );
+
+      }
+    }
+
   }
 
 

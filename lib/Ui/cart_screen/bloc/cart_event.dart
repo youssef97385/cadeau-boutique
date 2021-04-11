@@ -65,3 +65,15 @@ abstract class AddGlobalWrap extends CartEvent
 
   factory AddGlobalWrap([updates(AddGlobalWrapBuilder b)]) = _$AddGlobalWrap;
 }
+
+abstract class RemoveGlobalWrap extends CartEvent
+    implements Built<RemoveGlobalWrap, RemoveGlobalWrapBuilder> {
+
+  //fields go here
+
+
+
+  RemoveGlobalWrap._();
+
+  factory RemoveGlobalWrap([updates(RemoveGlobalWrapBuilder b)]) = _$RemoveGlobalWrap;
+}

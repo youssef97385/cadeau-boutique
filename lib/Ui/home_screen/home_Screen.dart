@@ -1749,7 +1749,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 state
                                                                     .wraps[
                                                                         index]
-                                                                    .wrapNameEn,
+                                                                    .wrapNameAr,
                                                                 style: TextStyle(
                                                                     color: index ==
                                                                             wrapIndex
