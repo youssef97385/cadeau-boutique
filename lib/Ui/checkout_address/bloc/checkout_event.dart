@@ -6,13 +6,11 @@ import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 
 part 'checkout_event.g.dart';
 
+abstract class CheckoutEvent {}
 
-abstract class CheckoutEvent{}
 abstract class AddReciever extends CheckoutEvent
     implements Built<AddReciever, AddRecieverBuilder> {
-
   //fields go here
-
 
   String get giftTo;
 
@@ -22,22 +20,37 @@ abstract class AddReciever extends CheckoutEvent
 
   String get phoneNumber;
 
+  String get address;
 
   AddReciever._();
 
   factory AddReciever([updates(AddRecieverBuilder b)]) = _$AddReciever;
 }
-//
-// abstract class TryCheckout extends CheckoutEvent
-//     implements Built<TryCheckout, TryCheckoutBuilder> {
-//
-//   //fields go here
-//
-//
-// BuiltList<RecieverModel> get recievers;
-//
-//
-//   TryCheckout._();
-//
-//   factory TryCheckout([updates(TryCheckoutBuilder b)]) = _$TryCheckout;
-// }
+
+abstract class EditReciever extends CheckoutEvent
+    implements Built<EditReciever, EditRecieverBuilder> {
+  //fields go here
+
+  RecieverModel get recieverModel;
+
+
+  int get index;
+
+  EditReciever._();
+
+  factory EditReciever([updates(EditRecieverBuilder b)]) = _$EditReciever;
+}
+
+abstract class DeleteReciever extends CheckoutEvent
+    implements Built<DeleteReciever, DeleteRecieverBuilder> {
+  //fields go here
+
+  @nullable
+  RecieverModel get reciever;
+
+  int get index;
+
+  DeleteReciever._();
+
+  factory DeleteReciever([updates(DeleteRecieverBuilder b)]) = _$DeleteReciever;
+}

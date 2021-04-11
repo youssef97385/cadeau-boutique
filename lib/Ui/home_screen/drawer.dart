@@ -244,11 +244,15 @@ class _MainDrawerState extends State<MainDrawer> {
                         ),
 
                         GestureDetector(
+
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context)=>SettingsScreen()
-                              ));
+                              showComingSoonDialog();
                             },
+                            // onTap: (){
+                            //   Navigator.push(context, MaterialPageRoute(
+                            //     builder: (context)=>SettingsScreen()
+                            //   ));
+                            // },
                             child: singleDrawerItem("assets/images/drawer/settings.svg", "Settings")),
                         SizedBox(
                           height: 30,
@@ -264,12 +268,20 @@ class _MainDrawerState extends State<MainDrawer> {
                     child: Column(
                       children: [
 
-                        singleDrawerItem("assets/images/drawer/share.svg", "Invite a friend"),
+                        InkWell(
+                            onTap: (){
+                              showComingSoonDialog();
+                            },
+                            child: singleDrawerItem("assets/images/drawer/share.svg", "Invite a friend")),
                         SizedBox(
                           height: 30,
                         ),
 
-                        singleDrawerItem("assets/images/drawer/question.svg", "Help and feedback"),
+                        InkWell(
+                            onTap: (){
+                              showComingSoonDialog();
+                            },
+                            child: singleDrawerItem("assets/images/drawer/question.svg", "Help and feedback")),
                         SizedBox(
                           height: 30,
                         ),
@@ -443,6 +455,28 @@ class _MainDrawerState extends State<MainDrawer> {
           fontSize: 16.0);
 
     }
+  }
+
+   showComingSoonDialog(){
+    return    AwesomeDialog(
+      context: context,
+      customHeader: Container(
+        child: Icon(
+          Icons.error_outline,
+          size: 100,
+          color: AppColor.darkYellow,
+        ),
+      ),
+      btnOkColor: AppColor.darkYellow,
+      dialogType: DialogType.WARNING,
+      animType: AnimType.BOTTOMSLIDE,
+      title: 'Coming Soon',
+      desc: '',
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+
+      },
+    )..show();
   }
 }
 

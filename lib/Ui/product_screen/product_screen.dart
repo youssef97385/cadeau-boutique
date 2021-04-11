@@ -77,7 +77,7 @@ class _ProductScreenState extends State<ProductScreen> {
     return BlocBuilder(
       cubit: _bloc,
       builder: (BuildContext context, ProductState state) {
-        print("my product "+ (state.product.image == null).toString() + "   "+state.product.toString() );
+        // print("my product "+ (state.product.image == null).toString() + "   "+state.product.toString() );
         return Stack(
           children: [
             Scaffold(
@@ -194,13 +194,15 @@ class _ProductScreenState extends State<ProductScreen> {
                              children: [
                                Row(
                                  children: [
+                                   state.product.salePrice==0?null:
                                    baseText(color: AppColor.darkTextColor,
                                        title: "\$ "+state.product.mainPrice,
                                        size: 20.0,
                                        decoration: TextDecoration.lineThrough),
                                    SizedBox(width: 10,),
+
                                    baseText(color: AppColor.darkYellow,
-                                       title: "\$ "+state.product.salePrice,
+                                       title: "\$ "+state.product.salePrice == 0?state.product.mainPrice:state.product.salePrice,
                                        size: 20.0),
                                  ],
                                ),
@@ -324,8 +326,13 @@ class _ProductScreenState extends State<ProductScreen> {
                                          onTap: () {
                                            setState(() {
                                              selectedColor = index;
-                                             selectedImage = state.product.colors[index].image;
-                                             imageChanged = true;
+                                             if(state.product.colors[index].image != null){
+
+
+                                               selectedImage = state.product.colors[index].image;
+                                               imageChanged = true;}
+
+
                                            });
                                          },
                                          child: Container(
@@ -467,7 +474,13 @@ class _ProductScreenState extends State<ProductScreen> {
                                    // splashColor: Colors.red,
                                    onPressed: () {
 
-                                     _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId));
+                                     print("wrap id test ${myWrapId}");
+                                     if(myWrapId == -1){
+                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id ));
+                                     }else{
+                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId));
+                                     }
+
                                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                                    },
                                    child: Text(
@@ -499,6 +512,6 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
   Color hexToColor(String code) {
-    return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+    return new Color(int.parse(code.substring(1, code.length), radix: 16) + 0xFF000000);
   }
 }

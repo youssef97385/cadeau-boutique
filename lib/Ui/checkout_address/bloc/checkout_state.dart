@@ -22,6 +22,7 @@ implements Built<CheckoutState, CheckoutStateBuilder> {
   BuiltList<String> get deliveryDate;
   BuiltList<String> get countryCode;
   BuiltList<String> get phoneNumber;
+  BuiltList<String> get address;
   String get total;
 
   CheckoutState._();

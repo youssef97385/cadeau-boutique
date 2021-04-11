@@ -165,7 +165,7 @@ class Repository implements IRepository {
   }
 
   @override
-  Future<bool> removeFavourite({int id}) async {
+  Future<BuiltList<ProductModel>> removeFavourite({int id}) async {
     final token = await _iprefHelper.getToken();
     final favourites =
         await _ihttpHelper.removeFavourite(productId: id, token: token);
@@ -325,9 +325,10 @@ class Repository implements IRepository {
     BuiltList<String> deliveryDate ,
     BuiltList<String> countryCode ,
     BuiltList<String> phone ,
+    BuiltList<String> address ,
   }) async{
     final token = await _iprefHelper.getToken();
-    final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total , giftTo: giftTo ,deliveryDate: deliveryDate ,countryCode: countryCode,phone: phone);
+    final succsess = await _ihttpHelper.checkoutMultieGift(token: token , recieverModel: recieverModel , total: total , giftTo: giftTo ,deliveryDate: deliveryDate ,countryCode: countryCode,phone: phone , address: address);
     return succsess;
   }
 

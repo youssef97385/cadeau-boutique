@@ -60,7 +60,7 @@ abstract class IRepository {
 
   Future<bool> addToFavourite({int id});
 
-  Future<bool> removeFavourite({int id});
+  Future<BuiltList<ProductModel>> removeFavourite({int id});
 
 
 
@@ -136,6 +136,7 @@ abstract class IRepository {
     BuiltList<String> deliveryDate ,
     BuiltList<String> countryCode ,
     BuiltList<String> phone ,
+    BuiltList<String> address ,
     String total,
 
   });

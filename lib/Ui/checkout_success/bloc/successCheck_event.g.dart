@@ -18,6 +18,8 @@ class _$TryCheckout extends TryCheckout {
   @override
   final BuiltList<String> phoneNumber;
   @override
+  final BuiltList<String> address;
+  @override
   final String total;
 
   factory _$TryCheckout([void Function(TryCheckoutBuilder) updates]) =>
@@ -29,6 +31,7 @@ class _$TryCheckout extends TryCheckout {
       this.deliveryDate,
       this.countryCode,
       this.phoneNumber,
+      this.address,
       this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -40,6 +43,7 @@ class _$TryCheckout extends TryCheckout {
         countryCode, 'TryCheckout', 'countryCode');
     BuiltValueNullFieldError.checkNotNull(
         phoneNumber, 'TryCheckout', 'phoneNumber');
+    BuiltValueNullFieldError.checkNotNull(address, 'TryCheckout', 'address');
     BuiltValueNullFieldError.checkNotNull(total, 'TryCheckout', 'total');
   }
 
@@ -59,6 +63,7 @@ class _$TryCheckout extends TryCheckout {
         deliveryDate == other.deliveryDate &&
         countryCode == other.countryCode &&
         phoneNumber == other.phoneNumber &&
+        address == other.address &&
         total == other.total;
   }
 
@@ -67,10 +72,12 @@ class _$TryCheckout extends TryCheckout {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, recievers.hashCode), giftTo.hashCode),
-                    deliveryDate.hashCode),
-                countryCode.hashCode),
-            phoneNumber.hashCode),
+                $jc(
+                    $jc($jc($jc(0, recievers.hashCode), giftTo.hashCode),
+                        deliveryDate.hashCode),
+                    countryCode.hashCode),
+                phoneNumber.hashCode),
+            address.hashCode),
         total.hashCode));
   }
 
@@ -82,6 +89,7 @@ class _$TryCheckout extends TryCheckout {
           ..add('deliveryDate', deliveryDate)
           ..add('countryCode', countryCode)
           ..add('phoneNumber', phoneNumber)
+          ..add('address', address)
           ..add('total', total))
         .toString();
   }
@@ -119,6 +127,11 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
   set phoneNumber(ListBuilder<String> phoneNumber) =>
       _$this._phoneNumber = phoneNumber;
 
+  ListBuilder<String> _address;
+  ListBuilder<String> get address =>
+      _$this._address ??= new ListBuilder<String>();
+  set address(ListBuilder<String> address) => _$this._address = address;
+
   String _total;
   String get total => _$this._total;
   set total(String total) => _$this._total = total;
@@ -133,6 +146,7 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
       _deliveryDate = $v.deliveryDate.toBuilder();
       _countryCode = $v.countryCode.toBuilder();
       _phoneNumber = $v.phoneNumber.toBuilder();
+      _address = $v.address.toBuilder();
       _total = $v.total;
       _$v = null;
     }
@@ -161,6 +175,7 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
               deliveryDate: deliveryDate.build(),
               countryCode: countryCode.build(),
               phoneNumber: phoneNumber.build(),
+              address: address.build(),
               total: BuiltValueNullFieldError.checkNotNull(
                   total, 'TryCheckout', 'total'));
     } catch (_) {
@@ -176,6 +191,8 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
         countryCode.build();
         _$failedField = 'phoneNumber';
         phoneNumber.build();
+        _$failedField = 'address';
+        address.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'TryCheckout', _$failedField, e.toString());

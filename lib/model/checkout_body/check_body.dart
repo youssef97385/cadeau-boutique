@@ -15,6 +15,9 @@ abstract class CheckBody implements Built<CheckBody, CheckBodyBuilder> {
 
   @BuiltValueField(wireName: "gift_to")
    BuiltList<String> get  gift_to;
+
+  BuiltList<String> get  address;
+
   @BuiltValueField(wireName: "delivery_date")
    BuiltList<String> get delivery_date;
   @BuiltValueField(wireName: "country_code")

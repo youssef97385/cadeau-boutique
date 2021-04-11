@@ -22,6 +22,10 @@ class _$CheckBodySerializer implements StructuredSerializer<CheckBody> {
       serializers.serialize(object.gift_to,
           specifiedType:
               const FullType(BuiltList, const [const FullType(String)])),
+      'address',
+      serializers.serialize(object.address,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(String)])),
       'delivery_date',
       serializers.serialize(object.delivery_date,
           specifiedType:
@@ -59,6 +63,12 @@ class _$CheckBodySerializer implements StructuredSerializer<CheckBody> {
                       const FullType(BuiltList, const [const FullType(String)]))
               as BuiltList<Object>);
           break;
+        case 'address':
+          result.address.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList<Object>);
+          break;
         case 'delivery_date':
           result.delivery_date.replace(serializers.deserialize(value,
                   specifiedType:
@@ -92,6 +102,8 @@ class _$CheckBody extends CheckBody {
   @override
   final BuiltList<String> gift_to;
   @override
+  final BuiltList<String> address;
+  @override
   final BuiltList<String> delivery_date;
   @override
   final BuiltList<String> country_code;
@@ -105,12 +117,14 @@ class _$CheckBody extends CheckBody {
 
   _$CheckBody._(
       {this.gift_to,
+      this.address,
       this.delivery_date,
       this.country_code,
       this.phone_number,
       this.total_cost})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(gift_to, 'CheckBody', 'gift_to');
+    BuiltValueNullFieldError.checkNotNull(address, 'CheckBody', 'address');
     BuiltValueNullFieldError.checkNotNull(
         delivery_date, 'CheckBody', 'delivery_date');
     BuiltValueNullFieldError.checkNotNull(
@@ -133,6 +147,7 @@ class _$CheckBody extends CheckBody {
     if (identical(other, this)) return true;
     return other is CheckBody &&
         gift_to == other.gift_to &&
+        address == other.address &&
         delivery_date == other.delivery_date &&
         country_code == other.country_code &&
         phone_number == other.phone_number &&
@@ -143,7 +158,9 @@ class _$CheckBody extends CheckBody {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, gift_to.hashCode), delivery_date.hashCode),
+            $jc(
+                $jc($jc($jc(0, gift_to.hashCode), address.hashCode),
+                    delivery_date.hashCode),
                 country_code.hashCode),
             phone_number.hashCode),
         total_cost.hashCode));
@@ -153,6 +170,7 @@ class _$CheckBody extends CheckBody {
   String toString() {
     return (newBuiltValueToStringHelper('CheckBody')
           ..add('gift_to', gift_to)
+          ..add('address', address)
           ..add('delivery_date', delivery_date)
           ..add('country_code', country_code)
           ..add('phone_number', phone_number)
@@ -168,6 +186,11 @@ class CheckBodyBuilder implements Builder<CheckBody, CheckBodyBuilder> {
   ListBuilder<String> get gift_to =>
       _$this._gift_to ??= new ListBuilder<String>();
   set gift_to(ListBuilder<String> gift_to) => _$this._gift_to = gift_to;
+
+  ListBuilder<String> _address;
+  ListBuilder<String> get address =>
+      _$this._address ??= new ListBuilder<String>();
+  set address(ListBuilder<String> address) => _$this._address = address;
 
   ListBuilder<String> _delivery_date;
   ListBuilder<String> get delivery_date =>
@@ -197,6 +220,7 @@ class CheckBodyBuilder implements Builder<CheckBody, CheckBodyBuilder> {
     final $v = _$v;
     if ($v != null) {
       _gift_to = $v.gift_to.toBuilder();
+      _address = $v.address.toBuilder();
       _delivery_date = $v.delivery_date.toBuilder();
       _country_code = $v.country_code.toBuilder();
       _phone_number = $v.phone_number.toBuilder();
@@ -224,6 +248,7 @@ class CheckBodyBuilder implements Builder<CheckBody, CheckBodyBuilder> {
       _$result = _$v ??
           new _$CheckBody._(
               gift_to: gift_to.build(),
+              address: address.build(),
               delivery_date: delivery_date.build(),
               country_code: country_code.build(),
               phone_number: phone_number.build(),
@@ -234,6 +259,8 @@ class CheckBodyBuilder implements Builder<CheckBody, CheckBodyBuilder> {
       try {
         _$failedField = 'gift_to';
         gift_to.build();
+        _$failedField = 'address';
+        address.build();
         _$failedField = 'delivery_date';
         delivery_date.build();
         _$failedField = 'country_code';

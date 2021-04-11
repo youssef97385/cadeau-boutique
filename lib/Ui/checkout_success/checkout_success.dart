@@ -20,8 +20,10 @@ class CheckoutSuccess extends StatefulWidget {
   BuiltList<String> countryCode;
   BuiltList<String> phone;
   BuiltList<String> deleviryDate;
+  BuiltList<String> address;
+  String total;
 
-  CheckoutSuccess({this.gifftTo , this.countryCode , this.phone , this.deleviryDate});
+  CheckoutSuccess({this.gifftTo , this.countryCode , this.phone , this.deleviryDate ,this.address , this.total});
 
   @override
   _CheckoutSuccessState createState() => _CheckoutSuccessState();
@@ -41,7 +43,8 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
     ..deliveryDate = widget.deleviryDate.toBuilder()
         ..countryCode = widget.countryCode.toBuilder()
         ..phoneNumber = widget.phone.toBuilder()
-        ..total = "100"
+      ..address = widget.address.toBuilder()
+        ..total = widget.total
 
     ));
 

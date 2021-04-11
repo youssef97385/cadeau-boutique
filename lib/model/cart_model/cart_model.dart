@@ -25,7 +25,16 @@ abstract class CartModel implements Built<CartModel, CartModelBuilder> {
 
   @nullable
   @BuiltValueField(wireName: "song_price")
-  String get songPrice;
+  int get songPrice;
+  @nullable
+  @BuiltValueField(wireName: "total_price")
+  int get totalPrice;
+  @nullable
+  @BuiltValueField(wireName: "products_price")
+  int get productsPrice;
+  @nullable
+  @BuiltValueField(wireName: "wraps_price")
+  int get wrapsPrice;
 
   @nullable
   String get status;

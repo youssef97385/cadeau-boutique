@@ -662,7 +662,7 @@ class HttpHelper implements IHttpHelper {
   }
 
   @override
-  Future<bool> removeFavourite({int productId, String token}) async {
+  Future<BuiltList<ProductModel>> removeFavourite({int productId, String token}) async {
     try {
       final formData = {
         "gift_id": productId,
@@ -679,7 +679,20 @@ class HttpHelper implements IHttpHelper {
 
       print("add2 " + response.toString());
       if (response.statusCode == 200) {
-        return true;
+        final BaseResponse<BuiltList<ProductModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(ProductModel),
+                  ],
+                ),
+              ],
+            ));
+        return baseResponse.data;
       } else {
         throw NetworkException();
       }
@@ -1210,6 +1223,7 @@ class HttpHelper implements IHttpHelper {
     BuiltList<String> deliveryDate ,
     BuiltList<String> countryCode ,
     BuiltList<String> phone ,
+    BuiltList<String> address ,
   }) async{
     try {
 
@@ -1226,6 +1240,7 @@ class HttpHelper implements IHttpHelper {
           ..country_code = countryCode.toBuilder()
           ..phone_number = phone.toBuilder()
           ..total_cost = total
+          ..address = address.toBuilder()
 
 
       );

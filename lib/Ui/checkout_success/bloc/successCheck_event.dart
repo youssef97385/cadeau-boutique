@@ -22,6 +22,7 @@ abstract class TryCheckout extends SuccessCheckEvent
   BuiltList<String> get deliveryDate;
   BuiltList<String> get countryCode;
   BuiltList<String> get phoneNumber;
+  BuiltList<String> get address;
   String get total;
 
   TryCheckout._();

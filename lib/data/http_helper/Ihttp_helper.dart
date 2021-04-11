@@ -78,7 +78,7 @@ Future<bool> addToFav({
  int productId,
   String token
 });
-Future<bool> removeFavourite({
+Future<BuiltList<ProductModel>> removeFavourite({
  int productId,
   String token
 });
@@ -130,6 +130,7 @@ Future<bool> checkoutMultieGift({
   BuiltList<String> deliveryDate ,
   BuiltList<String> countryCode ,
   BuiltList<String> phone ,
+  BuiltList<String> address ,
 });
 
 Future<UserInfoModel> editProfileRQ({

@@ -24,6 +24,8 @@ class _$CheckoutState extends CheckoutState {
   @override
   final BuiltList<String> phoneNumber;
   @override
+  final BuiltList<String> address;
+  @override
   final String total;
 
   factory _$CheckoutState([void Function(CheckoutStateBuilder) updates]) =>
@@ -38,6 +40,7 @@ class _$CheckoutState extends CheckoutState {
       this.deliveryDate,
       this.countryCode,
       this.phoneNumber,
+      this.address,
       this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'CheckoutState', 'success');
@@ -53,6 +56,7 @@ class _$CheckoutState extends CheckoutState {
         countryCode, 'CheckoutState', 'countryCode');
     BuiltValueNullFieldError.checkNotNull(
         phoneNumber, 'CheckoutState', 'phoneNumber');
+    BuiltValueNullFieldError.checkNotNull(address, 'CheckoutState', 'address');
     BuiltValueNullFieldError.checkNotNull(total, 'CheckoutState', 'total');
   }
 
@@ -75,6 +79,7 @@ class _$CheckoutState extends CheckoutState {
         deliveryDate == other.deliveryDate &&
         countryCode == other.countryCode &&
         phoneNumber == other.phoneNumber &&
+        address == other.address &&
         total == other.total;
   }
 
@@ -87,14 +92,16 @@ class _$CheckoutState extends CheckoutState {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, success.hashCode),
-                                    isLoading.hashCode),
-                                error.hashCode),
-                            recievers.hashCode),
-                        giftTo.hashCode),
-                    deliveryDate.hashCode),
-                countryCode.hashCode),
-            phoneNumber.hashCode),
+                                $jc(
+                                    $jc($jc(0, success.hashCode),
+                                        isLoading.hashCode),
+                                    error.hashCode),
+                                recievers.hashCode),
+                            giftTo.hashCode),
+                        deliveryDate.hashCode),
+                    countryCode.hashCode),
+                phoneNumber.hashCode),
+            address.hashCode),
         total.hashCode));
   }
 
@@ -109,6 +116,7 @@ class _$CheckoutState extends CheckoutState {
           ..add('deliveryDate', deliveryDate)
           ..add('countryCode', countryCode)
           ..add('phoneNumber', phoneNumber)
+          ..add('address', address)
           ..add('total', total))
         .toString();
   }
@@ -159,6 +167,11 @@ class CheckoutStateBuilder
   set phoneNumber(ListBuilder<String> phoneNumber) =>
       _$this._phoneNumber = phoneNumber;
 
+  ListBuilder<String> _address;
+  ListBuilder<String> get address =>
+      _$this._address ??= new ListBuilder<String>();
+  set address(ListBuilder<String> address) => _$this._address = address;
+
   String _total;
   String get total => _$this._total;
   set total(String total) => _$this._total = total;
@@ -176,6 +189,7 @@ class CheckoutStateBuilder
       _deliveryDate = $v.deliveryDate.toBuilder();
       _countryCode = $v.countryCode.toBuilder();
       _phoneNumber = $v.phoneNumber.toBuilder();
+      _address = $v.address.toBuilder();
       _total = $v.total;
       _$v = null;
     }
@@ -210,6 +224,7 @@ class CheckoutStateBuilder
               deliveryDate: deliveryDate.build(),
               countryCode: countryCode.build(),
               phoneNumber: phoneNumber.build(),
+              address: address.build(),
               total: BuiltValueNullFieldError.checkNotNull(
                   total, 'CheckoutState', 'total'));
     } catch (_) {
@@ -225,6 +240,8 @@ class CheckoutStateBuilder
         countryCode.build();
         _$failedField = 'phoneNumber';
         phoneNumber.build();
+        _$failedField = 'address';
+        address.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'CheckoutState', _$failedField, e.toString());

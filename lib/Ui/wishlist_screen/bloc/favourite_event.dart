@@ -26,3 +26,25 @@ abstract class RemoveFavourite extends FavouriteEvent
 
   factory RemoveFavourite([updates(RemoveFavouriteBuilder b)]) = _$RemoveFavourite;
 }
+
+abstract class AddToCart extends FavouriteEvent
+    implements Built<AddToCart, AddToCartBuilder> {
+
+  //fields go here
+
+
+  int get giftId;
+
+  @nullable
+  int get giftColorId;
+
+  @nullable
+  int get wrapId;
+
+  @nullable
+  int get wrapColorId;
+
+  AddToCart._();
+
+  factory AddToCart([updates(AddToCartBuilder b)]) = _$AddToCart;
+}

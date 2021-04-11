@@ -30,7 +30,7 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
 
         );
 
-        final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: "100",phone: event.phoneNumber,countryCode: event.countryCode,deliveryDate: event.deliveryDate,giftTo: event.giftTo);
+        final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: "100",phone: event.phoneNumber,countryCode: event.countryCode,deliveryDate: event.deliveryDate,giftTo: event.giftTo , address: event.address);
 
         print('check Success data ${data}');
         yield state.rebuild((b) => b
