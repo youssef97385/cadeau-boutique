@@ -10,16 +10,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../injectoin.dart';
 import 'bloc/successCheck_event.dart';
+import 'bloc/successCheck_event.dart';
 import 'bloc/successCheck_state.dart';
 import 'bloc/checkout_success_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:built_collection/built_collection.dart';
 class CheckoutSuccess extends StatefulWidget {
+  BuiltList<String> gifftTo;
+  BuiltList<String> countryCode;
+  BuiltList<String> phone;
+  BuiltList<String> deleviryDate;
+  BuiltList<String> address;
+  String total;
+
+  CheckoutSuccess({this.gifftTo , this.countryCode , this.phone , this.deleviryDate ,this.address , this.total});
+
   @override
   _CheckoutSuccessState createState() => _CheckoutSuccessState();
 }
 
 class _CheckoutSuccessState extends State<CheckoutSuccess> {
   final _bloc = sl<SuccessCheckBloc>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _bloc.add(TryCheckout((b)=>b
+
+      ..giftTo=widget.gifftTo.toBuilder()
+    ..deliveryDate = widget.deleviryDate.toBuilder()
+        ..countryCode = widget.countryCode.toBuilder()
+        ..phoneNumber = widget.phone.toBuilder()
+      ..address = widget.address.toBuilder()
+        ..total = widget.total
+
+    ));
+
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -30,81 +59,90 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
           backgroundColor: Colors.white,
           body: Stack(
             children: [
-              Container(
-                  width: size.width,
-                  height: size.height,
-                  child: Image.asset(
-                    "assets/images/background.png",
-                    fit: BoxFit.cover,
-                  )),
+              Stack(
+                children: [
+                  Container(
+                      width: size.width,
+                      height: size.height,
+                      child: Image.asset(
+                        "assets/images/background.png",
+                        fit: BoxFit.cover,
+                      )),
 
-              Positioned(
-                bottom: -60,
-                right: 0,
-                left: 0,
-                child: Container(
-                    width: 483,
-                    height: 192,
-                    child: SvgPicture.asset(
-                      "assets/images/bottombackground.svg",
-                      fit: BoxFit.cover,
-                    )),
+                  Positioned(
+                    bottom: -60,
+                    right: 0,
+                    left: 0,
+                    child: Container(
+                        width: 483,
+                        height: 192,
+                        child: SvgPicture.asset(
+                          "assets/images/bottombackground.svg",
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        baseAppBar(size,context),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              tick1(size: size),
+
+                              line(size,true),
+
+                              tick2(size: size),
+
+                              line(size , true),
+
+                              tick3(size: size),
+
+
+
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+                        baseText(
+                            title: "Thank You",color: AppColor.darkTextColor,size:20.0
+                        ),
+                        SizedBox(
+                          height: size.height * 0.07,
+                        ),
+
+                        Container(
+                            width: size.width,
+
+                            child: Center(child: baseText(title: state.error.isEmpty?"Your order has been placed Successfully ":"Sorry Try Again Later" ,
+                                size: 24.0 ,
+                                color: AppColor.darkTextColor,
+                                textAlign: TextAlign.center))),
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Image.asset("assets/images/gift box.png",fit: BoxFit.fill,)
+
+
+                      ],
+                    ),
+
+                  ),
+                ],
               ),
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    baseAppBar(size,context),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          tick1(size: size),
-
-                          line(size,true),
-
-                          tick2(size: size),
-
-                          line(size , true),
-
-                          tick3(size: size),
-
-
-
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(
-                      height: 20,
-                    ),
-                    baseText(
-                        title: "Thank You",color: AppColor.darkTextColor,size:20.0
-                    ),
-                    SizedBox(
-                      height: size.height * 0.07,
-                    ),
-
-                    Container(
-                        width: size.width,
-
-                        child: Center(child: baseText(title: "Your order has been placed Successfully " ,
-                            size: 24.0 ,
-                            color: AppColor.darkTextColor,
-                            textAlign: TextAlign.center))),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    Image.asset("assets/images/gift box.png",fit: BoxFit.fill,)
-
-
-                  ],
-                ),
-
-              ),
+              state.isLoading?Container(
+                width: size.width,
+                height: size.height,
+                color: Colors.black12.withOpacity(0.2),
+                child: Center(child: CircularProgressIndicator(backgroundColor: AppColor.darkYellow,),),):Container()
             ],
           )
 

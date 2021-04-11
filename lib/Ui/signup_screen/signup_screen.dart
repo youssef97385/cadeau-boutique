@@ -44,8 +44,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   /// googe signin
 
- // final GoogleSignIn _googleSignIn = GoogleSignIn();
- // final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   SharedPreferences prefs;
 
@@ -60,24 +60,24 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void isSignedIn() async {
-    // this.setState(() {
-    //   isLoading = true;
-    // });
-    //
-    // prefs = await SharedPreferences.getInstance();
-    //
-    // isLoggedIn = await _googleSignIn.isSignedIn();
-    // if (isLoggedIn) {
-    //   // Navigator.push(
-    //   //     context, MaterialPageRoute(builder: (context) => HomePage()));
-    // }
-    //
-    // this.setState(() {
-    //   isLoading = false;
-    // });
+    this.setState(() {
+      isLoading = true;
+    });
+
+    prefs = await SharedPreferences.getInstance();
+
+    isLoggedIn = await _googleSignIn.isSignedIn();
+    if (isLoggedIn) {
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
+
+    this.setState(() {
+      isLoading = false;
+    });
   }
 
-/*  Future<FirebaseUser> _handleSignIn() async {
+  Future<FirebaseUser> _handleSignIn() async {
     print("google 1");
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     print("google 2");
@@ -148,7 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
     print("////// "+firebaseUser.toString());
     return firebaseUser;
-  }*/
+  }
 
 
   bool _isLoggedIn = false;
@@ -156,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final facebookLogin = FacebookLogin();
 
   // fl.FacebookLogin facebookLogin = new fl.FacebookLogin();
-  /*_loginWithFb() async{
+  _loginWithFb() async{
     final result = await facebookLogin.logIn(['email']);
 
     switch (result.status) {
@@ -187,7 +187,7 @@ class _SignupScreenState extends State<SignupScreen> {
         setState(() => _isLoggedIn = false );
         break;
     }
-  }*/
+  }
 
 
 
@@ -671,7 +671,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   children: [
                                                     GestureDetector(
                                                       onTap:(){
-                                                     //   _loginWithFb();
+                                                       _loginWithFb();
                                                       },
                                                       child: Container(
                                                           height: 38,
@@ -701,7 +701,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     ),
                                                     GestureDetector(
                                                       onTap:(){
-                                                      //  _handleSignIn();
+                                                        _handleSignIn();
                                                       },
                                                       child: Container(
                                                           height: 38,

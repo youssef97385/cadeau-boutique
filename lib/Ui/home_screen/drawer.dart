@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+import 'package:cadeaue_boutique/Ui/cart_screen/cart_screen.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
@@ -7,6 +8,7 @@ import 'package:cadeaue_boutique/Ui/settings_screen/settings_screen.dart';
 import 'package:cadeaue_boutique/Ui/splash_screen/splash_screen.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/track_screen.dart';
 import 'package:cadeaue_boutique/Ui/welcome_page/welcome_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,12 +18,15 @@ import 'package:cadeaue_boutique/Ui/categories_screen/categories_screen.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
 import 'package:cadeaue_boutique/Ui/Dialog/WaitDilaog/WaitDialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:cadeaue_boutique/model/category_model/category_model.dart';
 import '../../injectoin.dart';
+import 'package:built_collection/built_collection.dart';
 class MainDrawer extends StatefulWidget {
   bool isLogin;
 
-  MainDrawer({this.isLogin});
+  BuiltList<CategoryModel> categories;
+
+  MainDrawer({this.isLogin,this.categories});
 
   @override
   _MainDrawerState createState() => _MainDrawerState();
@@ -140,7 +145,10 @@ class _MainDrawerState extends State<MainDrawer> {
                       children: [
                         GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoriesScreen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoriesScreen(
+                                categories:
+                                widget.categories!=null?
+                                widget.categories:null,)));
                             },
                             child: singleDrawerItem("assets/images/drawer/category.svg", "Category")),
                         SizedBox(
@@ -225,17 +233,26 @@ class _MainDrawerState extends State<MainDrawer> {
                           height: 30,
                         ),
 
-                        singleDrawerItem("assets/images/drawer/shopping-bag (2).svg", "Cart"),
+                        GestureDetector(
+
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                            },
+                            child: singleDrawerItem("assets/images/drawer/shopping-bag (2).svg", "Cart")),
                         SizedBox(
                           height: 30,
                         ),
 
                         GestureDetector(
+
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context)=>SettingsScreen()
-                              ));
+                              showComingSoonDialog();
                             },
+                            // onTap: (){
+                            //   Navigator.push(context, MaterialPageRoute(
+                            //     builder: (context)=>SettingsScreen()
+                            //   ));
+                            // },
                             child: singleDrawerItem("assets/images/drawer/settings.svg", "Settings")),
                         SizedBox(
                           height: 30,
@@ -251,12 +268,20 @@ class _MainDrawerState extends State<MainDrawer> {
                     child: Column(
                       children: [
 
-                        singleDrawerItem("assets/images/drawer/share.svg", "Invite a friend"),
+                        InkWell(
+                            onTap: (){
+                              showComingSoonDialog();
+                            },
+                            child: singleDrawerItem("assets/images/drawer/share.svg", "Invite a friend")),
                         SizedBox(
                           height: 30,
                         ),
 
-                        singleDrawerItem("assets/images/drawer/question.svg", "Help and feedback"),
+                        InkWell(
+                            onTap: (){
+                              showComingSoonDialog();
+                            },
+                            child: singleDrawerItem("assets/images/drawer/question.svg", "Help and feedback")),
                         SizedBox(
                           height: 30,
                         ),
@@ -430,6 +455,28 @@ class _MainDrawerState extends State<MainDrawer> {
           fontSize: 16.0);
 
     }
+  }
+
+   showComingSoonDialog(){
+    return    AwesomeDialog(
+      context: context,
+      customHeader: Container(
+        child: Icon(
+          Icons.error_outline,
+          size: 100,
+          color: AppColor.darkYellow,
+        ),
+      ),
+      btnOkColor: AppColor.darkYellow,
+      dialogType: DialogType.WARNING,
+      animType: AnimType.BOTTOMSLIDE,
+      title: 'Coming Soon',
+      desc: '',
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+
+      },
+    )..show();
   }
 }
 

@@ -20,6 +20,8 @@ abstract class RecieverModel implements Built<RecieverModel, RecieverModelBuilde
 
   String get phoneNumber;
 
+  String get address;
+
 
 
 

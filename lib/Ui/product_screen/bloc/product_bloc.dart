@@ -3,6 +3,8 @@ import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_event.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_state.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
 
+import 'product_event.dart';
+
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   IRepository _iRepository;
 
@@ -46,6 +48,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       }
     }
+
+
 
     if(event is AddToFavourite){
       try {
@@ -107,5 +111,37 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       }
     }
+    if(event is GetWrapByGift){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+          ..wraps.replace([])
+
+        );
+
+        final data = await _iRepository.getWrapsBygiftId(giftId: event.giftId);
+
+        print('get wraps Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+          ..wraps.replace(data)
+        );
+
+      } catch (e) {
+        print('GetWraps Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+          ..wraps.replace([])
+        );
+
+      }
+    }
   }
+
 }

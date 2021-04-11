@@ -22,6 +22,15 @@ implements Built<CartState, CartStateBuilder> {
   BuiltList<CartItem> get cartList;
   BuiltList<WrapModel> get wraps;
 
+  @nullable
+  int get productsCost;
+
+  @nullable
+  int get wrapsCost;
+
+  @nullable
+  int get totalCosts;
+
 
   CartState._();
 

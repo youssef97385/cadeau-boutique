@@ -31,6 +31,9 @@ class _$RecieverModelSerializer implements StructuredSerializer<RecieverModel> {
       'phoneNumber',
       serializers.serialize(object.phoneNumber,
           specifiedType: const FullType(String)),
+      'address',
+      serializers.serialize(object.address,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -64,6 +67,10 @@ class _$RecieverModelSerializer implements StructuredSerializer<RecieverModel> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'address':
+          result.address = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -80,12 +87,18 @@ class _$RecieverModel extends RecieverModel {
   final String countryCode;
   @override
   final String phoneNumber;
+  @override
+  final String address;
 
   factory _$RecieverModel([void Function(RecieverModelBuilder) updates]) =>
       (new RecieverModelBuilder()..update(updates)).build();
 
   _$RecieverModel._(
-      {this.giftTo, this.deliveryDate, this.countryCode, this.phoneNumber})
+      {this.giftTo,
+      this.deliveryDate,
+      this.countryCode,
+      this.phoneNumber,
+      this.address})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(giftTo, 'RecieverModel', 'giftTo');
     BuiltValueNullFieldError.checkNotNull(
@@ -94,6 +107,7 @@ class _$RecieverModel extends RecieverModel {
         countryCode, 'RecieverModel', 'countryCode');
     BuiltValueNullFieldError.checkNotNull(
         phoneNumber, 'RecieverModel', 'phoneNumber');
+    BuiltValueNullFieldError.checkNotNull(address, 'RecieverModel', 'address');
   }
 
   @override
@@ -110,15 +124,18 @@ class _$RecieverModel extends RecieverModel {
         giftTo == other.giftTo &&
         deliveryDate == other.deliveryDate &&
         countryCode == other.countryCode &&
-        phoneNumber == other.phoneNumber;
+        phoneNumber == other.phoneNumber &&
+        address == other.address;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, giftTo.hashCode), deliveryDate.hashCode),
-            countryCode.hashCode),
-        phoneNumber.hashCode));
+        $jc(
+            $jc($jc($jc(0, giftTo.hashCode), deliveryDate.hashCode),
+                countryCode.hashCode),
+            phoneNumber.hashCode),
+        address.hashCode));
   }
 
   @override
@@ -127,7 +144,8 @@ class _$RecieverModel extends RecieverModel {
           ..add('giftTo', giftTo)
           ..add('deliveryDate', deliveryDate)
           ..add('countryCode', countryCode)
-          ..add('phoneNumber', phoneNumber))
+          ..add('phoneNumber', phoneNumber)
+          ..add('address', address))
         .toString();
   }
 }
@@ -152,6 +170,10 @@ class RecieverModelBuilder
   String get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String phoneNumber) => _$this._phoneNumber = phoneNumber;
 
+  String _address;
+  String get address => _$this._address;
+  set address(String address) => _$this._address = address;
+
   RecieverModelBuilder();
 
   RecieverModelBuilder get _$this {
@@ -161,6 +183,7 @@ class RecieverModelBuilder
       _deliveryDate = $v.deliveryDate;
       _countryCode = $v.countryCode;
       _phoneNumber = $v.phoneNumber;
+      _address = $v.address;
       _$v = null;
     }
     return this;
@@ -188,7 +211,9 @@ class RecieverModelBuilder
             countryCode: BuiltValueNullFieldError.checkNotNull(
                 countryCode, 'RecieverModel', 'countryCode'),
             phoneNumber: BuiltValueNullFieldError.checkNotNull(
-                phoneNumber, 'RecieverModel', 'phoneNumber'));
+                phoneNumber, 'RecieverModel', 'phoneNumber'),
+            address: BuiltValueNullFieldError.checkNotNull(
+                address, 'RecieverModel', 'address'));
     replace(_$result);
     return _$result;
   }

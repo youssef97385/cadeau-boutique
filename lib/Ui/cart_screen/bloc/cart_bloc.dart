@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_event.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_state.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
 
@@ -23,6 +24,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..error = ""
           ..success = false
           ..cartList.replace([])
+
         );
 
         final data = await _iRepository.getCartInfo();
@@ -33,6 +35,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..error = ""
           ..success = true
           ..cartList.replace(data.details)
+          ..cart.replace(data)
         );
 
       } catch (e) {
@@ -53,7 +56,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..isLoading = true
           ..error = ""
           ..success = false
+
+
         );
+
 
         final data = await _iRepository.addSong(song: event.song);
 
@@ -62,7 +68,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..isLoading = false
           ..error = ""
           ..success = true
+          ..cartList.replace(data.details)
+            ..cart.replace(data)
         );
+
 
       } catch (e) {
         print('add song Error $e');
@@ -94,6 +103,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..error = ""
           ..success = true
           ..cartList.replace(data.details)
+            ..cart.replace(data)
 
         );
 
@@ -150,6 +160,8 @@ if(event is GetGlobalWraps){
         final data = await _iRepository.addGlobalWrap(wrapId: event.wrapId , wrapColor: event.wrapColorId);
 
         print('add global wraps Success data ${data}');
+
+
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""

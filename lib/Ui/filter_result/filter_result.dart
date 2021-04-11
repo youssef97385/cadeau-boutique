@@ -14,12 +14,12 @@ import 'bloc/search_state.dart';
 
 
 class FilterResult extends StatefulWidget {
-  String age , minPrice , maxPrice , gender;
-  int occasionId , relationId;
+  String age , minPrice , maxPrice , gender, occasionName , relationName;
+  int occasionId , relationId ;
 
 
   FilterResult({this.age, this.minPrice, this.maxPrice, this.gender,
-      this.occasionId, this.relationId});
+      this.occasionId, this.relationId ,this.occasionName , this.relationName});
 
   @override
   _FilterResultState createState() => _FilterResultState();
@@ -84,6 +84,22 @@ class _FilterResultState extends State<FilterResult> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _dynamicChips = [];
+
+    if(widget.occasionName != null){
+      _dynamicChips.add(widget.occasionName);
+    }if(widget.relationName !=null){
+      _dynamicChips.add(widget.relationName);
+    }if(widget.minPrice!="null"){
+      _dynamicChips.add("min price"+widget.minPrice);
+    }if(widget.maxPrice!= "null"){
+      _dynamicChips.add("max price"+widget.maxPrice);
+    }
+    if(widget.age != null){
+      _dynamicChips.add("age "+widget.age);
+    }if(widget.gender!= null){
+      _dynamicChips.add(widget.gender);
+    }
 
     _bloc.add(GetFilteredProducts((b)=> b
       ..minPrice = widget.minPrice

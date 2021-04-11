@@ -102,10 +102,11 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                     Container(
                       width: size.width*0.9,
                       child: GridView.builder(
+
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: state.products.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9,),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9,crossAxisSpacing: 20,mainAxisSpacing: 20),
                         itemBuilder: (context, index){
                           return GestureDetector(
                             onTap: (){

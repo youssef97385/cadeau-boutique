@@ -15,17 +15,21 @@ class _$ProductState extends ProductState {
   final String error;
   @override
   final ProductModel product;
+  @override
+  final BuiltList<WrapItem> wraps;
 
   factory _$ProductState([void Function(ProductStateBuilder) updates]) =>
       (new ProductStateBuilder()..update(updates)).build();
 
-  _$ProductState._({this.success, this.isLoading, this.error, this.product})
+  _$ProductState._(
+      {this.success, this.isLoading, this.error, this.product, this.wraps})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'ProductState', 'success');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, 'ProductState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'ProductState', 'error');
     BuiltValueNullFieldError.checkNotNull(product, 'ProductState', 'product');
+    BuiltValueNullFieldError.checkNotNull(wraps, 'ProductState', 'wraps');
   }
 
   @override
@@ -42,14 +46,18 @@ class _$ProductState extends ProductState {
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
-        product == other.product;
+        product == other.product &&
+        wraps == other.wraps;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode),
-        product.hashCode));
+        $jc(
+            $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                error.hashCode),
+            product.hashCode),
+        wraps.hashCode));
   }
 
   @override
@@ -58,7 +66,8 @@ class _$ProductState extends ProductState {
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
-          ..add('product', product))
+          ..add('product', product)
+          ..add('wraps', wraps))
         .toString();
   }
 }
@@ -84,6 +93,11 @@ class ProductStateBuilder
       _$this._product ??= new ProductModelBuilder();
   set product(ProductModelBuilder product) => _$this._product = product;
 
+  ListBuilder<WrapItem> _wraps;
+  ListBuilder<WrapItem> get wraps =>
+      _$this._wraps ??= new ListBuilder<WrapItem>();
+  set wraps(ListBuilder<WrapItem> wraps) => _$this._wraps = wraps;
+
   ProductStateBuilder();
 
   ProductStateBuilder get _$this {
@@ -93,6 +107,7 @@ class ProductStateBuilder
       _isLoading = $v.isLoading;
       _error = $v.error;
       _product = $v.product.toBuilder();
+      _wraps = $v.wraps.toBuilder();
       _$v = null;
     }
     return this;
@@ -121,12 +136,15 @@ class ProductStateBuilder
                   isLoading, 'ProductState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'ProductState', 'error'),
-              product: product.build());
+              product: product.build(),
+              wraps: wraps.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'product';
         product.build();
+        _$failedField = 'wraps';
+        wraps.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ProductState', _$failedField, e.toString());

@@ -60,7 +60,7 @@ abstract class IRepository {
 
   Future<bool> addToFavourite({int id});
 
-  Future<bool> removeFavourite({int id});
+  Future<BuiltList<ProductModel>> removeFavourite({int id});
 
 
 
@@ -132,9 +132,16 @@ abstract class IRepository {
 
   Future<bool> checkoutMultieGift({
     BuiltList<RecieverModel> recieverModel ,
+    BuiltList<String> giftTo ,
+    BuiltList<String> deliveryDate ,
+    BuiltList<String> countryCode ,
+    BuiltList<String> phone ,
+    BuiltList<String> address ,
     String total,
 
   });
+
+  Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId});
 
   Future<String>getNameUser();
   Future<String>getCountryCode();
@@ -150,3 +157,4 @@ abstract class IRepository {
   Future<String>getZip();
 }
 
+///

@@ -150,7 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
             backgroundColor: Colors.white,
             key: _drawerKey,
-            drawer: MainDrawer(isLogin: state.loginState,),
+            drawer: MainDrawer(isLogin: state.loginState,categories:
+
+              state.categories,),
             body: Stack(
               children: [
                 SingleChildScrollView(
@@ -990,7 +992,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: (context) =>
-                                                                CategoriesScreen()));
+                                                                CategoriesScreen(categories: state.categories,)));
                                                   },
                                                   child: Text(
                                                     "More",
@@ -1025,7 +1027,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               builder: (context) =>
                                                                   AllProductsScreen(
                                                                     id: state
-                                                                        .brands[
+                                                                        .categories[
                                                                             index]
                                                                         .id,
                                                                     type:

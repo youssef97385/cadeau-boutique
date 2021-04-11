@@ -196,7 +196,7 @@ class _HomeState extends State<Home> {
 
   void onTabTapped(int index,isLogin) {
 
-    if((index==1||index==3) &&  !(isLogin) ){
+    if((index==1||index==3||index==0) &&  !(isLogin) ){
       AwesomeDialog(
         context: context,
         customHeader: Container(

@@ -29,8 +29,18 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
                   ..phoneNumber = event.phoneNumber
                   ..countryCode = event.countryCode
                   ..deliveryDate = event.deliveryDate
+                  ..address = event.address
 
-          ))
+
+          )
+
+          )
+            ..giftTo.add(event.giftTo)
+            ..phoneNumber.add(event.phoneNumber)
+            ..countryCode.add(event.countryCode)
+            ..deliveryDate.add(event.deliveryDate)
+            ..address.add(event.address)
+
         );
 
       } catch (e) {
@@ -39,36 +49,40 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
       }
     }
+    if(event is EditReciever){
+      try {
 
-    // if(event is TryCheckout){
-    //   try {
-    //     yield state.rebuild((b) => b
-    //       ..isLoading = true
-    //       ..error = ""
-    //       ..success = false
-    //
-    //     );
-    //
-    //     final data = await _iRepository.checkoutMultieGift(total: "100" , recieverModel: event.recievers);
-    //
-    //     print('get wraps Success data ${data}');
-    //     yield state.rebuild((b) => b
-    //       ..isLoading = false
-    //       ..error = ""
-    //       ..success = true
-    //
-    //     );
-    //
-    //   } catch (e) {
-    //     print('GetWraps Error $e');
-    //     yield state.rebuild((b) => b
-    //       ..isLoading = false
-    //       ..error = "Something went wrong"
-    //       ..success = false
-    //
-    //     );
-    //
-    //   }
-    // }
+        yield state.rebuild((b) => b
+        ..recievers.replaceRange(event.index, event.index, [event.recieverModel])
+            ..recievers.removeAt(event.index+1)
+
+
+          );
+
+
+
+
+      } catch (e) {
+        print('edit  Error $e');
+
+
+      }
+    }
+    if(event is DeleteReciever){
+      try {
+
+        yield state.rebuild((b) => b
+          ..recievers.removeAt(event.index)
+
+        );
+
+      } catch (e) {
+        print('remove Error $e');
+
+
+      }
+    }
+
+
   }
 }

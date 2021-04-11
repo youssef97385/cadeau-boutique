@@ -36,8 +36,25 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
     if (value != null) {
       result
         ..add('song_price')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.totalPrice;
+    if (value != null) {
+      result
+        ..add('total_price')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.productsPrice;
+    if (value != null) {
+      result
+        ..add('products_price')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.wrapsPrice;
+    if (value != null) {
+      result
+        ..add('wraps_price')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.status;
     if (value != null) {
@@ -110,7 +127,19 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
           break;
         case 'song_price':
           result.songPrice = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'total_price':
+          result.totalPrice = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'products_price':
+          result.productsPrice = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'wraps_price':
+          result.wrapsPrice = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
         case 'status':
           result.status = serializers.deserialize(value,
@@ -155,7 +184,13 @@ class _$CartModel extends CartModel {
   @override
   final String songLink;
   @override
-  final String songPrice;
+  final int songPrice;
+  @override
+  final int totalPrice;
+  @override
+  final int productsPrice;
+  @override
+  final int wrapsPrice;
   @override
   final String status;
   @override
@@ -178,6 +213,9 @@ class _$CartModel extends CartModel {
       {this.id,
       this.songLink,
       this.songPrice,
+      this.totalPrice,
+      this.productsPrice,
+      this.wrapsPrice,
       this.status,
       this.allCartWrapped,
       this.wrapId,
@@ -201,6 +239,9 @@ class _$CartModel extends CartModel {
         id == other.id &&
         songLink == other.songLink &&
         songPrice == other.songPrice &&
+        totalPrice == other.totalPrice &&
+        productsPrice == other.productsPrice &&
+        wrapsPrice == other.wrapsPrice &&
         status == other.status &&
         allCartWrapped == other.allCartWrapped &&
         wrapId == other.wrapId &&
@@ -219,8 +260,16 @@ class _$CartModel extends CartModel {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc($jc(0, id.hashCode), songLink.hashCode),
-                                    songPrice.hashCode),
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc($jc(0, id.hashCode),
+                                                    songLink.hashCode),
+                                                songPrice.hashCode),
+                                            totalPrice.hashCode),
+                                        productsPrice.hashCode),
+                                    wrapsPrice.hashCode),
                                 status.hashCode),
                             allCartWrapped.hashCode),
                         wrapId.hashCode),
@@ -236,6 +285,9 @@ class _$CartModel extends CartModel {
           ..add('id', id)
           ..add('songLink', songLink)
           ..add('songPrice', songPrice)
+          ..add('totalPrice', totalPrice)
+          ..add('productsPrice', productsPrice)
+          ..add('wrapsPrice', wrapsPrice)
           ..add('status', status)
           ..add('allCartWrapped', allCartWrapped)
           ..add('wrapId', wrapId)
@@ -258,9 +310,21 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
   String get songLink => _$this._songLink;
   set songLink(String songLink) => _$this._songLink = songLink;
 
-  String _songPrice;
-  String get songPrice => _$this._songPrice;
-  set songPrice(String songPrice) => _$this._songPrice = songPrice;
+  int _songPrice;
+  int get songPrice => _$this._songPrice;
+  set songPrice(int songPrice) => _$this._songPrice = songPrice;
+
+  int _totalPrice;
+  int get totalPrice => _$this._totalPrice;
+  set totalPrice(int totalPrice) => _$this._totalPrice = totalPrice;
+
+  int _productsPrice;
+  int get productsPrice => _$this._productsPrice;
+  set productsPrice(int productsPrice) => _$this._productsPrice = productsPrice;
+
+  int _wrapsPrice;
+  int get wrapsPrice => _$this._wrapsPrice;
+  set wrapsPrice(int wrapsPrice) => _$this._wrapsPrice = wrapsPrice;
 
   String _status;
   String get status => _$this._status;
@@ -303,6 +367,9 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
       _id = $v.id;
       _songLink = $v.songLink;
       _songPrice = $v.songPrice;
+      _totalPrice = $v.totalPrice;
+      _productsPrice = $v.productsPrice;
+      _wrapsPrice = $v.wrapsPrice;
       _status = $v.status;
       _allCartWrapped = $v.allCartWrapped;
       _wrapId = $v.wrapId;
@@ -335,6 +402,9 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
               id: id,
               songLink: songLink,
               songPrice: songPrice,
+              totalPrice: totalPrice,
+              productsPrice: productsPrice,
+              wrapsPrice: wrapsPrice,
               status: status,
               allCartWrapped: allCartWrapped,
               wrapId: wrapId,

@@ -1,4 +1,5 @@
- import 'package:cadeaue_boutique/injectoin.dart';
+ import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
+import 'package:cadeaue_boutique/injectoin.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -62,140 +63,148 @@ class _WishlistScreenState extends State<WishlistScreen> {
                           itemBuilder: (BuildContext context , int index){
                             return Padding(
                               padding: const EdgeInsets.only(bottom:24.0),
-                              child: Container(
-                                width: size.width*0.85,
-                                height: 170,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(18)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(1, 1),
-                                      color: Colors.grey.withOpacity(0.6),
-                                      blurRadius: 5,
-                                      spreadRadius: 3,
-                                    ),
-
-                                  ],
-
-                                ),
-                                child: Row(
-                                  children: [
-
-                                    SizedBox(width: size.width*0.04,),
-                                    ///0.35
-                                    Container(
-                                      height:140,
-                                      width: size.width*0.35,
-                                      child: ClipRRect(
-
-                                        child: Image.network(BaseImgUrl+state.products[index].image,fit: BoxFit.fill,),
-                                        borderRadius: BorderRadius.all(Radius.circular(14)),
-
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context)=>ProductScreen(id: state.products[index].id,img: state.products[index].image,)
+                                  ));
+                                },
+                                child: Container(
+                                  width: size.width*0.85,
+                                  height: 170,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(1, 1),
+                                        color: Colors.grey.withOpacity(0.6),
+                                        blurRadius: 5,
+                                        spreadRadius: 3,
                                       ),
-                                    ),
 
-                                    SizedBox(width: size.width*0.04,),
-                                    ///0.25
-                                    Container(
-                                      width: size.width*0.25,
-                                      height: 120,
-                                      // color: Colors.red,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          baseText(color: AppColor.darkTextColor , title: state.products[index].nameEn , size: 18.0 , fontWeight: FontWeight.bold ),
-                                          baseText(color: AppColor.darkYellow , title: "\$ "+state.products[index].salePrice , size: 20.0 ),
-                                          Container(
-                                            // margin: EdgeInsets.only(bottom: 80),
-                                            height: 26,
-                                            width: 120,
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  offset: Offset(1, 1),
-                                                  color: Colors.grey.withOpacity(0.6),
-                                                  blurRadius: 5,
-                                                  spreadRadius: 3,
-                                                ),
-                                              ],
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  AppColor.darkYellow,
-                                                  AppColor.lightYellow
-                                                ],
-                                                stops: [0.1, 0.96],
-                                              ),
-                                              borderRadius: BorderRadius.circular(40),
-                                            ),
-                                            child: FlatButton(
-                                              // splashColor: Colors.red,
-                                              onPressed: () {
-                                              },
-                                              child: Text(
-                                                'Add To Cart',
-                                                style: TextStyle(
-                                                  color: AppColor.textColor,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                    ],
 
-                                        ],
+                                  ),
+                                  child: Row(
+                                    children: [
+
+                                      SizedBox(width: size.width*0.04,),
+                                      ///0.35
+                                      Container(
+                                        height:140,
+                                        width: size.width*0.35,
+                                        child: ClipRRect(
+
+                                          child: Image.network(BaseImgUrl+state.products[index].image,fit: BoxFit.fill,),
+                                          borderRadius: BorderRadius.all(Radius.circular(14)),
+
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(width: size.width*0.02,),
-                                    ///0.15
 
-                                    Container(
-                                      height: 120,
-                                      width: size.width*0.15,
-                                      // color: Colors.green,
-
-                                      child: Column(
-                                        children: [
-                                          GestureDetector(
-                                            onTap:(){
-                                              _bloc.add(RemoveFavourite((b)=>b..id = state.products[index].id));
-
-                                            },
-                                            child: Container(
+                                      SizedBox(width: size.width*0.04,),
+                                      ///0.25
+                                      Container(
+                                        width: size.width*0.25,
+                                        height: 120,
+                                        // color: Colors.red,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            baseText(color: AppColor.darkTextColor , title: state.products[index].nameEn , size: 18.0 , fontWeight: FontWeight.bold ),
+                                            baseText(color: AppColor.darkYellow , title: "\$ "+state.products[index].salePrice , size: 20.0 ),
+                                            Container(
+                                              // margin: EdgeInsets.only(bottom: 80),
                                               height: 26,
-                                              width:33 ,
-                                              child: Container(
-                                                // color: Colors.blueAccent,
-                                                  child: Image.asset("assets/images/delete.png")
+                                              width: 120,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    offset: Offset(1, 1),
+                                                    color: Colors.grey.withOpacity(0.6),
+                                                    blurRadius: 5,
+                                                    spreadRadius: 3,
+                                                  ),
+                                                ],
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    AppColor.darkYellow,
+                                                    AppColor.lightYellow
+                                                  ],
+                                                  stops: [0.1, 0.96],
+                                                ),
+                                                borderRadius: BorderRadius.circular(40),
                                               ),
-                                              // decoration: BoxDecoration(
-                                              //   borderRadius: BorderRadius.all(Radius.circular(10)),
-                                              //   boxShadow: [
-                                              //     BoxShadow(
-                                              //       offset: Offset(1, 1),
-                                              //       color: Colors.grey.withOpacity(0.6),
-                                              //       blurRadius: 2,
-                                              //       spreadRadius: 1,
-                                              //     ),
-                                              //   ],
-                                              //   gradient: LinearGradient(
-                                              //     colors: [
-                                              //       AppColor.darkYellow,
-                                              //       AppColor.lightYellow
-                                              //     ],
-                                              //     stops: [0.1, 0.96],
-                                              //   ),
-                                              // ),
+                                              child: FlatButton(
+                                                // splashColor: Colors.red,
+                                                onPressed: () {
+                                                  _bloc.add(AddToCart((b)=> b..giftId  = state.products[index].id ));
+                                                },
+                                                child: Text(
+                                                  'Add To Cart',
+                                                  style: TextStyle(
+                                                    color: AppColor.textColor,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
 
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    // SizedBox(width: size.width*0.02,),
-                                  ],
-                                ) ,
+                                      SizedBox(width: size.width*0.02,),
+                                      ///0.15
+
+                                      Container(
+                                        height: 120,
+                                        width: size.width*0.15,
+                                        // color: Colors.green,
+
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap:(){
+                                                _bloc.add(RemoveFavourite((b)=>b..id = state.products[index].id));
+
+                                              },
+                                              child: Container(
+                                                height: 26,
+                                                width:33 ,
+                                                child: Container(
+                                                  // color: Colors.blueAccent,
+                                                    child: Image.asset("assets/images/delete.png")
+                                                ),
+                                                // decoration: BoxDecoration(
+                                                //   borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                //   boxShadow: [
+                                                //     BoxShadow(
+                                                //       offset: Offset(1, 1),
+                                                //       color: Colors.grey.withOpacity(0.6),
+                                                //       blurRadius: 2,
+                                                //       spreadRadius: 1,
+                                                //     ),
+                                                //   ],
+                                                //   gradient: LinearGradient(
+                                                //     colors: [
+                                                //       AppColor.darkYellow,
+                                                //       AppColor.lightYellow
+                                                //     ],
+                                                //     stops: [0.1, 0.96],
+                                                //   ),
+                                                // ),
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+                                      ),
+                                      // SizedBox(width: size.width*0.02,),
+                                    ],
+                                  ) ,
+                                ),
                               ),
                             );
                           }),

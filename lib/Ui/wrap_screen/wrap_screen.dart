@@ -112,17 +112,17 @@ class _WrapScreenState extends State<WrapScreen> {
 
                               ],),
 
-                            Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.darkYellow
-
-                              ),
-                              child: Center(child: SvgPicture.asset(
-                                  "assets/images/favourite.svg")),
-                            )
+                            // Container(
+                            //   width: 36,
+                            //   height: 36,
+                            //   decoration: BoxDecoration(
+                            //       shape: BoxShape.circle,
+                            //       color: AppColor.darkYellow
+                            //
+                            //   ),
+                            //   child: Center(child: SvgPicture.asset(
+                            //       "assets/images/favourite.svg")),
+                            // )
                           ],
                         ),
                       ),

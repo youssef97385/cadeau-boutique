@@ -78,7 +78,7 @@ Future<bool> addToFav({
  int productId,
   String token
 });
-Future<bool> removeFavourite({
+Future<BuiltList<ProductModel>> removeFavourite({
  int productId,
   String token
 });
@@ -125,7 +125,12 @@ Future<BuiltList<ProductModel>> filter({
 Future<bool> checkoutMultieGift({
   BuiltList<RecieverModel> recieverModel ,
   String total,
-  String token
+  String token,
+  BuiltList<String> giftTo ,
+  BuiltList<String> deliveryDate ,
+  BuiltList<String> countryCode ,
+  BuiltList<String> phone ,
+  BuiltList<String> address ,
 });
 
 Future<UserInfoModel> editProfileRQ({
@@ -162,5 +167,7 @@ Future<bool>  saveFirebaseToken(String fireToken,String serverToken);
 
 Future<bool> logoutRQ(String token);
 
+
+Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId , String token});
 
 }

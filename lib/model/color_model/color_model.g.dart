@@ -21,11 +21,15 @@ class _$ColorModelSerializer implements StructuredSerializer<ColorModel> {
       'color',
       serializers.serialize(object.color,
           specifiedType: const FullType(String)),
-      'media_path',
-      serializers.serialize(object.image,
-          specifiedType: const FullType(String)),
     ];
-
+    Object value;
+    value = object.image;
+    if (value != null) {
+      result
+        ..add('media_path')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -66,7 +70,6 @@ class _$ColorModel extends ColorModel {
 
   _$ColorModel._({this.color, this.image}) : super._() {
     BuiltValueNullFieldError.checkNotNull(color, 'ColorModel', 'color');
-    BuiltValueNullFieldError.checkNotNull(image, 'ColorModel', 'image');
   }
 
   @override
@@ -136,8 +139,7 @@ class ColorModelBuilder implements Builder<ColorModel, ColorModelBuilder> {
         new _$ColorModel._(
             color: BuiltValueNullFieldError.checkNotNull(
                 color, 'ColorModel', 'color'),
-            image: BuiltValueNullFieldError.checkNotNull(
-                image, 'ColorModel', 'image'));
+            image: image);
     replace(_$result);
     return _$result;
   }
