@@ -64,6 +64,8 @@ class Repository implements IRepository {
     final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
     final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
       final email= await _iprefHelper.setEmail(user.user.email);
+    if(user.user.gender!=null)
+      final gemderuser= await _iprefHelper.setGender(user.user.gender);
       final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
 
 
@@ -94,6 +96,9 @@ class Repository implements IRepository {
     final nameuser= await _iprefHelper.setNameUser(user.user.name);
     final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
     final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
+
+    if(user.user.gender!=null)
+    final gemderuser= await _iprefHelper.setGender(user.user.gender);
     if(user.user.email!=null)
     final email= await _iprefHelper.setEmail(user.user.email);
     if(user.user.dateBirth!=null)
@@ -132,6 +137,7 @@ class Repository implements IRepository {
     final nameuser= await _iprefHelper.setNameUser(user.user.name);
     final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
     final phoneCode= await _iprefHelper.setPhoneNumber(0);
+
     if(user.user.email!=null) final email= await _iprefHelper.setEmail(user.user.email);
     if(user.user.dateBirth!=null) final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
 
