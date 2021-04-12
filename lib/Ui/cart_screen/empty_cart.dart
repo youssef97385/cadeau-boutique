@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class EmptyCart extends StatefulWidget {
+  bool isLoading;
+
+  EmptyCart({this.isLoading});
+
   @override
   _EmptyCartState createState() => _EmptyCartState();
 }
@@ -13,7 +17,16 @@ class _EmptyCartState extends State<EmptyCart> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
+    return
+      widget.isLoading?Container(
+        width: size.width,
+        height: size.height,
+        color: Colors.white,
+        child: Center(
+          child: CircularProgressIndicator(backgroundColor: AppColor.darkYellow,),
+        ),
+      ):
+      Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
           children: [

@@ -148,6 +148,41 @@ if(event is GetGlobalWraps){
 
   }
 }
+    if(event is AddToCart){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+        );
+
+        final data = await _iRepository.addToCart(
+            giftId: event.giftId ,
+            giftColorId: event.giftColorId ,
+            wrapId: event.wrapId ,
+            wrapColorId: event.wrapColorId);
+
+        print('add cart Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+            ..cartList.replace(data.details)
+            ..cart.replace(data)
+            ..successAddToCart = true
+        );
+
+      } catch (e) {
+        print('add cart Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+            ..successAddToCart = false
+        );
+
+      }
+    }
     if(event is AddGlobalWrap){
       try {
         yield state.rebuild((b) => b
@@ -216,8 +251,24 @@ if(event is GetGlobalWraps){
 
       }
     }
+    if(event is ClearSuccess){
+      try {
+        yield state.rebuild((b) => b
+         ..successAddToCart = false
+
+        );
+
+
+      } catch (e) {
+
+
+
+
+      }
+    }
 
   }
+
 
 
 }

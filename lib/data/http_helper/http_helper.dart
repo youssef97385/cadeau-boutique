@@ -368,10 +368,10 @@ class HttpHelper implements IHttpHelper {
   }
 
   @override
-  Future<ProductModel> getProductByid({int id}) async {
+  Future<ProductModel> getProductByid({int id , String token}) async {
     try {
       _dio.interceptors.add(CookieManager(cookieJar));
-      final response = await _dio.get('app/gift/$id/get');
+      final response = await _dio.get('app/gift/$id/get',  options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('product Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {

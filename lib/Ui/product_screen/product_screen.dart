@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/wrap_alert_dialog/wrap_dialog.dart';
 import 'package:cadeaue_boutique/injectoin.dart';
@@ -72,12 +73,18 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     var size = MediaQuery
         .of(context)
         .size;
     return BlocBuilder(
       cubit: _bloc,
       builder: (BuildContext context, ProductState state) {
+        if (state.successAddToCart) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            showSuccsess();
+          });
+        }
         // print("my product "+ (state.product.image == null).toString() + "   "+state.product.toString() );
         return Stack(
           children: [
@@ -205,7 +212,13 @@ class _ProductScreenState extends State<ProductScreen> {
                                        },
                                      )..show();
                                    }else{
-                                     _bloc.add(AddToFavourite((b)=>b..id = widget.id));
+                                     if(!state.product.isFavourite){
+                                       _bloc.add(AddToFavourite((b)=>b..id = widget.id));
+                                     }else{
+                                       _bloc.add(RemoveFavourite((b)=>b..id = widget.id));
+                                     }
+
+
                                    }
 
                                  },
@@ -217,10 +230,20 @@ class _ProductScreenState extends State<ProductScreen> {
                                        color: AppColor.darkYellow
 
                                    ),
-                                   child: Center(child: SvgPicture.asset(
-                                       "assets/images/favourite.svg")),
+                                   child: Center(child:
+
+                                       state.product.isFavourite?
+
+                                           Icon(Icons.favorite,color: Colors.red,):
+                                     SvgPicture.asset(
+                                         "assets/images/favourite.svg")
+
+                                   //
+                                   // !state.product.isFavourite && !state.removed?
+                                   // SvgPicture.asset(
+                                   //     "assets/images/favourite.svg"):Icon(Icons.favorite,color: Colors.red,),
                                  ),
-                               )
+                               ))
                              ],
                            ),
                          ),
@@ -516,7 +539,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                    // splashColor: Colors.red,
                                    onPressed: () {
 
-                                     print("wrap id test ${myWrapId}");
+                                     // print("wrap id test ${myWrapId}");
                                      if(myWrapId == -1){
                                        _bloc.add(AddToCart((b)=> b..giftId = widget.id ));
                                      }else{
@@ -555,5 +578,33 @@ class _ProductScreenState extends State<ProductScreen> {
   }
   Color hexToColor(String code) {
     return new Color(int.parse(code.substring(1, code.length), radix: 16) + 0xFF000000);
+  }
+
+  showSuccsess(){
+    _bloc.add(ClearSuccess());
+    AwesomeDialog(
+      context: context,
+      customHeader:
+      Container(
+        child: Icon(
+          Icons
+              .error_outline,
+          size: 100,
+          color: AppColor
+              .darkYellow,
+        ),
+      ),
+      btnOkColor: AppColor
+          .darkYellow,
+      dialogType:
+      DialogType
+          .SUCCES,
+      animType: AnimType
+          .BOTTOMSLIDE,
+      title: 'Successfully Added To Cart',
+      desc:
+      '',
+
+    )..show();
   }
 }

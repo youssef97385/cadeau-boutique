@@ -61,7 +61,7 @@ Future<BaseCoupon> getCoupon({
 Future<BuiltList<WrapModel>> getWraps({bool isGlobalWrap});
 
 
-Future<ProductModel> getProductByid({int id});
+Future<ProductModel> getProductByid({int id , String token});
 
 Future<WrapItem> getWrapByid({int id});
 

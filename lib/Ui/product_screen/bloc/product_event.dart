@@ -65,3 +65,25 @@ abstract class GetWrapByGift extends ProductEvent
 
   factory GetWrapByGift([updates(GetWrapByGiftBuilder b)]) = _$GetWrapByGift;
 }
+
+abstract class RemoveFavourite extends ProductEvent
+    implements Built<RemoveFavourite, RemoveFavouriteBuilder> {
+
+  //fields go here
+
+  int get id;
+
+  RemoveFavourite._();
+
+  factory RemoveFavourite([updates(RemoveFavouriteBuilder b)]) = _$RemoveFavourite;
+}
+abstract class ClearSuccess extends ProductEvent
+    implements Built<ClearSuccess, ClearSuccessBuilder> {
+
+  //fields go here
+
+
+  ClearSuccess._();
+
+  factory ClearSuccess([updates(ClearSuccessBuilder b)]) = _$ClearSuccess;
+}

@@ -17,12 +17,22 @@ class _$ProductState extends ProductState {
   final ProductModel product;
   @override
   final BuiltList<WrapItem> wraps;
+  @override
+  final bool removed;
+  @override
+  final bool successAddToCart;
 
   factory _$ProductState([void Function(ProductStateBuilder) updates]) =>
       (new ProductStateBuilder()..update(updates)).build();
 
   _$ProductState._(
-      {this.success, this.isLoading, this.error, this.product, this.wraps})
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.product,
+      this.wraps,
+      this.removed,
+      this.successAddToCart})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'ProductState', 'success');
     BuiltValueNullFieldError.checkNotNull(
@@ -30,6 +40,9 @@ class _$ProductState extends ProductState {
     BuiltValueNullFieldError.checkNotNull(error, 'ProductState', 'error');
     BuiltValueNullFieldError.checkNotNull(product, 'ProductState', 'product');
     BuiltValueNullFieldError.checkNotNull(wraps, 'ProductState', 'wraps');
+    BuiltValueNullFieldError.checkNotNull(removed, 'ProductState', 'removed');
+    BuiltValueNullFieldError.checkNotNull(
+        successAddToCart, 'ProductState', 'successAddToCart');
   }
 
   @override
@@ -47,17 +60,23 @@ class _$ProductState extends ProductState {
         isLoading == other.isLoading &&
         error == other.error &&
         product == other.product &&
-        wraps == other.wraps;
+        wraps == other.wraps &&
+        removed == other.removed &&
+        successAddToCart == other.successAddToCart;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
-                error.hashCode),
-            product.hashCode),
-        wraps.hashCode));
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                        error.hashCode),
+                    product.hashCode),
+                wraps.hashCode),
+            removed.hashCode),
+        successAddToCart.hashCode));
   }
 
   @override
@@ -67,7 +86,9 @@ class _$ProductState extends ProductState {
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('product', product)
-          ..add('wraps', wraps))
+          ..add('wraps', wraps)
+          ..add('removed', removed)
+          ..add('successAddToCart', successAddToCart))
         .toString();
   }
 }
@@ -98,6 +119,15 @@ class ProductStateBuilder
       _$this._wraps ??= new ListBuilder<WrapItem>();
   set wraps(ListBuilder<WrapItem> wraps) => _$this._wraps = wraps;
 
+  bool _removed;
+  bool get removed => _$this._removed;
+  set removed(bool removed) => _$this._removed = removed;
+
+  bool _successAddToCart;
+  bool get successAddToCart => _$this._successAddToCart;
+  set successAddToCart(bool successAddToCart) =>
+      _$this._successAddToCart = successAddToCart;
+
   ProductStateBuilder();
 
   ProductStateBuilder get _$this {
@@ -108,6 +138,8 @@ class ProductStateBuilder
       _error = $v.error;
       _product = $v.product.toBuilder();
       _wraps = $v.wraps.toBuilder();
+      _removed = $v.removed;
+      _successAddToCart = $v.successAddToCart;
       _$v = null;
     }
     return this;
@@ -137,7 +169,11 @@ class ProductStateBuilder
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'ProductState', 'error'),
               product: product.build(),
-              wraps: wraps.build());
+              wraps: wraps.build(),
+              removed: BuiltValueNullFieldError.checkNotNull(
+                  removed, 'ProductState', 'removed'),
+              successAddToCart: BuiltValueNullFieldError.checkNotNull(
+                  successAddToCart, 'ProductState', 'successAddToCart'));
     } catch (_) {
       String _$failedField;
       try {
