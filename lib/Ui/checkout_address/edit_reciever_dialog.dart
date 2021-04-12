@@ -28,8 +28,10 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
   Animation<double> scaleAnimation;
 
 
+
+  DateTime selectedDate =DateTime.now();
   String giftTo , deliveryAddress , state , zipCode , city ;
-  DateTime selectedDate = DateTime.utc(2019,1,1);
+
   bool _dateSelected = false;
 
 
@@ -57,8 +59,8 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate, // Refer step 1
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2020),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 3650)),
     );
     if (picked != null && picked != selectedDate)
       setState(() {

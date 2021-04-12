@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../injectoin.dart';
 import 'bloc/checkout_state.dart';
 import 'bloc/checkout_bloc.dart';
@@ -33,7 +34,7 @@ class CheckoutAddress extends StatefulWidget {
 class _CheckoutAddressState extends State<CheckoutAddress> {
   String giftTo, deliveryAddress, state, zipCode, city;
 
-  DateTime selectedDate = DateTime.utc(2019, 1, 1);
+  DateTime selectedDate =DateTime.now();
   bool _dateSelected = false;
 
   String countryCode = '966',
@@ -56,8 +57,8 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate, // Refer step 1
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2020),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 3650)),
     );
     if (picked != null && picked != selectedDate)
       setState(() {
@@ -549,6 +550,12 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         child: FlatButton(
                           // splashColor: Colors.red,
                           onPressed: () {
+
+                            if(state.recievers.isEmpty){
+
+
+                              error("Please add receivers to continue");
+                            }else
                             Navigator.push(
                               context,
                               PageRouteBuilder(
@@ -641,6 +648,20 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
     return Container(
       width: 5.0,
     );
+  }
+
+  void error(String errorCode) {
+    if (errorCode.isNotEmpty) {
+      Fluttertoast.showToast(
+          msg: errorCode,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          //timeInSecForIos: 1,
+          backgroundColor: Colors.red.withOpacity(0.8),
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+    }
   }
 
   Widget line(Size size, bool isChecked) {
