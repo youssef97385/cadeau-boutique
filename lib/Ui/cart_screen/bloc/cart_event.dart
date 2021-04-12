@@ -65,3 +65,50 @@ abstract class AddGlobalWrap extends CartEvent
 
   factory AddGlobalWrap([updates(AddGlobalWrapBuilder b)]) = _$AddGlobalWrap;
 }
+
+abstract class RemoveGlobalWrap extends CartEvent
+    implements Built<RemoveGlobalWrap, RemoveGlobalWrapBuilder> {
+
+  //fields go here
+
+
+
+  RemoveGlobalWrap._();
+
+  factory RemoveGlobalWrap([updates(RemoveGlobalWrapBuilder b)]) = _$RemoveGlobalWrap;
+}
+
+
+
+abstract class AddToCart extends CartEvent
+    implements Built<AddToCart, AddToCartBuilder> {
+
+  //fields go here
+
+
+  int get giftId;
+
+  @nullable
+  int get giftColorId;
+
+  @nullable
+  int get wrapId;
+
+  @nullable
+  int get wrapColorId;
+
+  AddToCart._();
+
+  factory AddToCart([updates(AddToCartBuilder b)]) = _$AddToCart;
+}
+
+abstract class ClearSuccess extends CartEvent
+    implements Built<ClearSuccess, ClearSuccessBuilder> {
+
+  //fields go here
+
+
+  ClearSuccess._();
+
+  factory ClearSuccess([updates(ClearSuccessBuilder b)]) = _$ClearSuccess;
+}

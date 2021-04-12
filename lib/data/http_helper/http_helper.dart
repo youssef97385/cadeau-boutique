@@ -368,10 +368,10 @@ class HttpHelper implements IHttpHelper {
   }
 
   @override
-  Future<ProductModel> getProductByid({int id}) async {
+  Future<ProductModel> getProductByid({int id , String token}) async {
     try {
       _dio.interceptors.add(CookieManager(cookieJar));
-      final response = await _dio.get('app/gift/$id/get');
+      final response = await _dio.get('app/gift/$id/get',  options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('product Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {
@@ -715,7 +715,7 @@ class HttpHelper implements IHttpHelper {
 
       // _dio.options.headers["authorization"] = "token ${token}";
 
-      final response = await _dio.post('cart/add/item',
+      final response = await _dio.post('cart/add/global/warp',
           data: formData,
           options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('add global wrap Response StatusCode ${response.statusCode}');
@@ -895,7 +895,7 @@ class HttpHelper implements IHttpHelper {
 
       // _dio.options.headers["authorization"] = "token ${token}";
 
-      final response = await _dio.post('remove/global/warp',
+      final response = await _dio.post('cart/remove/global/warp',
           options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('remove global wrap StatusCode ${response.statusCode}');
 

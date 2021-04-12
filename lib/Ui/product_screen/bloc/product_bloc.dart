@@ -50,7 +50,35 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
 
 
+    if(event is RemoveFavourite){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+        );
 
+        final data = await _iRepository.removeFavourite(id: event.id);
+
+        print('remove Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+          ..removed = true
+          ..product.isFavourite = false
+        );
+
+      } catch (e) {
+        print('remobve Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+        );
+
+      }
+    }
     if(event is AddToFavourite){
       try {
         yield state.rebuild((b) => b
@@ -66,6 +94,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ..isLoading = false
           ..error = ""
           ..success = true
+            ..removed = false
+            ..product.isFavourite = true
         );
 
       } catch (e) {
@@ -99,6 +129,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ..isLoading = false
           ..error = ""
           ..success = true
+            ..successAddToCart = true
         );
 
       } catch (e) {
@@ -139,6 +170,22 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ..success = false
           ..wraps.replace([])
         );
+
+      }
+    }
+
+    if(event is ClearSuccess){
+      try {
+        yield state.rebuild((b) => b
+          ..successAddToCart = false
+
+        );
+
+
+      } catch (e) {
+
+
+
 
       }
     }

@@ -22,17 +22,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
      Timer(
-         Duration(seconds: 1),
+         Duration(seconds: 8),
              () => Navigator.of(context).pushReplacement(MaterialPageRoute(
              builder: (BuildContext context) => widget.isLogin ? WelcomePage() : WelcomePage())));
   }
   @override
   Widget build(BuildContext context) {
-
+var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Image.asset(''),
+      body: Container(
+        height: size.height,
+        width: size.width,
+        child: Image.asset('assets/images/big.gif',fit: BoxFit.fill,),
       ),
     );
   }

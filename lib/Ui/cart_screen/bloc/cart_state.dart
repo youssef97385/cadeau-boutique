@@ -32,6 +32,7 @@ implements Built<CartState, CartStateBuilder> {
   int get totalCosts;
 
 
+  bool get successAddToCart;
   CartState._();
 
   factory CartState([updates(CartStateBuilder b)]) = _$CartState;
@@ -43,6 +44,7 @@ implements Built<CartState, CartStateBuilder> {
       ..success = false
       ..cart=null
       ..cartList.replace([])
+        ..successAddToCart = false
 
     );
   }

@@ -50,6 +50,12 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(ColorModel)));
     }
+    value = object.totalPrice;
+    if (value != null) {
+      result
+        ..add('total_price')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -84,6 +90,10 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
           result.wrapColor.replace(serializers.deserialize(value,
               specifiedType: const FullType(ColorModel)) as ColorModel);
           break;
+        case 'total_price':
+          result.totalPrice = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -102,11 +112,19 @@ class _$CartItem extends CartItem {
   final ProductModel wrap;
   @override
   final ColorModel wrapColor;
+  @override
+  final int totalPrice;
 
   factory _$CartItem([void Function(CartItemBuilder) updates]) =>
       (new CartItemBuilder()..update(updates)).build();
 
-  _$CartItem._({this.id, this.gift, this.giftColor, this.wrap, this.wrapColor})
+  _$CartItem._(
+      {this.id,
+      this.gift,
+      this.giftColor,
+      this.wrap,
+      this.wrapColor,
+      this.totalPrice})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'CartItem', 'id');
   }
@@ -126,15 +144,20 @@ class _$CartItem extends CartItem {
         gift == other.gift &&
         giftColor == other.giftColor &&
         wrap == other.wrap &&
-        wrapColor == other.wrapColor;
+        wrapColor == other.wrapColor &&
+        totalPrice == other.totalPrice;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, id.hashCode), gift.hashCode), giftColor.hashCode),
-            wrap.hashCode),
-        wrapColor.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, id.hashCode), gift.hashCode),
+                    giftColor.hashCode),
+                wrap.hashCode),
+            wrapColor.hashCode),
+        totalPrice.hashCode));
   }
 
   @override
@@ -144,7 +167,8 @@ class _$CartItem extends CartItem {
           ..add('gift', gift)
           ..add('giftColor', giftColor)
           ..add('wrap', wrap)
-          ..add('wrapColor', wrapColor))
+          ..add('wrapColor', wrapColor)
+          ..add('totalPrice', totalPrice))
         .toString();
   }
 }
@@ -174,6 +198,10 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
       _$this._wrapColor ??= new ColorModelBuilder();
   set wrapColor(ColorModelBuilder wrapColor) => _$this._wrapColor = wrapColor;
 
+  int _totalPrice;
+  int get totalPrice => _$this._totalPrice;
+  set totalPrice(int totalPrice) => _$this._totalPrice = totalPrice;
+
   CartItemBuilder();
 
   CartItemBuilder get _$this {
@@ -184,6 +212,7 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
       _giftColor = $v.giftColor?.toBuilder();
       _wrap = $v.wrap?.toBuilder();
       _wrapColor = $v.wrapColor?.toBuilder();
+      _totalPrice = $v.totalPrice;
       _$v = null;
     }
     return this;
@@ -210,7 +239,8 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
               gift: _gift?.build(),
               giftColor: _giftColor?.build(),
               wrap: _wrap?.build(),
-              wrapColor: _wrapColor?.build());
+              wrapColor: _wrapColor?.build(),
+              totalPrice: totalPrice);
     } catch (_) {
       String _$failedField;
       try {

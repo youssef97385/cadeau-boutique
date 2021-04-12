@@ -18,8 +18,10 @@ implements Built<ProductState, ProductStateBuilder> {
   bool get isLoading;
   String get error;
   ProductModel get product;
-
   BuiltList<WrapItem> get wraps;
+  bool get removed;
+
+  bool get successAddToCart;
 
   ProductState._();
 
@@ -31,7 +33,9 @@ implements Built<ProductState, ProductStateBuilder> {
       ..isLoading = false
       ..success = false
      ..product = null
+      ..removed = false
         ..wraps.replace([])
+      ..successAddToCart = false
     );
   }
 }

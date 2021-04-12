@@ -8,7 +8,7 @@ import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'bloc/wrap_event.dart';
 import '../../injectoin.dart';
 import 'bloc/wrap_bloc.dart';
 class WrapScreen extends StatefulWidget {
@@ -374,7 +374,11 @@ class _WrapScreenState extends State<WrapScreen> {
                               ),
                               child: FlatButton(
                                 // splashColor: Colors.red,
-                                onPressed: () {},
+                                onPressed: () {
+                                  _bloc.add(AddWrap((b) =>
+                                  b
+                                    ..wrapId = widget.id));
+                                },
                                 child: Text(
                                   'Add To Cart',
                                   style: TextStyle(

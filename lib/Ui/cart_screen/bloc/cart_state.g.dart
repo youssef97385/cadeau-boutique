@@ -25,6 +25,8 @@ class _$CartState extends CartState {
   final int wrapsCost;
   @override
   final int totalCosts;
+  @override
+  final bool successAddToCart;
 
   factory _$CartState([void Function(CartStateBuilder) updates]) =>
       (new CartStateBuilder()..update(updates)).build();
@@ -38,7 +40,8 @@ class _$CartState extends CartState {
       this.wraps,
       this.productsCost,
       this.wrapsCost,
-      this.totalCosts})
+      this.totalCosts,
+      this.successAddToCart})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'CartState', 'success');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'CartState', 'isLoading');
@@ -46,6 +49,8 @@ class _$CartState extends CartState {
     BuiltValueNullFieldError.checkNotNull(cart, 'CartState', 'cart');
     BuiltValueNullFieldError.checkNotNull(cartList, 'CartState', 'cartList');
     BuiltValueNullFieldError.checkNotNull(wraps, 'CartState', 'wraps');
+    BuiltValueNullFieldError.checkNotNull(
+        successAddToCart, 'CartState', 'successAddToCart');
   }
 
   @override
@@ -67,7 +72,8 @@ class _$CartState extends CartState {
         wraps == other.wraps &&
         productsCost == other.productsCost &&
         wrapsCost == other.wrapsCost &&
-        totalCosts == other.totalCosts;
+        totalCosts == other.totalCosts &&
+        successAddToCart == other.successAddToCart;
   }
 
   @override
@@ -79,15 +85,17 @@ class _$CartState extends CartState {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, success.hashCode),
-                                    isLoading.hashCode),
-                                error.hashCode),
-                            cart.hashCode),
-                        cartList.hashCode),
-                    wraps.hashCode),
-                productsCost.hashCode),
-            wrapsCost.hashCode),
-        totalCosts.hashCode));
+                                $jc(
+                                    $jc($jc(0, success.hashCode),
+                                        isLoading.hashCode),
+                                    error.hashCode),
+                                cart.hashCode),
+                            cartList.hashCode),
+                        wraps.hashCode),
+                    productsCost.hashCode),
+                wrapsCost.hashCode),
+            totalCosts.hashCode),
+        successAddToCart.hashCode));
   }
 
   @override
@@ -101,7 +109,8 @@ class _$CartState extends CartState {
           ..add('wraps', wraps)
           ..add('productsCost', productsCost)
           ..add('wrapsCost', wrapsCost)
-          ..add('totalCosts', totalCosts))
+          ..add('totalCosts', totalCosts)
+          ..add('successAddToCart', successAddToCart))
         .toString();
   }
 }
@@ -147,6 +156,11 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
   int get totalCosts => _$this._totalCosts;
   set totalCosts(int totalCosts) => _$this._totalCosts = totalCosts;
 
+  bool _successAddToCart;
+  bool get successAddToCart => _$this._successAddToCart;
+  set successAddToCart(bool successAddToCart) =>
+      _$this._successAddToCart = successAddToCart;
+
   CartStateBuilder();
 
   CartStateBuilder get _$this {
@@ -161,6 +175,7 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
       _productsCost = $v.productsCost;
       _wrapsCost = $v.wrapsCost;
       _totalCosts = $v.totalCosts;
+      _successAddToCart = $v.successAddToCart;
       _$v = null;
     }
     return this;
@@ -194,7 +209,9 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
               wraps: wraps.build(),
               productsCost: productsCost,
               wrapsCost: wrapsCost,
-              totalCosts: totalCosts);
+              totalCosts: totalCosts,
+              successAddToCart: BuiltValueNullFieldError.checkNotNull(
+                  successAddToCart, 'CartState', 'successAddToCart'));
     } catch (_) {
       String _$failedField;
       try {

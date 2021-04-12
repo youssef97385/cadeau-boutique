@@ -356,4 +356,228 @@ class AddGlobalWrapBuilder
   }
 }
 
+class _$RemoveGlobalWrap extends RemoveGlobalWrap {
+  factory _$RemoveGlobalWrap(
+          [void Function(RemoveGlobalWrapBuilder) updates]) =>
+      (new RemoveGlobalWrapBuilder()..update(updates)).build();
+
+  _$RemoveGlobalWrap._() : super._();
+
+  @override
+  RemoveGlobalWrap rebuild(void Function(RemoveGlobalWrapBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  RemoveGlobalWrapBuilder toBuilder() =>
+      new RemoveGlobalWrapBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is RemoveGlobalWrap;
+  }
+
+  @override
+  int get hashCode {
+    return 145205457;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('RemoveGlobalWrap').toString();
+  }
+}
+
+class RemoveGlobalWrapBuilder
+    implements Builder<RemoveGlobalWrap, RemoveGlobalWrapBuilder> {
+  _$RemoveGlobalWrap _$v;
+
+  RemoveGlobalWrapBuilder();
+
+  @override
+  void replace(RemoveGlobalWrap other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$RemoveGlobalWrap;
+  }
+
+  @override
+  void update(void Function(RemoveGlobalWrapBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$RemoveGlobalWrap build() {
+    final _$result = _$v ?? new _$RemoveGlobalWrap._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$AddToCart extends AddToCart {
+  @override
+  final int giftId;
+  @override
+  final int giftColorId;
+  @override
+  final int wrapId;
+  @override
+  final int wrapColorId;
+
+  factory _$AddToCart([void Function(AddToCartBuilder) updates]) =>
+      (new AddToCartBuilder()..update(updates)).build();
+
+  _$AddToCart._({this.giftId, this.giftColorId, this.wrapId, this.wrapColorId})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(giftId, 'AddToCart', 'giftId');
+  }
+
+  @override
+  AddToCart rebuild(void Function(AddToCartBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  AddToCartBuilder toBuilder() => new AddToCartBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is AddToCart &&
+        giftId == other.giftId &&
+        giftColorId == other.giftColorId &&
+        wrapId == other.wrapId &&
+        wrapColorId == other.wrapColorId;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc($jc(0, giftId.hashCode), giftColorId.hashCode),
+            wrapId.hashCode),
+        wrapColorId.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('AddToCart')
+          ..add('giftId', giftId)
+          ..add('giftColorId', giftColorId)
+          ..add('wrapId', wrapId)
+          ..add('wrapColorId', wrapColorId))
+        .toString();
+  }
+}
+
+class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
+  _$AddToCart _$v;
+
+  int _giftId;
+  int get giftId => _$this._giftId;
+  set giftId(int giftId) => _$this._giftId = giftId;
+
+  int _giftColorId;
+  int get giftColorId => _$this._giftColorId;
+  set giftColorId(int giftColorId) => _$this._giftColorId = giftColorId;
+
+  int _wrapId;
+  int get wrapId => _$this._wrapId;
+  set wrapId(int wrapId) => _$this._wrapId = wrapId;
+
+  int _wrapColorId;
+  int get wrapColorId => _$this._wrapColorId;
+  set wrapColorId(int wrapColorId) => _$this._wrapColorId = wrapColorId;
+
+  AddToCartBuilder();
+
+  AddToCartBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _giftId = $v.giftId;
+      _giftColorId = $v.giftColorId;
+      _wrapId = $v.wrapId;
+      _wrapColorId = $v.wrapColorId;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(AddToCart other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$AddToCart;
+  }
+
+  @override
+  void update(void Function(AddToCartBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$AddToCart build() {
+    final _$result = _$v ??
+        new _$AddToCart._(
+            giftId: BuiltValueNullFieldError.checkNotNull(
+                giftId, 'AddToCart', 'giftId'),
+            giftColorId: giftColorId,
+            wrapId: wrapId,
+            wrapColorId: wrapColorId);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ClearSuccess extends ClearSuccess {
+  factory _$ClearSuccess([void Function(ClearSuccessBuilder) updates]) =>
+      (new ClearSuccessBuilder()..update(updates)).build();
+
+  _$ClearSuccess._() : super._();
+
+  @override
+  ClearSuccess rebuild(void Function(ClearSuccessBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ClearSuccessBuilder toBuilder() => new ClearSuccessBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ClearSuccess;
+  }
+
+  @override
+  int get hashCode {
+    return 74631534;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('ClearSuccess').toString();
+  }
+}
+
+class ClearSuccessBuilder
+    implements Builder<ClearSuccess, ClearSuccessBuilder> {
+  _$ClearSuccess _$v;
+
+  ClearSuccessBuilder();
+
+  @override
+  void replace(ClearSuccess other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ClearSuccess;
+  }
+
+  @override
+  void update(void Function(ClearSuccessBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ClearSuccess build() {
+    final _$result = _$v ?? new _$ClearSuccess._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
