@@ -7,10 +7,15 @@ part of app_event;
 // **************************************************************************
 
 class _$IniEvent extends IniEvent {
+  @override
+  final String langDevice;
+
   factory _$IniEvent([void Function(IniEventBuilder) updates]) =>
       (new IniEventBuilder()..update(updates)).build();
 
-  _$IniEvent._() : super._();
+  _$IniEvent._({this.langDevice}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(langDevice, 'IniEvent', 'langDevice');
+  }
 
   @override
   IniEvent rebuild(void Function(IniEventBuilder) updates) =>
@@ -22,24 +27,39 @@ class _$IniEvent extends IniEvent {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is IniEvent;
+    return other is IniEvent && langDevice == other.langDevice;
   }
 
   @override
   int get hashCode {
-    return 693744521;
+    return $jf($jc(0, langDevice.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('IniEvent').toString();
+    return (newBuiltValueToStringHelper('IniEvent')
+          ..add('langDevice', langDevice))
+        .toString();
   }
 }
 
 class IniEventBuilder implements Builder<IniEvent, IniEventBuilder> {
   _$IniEvent _$v;
 
+  String _langDevice;
+  String get langDevice => _$this._langDevice;
+  set langDevice(String langDevice) => _$this._langDevice = langDevice;
+
   IniEventBuilder();
+
+  IniEventBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _langDevice = $v.langDevice;
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(IniEvent other) {
@@ -54,7 +74,10 @@ class IniEventBuilder implements Builder<IniEvent, IniEventBuilder> {
 
   @override
   _$IniEvent build() {
-    final _$result = _$v ?? new _$IniEvent._();
+    final _$result = _$v ??
+        new _$IniEvent._(
+            langDevice: BuiltValueNullFieldError.checkNotNull(
+                langDevice, 'IniEvent', 'langDevice'));
     replace(_$result);
     return _$result;
   }

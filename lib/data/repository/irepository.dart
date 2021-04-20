@@ -16,12 +16,15 @@ import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 abstract class IRepository {
 
   Future<bool> getIsLogin();
 
   Future<int> getAppLanguage();
+
+  Future<void> setAppLanguage(int lang);
 
   Future<SignupResponse> signup(
       {String countryCode, String phone, String gender, String name, String password});
@@ -143,6 +146,9 @@ abstract class IRepository {
 
   Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId});
 
+
+  Future<MainGift> getMainGift();
+
   Future<String>getNameUser();
   Future<String>getCountryCode();
   Future<int>getPhoneNumber();
@@ -155,6 +161,9 @@ abstract class IRepository {
   Future<String>getState();
   Future<String>getAddress();
   Future<String>getZip();
+  Future<String>getSocialToken();
+  Future<String>getLoginType();
+  Future<String>getPassword();
 }
 
 ///

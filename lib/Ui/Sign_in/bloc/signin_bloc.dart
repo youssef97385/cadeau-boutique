@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/bloc/signin_event.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/bloc/signin_state.dart';
+import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
 
 class SigninBloc extends Bloc<SigninEvent, SigninState> {
@@ -16,6 +17,33 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   Stream<SigninState> mapEventToState(
     SigninEvent event,
   ) async* {
+
+
+    final loginType=await _irepository.getLoginType();
+    final socialToken=await _irepository.getSocialToken();
+    final name=await _irepository.getNameUser();
+    final password=await _irepository.getPassword();
+    final countryCode=await _irepository.getCountryCode();
+    final phoneNumber=await _irepository.getPhoneNumber();
+
+
+    if(event is InitStateSignUp){
+
+
+      if(loginType==LOGIN_TYPE_SOCIAL&& !state.isLoading )
+        add(TrySocialSignin((b) => b
+          ..phoneNumber = '${DateTime.now().microsecondsSinceEpoch}'
+          ..socialToken = socialToken
+          ..name = name));
+
+      else if(loginType==LOGIN_TYPE_NORMAL&& !state.isLoading)
+        add(TrySignin((b) => b
+          ..password = password
+          ..countryCode = countryCode
+          ..phone = phoneNumber.toString()));
+
+    }
+
     if(event is TrySignin){
       try {
         yield state.rebuild((b) => b

@@ -1,11 +1,14 @@
+import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'dart:math';
 import 'package:cadeaue_boutique/core/validators.dart';
 import 'dart:math' as math;
-import 'package:country_picker/country_picker.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
 import 'package:cadeaue_boutique/Ui/signup_screen/bloc/signup_bloc.dart';
 import 'package:cadeaue_boutique/Ui/signup_screen/bloc/signup_state.dart';
@@ -34,6 +37,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../MyCountryPicker.dart';
+
 class SignupScreen extends StatefulWidget {
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -52,11 +57,33 @@ class _SignupScreenState extends State<SignupScreen> {
   bool isLoading = false;
   bool isLoggedIn = false;
   FirebaseUser currentUser;
-
+  Country selectedCountry;
+  Country initCountry(String num){
+    return new Country(
+      phoneCode: CountryPickerUtils
+          .getCountryByPhoneCode(num).phoneCode,
+      name: "SAR",
+      iso3Code: "SAR",
+      isoCode: "SAR"
+    );
+  }
   @override
   void initState() {
     super.initState();
     // isSignedIn();
+
+    selectedCountry=initCountry("966");
+  }
+
+
+  Future<Country> openCountryDialog(BuildContext context,{String search,String selectedHint,ValueChanged<Country> onValuePicked}) async {
+    return showDialog<Country>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return MyCountryPickerDialog(searchHint: search,selectHint: selectedHint,onValuePicked: onValuePicked,);
+      },
+    );
   }
 
   void isSignedIn() async {
@@ -211,6 +238,28 @@ class _SignupScreenState extends State<SignupScreen> {
     }
   }
 
+  Widget initAddCountryPrefixIcon(){
+    return Container(
+
+      child: GestureDetector(
+        onTap: () async {
+          var item= await openCountryDialog(context,onValuePicked: (country){
+            setState(() {
+              selectedCountry=country;
+              countryCode=country.phoneCode;
+
+            });
+
+
+          });
+
+        },
+        child: MyCountryPicker(country: selectedCountry,padding: 0 ,
+        width: 99),
+      ),
+    );
+  }
+
   // fl.FacebookLogin facebookLogin = new fl.FacebookLogin();
   _loginWithFb() async{
     await  logOutFacebook();
@@ -253,8 +302,9 @@ class _SignupScreenState extends State<SignupScreen> {
   String dropdownValue;
   final registerKey = new GlobalKey<FormState>();
 
-  String password, name, countryCode = '+966', phone, gender;
+  String password, name, countryCode = '966', phone, gender;
   final _bloc = sl<SignupBloc>();
+
 
   void _onCountryChange(String countryCode) {
     //TODO : manipulate the selected country code here
@@ -421,7 +471,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                         enabledBorder: InputBorder.none,
                                                         focusedBorder: InputBorder.none,
                                                         disabledBorder: InputBorder.none,
-                                                        hintText: "Full Name",
+                                                        hintText: AppLocalizations.of(context).translate("full_name"),
                                                         contentPadding:
                                                         EdgeInsets.only(left:8 , top:4 , bottom :4),
                                                         suffixIcon: false
@@ -500,7 +550,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                                 ),
                                                               ),
                                                               iconSize: 30,
-                                                              hint: Text("Gender"),
+                                                              hint: Text(AppLocalizations.of(context).translate("gender")),
                                                               underline: SizedBox(),
                                                               onChanged: (String newValue) {
                                                                 setState(() {
@@ -546,10 +596,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     ]),
                                                 child: Center(
                                                   child: Padding(
-                                                    padding: const EdgeInsets.all(8.0),
+                                                    padding: const EdgeInsets.all(0),
                                                     child: Row(
+
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       children: [
-                                                        Container(
+
+                                                       /* Container(
                                                           height: size.height * 0.07,
                                                           width: size.width * .2,
                                                           child: CountryCodePicker(
@@ -572,44 +625,55 @@ class _SignupScreenState extends State<SignupScreen> {
                                                             // optional. aligns the flag and the Text left
                                                             alignLeft: false,
                                                           ),
-                                                        ),
-                                                        Container(
-                                                          // height: size.height * 0.07,
-                                                          width: size.width * .5,
-                                                          // color:Colors.red,
-                                                          child: TextFormField(
-                                                            validator:
-                                                            emptyFieldVAlidator(phone,context),
-                                                            keyboardType:
-                                                            TextInputType.number,
-                                                            obscureText: false,
-                                                            decoration: InputDecoration(
-                                                              enabledBorder:
-                                                              InputBorder.none,
-                                                              focusedBorder:
-                                                              InputBorder.none,
-                                                              disabledBorder:
-                                                              InputBorder.none,
-                                                              // labelText: "Phone Number",
-                                                              hintText: "Phone Number",
-                                                              contentPadding:
-                                                              EdgeInsets.all( 12),
-                                                              suffixIcon: false
-                                                                  ? Icon(
-                                                                Icons.arrow_drop_down,
-                                                                color: Colors.red,
-                                                              )
-                                                                  : Container(
-                                                                width: 10,
+                                                        ),*/
+                                                        Flexible(
+                                                          child: Container(
+
+
+
+
+                                                             height: size.height * 0.07,
+                                                            
+
+                                                            // color:Colors.red,
+                                                            child: TextFormField(
+                                                              validator:
+                                                              emptyFieldVAlidator(phone,context),
+                                                              keyboardType:
+                                                              TextInputType.number,
+                                                              obscureText: false,
+                                                              decoration: InputDecoration(
+                                                                enabledBorder:
+                                                                InputBorder.none,
+                                                                hintStyle: TextStyle(fontSize: 14),
+                                                                focusedBorder:
+                                                                InputBorder.none,
+                                                                disabledBorder:
+                                                                InputBorder.none,
+
+                                                                // labelText: "Phone Number",
+                                                                hintText: AppLocalizations.of(context).translate("phone_number"),
+                                                                contentPadding:
+                                                                EdgeInsets.all( 12),
+                                                                // suffixIcon: false
+                                                                //     ? Icon(
+                                                                //   Icons.arrow_drop_down,
+                                                                //   color: Colors.red,
+                                                                // )
+                                                                //     : Container(
+                                                                //   width: 10,
+                                                                // ),
                                                               ),
+                                                              onChanged: (val) {
+                                                                setState(() => phone = val);
+                                                              },
+                                                              onSaved: (value) =>
+                                                              phone = value,
                                                             ),
-                                                            onChanged: (val) {
-                                                              setState(() => phone = val);
-                                                            },
-                                                            onSaved: (value) =>
-                                                            phone = value,
                                                           ),
                                                         ),
+
+                                                        initAddCountryPrefixIcon()
                                                       ],
                                                     ),
                                                   ),
@@ -643,7 +707,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                         enabledBorder: InputBorder.none,
                                                         focusedBorder: InputBorder.none,
                                                         disabledBorder: InputBorder.none,
-                                                        hintText: "Password",
+                                                        hintText: AppLocalizations.of(context).translate("password"),
                                                         contentPadding:
                                                         EdgeInsets.all(12),
                                                         suffixIcon: false
@@ -699,7 +763,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                       ..gender = gender));
                                                   },
                                                   child: Text(
-                                                    'Sign Up',
+                                                    AppLocalizations.of(context).translate('sign_up'),
                                                     style: TextStyle(
                                                       color: AppColor.textColor,
                                                       fontSize: 18,
@@ -712,7 +776,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 height: size.height * 0.03,
                                               ),
                                               Text(
-                                                "Or Signup With",
+                                                AppLocalizations.of(context).translate("or_signup_with"),
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     color: AppColor.textColor),

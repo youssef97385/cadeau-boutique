@@ -96,6 +96,14 @@ abstract class GetAllProducts extends HomeEvent
   factory GetAllProducts([updates(GetAllProductsBuilder b)]) = _$GetAllProducts;
 }
 
+abstract class GetMainGift extends HomeEvent
+    implements Built<GetMainGift, GetMainGiftBuilder> {
+// fields go here
+GetMainGift._();
+
+factory GetMainGift([updates(GetMainGiftBuilder b)]) = _$GetMainGift;
+}
+
 abstract class IniEvent extends HomeEvent
     implements Built<IniEvent, IniEventBuilder> {
   // fields go here
@@ -104,6 +112,9 @@ abstract class IniEvent extends HomeEvent
 
   factory IniEvent([updates(IniEventBuilder b)]) = _$IniEvent;
 }
+
+
+
 
 
 abstract class LogoutEvent extends HomeEvent

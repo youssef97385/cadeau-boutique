@@ -29,6 +29,7 @@ import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/model/checkout_body/checkout_body.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 
 import '../../model/wrap_model/wrap_item.dart';
 import 'Ihttp_helper.dart';
@@ -1322,6 +1323,36 @@ class HttpHelper implements IHttpHelper {
       print(e.toString());
       throw NetworkException();
     }
+  }
+
+  static var MainGiftRQType=FullType(BaseResponse,[FullType(MainGift)]);
+  @override
+  Future<MainGift> getMainGift()  async{
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('app/gift/main' );
+      print('Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<MainGift> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: MainGiftRQType);
+
+        print(" status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+
+
   }
 
 

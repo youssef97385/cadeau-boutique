@@ -1,3 +1,7 @@
+import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -12,7 +16,7 @@ import 'package:cadeaue_boutique/Ui/Sign_in/bloc/signin_state.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/bloc/signin_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+
 // import 'package:flutter_facebook_login/flutter_facebook_login.dart' as fl;
 
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -43,6 +47,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../MyCountryPicker.dart';
+
 
 
 class SigninScreen extends StatefulWidget {
@@ -66,10 +72,53 @@ class _SigninScreenState extends State<SigninScreen> {
   bool isLoading = false;
   bool isLoggedIn = false;
   FirebaseUser currentUser;
+  Country selectedCountry;
+  Country initCountry(String num){
+    return new Country(
+        phoneCode: CountryPickerUtils
+            .getCountryByPhoneCode(num).phoneCode,
+        name: "SAR",
+        iso3Code: "SAR",
+        isoCode: "SAR"
+    );
+  }
+
+  Future<Country> openCountryDialog(BuildContext context,{String search,String selectedHint,ValueChanged<Country> onValuePicked}) async {
+    return showDialog<Country>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return MyCountryPickerDialog(searchHint: search,selectHint: selectedHint,onValuePicked: onValuePicked,);
+      },
+    );
+  }
+
+  Widget initAddCountryPrefixIcon(){
+    return Container(
+
+      child: GestureDetector(
+        onTap: () async {
+          var item= await openCountryDialog(context,onValuePicked: (country){
+            setState(() {
+              selectedCountry=country;
+              countryCode=country.phoneCode;
+
+            });
+
+
+          });
+
+        },
+        child: MyCountryPicker(country: selectedCountry,padding: 0 ,
+            width: 99),
+      ),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
+    selectedCountry=initCountry("966");
     // isSignedIn();
   }
 
@@ -338,7 +387,7 @@ class _SigninScreenState extends State<SigninScreen> {
   String firstName, email, confirmPassword, lastName;
   String country = '';
 
-  String phone, countryCode = '+966', password;
+  String phone, countryCode = '966', password;
 
   final _bloc = sl<SigninBloc>();
 
@@ -398,7 +447,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "WELCOME TO",
+                                    AppLocalizations.of(context).translate("welcome_to"),
                                     style: TextStyle(
                                       color: AppColor.textColor,
                                       fontSize: 20,
@@ -495,13 +544,16 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 ]),
                                             child: Center(
                                               child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
-                                                  Container(
+                                                 /* Container(
                                                     height: size.height * 0.07,
                                                     width: size.width * .2,
                                                     child: Padding(
                                                       padding: const EdgeInsets.only(left:8.0),
-                                                      child: CountryCodePicker(
+
+
+                                                    *//*  child: CountryCodePicker(
                                                         onChanged: (value) {
                                                           setState(() {
                                                             countryCode =
@@ -518,49 +570,46 @@ class _SigninScreenState extends State<SigninScreen> {
                                                             false,
                                                         // optional. aligns the flag and the Text left
                                                         alignLeft: false,
+                                                      ),*//*
+                                                    ),
+                                                  ),*/
+                                                  Flexible(
+                                                    child: Container(
+                                                      height: size.height * 0.07,
+                                                      // height: size.height * 0.07,
+
+                                                      // color:Colors.red,
+                                                      child: TextFormField(
+                                                        validator:
+                                                            emptyFieldVAlidator(
+                                                                phone,context),
+                                                        keyboardType:
+                                                            TextInputType.number,
+                                                        obscureText: false,
+                                                        decoration: InputDecoration(
+                                                          enabledBorder:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                          disabledBorder:
+                                                              InputBorder.none,
+                                                          // labelText: "Phone Number",
+                                                          hintText: AppLocalizations.of(context).translate("phone_number"),
+                                                          contentPadding:
+                                                              EdgeInsets.only(
+                                                                   left:8 , top:size.height*0.02 ),
+
+                                                        ),
+                                                        onChanged: (val) {
+                                                          setState(() => phone = val);
+                                                        },
+                                                        onSaved: (value) =>
+                                                            phone = value,
                                                       ),
                                                     ),
                                                   ),
-                                                  Container(
-                                                    // height: size.height * 0.07,
-                                                    width: size.width * .5,
-                                                    // color:Colors.red,
-                                                    child: TextFormField(
-                                                      validator:
-                                                          emptyFieldVAlidator(
-                                                              phone,context),
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      obscureText: false,
-                                                      decoration: InputDecoration(
-                                                        enabledBorder:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                        disabledBorder:
-                                                            InputBorder.none,
-                                                        // labelText: "Phone Number",
-                                                        hintText: "Phone Number",
-                                                        contentPadding:
-                                                            EdgeInsets.only(
-                                                                 left:8 , top:size.height*0.02 ),
-                                                        suffixIcon: false
-                                                            ? Icon(
-                                                                Icons
-                                                                    .arrow_drop_down,
-                                                                color: Colors.red,
-                                                              )
-                                                            : Container(
-                                                                width: 10,
-                                                              ),
-                                                      ),
-                                                      onChanged: (val) {
-                                                        setState(() => phone = val);
-                                                      },
-                                                      onSaved: (value) =>
-                                                          phone = value,
-                                                    ),
-                                                  ),
+
+                                                  initAddCountryPrefixIcon()
                                                 ],
                                               ),
                                             ),
@@ -593,7 +642,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                   enabledBorder: InputBorder.none,
                                                   focusedBorder: InputBorder.none,
                                                   disabledBorder: InputBorder.none,
-                                                  hintText: "Password",
+                                                  hintText: AppLocalizations.of(context).translate("password"),
                                                   contentPadding:
                                                       EdgeInsets.only(left:16,top:size.height*0.02),
                                                   suffixIcon: false
@@ -625,7 +674,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        "Don't have account?",
+                                                        AppLocalizations.of(context).translate("dont_have_account"),
                                                         style: TextStyle(
                                                             fontSize: 14,
                                                             color: AppColor.textColor),
@@ -635,7 +684,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                           builder: (context)=>SignupScreen()
                                                         ));},
                                                         child: Text(
-                                                          "Register",
+                                                          AppLocalizations.of(context).translate("sign_up"),
                                                           style: TextStyle(
                                                               fontSize: 16,
                                                               color: AppColor.darkYellow),
@@ -686,7 +735,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                   ..phone = phone));
                                               },
                                               child: Text(
-                                                'Log In',
+                                                AppLocalizations.of(context).translate('login'),
                                                 style: TextStyle(
                                                   color: AppColor.textColor,
                                                   fontSize: 18,
@@ -701,7 +750,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
 
                                           Text(
-                                            "Or Login With",
+                                            AppLocalizations.of(context).translate("or_login_with"),
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: AppColor.textColor),

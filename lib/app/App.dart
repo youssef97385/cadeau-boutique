@@ -51,12 +51,14 @@ class _AppState extends State<App> {
 
     });
 
-    _AppBloc.add(IniEvent());
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var lang=Localizations.localeOf(context).toString();
+    _AppBloc.add(IniEvent((b)=>b ..langDevice=lang.toLowerCase()));
     return BlocBuilder(
         cubit: _AppBloc,
         builder: (BuildContext context, AppState state) {
@@ -80,7 +82,10 @@ class _AppState extends State<App> {
 
                   },
                // home:  SplashScreen(false),
-                home:  SplashScreen(state.loginState),
+                home:  SplashScreen(state.loginState,countryCode: state.countryCode,
+                loginType: state.loginType,name: state.name,
+                password: state.password,phoneNumber: state.phoneNumber,
+                socialToken: state.socialToken),
                 // SplashScreen(state.loginState),
                   locale: snapshotLanguage.data == AppLanguageKeys.AR
                       ? Locale('ar', '')

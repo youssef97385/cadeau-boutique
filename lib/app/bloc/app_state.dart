@@ -13,12 +13,35 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   bool get loginState;
   int get appLanguage;
+  String get appLanguageString;
+  @nullable
+  String get loginType;
+  @nullable
+  String get socialToken;
+  @nullable
+  String get name;
+  @nullable
+  String get password;
+  @nullable
+  String get countryCode;
+  @nullable
+  String get phoneNumber;
 
   AppState._();
 
   factory AppState([updates(AppStateBuilder b)]) = _$AppState;
 
   factory AppState.initail() {
-    return AppState((b) => b..loginState = false..appLanguage = 0);
+    return AppState((b) => b
+      ..loginState = false
+      ..appLanguageString="en"
+      ..appLanguage = 0
+      ..loginType=""
+      ..socialToken=""
+      ..name=""
+      ..password=""
+      ..countryCode=""
+      ..phoneNumber=""
+    );
   }
 }

@@ -1,10 +1,16 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
-import 'package:country_picker/country_picker.dart';
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/utils/utils.dart';
+
 import 'package:flutter/material.dart';
+
+import '../MyCountryPicker.dart';
 
 class EditRecieverDialog extends StatefulWidget {
 
@@ -74,10 +80,53 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
   int selectedSize = -1;
   int selectedColor = -1;
 
+  Country selectedCountry;
+  Country initCountry(String num){
+    return new Country(
+        phoneCode: CountryPickerUtils
+            .getCountryByPhoneCode(num).phoneCode,
+        name: "SAR",
+        iso3Code: "SAR",
+        isoCode: "SAR"
+    );
+  }
+
+  Future<Country> openCountryDialog(BuildContext context,{String search,String selectedHint,ValueChanged<Country> onValuePicked}) async {
+    return showDialog<Country>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return MyCountryPickerDialog(searchHint: search,selectHint: selectedHint,onValuePicked: onValuePicked,);
+      },
+    );
+  }
+
+  Widget initAddCountryPrefixIcon(){
+    return Container(
+
+      child: GestureDetector(
+        onTap: () async {
+          var item= await openCountryDialog(context,onValuePicked: (country){
+            setState(() {
+              selectedCountry=country;
+              countryCode=country.phoneCode;
+
+            });
+
+
+          });
+
+        },
+        child: MyCountryPicker(country: selectedCountry,padding: 0 ,
+            width: 99),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-
+    selectedCountry=initCountry("966");
     controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 800));
     scaleAnimation =
@@ -92,6 +141,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
     _giftToController.text = widget.recieverModel.giftTo;
     _phoneController.text = widget.recieverModel.phoneNumber;
      _addressController.text = widget.recieverModel.address;
+    selectedCountry=initCountry(widget.recieverModel.countryCode);
   }
 
   @override
@@ -147,7 +197,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
-                              hintText: "Gift To",
+                              hintText: AppLocalizations.of(context).translate("gift_to"),
                               contentPadding:
                               EdgeInsets.only(left:16 , top:size.height*0.02 , ),
                               suffixIcon: false
@@ -191,11 +241,13 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                Container(
+                              /*  Container(
 
                                   height: size.height * 0.07,
                                   width: size.width * .2,
-                                  child:Center(
+
+
+                             *//*     child:Center(
                                     child: ElevatedButton(
 
                                       onPressed: () {
@@ -221,48 +273,51 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                                       },
                                       child:  Text("+"+countryCode),
                                     ),
-                                  ),
-                                ),
-                                Container(
-                                  // height: size.height * 0.07,
-                                  width: size.width * .5,
-                                  // color:Colors.red,
-                                  child: TextFormField(
-                                    controller: _phoneController,
+                                  ),*//*
+                                ),*/
+                                Flexible(
+                                  child: Container(
+                                    height: size.height * 0.07,
+                                   // width: size.width * .5,
+                                    // color:Colors.red,
+                                    child: TextFormField(
+                                      controller: _phoneController,
 
-                                    validator:
-                                    emptyFieldVAlidator(phone,context),
-                                    keyboardType:
-                                    TextInputType.number,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
+                                      validator:
+                                      emptyFieldVAlidator(phone,context),
+                                      keyboardType:
+                                      TextInputType.number,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
 
-                                      enabledBorder:
-                                      InputBorder.none,
-                                      focusedBorder:
-                                      InputBorder.none,
-                                      disabledBorder:
-                                      InputBorder.none,
-                                      // labelText: "Phone Number",
-                                      hintText: "Phone Number",
-                                      contentPadding:
-                                      EdgeInsets.all( 12),
-                                      suffixIcon: false
-                                          ? Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.red,
-                                      )
-                                          : Container(
-                                        width: 10,
+                                        enabledBorder:
+                                        InputBorder.none,
+                                        focusedBorder:
+                                        InputBorder.none,
+                                        disabledBorder:
+                                        InputBorder.none,
+                                        // labelText: "Phone Number",
+                                        hintText: AppLocalizations.of(context).translate("phone_number"),
+                                        contentPadding:
+                                        EdgeInsets.all( 12),
+                                        suffixIcon: false
+                                            ? Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.red,
+                                        )
+                                            : Container(
+                                          width: 10,
+                                        ),
                                       ),
+                                      onChanged: (val) {
+                                        setState(() => phone = val);
+                                      },
+                                      onSaved: (value) =>
+                                      phone = value,
                                     ),
-                                    onChanged: (val) {
-                                      setState(() => phone = val);
-                                    },
-                                    onSaved: (value) =>
-                                    phone = value,
                                   ),
                                 ),
+                                initAddCountryPrefixIcon(),
                               ],
                             ),
                           ),
@@ -341,7 +396,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
-                              hintText: "Delivery Address",
+                              hintText: AppLocalizations.of(context).translate("delevery_address"),
                               contentPadding:
                               EdgeInsets.only(left:16 , top:size.height*0.02 , ),
                               suffixIcon: false
@@ -401,7 +456,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                             Navigator.pop(context);
                           },
                           child: Text(
-                            'Delete',
+                            AppLocalizations.of(context).translate('delete'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 13,
@@ -447,7 +502,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
 
                           },
                           child: Text(
-                            'Update',
+                            AppLocalizations.of(context).translate('update'),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,

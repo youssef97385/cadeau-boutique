@@ -22,6 +22,7 @@ import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 
 
 
@@ -169,5 +170,7 @@ Future<bool> logoutRQ(String token);
 
 
 Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId , String token});
+
+Future<MainGift> getMainGift();
 
 }

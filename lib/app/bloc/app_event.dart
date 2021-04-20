@@ -12,7 +12,8 @@ abstract class AppEvent {}
 
 abstract class IniEvent extends AppEvent
     implements Built<IniEvent, IniEventBuilder> {
-  // fields go here
+
+  String get langDevice;
 
   IniEvent._();
 

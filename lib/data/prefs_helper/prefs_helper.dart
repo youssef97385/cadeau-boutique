@@ -67,6 +67,9 @@ class PrefsHelper implements IPrefsHelper {
     (await getPrefs()).setString(STATE, "");
     (await getPrefs()).setString(DETAISL_ADDRESS, "");
     (await getPrefs()).setString(ZIP_CODE, "");
+    (await getPrefs()).setString(SOCIAL_TOKEN, "");
+    (await getPrefs()).setString(LOGIN_TYPE, "");
+    (await getPrefs()).setString(PASSWORD, "");
 
 
 
@@ -138,6 +141,22 @@ class PrefsHelper implements IPrefsHelper {
 
   }
 
+  @override
+  Future<String> getSocialToken()async {
+    return ((await getPrefs()).getString(SOCIAL_TOKEN));
+  }
+
+  @override
+  Future<String> getLoginType() async{
+    return ((await getPrefs()).getString(LOGIN_TYPE));
+  }
+
+  @override
+  Future<String> getPassword() async{
+    return ((await getPrefs()).getString(PASSWORD));
+  }
+
+
 
   //-----------------------------------------------------------//
 
@@ -202,5 +221,23 @@ class PrefsHelper implements IPrefsHelper {
     (await getPrefs()).setString(ZIP_CODE, txt);
 
   }
+
+
+  @override
+  Future<void> setSocialToken(String txt) async{
+    (await getPrefs()).setString(SOCIAL_TOKEN, txt);
+  }
+
+
+
+  @override
+  Future<void> setLoginType(String txt)async {
+    (await getPrefs()).setString(LOGIN_TYPE, txt);
+  }
+  @override
+  Future<void> setPassword(String txt)async {
+    (await getPrefs()).setString(PASSWORD, txt);
+  }
+
 
 }

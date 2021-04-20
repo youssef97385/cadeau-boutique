@@ -23,7 +23,13 @@ class _$SliderModelSerializer implements StructuredSerializer<SliderModel> {
       'media_path',
       serializers.serialize(object.img, specifiedType: const FullType(String)),
     ];
-
+    Object value;
+    value = object.brandID;
+    if (value != null) {
+      result
+        ..add('brand_id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -46,6 +52,10 @@ class _$SliderModelSerializer implements StructuredSerializer<SliderModel> {
           result.img = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'brand_id':
+          result.brandID = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -58,11 +68,13 @@ class _$SliderModel extends SliderModel {
   final int number;
   @override
   final String img;
+  @override
+  final int brandID;
 
   factory _$SliderModel([void Function(SliderModelBuilder) updates]) =>
       (new SliderModelBuilder()..update(updates)).build();
 
-  _$SliderModel._({this.number, this.img}) : super._() {
+  _$SliderModel._({this.number, this.img, this.brandID}) : super._() {
     BuiltValueNullFieldError.checkNotNull(number, 'SliderModel', 'number');
     BuiltValueNullFieldError.checkNotNull(img, 'SliderModel', 'img');
   }
@@ -77,19 +89,24 @@ class _$SliderModel extends SliderModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SliderModel && number == other.number && img == other.img;
+    return other is SliderModel &&
+        number == other.number &&
+        img == other.img &&
+        brandID == other.brandID;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, number.hashCode), img.hashCode));
+    return $jf(
+        $jc($jc($jc(0, number.hashCode), img.hashCode), brandID.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SliderModel')
           ..add('number', number)
-          ..add('img', img))
+          ..add('img', img)
+          ..add('brandID', brandID))
         .toString();
   }
 }
@@ -105,6 +122,10 @@ class SliderModelBuilder implements Builder<SliderModel, SliderModelBuilder> {
   String get img => _$this._img;
   set img(String img) => _$this._img = img;
 
+  int _brandID;
+  int get brandID => _$this._brandID;
+  set brandID(int brandID) => _$this._brandID = brandID;
+
   SliderModelBuilder();
 
   SliderModelBuilder get _$this {
@@ -112,6 +133,7 @@ class SliderModelBuilder implements Builder<SliderModel, SliderModelBuilder> {
     if ($v != null) {
       _number = $v.number;
       _img = $v.img;
+      _brandID = $v.brandID;
       _$v = null;
     }
     return this;
@@ -135,7 +157,8 @@ class SliderModelBuilder implements Builder<SliderModel, SliderModelBuilder> {
             number: BuiltValueNullFieldError.checkNotNull(
                 number, 'SliderModel', 'number'),
             img: BuiltValueNullFieldError.checkNotNull(
-                img, 'SliderModel', 'img'));
+                img, 'SliderModel', 'img'),
+            brandID: brandID);
     replace(_$result);
     return _$result;
   }

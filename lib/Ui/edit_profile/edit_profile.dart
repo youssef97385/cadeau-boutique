@@ -1,4 +1,7 @@
+import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/utils/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -7,13 +10,14 @@ import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_bloc.dart';
 import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_state.dart';
 import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_event.dart';
 
 import '../../injectoin.dart';
+import '../MyCountryPicker.dart';
 class EditProfileScreen extends StatefulWidget {
 
   String nameUser;
@@ -21,10 +25,11 @@ class EditProfileScreen extends StatefulWidget {
   String phoneUser;
   String genderUser;
   String dateUser;
+  String countryCodeUser;
 
 
   EditProfileScreen(
-  {this.nameUser, this.emailUser, this.phoneUser, this.genderUser,this.dateUser});
+  {this.nameUser, this.emailUser, this.phoneUser, this.genderUser,this.dateUser,this.countryCodeUser});
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -32,7 +37,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   var formKeyValidation = GlobalKey<FormState>();
-  String password, name, countryCode = '+966', phone, gender , email;
+  String password, name, countryCode = '966', phone, gender , email;
   int _groupValue = 0;
 
   int _selectedGender = -1;
@@ -42,26 +47,53 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   bool first=false;
 
+  Country selectedCountry;
+  Country initCountry(String num){
+    return new Country(
+        phoneCode: CountryPickerUtils
+            .getCountryByPhoneCode(num).phoneCode,
+        name: "SAR",
+        iso3Code: "SAR",
+        isoCode: "SAR"
+    );
+  }
+
+  Future<Country> openCountryDialog(BuildContext context,{String search,String selectedHint,ValueChanged<Country> onValuePicked}) async {
+    return showDialog<Country>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return MyCountryPickerDialog(searchHint: search,selectHint: selectedHint,onValuePicked: onValuePicked,);
+      },
+    );
+  }
+
+  Widget initAddCountryPrefixIcon(){
+    return Container(
+
+      child: GestureDetector(
+        onTap: () async {
+          var item= await openCountryDialog(context,onValuePicked: (country){
+            setState(() {
+              selectedCountry=country;
+              countryCode=country.phoneCode;
+
+            });
+
+
+          });
+
+        },
+        child: MyCountryPicker(country: selectedCountry,padding: 0 ,
+            width: 99),
+      ),
+    );
+  }
 
 
   // PersonalInfoProvider personalInfoProvider = PersonalInfoProvider();
 
-  _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate, // Refer step 1
-      firstDate: DateTime(1950),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != selectedDate)
-      setState(() {
 
-        selectedDate = picked;
-        _dateSelected = true;
-
-        widget.dateUser=selectedDate.toString().substring(0, 10);
-      });
-  }
 
   final _bloc = sl<EditProfileBloc>();
 
@@ -75,6 +107,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     _bloc.add(InitEvent());
 
+    selectedCountry=initCountry(widget.countryCodeUser);
     controllerName=TextEditingController(text: widget.nameUser);
     if(widget.phoneUser==null||widget.phoneUser=="0")
     controllerPhone=TextEditingController(text: "");
@@ -92,7 +125,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   }
 
+  _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
 
+        selectedDate = picked;
+        _dateSelected = true;
+
+        widget.dateUser=selectedDate.toString().substring(0, 10);
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -297,10 +345,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           padding: const EdgeInsets.only(left:8.0),
                                           child: Row(
                                             children: [
-                                              Container(
+                                             /* Container(
                                                 height: size.height * 0.07,
                                                 width: size.width * .2,
-                                                child: CountryCodePicker(
+
+
+                                               *//* child: CountryCodePicker(
                                                   onChanged: (value) {
                                                     setState(() {
                                                       countryCode =
@@ -318,54 +368,57 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                   false,
                                                   // optional. aligns the flag and the Text left
                                                   alignLeft: false,
-                                                ),
-                                              ),
-                                              Container(
-                                                // height: size.height * 0.07,
-                                                width: size.width * .5,
-                                                // color:Colors.red,
+                                                ),*//*
+                                              ),*/
+                                              Flexible(
+                                                child: Container(
+                                                 height: size.height * 0.07,
+                                                 // width: size.width * .5,
+                                                  // color:Colors.red,
 
-                                                child: TextFormField(
-                                                  controller: controllerPhone,
-                                                  validator:(String text){
-                                                    if(text==null|| text.isEmpty){
-                                                      return AppLocalizations.of(context).translate('empty_hint');
-                                                    }else
-                                                      return null;
+                                                  child: TextFormField(
+                                                    controller: controllerPhone,
+                                                    validator:(String text){
+                                                      if(text==null|| text.isEmpty){
+                                                        return AppLocalizations.of(context).translate('empty_hint');
+                                                      }else
+                                                        return null;
 
 
-                                                  },
-                                                  keyboardType:
-                                                  TextInputType.number,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    enabledBorder:
-                                                    InputBorder.none,
-                                                    focusedBorder:
-                                                    InputBorder.none,
-                                                    disabledBorder:
-                                                    InputBorder.none,
-                                                    errorBorder:  InputBorder.none,
-                                                    // labelText: "Phone Number",
-                                                    hintText: AppLocalizations.of(context).translate("phone_number"),
-                                                    contentPadding:
-                                                    EdgeInsets.only(left: 16 , top: size.height*0.02 ),
-                                                    suffixIcon: false
-                                                        ? Icon(
-                                                      Icons.arrow_drop_down,
-                                                      color: Colors.red,
-                                                    )
-                                                        : Container(
-                                                      width: 10,
+                                                    },
+                                                    keyboardType:
+                                                    TextInputType.number,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      enabledBorder:
+                                                      InputBorder.none,
+                                                      focusedBorder:
+                                                      InputBorder.none,
+                                                      disabledBorder:
+                                                      InputBorder.none,
+                                                      errorBorder:  InputBorder.none,
+                                                      // labelText: "Phone Number",
+                                                      hintText: AppLocalizations.of(context).translate("phone_number"),
+                                                      contentPadding:
+                                                      EdgeInsets.only(left: 16 , top: size.height*0.02 ),
+                                                      suffixIcon: false
+                                                          ? Icon(
+                                                        Icons.arrow_drop_down,
+                                                        color: Colors.red,
+                                                      )
+                                                          : Container(
+                                                        width: 10,
+                                                      ),
                                                     ),
-                                                  ),
                                            /*       onChanged: (val) {
-                                                    setState(() => phone = val);
-                                                  },
-                                                  onSaved: (value) =>
-                                                  phone = value,*/
+                                                      setState(() => phone = val);
+                                                    },
+                                                    onSaved: (value) =>
+                                                    phone = value,*/
+                                                  ),
                                                 ),
                                               ),
+                                              initAddCountryPrefixIcon()
                                             ],
                                           ),
                                         ),

@@ -37,6 +37,7 @@ import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 
 
 
@@ -67,7 +68,8 @@ part 'serializer.g.dart';
   UserInfoModel,
   TrackModel,
   CheckBody,
-  DetailsUser
+  DetailsUser,
+  MainGift
 
 
 
@@ -399,5 +401,9 @@ final Serializers serializers =
         ],
       )),
           () => ListBuilder<TrackModel>())
+
+  ..addBuilderFactory(
+    HttpHelper.MainGiftRQType,
+          () => BaseResponseBuilder<MainGift>())
 
 ).build();

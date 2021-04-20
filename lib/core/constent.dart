@@ -90,3 +90,9 @@ const String CITY="city";
 const String STATE="state";
 const String DETAISL_ADDRESS="details";
 const String ZIP_CODE="zip_code";
+
+const String SOCIAL_TOKEN="social_token";
+const String LOGIN_TYPE="login_type";
+const String LOGIN_TYPE_SOCIAL="social";
+const String LOGIN_TYPE_NORMAL="normal";
+const String PASSWORD="password";

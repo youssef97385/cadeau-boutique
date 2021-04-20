@@ -3,6 +3,9 @@ import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
+import 'package:cadeaue_boutique/core/app_language.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // print ("home state "+state2.categories.toString());
     _bloc.add(IniEvent());
+    _bloc.add(GetMainGift());
     _bloc.add(GetSlider());
     _bloc.add(GetOccasion());
     _bloc.add(GetCategory());
@@ -147,6 +151,11 @@ class _HomeScreenState extends State<HomeScreen> {
       cubit: _bloc,
       builder: (BuildContext context, HomeState state) {
 
+
+
+
+
+
         return Scaffold(
             backgroundColor: Colors.white,
             key: _drawerKey,
@@ -177,27 +186,45 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: PageView(
                                         controller: controller,
                                         children: List.generate(
-                                            3,
-                                            (index) => Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal:8.0),
-                                              child: Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    12))),
+                                            state.sliders.length,
+                                            (index) => GestureDetector(
+                                              onTap: () {
 
-                                                    // color:index == 0 ?Colors.green : index == 1 ?Colors.yellow: Colors.pink,
-                                                    child: ClipRRect(
-                                                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                                                      child: Image.network(
-                                                        BaseImgUrl +
-                                                            state
-                                                                .sliders[index].img,
-                                                        fit: BoxFit.fill,
+                                                if(state
+                                                    .sliders[index]
+                                                    .brandID!=null)
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            AllProductsScreen(
+                                                              id: state
+                                                                  .sliders[index]
+                                                                  .brandID,
+                                                              type: "brand",
+                                                            )));
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal:8.0),
+                                                child: Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      12))),
+
+                                                      // color:index == 0 ?Colors.green : index == 1 ?Colors.yellow: Colors.pink,
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                                                        child: Image.network(
+                                                          BaseImgUrl +
+                                                              state
+                                                                  .sliders[index].img,
+                                                          fit: BoxFit.fill,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
+                                              ),
                                             )
                                             // _makePage(context, index, slider)
                                             ),
@@ -211,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   child: SmoothPageIndicator(
                                     controller: controller,
-                                    count: 3,
+                                    count: state.sliders.length,
                                     effect: ExpandingDotsEffect(
                                       activeDotColor: AppColor.darkYellow,
                                       dotColor:
@@ -849,7 +876,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               /***************************************************
                                * *** modify here get the main product from api
                                */
-                              state.products.isEmpty
+                              state.mainGift.id==null||state.mainGift.image==null
                                   ? Container()
                                   : Row(
                                       children: [
@@ -864,8 +891,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   width: size.width * .4,
                                                   //  color: Colors.green,
                                                   child: Image.network(
-                                                    BaseImgUrl +
-                                                        state.products[9].image,
+                                                    "$BaseImgUrl${state.mainGift.image}",
+
                                                     fit: BoxFit.cover,
                                                   )),
                                             ],
@@ -883,19 +910,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 16.0),
-                                                child: Text(
-                                                  firstCharacterUpper(
-                                                  state.products[9].nameEn),
+                                                child:state.lang==AppLanguageKeys.EN? Text(
+                                                  state.mainGift.titleEn,
                                                   style: TextStyle(
                                                       fontSize: 26,
                                                       color: Color(0xff393741)),
-                                                ),
+                                                ): Text(
+                                          state.mainGift.titleAr,
+                                          style: TextStyle(
+                                              fontSize: 26,
+                                              color: Color(0xff393741)),
+                                        ),
                                               ),
+                                              state.lang==AppLanguageKeys.EN?
                                               Text(
-                                                "Lorem ipsum is placeholder\ntext commonly used in the\ngraphic.",
+                                                "${state.mainGift.textEn}",
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     color: Color(0xff393741)),
+                                                maxLines: 3,
+                                                overflow:TextOverflow.ellipsis ,
+                                              ):
+                                              Text(
+                                                "${state.mainGift.textAr}",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Color(0xff393741)),
+                                                maxLines: 3,
+                                                overflow:TextOverflow.ellipsis ,
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -903,9 +945,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceBetween,
+                                                          .center,
                                                   children: [
-                                                    Text(
+                                                  /*  Text(
                                                       state.products[9]
                                                               .mainPrice +
                                                           "\$",
@@ -916,38 +958,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     SizedBox(
                                                       width: 60,
-                                                    ),
-                                                    Container(
-                                                      height: 32,
-                                                      width: 54,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    12)),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            offset:
-                                                                Offset(1, 1),
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.6),
-                                                            blurRadius: 1,
-                                                            spreadRadius: 1,
-                                                          ),
-                                                        ],
-                                                        gradient:
-                                                            LinearGradient(
-                                                          colors: [
-                                                            AppColor.darkYellow,
-                                                            AppColor.lightYellow
+                                                    ),*/
+                                                   GestureDetector(
+                                                      onTap:(){
+                                              Navigator.push(context, MaterialPageRoute(
+                                              builder: (context)=>ProductScreen(id: state.mainGift.idGift,img: state.mainGift.image,)
+                                              ));
+                                              },
+                                                      child: Container(
+                                                        alignment: Alignment.center,
+                                                        height: 32,
+                                                        width: 54,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      12)),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              offset:
+                                                                  Offset(1, 1),
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      0.6),
+                                                              blurRadius: 1,
+                                                              spreadRadius: 1,
+                                                            ),
                                                           ],
-                                                          stops: [0.1, 0.96],
+                                                          gradient:
+                                                              LinearGradient(
+                                                            colors: [
+                                                              AppColor.darkYellow,
+                                                              AppColor.lightYellow
+                                                            ],
+                                                            stops: [0.1, 0.96],
+                                                          ),
                                                         ),
+                                                        child: Center(
+                                                            child: SvgPicture.asset(
+                                                                "assets/images/bag icon.svg")),
                                                       ),
-                                                      child: Center(
-                                                          child: SvgPicture.asset(
-                                                              "assets/images/bag icon.svg")),
                                                     )
                                                   ],
                                                 ),

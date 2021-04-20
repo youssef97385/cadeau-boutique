@@ -1,6 +1,7 @@
 library home_state;
 
 import 'package:built_value/built_value.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
@@ -22,6 +23,8 @@ abstract class HomeState
   String get error;
   bool get loginState;
 
+  int get lang;
+
   BuiltList<SliderModel> get sliders;
   BuiltList<OccasionModel> get occasions;
   BuiltList<OccasionModel> get nearbyOccasions;
@@ -31,6 +34,8 @@ abstract class HomeState
   BuiltList<WrapModel> get wraps;
   BuiltList<ProductModel> get products;
 
+  MainGift get mainGift;
+
   HomeState._();
 
   factory HomeState([updates(HomeStateBuilder b)]) = _$HomeState;
@@ -38,9 +43,11 @@ abstract class HomeState
   factory HomeState.initail() {
     return HomeState((b) => b
       ..error = ""
+      ..lang=0
       ..isLoading = false
       ..success = false
       ..loginState=false
+      ..mainGift=null
         ..sliders.replace([])
         ..occasions.replace([])
         ..categories.replace([])

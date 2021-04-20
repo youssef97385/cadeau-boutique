@@ -20,11 +20,41 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     AppEvent event,
   ) async* {
     if (event is IniEvent) {
+      var langNumber=AppLanguageKeys.EN;
       final result = await _repository.getIsLogin();
       yield state.rebuild((b) => b..loginState = result);
+
+
+      print("LLLLLLLLLLLLL ${event.langDevice}");
+      if(event.langDevice.contains("en")){
+       langNumber=AppLanguageKeys.EN;
+      print("lang 0");}
+      else { langNumber=AppLanguageKeys.AR;
+      print("lang 1");}
+     await _repository.setAppLanguage(langNumber);
+
       final language = await _repository.getAppLanguage();
-      yield state.rebuild((b) => b..appLanguage = language);
-      changeAppLanguage(state.appLanguage);
+      // yield state.rebuild((b) => b..appLanguage = language);
+      // changeAppLanguage(state.appLanguage);
+
+      final loginType=await _repository.getLoginType();
+      final socialToken=await _repository.getSocialToken();
+      final name=await _repository.getNameUser();
+      final password=await _repository.getPassword();
+      final countryCode=await _repository.getCountryCode();
+      final phoneNumber=await _repository.getPhoneNumber();
+
+      yield state.rebuild((b) => b
+        ..loginType=loginType
+        ..socialToken=socialToken
+        ..name=name
+        ..password=password
+        ..countryCode=countryCode
+        ..phoneNumber=phoneNumber.toString()
+        ..appLanguage = language
+        ..appLanguageString="${event.langDevice}"
+      );
+       changeAppLanguage(state.appLanguage);
 
 
     }

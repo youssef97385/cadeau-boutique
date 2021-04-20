@@ -3,6 +3,7 @@ import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
 import 'package:cadeaue_boutique/Ui/home/page/home.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   IRepository _iRepository;
@@ -252,9 +253,46 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       }
     }
+
+
+
+    if(event is GetMainGift){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+          ..mainGift=null
+        );
+
+        final data = await _iRepository.getMainGift();
+
+        print(' Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+          ..mainGift.replace(data)
+        );
+
+      } catch (e) {
+        print('r Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+          ..mainGift=null
+        );
+
+      }
+    }
+    
+    
     if (event is IniEvent) {
       final result = await _iRepository.getIsLogin();
-      yield state.rebuild((b) => b..loginState = result);
+      final langDevice = await _iRepository.getAppLanguage();
+      yield state.rebuild((b) => b..loginState = result
+      ..lang=langDevice);
     }
 
     if(event is LogoutEvent){

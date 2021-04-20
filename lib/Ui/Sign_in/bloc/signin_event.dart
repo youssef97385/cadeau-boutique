@@ -47,3 +47,13 @@ abstract class ClearError extends SigninEvent
 
   factory ClearError([updates(ClearErrorBuilder b)]) = _$ClearError;
 }
+
+
+
+abstract class InitStateSignUp  extends SigninEvent
+    implements Built<InitStateSignUp, InitStateSignUpBuilder> {
+// fields go here
+InitStateSignUp._();
+
+factory InitStateSignUp([updates(InitStateSignUpBuilder b)]) = _$InitStateSignUp;
+}

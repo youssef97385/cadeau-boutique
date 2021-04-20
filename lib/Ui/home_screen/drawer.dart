@@ -8,6 +8,7 @@ import 'package:cadeaue_boutique/Ui/settings_screen/settings_screen.dart';
 import 'package:cadeaue_boutique/Ui/splash_screen/splash_screen.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/track_screen.dart';
 import 'package:cadeaue_boutique/Ui/welcome_page/welcome_page.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -150,7 +151,8 @@ class _MainDrawerState extends State<MainDrawer> {
                                 widget.categories!=null?
                                 widget.categories:null,)));
                             },
-                            child: singleDrawerItem("assets/images/drawer/category.svg", "Category")),
+                            child: singleDrawerItem("assets/images/drawer/category.svg",
+                                AppLocalizations.of(context).translate("category"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -174,8 +176,8 @@ class _MainDrawerState extends State<MainDrawer> {
                                 btnOkColor: AppColor.darkYellow,
                                 dialogType: DialogType.INFO,
                                 animType: AnimType.BOTTOMSLIDE,
-                                title: 'Login',
-                                desc: 'You must be logged in',
+                                title: AppLocalizations.of(context).translate('login'),
+                                desc: 'you_must_logged_in',
                                 btnCancelOnPress: () { },
                                 btnOkOnPress: () {
                                   WidgetsBinding.instance.addPostFrameCallback((_) =>
@@ -185,7 +187,8 @@ class _MainDrawerState extends State<MainDrawer> {
                               )..show();
                             }
                            },
-                            child: singleDrawerItem("assets/images/drawer/heart.svg", "Wishlist")),
+                            child: singleDrawerItem("assets/images/drawer/heart.svg",
+                                AppLocalizations.of(context).translate("wishlist"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -213,8 +216,8 @@ class _MainDrawerState extends State<MainDrawer> {
         btnOkColor: AppColor.darkYellow,
         dialogType: DialogType.INFO,
         animType: AnimType.BOTTOMSLIDE,
-        title: 'Login',
-        desc: 'You must be logged in',
+        title: AppLocalizations.of(context).translate('login'),
+        desc: AppLocalizations.of(context).translate('you_must_logged_in'),
         btnCancelOnPress: () { },
         btnOkOnPress: () {
           Navigator.of(context).pop();
@@ -228,7 +231,8 @@ class _MainDrawerState extends State<MainDrawer> {
 
 
                             },
-                            child: singleDrawerItem("assets/images/drawer/delivery.svg", "Track Order")),
+                            child: singleDrawerItem("assets/images/drawer/delivery.svg",
+                                AppLocalizations.of(context).translate("track_order"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -238,7 +242,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                             },
-                            child: singleDrawerItem("assets/images/drawer/shopping-bag (2).svg", "Cart")),
+                            child: singleDrawerItem("assets/images/drawer/shopping-bag (2).svg", AppLocalizations.of(context).translate("cart"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -253,7 +257,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             //     builder: (context)=>SettingsScreen()
                             //   ));
                             // },
-                            child: singleDrawerItem("assets/images/drawer/settings.svg", "Settings")),
+                            child: singleDrawerItem("assets/images/drawer/settings.svg", AppLocalizations.of(context).translate("settings"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -272,7 +276,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             onTap: (){
                               showComingSoonDialog();
                             },
-                            child: singleDrawerItem("assets/images/drawer/share.svg", "Invite a friend")),
+                            child: singleDrawerItem("assets/images/drawer/share.svg", AppLocalizations.of(context).translate("invite_friend"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -281,7 +285,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             onTap: (){
                               showComingSoonDialog();
                             },
-                            child: singleDrawerItem("assets/images/drawer/question.svg", "Help and feedback")),
+                            child: singleDrawerItem("assets/images/drawer/question.svg",AppLocalizations.of(context).translate("help_feedback"))),
                         SizedBox(
                           height: 30,
                         ),
@@ -323,8 +327,8 @@ class _MainDrawerState extends State<MainDrawer> {
                           btnOkColor: AppColor.darkYellow,
                           dialogType: DialogType.QUESTION,
                           animType: AnimType.BOTTOMSLIDE,
-                          title: 'Logout',
-                          desc: 'do you want to logout',
+                          title: AppLocalizations.of(context).translate('logout'),
+                          desc: AppLocalizations.of(context).translate('do_you_want_to_logout'),
                           btnCancelOnPress: () { },
                           btnOkOnPress: () async {
 
@@ -349,7 +353,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           SvgPicture.asset("assets/images/drawer/logout.svg"),
                           SizedBox(width:10),
                           Text(
-                            'Log Out',
+                            AppLocalizations.of(context).translate('logout'),
                             style: TextStyle(
                               color: AppColor.textColor,
                               fontSize: 18,
@@ -401,7 +405,7 @@ class _MainDrawerState extends State<MainDrawer> {
                          SvgPicture.asset("assets/images/drawer/logout.svg"),
                          SizedBox(width:10),
                          Text(
-                           'Login',
+                           AppLocalizations.of(context).translate('login'),
                            style: TextStyle(
                              color: AppColor.textColor,
                              fontSize: 18,

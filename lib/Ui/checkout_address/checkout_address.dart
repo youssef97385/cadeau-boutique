@@ -1,5 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/utils/utils.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -13,9 +17,10 @@ import 'package:cadeaue_boutique/Ui/checkout_address/checkout_address.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
-import 'package:country_picker/country_picker.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../injectoin.dart';
+import '../MyCountryPicker.dart';
 import 'bloc/checkout_state.dart';
 import 'bloc/checkout_bloc.dart';
 import 'bloc/checkout_event.dart';
@@ -67,6 +72,60 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
       });
   }
 
+
+  Country selectedCountry;
+  Country initCountry(String num){
+    return new Country(
+        phoneCode: CountryPickerUtils
+            .getCountryByPhoneCode(num).phoneCode,
+        name: "SAR",
+        iso3Code: "SAR",
+        isoCode: "SAR"
+    );
+  }
+
+  Future<Country> openCountryDialog(BuildContext context,{String search,String selectedHint,ValueChanged<Country> onValuePicked}) async {
+    return showDialog<Country>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return MyCountryPickerDialog(searchHint: search,selectHint: selectedHint,onValuePicked: onValuePicked,);
+      },
+    );
+  }
+
+  Widget initAddCountryPrefixIcon(){
+    return Container(
+
+      child: GestureDetector(
+        onTap: () async {
+          var item= await openCountryDialog(context,onValuePicked: (country){
+            setState(() {
+              selectedCountry=country;
+              countryCode=country.phoneCode;
+
+            });
+
+
+          });
+
+        },
+        child: MyCountryPicker(country: selectedCountry,padding: 0 ,
+            width: 99),
+      ),
+    );
+  }
+
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    selectedCountry=initCountry("966");
+
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery
@@ -102,7 +161,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                     height: 20,
                   ),
                   baseText(
-                      title: "Address",
+                      title: AppLocalizations.of(context).translate("address_details"),
                       color: AppColor.darkTextColor,
                       size: 20.0),
 
@@ -178,7 +237,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           children: [
                             baseText(
                                 size: 14.0,
-                                title: "Number of added people",
+                                title: AppLocalizations.of(context).translate("Number_of_added_people"),
                                 color: Color(0xff464646)),
                             baseText(
                                 color: AppColor.darkYellow,
@@ -229,7 +288,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
-                          hintText: "Gift To",
+                          hintText: AppLocalizations.of(context).translate("gift_to"),
                           contentPadding: EdgeInsets.only(
                             left: 16,
                             top: size.height * 0.02,
@@ -272,71 +331,76 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            Container(
-                              height: size.height * 0.07,
-                              width: size.width * .2,
-                              child: Center(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    showCountryPicker(
-                                      countryListTheme: CountryListThemeData(
-                                        flagSize: 25,
-                                        backgroundColor: Colors.white,
-                                        textStyle: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.blueGrey),
-                                      ),
-
-                                      context: context,
-                                      //Optional.  Can be used to exclude(remove) one ore more country from the countries list (optional).
-
-                                      //Optional. Shows phone code before the country name.
-                                      showPhoneCode: true,
-                                      onSelect: (Country country) {
-                                        print(
-                                            'Select country: ${country
-                                                .phoneCode}');
-                                        setState(() {
-                                          countryCode = country.phoneCode;
-                                        });
-                                      },
-                                    );
-                                  },
-                                  child: Text("+" + countryCode),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              // height: size.height * 0.07,
-                              width: size.width * .5,
-                              // color:Colors.red,
-                              child: TextFormField(
-                                controller: _phoneController,
-                                validator: emptyFieldVAlidator(phone, context),
-                                keyboardType: TextInputType.number,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
-                                  // labelText: "Phone Number",
-                                  hintText: "Phone Number",
-                                  contentPadding: EdgeInsets.all(12),
-                                  suffixIcon: false
-                                      ? Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Colors.red,
-                                  )
-                                      : Container(
-                                    width: 10,
+                            // Container(
+                            //   height: size.height * 0.07,
+                            //   width: size.width * .2,
+                            //
+                            // // TODO ADD THIS
+                            //  /* child: Center(
+                            //     child: ElevatedButton(
+                            //       onPressed: () {
+                            //         showCountryPicker(
+                            //           countryListTheme: CountryListThemeData(
+                            //             flagSize: 25,
+                            //             backgroundColor: Colors.white,
+                            //             textStyle: TextStyle(
+                            //                 fontSize: 16,
+                            //                 color: Colors.blueGrey),
+                            //           ),
+                            //
+                            //           context: context,
+                            //           //Optional.  Can be used to exclude(remove) one ore more country from the countries list (optional).
+                            //
+                            //           //Optional. Shows phone code before the country name.
+                            //           showPhoneCode: true,
+                            //           onSelect: (Country country) {
+                            //             print(
+                            //                 'Select country: ${country
+                            //                     .phoneCode}');
+                            //             setState(() {
+                            //               countryCode = country.phoneCode;
+                            //             });
+                            //           },
+                            //         );
+                            //       },
+                            //       child: Text("+" + countryCode),
+                            //     ),
+                            //   ),*/
+                            // ),
+                            Flexible(
+                              child: Container(
+                                // height: size.height * 0.07,
+                                width: size.width * .5,
+                                // color:Colors.red,
+                                child: TextFormField(
+                                  controller: _phoneController,
+                                  validator: emptyFieldVAlidator(phone, context),
+                                  keyboardType: TextInputType.number,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    // labelText: "Phone Number",
+                                    hintText: AppLocalizations.of(context).translate("phone_number"),
+                                    contentPadding: EdgeInsets.all(12),
+                                    suffixIcon: false
+                                        ? Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.red,
+                                    )
+                                        : Container(
+                                      width: 10,
+                                    ),
                                   ),
+                                  onChanged: (val) {
+                                    setState(() => phone = val);
+                                  },
+                                  onSaved: (value) => phone = value,
                                 ),
-                                onChanged: (val) {
-                                  setState(() => phone = val);
-                                },
-                                onSaved: (value) => phone = value,
                               ),
                             ),
+                            initAddCountryPrefixIcon()
                           ],
                         ),
                       ),
@@ -382,7 +446,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                             child: Text(
                               _dateSelected
                                   ? selectedDate.toString().substring(0, 10)
-                                  : "Delivery Date",
+                                  : AppLocalizations.of(context).translate("Delivery_Date"),
                               style: TextStyle(
                                   color: AppColor.textColor, fontSize: 14),
                             ),
@@ -424,7 +488,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
-                          hintText: "Delivery Address",
+                          hintText: AppLocalizations.of(context).translate("delevery_address"),
                           contentPadding: EdgeInsets.only(
                             left: 16,
                             top: size.height * 0.02,
@@ -504,7 +568,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         }
                       },
                       child: Text(
-                        'Add',
+                        AppLocalizations.of(context).translate('add'),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -520,15 +584,10 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
+
                       Container(
-                        // margin: EdgeInsets.only(bottom: 80),
-                        height: size.height * 0.07,
-                        width: size.width * .41,
-                      ),
-                      SizedBox(
-                        width: size.width * 0.03,
-                      ),
-                      Container(
+                        alignment: Alignment.center,
                         // margin: EdgeInsets.only(bottom: 80),
                         height: size.height * 0.07,
                         width: size.width * .41,
@@ -554,7 +613,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                             if(state.recievers.isEmpty){
 
 
-                              error("Please add receivers to continue");
+                              error("Please_add_receivers_to_continue");
                             }else
                             Navigator.push(
                               context,
@@ -572,7 +631,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                             // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
                           },
                           child: Text(
-                            'Proceed',
+                            AppLocalizations.of(context).translate('save'),
                             style: TextStyle(
                               color: AppColor.textColor,
                               fontSize: 13,

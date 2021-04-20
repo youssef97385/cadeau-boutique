@@ -10,6 +10,7 @@ import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
@@ -37,6 +38,10 @@ class Repository implements IRepository {
   Future<int> getAppLanguage() async {
     return await _iprefHelper.getAppLanguage();
   }
+  @override
+  Future<void> setAppLanguage(int lang) async {
+     await _iprefHelper.setAppLanguage(lang);
+  }
 
   @override
   Future<bool> getIsLogin() async {
@@ -63,7 +68,9 @@ class Repository implements IRepository {
     final nameuser= await _iprefHelper.setNameUser(user.user.name);
     final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
     final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
-      final email= await _iprefHelper.setEmail(user.user.email);
+    final email= await _iprefHelper.setEmail(user.user.email);
+    final loginType=await _iprefHelper.setLoginType(LOGIN_TYPE_NORMAL);
+    final pass=await _iprefHelper.setPassword(password);
     if(user.user.gender!=null)
       final gemderuser= await _iprefHelper.setGender(user.user.gender);
       final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
@@ -96,7 +103,8 @@ class Repository implements IRepository {
     final nameuser= await _iprefHelper.setNameUser(user.user.name);
     final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
     final phoneCode= await _iprefHelper.setPhoneNumber(user.user.phoneNumber);
-
+    final loginType=await _iprefHelper.setLoginType(LOGIN_TYPE_NORMAL);
+    final pass=await _iprefHelper.setPassword(password);
     if(user.user.gender!=null)
     final gemderuser= await _iprefHelper.setGender(user.user.gender);
     if(user.user.email!=null)
@@ -135,9 +143,11 @@ class Repository implements IRepository {
 
 
     final nameuser= await _iprefHelper.setNameUser(user.user.name);
-    final countyCode= await _iprefHelper.setCountryCode(user.user.countryCode);
+    final countyCode= await _iprefHelper.setCountryCode("");
     final phoneCode= await _iprefHelper.setPhoneNumber(0);
-
+    final loginType=await _iprefHelper.setLoginType(LOGIN_TYPE_SOCIAL);
+    final sToken=await _iprefHelper.setSocialToken(socialToken);
+    final pass=await _iprefHelper.setPassword("");
     if(user.user.email!=null) final email= await _iprefHelper.setEmail(user.user.email);
     if(user.user.dateBirth!=null) final dateOf= await _iprefHelper.setDate(user.user.dateBirth);
 
@@ -510,5 +520,27 @@ class Repository implements IRepository {
   @override
   Future<String> getZip() async{
     return await _iprefHelper.getZIP();
+  }
+
+  @override
+  Future<String> getSocialToken() async{
+    return await _iprefHelper.getSocialToken();
+  }
+
+  @override
+  Future<String> getLoginType()async {
+    return await _iprefHelper.getLoginType();
+  }
+
+  @override
+  Future<String> getPassword() async {
+    return await _iprefHelper.getPassword();
+  }
+
+  @override
+  Future<MainGift> getMainGift()async {
+    final item = await _ihttpHelper.getMainGift();
+    return item;
+
   }
 }

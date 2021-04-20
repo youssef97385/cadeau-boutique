@@ -17,6 +17,11 @@ abstract class SliderModel implements Built<SliderModel, SliderModelBuilder> {
   @BuiltValueField(wireName: "media_path")
   String get img;
 
+
+  @BuiltValueField(wireName: "brand_id")
+  @nullable
+  int get brandID;
+
   SliderModel._();
 
   factory SliderModel([updates(SliderModelBuilder b)]) = _$SliderModel;

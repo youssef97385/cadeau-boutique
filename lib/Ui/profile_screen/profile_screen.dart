@@ -4,6 +4,7 @@ import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_state.dart';
 import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_bloc.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/track_screen.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 
 
@@ -164,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                        var response=     openMapPage(context, EditProfileScreen(
                               emailUser: AppColor.UserInfoModelGlobal.email,genderUser: AppColor.UserInfoModelGlobal.gender,
                               nameUser: AppColor.UserInfoModelGlobal.name,phoneUser: AppColor.UserInfoModelGlobal.phone,
-                       dateUser: AppColor.UserInfoModelGlobal.dateOf,));
+                       dateUser: AppColor.UserInfoModelGlobal.dateOf,countryCodeUser: AppColor.UserInfoModelGlobal.countryCode,));
 
 
                       /*      Navigator.push(context,
@@ -175,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           emailUser: state.email,genderUser: state.gender,
                                         nameUser: state.name,phoneUser: state.phoneNumber.toString(),)));*/
                           },
-                          child: singleProfileItem(title: "Edit Profile",icon: "assets/images/drawer/edit.svg",size: size)),
+                          child: singleProfileItem(title: AppLocalizations.of(context).translate("edit_profile"),icon: "assets/images/drawer/edit.svg",size: size)),
 
                       // SizedBox(
                       //   height: size.height*0.04,
@@ -207,7 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ProfileAddressesScreen(addressUser: AppColor.UserAddressV2.address,cityUser: AppColor.UserAddressV2.city
                                                 ,stateUser: AppColor.UserAddressV2.state,zipUser: AppColor.UserAddressV2.zip,)));
                                 },
-                                child: singleProfileItem(title: "Address",icon: "assets/images/profile/address.svg",size: size));
+                                child: singleProfileItem(title: AppLocalizations.of(context).translate("address"),icon: "assets/images/profile/address.svg",size: size));
                             }),
 
 
@@ -221,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 builder: (context)=>WishlistScreen()
                             ));
                           },
-                          child: singleProfileItem(title: "Wishlist",icon: "assets/images/drawer/heart.svg",size: size)),
+                          child: singleProfileItem(title: AppLocalizations.of(context).translate("wishlist"),icon: "assets/images/drawer/heart.svg",size: size)),
 
                       // SizedBox(
                       //   height: size.height*0.04,
@@ -234,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
 
 
-                          child: singleProfileItem(title: "Order History",icon: "assets/images/profile/history.svg",size: size)),
+                          child: singleProfileItem(title: AppLocalizations.of(context).translate("order_history"),icon: "assets/images/profile/history.svg",size: size)),
 
                       // SizedBox(
                       //   height: size.height*0.04,

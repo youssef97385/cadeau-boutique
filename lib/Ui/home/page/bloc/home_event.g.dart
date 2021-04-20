@@ -440,6 +440,60 @@ class GetAllProductsBuilder
   }
 }
 
+class _$GetMainGift extends GetMainGift {
+  factory _$GetMainGift([void Function(GetMainGiftBuilder) updates]) =>
+      (new GetMainGiftBuilder()..update(updates)).build();
+
+  _$GetMainGift._() : super._();
+
+  @override
+  GetMainGift rebuild(void Function(GetMainGiftBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetMainGiftBuilder toBuilder() => new GetMainGiftBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetMainGift;
+  }
+
+  @override
+  int get hashCode {
+    return 513116309;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('GetMainGift').toString();
+  }
+}
+
+class GetMainGiftBuilder implements Builder<GetMainGift, GetMainGiftBuilder> {
+  _$GetMainGift _$v;
+
+  GetMainGiftBuilder();
+
+  @override
+  void replace(GetMainGift other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetMainGift;
+  }
+
+  @override
+  void update(void Function(GetMainGiftBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GetMainGift build() {
+    final _$result = _$v ?? new _$GetMainGift._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$IniEvent extends IniEvent {
   factory _$IniEvent([void Function(IniEventBuilder) updates]) =>
       (new IniEventBuilder()..update(updates)).build();

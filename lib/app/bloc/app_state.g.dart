@@ -11,14 +11,40 @@ class _$AppState extends AppState {
   final bool loginState;
   @override
   final int appLanguage;
+  @override
+  final String appLanguageString;
+  @override
+  final String loginType;
+  @override
+  final String socialToken;
+  @override
+  final String name;
+  @override
+  final String password;
+  @override
+  final String countryCode;
+  @override
+  final String phoneNumber;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.loginState, this.appLanguage}) : super._() {
+  _$AppState._(
+      {this.loginState,
+      this.appLanguage,
+      this.appLanguageString,
+      this.loginType,
+      this.socialToken,
+      this.name,
+      this.password,
+      this.countryCode,
+      this.phoneNumber})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(loginState, 'AppState', 'loginState');
     BuiltValueNullFieldError.checkNotNull(
         appLanguage, 'AppState', 'appLanguage');
+    BuiltValueNullFieldError.checkNotNull(
+        appLanguageString, 'AppState', 'appLanguageString');
   }
 
   @override
@@ -33,19 +59,48 @@ class _$AppState extends AppState {
     if (identical(other, this)) return true;
     return other is AppState &&
         loginState == other.loginState &&
-        appLanguage == other.appLanguage;
+        appLanguage == other.appLanguage &&
+        appLanguageString == other.appLanguageString &&
+        loginType == other.loginType &&
+        socialToken == other.socialToken &&
+        name == other.name &&
+        password == other.password &&
+        countryCode == other.countryCode &&
+        phoneNumber == other.phoneNumber;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, loginState.hashCode), appLanguage.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc($jc(0, loginState.hashCode),
+                                    appLanguage.hashCode),
+                                appLanguageString.hashCode),
+                            loginType.hashCode),
+                        socialToken.hashCode),
+                    name.hashCode),
+                password.hashCode),
+            countryCode.hashCode),
+        phoneNumber.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
           ..add('loginState', loginState)
-          ..add('appLanguage', appLanguage))
+          ..add('appLanguage', appLanguage)
+          ..add('appLanguageString', appLanguageString)
+          ..add('loginType', loginType)
+          ..add('socialToken', socialToken)
+          ..add('name', name)
+          ..add('password', password)
+          ..add('countryCode', countryCode)
+          ..add('phoneNumber', phoneNumber))
         .toString();
   }
 }
@@ -61,6 +116,35 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   int get appLanguage => _$this._appLanguage;
   set appLanguage(int appLanguage) => _$this._appLanguage = appLanguage;
 
+  String _appLanguageString;
+  String get appLanguageString => _$this._appLanguageString;
+  set appLanguageString(String appLanguageString) =>
+      _$this._appLanguageString = appLanguageString;
+
+  String _loginType;
+  String get loginType => _$this._loginType;
+  set loginType(String loginType) => _$this._loginType = loginType;
+
+  String _socialToken;
+  String get socialToken => _$this._socialToken;
+  set socialToken(String socialToken) => _$this._socialToken = socialToken;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  String _password;
+  String get password => _$this._password;
+  set password(String password) => _$this._password = password;
+
+  String _countryCode;
+  String get countryCode => _$this._countryCode;
+  set countryCode(String countryCode) => _$this._countryCode = countryCode;
+
+  String _phoneNumber;
+  String get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String phoneNumber) => _$this._phoneNumber = phoneNumber;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -68,6 +152,13 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     if ($v != null) {
       _loginState = $v.loginState;
       _appLanguage = $v.appLanguage;
+      _appLanguageString = $v.appLanguageString;
+      _loginType = $v.loginType;
+      _socialToken = $v.socialToken;
+      _name = $v.name;
+      _password = $v.password;
+      _countryCode = $v.countryCode;
+      _phoneNumber = $v.phoneNumber;
       _$v = null;
     }
     return this;
@@ -91,7 +182,15 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
             loginState: BuiltValueNullFieldError.checkNotNull(
                 loginState, 'AppState', 'loginState'),
             appLanguage: BuiltValueNullFieldError.checkNotNull(
-                appLanguage, 'AppState', 'appLanguage'));
+                appLanguage, 'AppState', 'appLanguage'),
+            appLanguageString: BuiltValueNullFieldError.checkNotNull(
+                appLanguageString, 'AppState', 'appLanguageString'),
+            loginType: loginType,
+            socialToken: socialToken,
+            name: name,
+            password: password,
+            countryCode: countryCode,
+            phoneNumber: phoneNumber);
     replace(_$result);
     return _$result;
   }

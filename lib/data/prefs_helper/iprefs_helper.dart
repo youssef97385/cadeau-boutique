@@ -22,6 +22,7 @@ abstract class IPrefsHelper {
   Future<void>setEmail(String txt);
   Future<void>setDate(String txt);
   Future<void>setGender(String txt);
+  Future<void>setPassword(String txt);
 
 
   Future<void>setCity(String txt);
@@ -30,6 +31,10 @@ abstract class IPrefsHelper {
   Future<void>setZIP(String txt);
 
 
+  //splash
+  Future<void>setSocialToken(String txt);
+  Future<void>setLoginType(String txt);
+
 
   Future<String>getNameUser();
   Future<String>getCountryCode();
@@ -37,6 +42,9 @@ abstract class IPrefsHelper {
   Future<String>getEmail();
   Future<String>getDate();
   Future<String>getGender();
+  Future<String>getPassword();
+
+
 
 
 
@@ -46,4 +54,7 @@ abstract class IPrefsHelper {
   Future<String>getZIP();
 
 
+  //splash
+  Future<String>getSocialToken();
+  Future<String>getLoginType();
 }

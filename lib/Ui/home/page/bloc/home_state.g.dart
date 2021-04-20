@@ -16,6 +16,8 @@ class _$HomeState extends HomeState {
   @override
   final bool loginState;
   @override
+  final int lang;
+  @override
   final BuiltList<SliderModel> sliders;
   @override
   final BuiltList<OccasionModel> occasions;
@@ -31,6 +33,8 @@ class _$HomeState extends HomeState {
   final BuiltList<WrapModel> wraps;
   @override
   final BuiltList<ProductModel> products;
+  @override
+  final MainGift mainGift;
 
   factory _$HomeState([void Function(HomeStateBuilder) updates]) =>
       (new HomeStateBuilder()..update(updates)).build();
@@ -40,6 +44,7 @@ class _$HomeState extends HomeState {
       this.isLoading,
       this.error,
       this.loginState,
+      this.lang,
       this.sliders,
       this.occasions,
       this.nearbyOccasions,
@@ -47,13 +52,15 @@ class _$HomeState extends HomeState {
       this.brands,
       this.coupons,
       this.wraps,
-      this.products})
+      this.products,
+      this.mainGift})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'HomeState', 'success');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'HomeState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'HomeState', 'error');
     BuiltValueNullFieldError.checkNotNull(
         loginState, 'HomeState', 'loginState');
+    BuiltValueNullFieldError.checkNotNull(lang, 'HomeState', 'lang');
     BuiltValueNullFieldError.checkNotNull(sliders, 'HomeState', 'sliders');
     BuiltValueNullFieldError.checkNotNull(occasions, 'HomeState', 'occasions');
     BuiltValueNullFieldError.checkNotNull(
@@ -64,6 +71,7 @@ class _$HomeState extends HomeState {
     BuiltValueNullFieldError.checkNotNull(coupons, 'HomeState', 'coupons');
     BuiltValueNullFieldError.checkNotNull(wraps, 'HomeState', 'wraps');
     BuiltValueNullFieldError.checkNotNull(products, 'HomeState', 'products');
+    BuiltValueNullFieldError.checkNotNull(mainGift, 'HomeState', 'mainGift');
   }
 
   @override
@@ -81,6 +89,7 @@ class _$HomeState extends HomeState {
         isLoading == other.isLoading &&
         error == other.error &&
         loginState == other.loginState &&
+        lang == other.lang &&
         sliders == other.sliders &&
         occasions == other.occasions &&
         nearbyOccasions == other.nearbyOccasions &&
@@ -88,7 +97,8 @@ class _$HomeState extends HomeState {
         brands == other.brands &&
         coupons == other.coupons &&
         wraps == other.wraps &&
-        products == other.products;
+        products == other.products &&
+        mainGift == other.mainGift;
   }
 
   @override
@@ -103,18 +113,24 @@ class _$HomeState extends HomeState {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, success.hashCode),
-                                                isLoading.hashCode),
-                                            error.hashCode),
-                                        loginState.hashCode),
-                                    sliders.hashCode),
-                                occasions.hashCode),
-                            nearbyOccasions.hashCode),
-                        categories.hashCode),
-                    brands.hashCode),
-                coupons.hashCode),
-            wraps.hashCode),
-        products.hashCode));
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(0,
+                                                            success.hashCode),
+                                                        isLoading.hashCode),
+                                                    error.hashCode),
+                                                loginState.hashCode),
+                                            lang.hashCode),
+                                        sliders.hashCode),
+                                    occasions.hashCode),
+                                nearbyOccasions.hashCode),
+                            categories.hashCode),
+                        brands.hashCode),
+                    coupons.hashCode),
+                wraps.hashCode),
+            products.hashCode),
+        mainGift.hashCode));
   }
 
   @override
@@ -124,6 +140,7 @@ class _$HomeState extends HomeState {
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('loginState', loginState)
+          ..add('lang', lang)
           ..add('sliders', sliders)
           ..add('occasions', occasions)
           ..add('nearbyOccasions', nearbyOccasions)
@@ -131,7 +148,8 @@ class _$HomeState extends HomeState {
           ..add('brands', brands)
           ..add('coupons', coupons)
           ..add('wraps', wraps)
-          ..add('products', products))
+          ..add('products', products)
+          ..add('mainGift', mainGift))
         .toString();
   }
 }
@@ -154,6 +172,10 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   bool _loginState;
   bool get loginState => _$this._loginState;
   set loginState(bool loginState) => _$this._loginState = loginState;
+
+  int _lang;
+  int get lang => _$this._lang;
+  set lang(int lang) => _$this._lang = lang;
 
   ListBuilder<SliderModel> _sliders;
   ListBuilder<SliderModel> get sliders =>
@@ -199,6 +221,10 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   set products(ListBuilder<ProductModel> products) =>
       _$this._products = products;
 
+  MainGiftBuilder _mainGift;
+  MainGiftBuilder get mainGift => _$this._mainGift ??= new MainGiftBuilder();
+  set mainGift(MainGiftBuilder mainGift) => _$this._mainGift = mainGift;
+
   HomeStateBuilder();
 
   HomeStateBuilder get _$this {
@@ -208,6 +234,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _isLoading = $v.isLoading;
       _error = $v.error;
       _loginState = $v.loginState;
+      _lang = $v.lang;
       _sliders = $v.sliders.toBuilder();
       _occasions = $v.occasions.toBuilder();
       _nearbyOccasions = $v.nearbyOccasions.toBuilder();
@@ -216,6 +243,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _coupons = $v.coupons.toBuilder();
       _wraps = $v.wraps.toBuilder();
       _products = $v.products.toBuilder();
+      _mainGift = $v.mainGift.toBuilder();
       _$v = null;
     }
     return this;
@@ -246,6 +274,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
                   error, 'HomeState', 'error'),
               loginState: BuiltValueNullFieldError.checkNotNull(
                   loginState, 'HomeState', 'loginState'),
+              lang: BuiltValueNullFieldError.checkNotNull(
+                  lang, 'HomeState', 'lang'),
               sliders: sliders.build(),
               occasions: occasions.build(),
               nearbyOccasions: nearbyOccasions.build(),
@@ -253,7 +283,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
               brands: brands.build(),
               coupons: coupons.build(),
               wraps: wraps.build(),
-              products: products.build());
+              products: products.build(),
+              mainGift: mainGift.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -273,6 +304,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
         wraps.build();
         _$failedField = 'products';
         products.build();
+        _$failedField = 'mainGift';
+        mainGift.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'HomeState', _$failedField, e.toString());
