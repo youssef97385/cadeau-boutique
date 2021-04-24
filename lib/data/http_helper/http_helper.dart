@@ -69,6 +69,7 @@ class HttpHelper implements IHttpHelper {
         "gender": gender,
         "name": name,
         "password": password,
+        "sms_code": "545454",
       };
       _dio.interceptors.add(CookieManager(cookieJar));
       final response =

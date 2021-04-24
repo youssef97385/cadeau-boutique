@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _bloc.add(GetAllProducts());
 
     Timer.periodic(Duration(seconds: 3), (Timer timer) {
-      if (_currentPage < 2) {
+      if (_currentPage < 3) {
         _currentPage++;
       } else {
         _currentPage = 0;
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+
     super.dispose();
   }
 
@@ -230,8 +230,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                       ),
                                     ),
+
                               SizedBox(height: 16),
 
+                              state.sliders.isEmpty?Container():
                               Padding(
                                 padding:
                                     const EdgeInsets.only(top: 8.0, bottom: 8),
@@ -267,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: const EdgeInsets.only(
                                                 left: 16.0, bottom: 16),
                                             child: Text(
-                                              "Occasions",
+                                              AppLocalizations.of(context).translate("occasions"),
                                               style: TextStyle(
                                                   color: Color(0xff393741),
                                                   fontSize: 18),
@@ -685,7 +687,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Top Seller",
+                                    AppLocalizations.of(context).translate("top_seller"),
                                       style: TextStyle(
                                           fontSize: 22,
                                           color: Color(0xff393741)),
@@ -700,7 +702,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         id: 1, type: 'all')));
                                       },
                                       child: Text(
-                                        "More",
+                                        AppLocalizations.of(context).translate("more"),
                                         style: TextStyle(
                                             color: AppColor.darkYellow,
                                             fontSize: 18),
@@ -1031,7 +1033,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  "Categories",
+                                                AppLocalizations.of(context).translate("categories"),
                                                   style: TextStyle(
                                                       fontSize: 22,
                                                       color: Color(0xff393741)),
@@ -1045,7 +1047,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 CategoriesScreen(categories: state.categories,)));
                                                   },
                                                   child: Text(
-                                                    "More",
+                                                     AppLocalizations.of(context).translate("more"),
                                                     style: TextStyle(
                                                         color:
                                                             AppColor.darkYellow,
@@ -1113,13 +1115,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Latest",
+                                    AppLocalizations.of(context).translate("latest"),
                                       style: TextStyle(
                                           fontSize: 22,
                                           color: Color(0xff393741)),
                                     ),
                                     Text(
-                                      "More",
+                                       AppLocalizations.of(context).translate("more"),
                                       style: TextStyle(
                                           color: AppColor.darkYellow,
                                           fontSize: 18),
@@ -2000,7 +2002,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 color: Color(0xff393741)),
                                           ),
                                           Text(
-                                            "More",
+                                             AppLocalizations.of(context).translate("more"),
                                             style: TextStyle(
                                                 color: AppColor.darkYellow,
                                                 fontSize: 18),

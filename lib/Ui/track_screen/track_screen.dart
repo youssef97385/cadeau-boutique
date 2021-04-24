@@ -1,4 +1,5 @@
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart';
 import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
 import 'package:cadeaue_boutique/data/http_helper/Ihttp_helper.dart';
@@ -21,6 +22,7 @@ import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_state.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_event.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_bloc.dart';
+import 'package:cadeaue_boutique/Ui/empty_page/empty_page.dart';
 
 
 import '../../injectoin.dart';
@@ -39,6 +41,77 @@ class _TrackScreenState extends State<TrackScreen> {
   bool loading=true;
   int ticks=2;
 
+
+  Widget EmptyWidget({Size size , String image , String title , String subTitle=""}){
+    return Stack(
+      children: [
+        Stack(
+          children: [
+            Container(
+                width: size.width,
+                height: size.height * 0.6,
+                child: Image.asset(
+                  "assets/images/background.png",
+                  fit: BoxFit.cover,
+                )),
+            Positioned(
+              bottom: -60,
+              right: 0,
+              left: 0,
+              child: Container(
+                  width: 483,
+                  height: 192,
+                  child: SvgPicture.asset(
+                    "assets/images/bottombackground.svg",
+                    fit: BoxFit.cover,
+                  )),
+            ),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.1,
+                  ),
+                  baseText(
+                      title: title,
+                      color: AppColor.darkTextColor,
+                      size: 24.0),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  Container(
+                      width: size.width,
+                      child: Center(
+                          child: baseText(
+                              title:
+                              subTitle,
+                              size: 14.0,
+                              color: AppColor
+                                  .darkTextColor,
+                              textAlign:
+                              TextAlign.center))),
+                  SizedBox(
+                    height: size.height * 0.1,
+                  ),
+                  Image.asset(
+                    image==null?"assets/images/shopping-bag (2).png":image,
+                    fit: BoxFit.fill,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  SvgPicture.asset(
+                   "assets/images/shadow.svg",
+                    fit: BoxFit.fill,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   final _bloc = sl<TrackScreenBloc>();
   List<Data> trackHomeModelList;
@@ -144,6 +217,10 @@ class _TrackScreenState extends State<TrackScreen> {
                         height: 20,
                       ),
 
+
+                      (state.tracks.isEmpty &&!state.isLoading)?EmptyPage(size: size,
+                        title: AppLocalizations.of(context).translate("your_tack_order_is_empty"),
+                      ):
 
                       Flexible(
                         child: ListView.builder(

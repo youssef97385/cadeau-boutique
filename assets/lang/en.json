@@ -57,8 +57,30 @@
   "you_must_logged_in": "You must be logged in",
   "invite_friend": "Invite a friend",
   "help_feedback": "Help and feedback",
-  "main_gift":"Main Gift"
-
+  "main_gift":"Main Gift",
+  "your_tack_order_is_empty": "Your Track Order Is Empty",
+  "occasions": "Occasions",
+  "top_seller": "Top Seller",
+  "more": "More",
+  "categories": "Categories",
+  "latest": "Latest",
+  "no_data": "There are no products to display",
+  "lets_find_you_gift": "Let's Find You a Gift",
+  "choose_occasion": "Choose Occasion",
+  "find_now": "Find Now",
+  "back": "Back",
+  "tow_out_five": "2 out of 5",
+  "next": "Next",
+  "choose_relation": "Choose Relation",
+  "three_out_five": "three_out_five",
+  "choose_gender": "Choose Gender",
+  "choose_age": "Choose Age",
+  "choose_price": "Choose Price",
+  "max": "Max:",
+  "min": "Min:",
+  "five_out_five": "5 out of 5",
+  "find": "Find",
+  "one_out_five": "1 out of 5"
 
 
 

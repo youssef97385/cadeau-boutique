@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -10,6 +11,7 @@ import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_event.dart';
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_state.dart';
+import 'package:cadeaue_boutique/Ui/empty_page/empty_page.dart';
 
 import '../../injectoin.dart';
 
@@ -99,6 +101,9 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                 child: Column(
                   children: [
                     baseAppBar(size , context),
+                    (state.products.isEmpty &&!state.isLoading)?EmptyPage(size: size,
+                      title: AppLocalizations.of(context).translate("no_data"),
+                    ):
                     Container(
                       width: size.width*0.9,
                       child: GridView.builder(

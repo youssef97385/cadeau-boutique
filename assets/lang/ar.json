@@ -57,7 +57,32 @@
   "you_must_logged_in": "يجب عليك تسجيل الدخول اولا!!!",
   "invite_friend": "ادعو صديقك",
   "help_feedback": "مساعدة وتقييم",
-  "main_gift":"الهدية الرئيسية"
+  "main_gift":"الهدية الرئيسية",
+  "your_tack_order_is_empty": "لايوجد لديك طلبات",
+  "occasions": "المناسبات",
+  "top_seller": "الاعلى مبيعا",
+  "more": "مزيد",
+  "categories": "الاصناف",
+  "latest": "الاحدث",
+  "no_data": "لايوجد بيانات للعرض",
+  "lets_find_you_gift": "لنجد لك هدية",
+  "choose_occasion": "اختر المناسبة",
+  "find_now": "بحث الان",
+  "back": "رجوع",
+  "tow_out_five": "2 من اصل 5",
+  "next": "التالي",
+  "choose_relation": "اختر العلاقة",
+  "three_out_five": "3 من اصل 5",
+  "choose_gender": "اختر الجنس",
+  "choose_age": "اختر العمر",
+  "choose_price": "اختر السعر",
+  "max": "الاعلى",
+  "min": "الادنى",
+  "five_out_five": "5 من اصل 5",
+  "find": "بحث",
+  "one_out_five": "1 من اصل 5"
+
+
 
 
 }

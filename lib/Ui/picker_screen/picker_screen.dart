@@ -1,6 +1,7 @@
 import 'package:cadeaue_boutique/Ui/filter_result/filter_result.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
 import 'package:cadeaue_boutique/Ui/home_screen/home_Screen.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/welcome_page/welcome_page.dart';
@@ -91,7 +92,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         height: size.height * 0.05,
                       ),
                       Text(
-                        "Let's Find You a Gift",
+                        AppLocalizations.of(context).translate("lets_find_you_gift"),
                         style: TextStyle(
                           color: Color(0xff596273),
                           fontSize: 35,
@@ -189,7 +190,7 @@ class _PickerScreenState extends State<PickerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Choose Occasion",
+                          AppLocalizations.of(context).translate("choose_occasion"),
                           style: TextStyle(
                             fontSize: 21,
                             color: Color(0xff515A6B),
@@ -256,7 +257,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         color: Color(0xff393741)),
                     child: Center(
                       child: Text(
-                        "Find Now",
+                        AppLocalizations.of(context).translate("find_now"),
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ),
@@ -283,7 +284,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Back",
+                              AppLocalizations.of(context).translate("back"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -291,7 +292,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        "2 out of 5",
+                        AppLocalizations.of(context).translate("tow_out_five"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),
@@ -313,7 +314,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Next",
+                              AppLocalizations.of(context).translate("next"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -353,7 +354,7 @@ class _PickerScreenState extends State<PickerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Choose Relation",
+                          AppLocalizations.of(context).translate("choose_relation"),
                           style: TextStyle(
                             fontSize: 21,
                             color: Color(0xff515A6B),
@@ -424,7 +425,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         color: Color(0xff393741)),
                     child: Center(
                       child: Text(
-                        "Find Now",
+                        AppLocalizations.of(context).translate("find_now"),
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ),
@@ -451,7 +452,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Back",
+                              AppLocalizations.of(context).translate("back"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -459,7 +460,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        "3 out of 5",
+                        AppLocalizations.of(context).translate("three_out_five"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),
@@ -481,7 +482,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Next",
+                              AppLocalizations.of(context).translate("next"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -519,7 +520,7 @@ class _PickerScreenState extends State<PickerScreen> {
                 Column(
                   children: [
                     Text(
-                      "Choose Gender",
+                      AppLocalizations.of(context).translate("choose_gender"),
                       style: TextStyle(
                         fontSize: 21,
                         color: Color(0xff515A6B),
@@ -569,7 +570,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         SizedBox(
                           height: 15,
                         ),
-                        Text("Male",
+                        Text(AppLocalizations.of(context).translate("male"),
                             style: TextStyle(
                                 color: Color(0xff515A6B), fontSize: 16))
                       ],
@@ -617,7 +618,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         SizedBox(
                           height: 15,
                         ),
-                        Text("Female",
+                        Text(AppLocalizations.of(context).translate("female"),
                             style: TextStyle(
                                 color: Color(0xff515A6B), fontSize: 16))
                       ],
@@ -648,7 +649,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         color: Color(0xff393741)),
                     child: Center(
                       child: Text(
-                        "Find Now",
+                        AppLocalizations.of(context).translate("find_now"),
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ),
@@ -672,7 +673,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Back",
+                              AppLocalizations.of(context).translate("back"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -680,7 +681,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        "1 out of 5",
+                        AppLocalizations.of(context).translate("one_out_five"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),
@@ -707,7 +708,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Next",
+                              AppLocalizations.of(context).translate("next"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -747,7 +748,7 @@ class _PickerScreenState extends State<PickerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Choose Age",
+                          AppLocalizations.of(context).translate("choose_age"),
                           style: TextStyle(
                             fontSize: 21,
                             color: Color(0xff515A6B),
@@ -852,7 +853,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         color: Color(0xff393741)),
                     child: Center(
                       child: Text(
-                        "Find Now",
+                        AppLocalizations.of(context).translate("find_now"),
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ),
@@ -879,7 +880,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Back",
+                              AppLocalizations.of(context).translate("back"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -887,7 +888,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        "4 out of 5",
+                        AppLocalizations.of(context).translate("4 out of 5"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),
@@ -909,7 +910,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Next",
+                              AppLocalizations.of(context).translate("next"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -949,7 +950,7 @@ class _PickerScreenState extends State<PickerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Choose Price ",
+                          AppLocalizations.of(context).translate("choose_price"),
                           style: TextStyle(
                             fontSize: 21,
                             color: Color(0xff515A6B),
@@ -978,7 +979,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 width: 4,
                               ),
                               Text(
-                                "Max:",
+                                AppLocalizations.of(context).translate("max"),
                                 style: TextStyle(
                                     color: Color(0xff515A6B), fontSize: 21),
                               )
@@ -1071,7 +1072,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 width: 4,
                               ),
                               Text(
-                                "Mine:",
+                                AppLocalizations.of(context).translate("min"),
                                 style: TextStyle(
                                     color: Color(0xff515A6B), fontSize: 21),
                               )
@@ -1173,7 +1174,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Back",
+                              AppLocalizations.of(context).translate("back"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
@@ -1181,7 +1182,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        "5 out of 5",
+                        AppLocalizations.of(context).translate("five_out_five"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),
@@ -1211,7 +1212,7 @@ class _PickerScreenState extends State<PickerScreen> {
                               color: Color(0xffF2D750)),
                           child: Center(
                             child: Text(
-                              "Find",
+                              AppLocalizations.of(context).translate("find"),
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xff515A6B)),
                             ),
