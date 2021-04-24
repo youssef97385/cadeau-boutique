@@ -173,4 +173,7 @@ Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId , String token});
 
 Future<MainGift> getMainGift();
 
+
+Future<BuiltList<ProductModel>> getTopSeller();
+
 }

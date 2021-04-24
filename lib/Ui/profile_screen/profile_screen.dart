@@ -22,6 +22,7 @@ import 'package:cadeaue_boutique/Ui/profile_addresses/profile_addresses.dart';
 import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_state.dart';
 import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_event.dart';
 import 'package:cadeaue_boutique/Ui/my_cards/my_cards.dart';
+import 'package:cadeaue_boutique/Ui/verify_code/verify_code.dart';
 
 import '../../injectoin.dart';
 class ProfileScreen extends StatefulWidget {
@@ -168,13 +169,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                        dateUser: AppColor.UserInfoModelGlobal.dateOf,countryCodeUser: AppColor.UserInfoModelGlobal.countryCode,));
 
 
-                      /*      Navigator.push(context,
+                        /*    Navigator.push(context,
                                 MaterialPageRoute(
                                 builder:
                                     (context)=>
-                                        EditProfileScreen(
-                                          emailUser: state.email,genderUser: state.gender,
-                                        nameUser: state.name,phoneUser: state.phoneNumber.toString(),)));*/
+                                    VerifyCode()));*/
                           },
                           child: singleProfileItem(title: AppLocalizations.of(context).translate("edit_profile"),icon: "assets/images/drawer/edit.svg",size: size)),
 

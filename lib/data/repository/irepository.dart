@@ -164,6 +164,10 @@ abstract class IRepository {
   Future<String>getSocialToken();
   Future<String>getLoginType();
   Future<String>getPassword();
+
+
+
+  Future<BuiltList<ProductModel>> getTopSeller();
 }
 
 ///

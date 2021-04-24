@@ -80,7 +80,11 @@
   "min": "الادنى",
   "five_out_five": "5 من اصل 5",
   "find": "بحث",
-  "one_out_five": "1 من اصل 5"
+  "one_out_five": "1 من اصل 5",
+  "code_success":"تم ارسال الكود بنجاح",
+  "enter_verfiy_code":"ادخل كود التأكيد",
+  "verify_code":"تأكيد الكود",
+  "resend_code":"اعادة ارسال"
 
 
 

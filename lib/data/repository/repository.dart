@@ -543,4 +543,10 @@ class Repository implements IRepository {
     return item;
 
   }
+
+  @override
+  Future<BuiltList<ProductModel>> getTopSeller() async{
+    final products = await _ihttpHelper.getTopSeller();
+    return products;
+  }
 }

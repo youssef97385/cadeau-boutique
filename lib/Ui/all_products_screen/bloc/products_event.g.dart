@@ -93,4 +93,59 @@ class GetProductsBuilder implements Builder<GetProducts, GetProductsBuilder> {
   }
 }
 
+class _$GetTopSeller extends GetTopSeller {
+  factory _$GetTopSeller([void Function(GetTopSellerBuilder) updates]) =>
+      (new GetTopSellerBuilder()..update(updates)).build();
+
+  _$GetTopSeller._() : super._();
+
+  @override
+  GetTopSeller rebuild(void Function(GetTopSellerBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetTopSellerBuilder toBuilder() => new GetTopSellerBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetTopSeller;
+  }
+
+  @override
+  int get hashCode {
+    return 956438260;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('GetTopSeller').toString();
+  }
+}
+
+class GetTopSellerBuilder
+    implements Builder<GetTopSeller, GetTopSellerBuilder> {
+  _$GetTopSeller _$v;
+
+  GetTopSellerBuilder();
+
+  @override
+  void replace(GetTopSeller other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GetTopSeller;
+  }
+
+  @override
+  void update(void Function(GetTopSellerBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GetTopSeller build() {
+    final _$result = _$v ?? new _$GetTopSeller._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

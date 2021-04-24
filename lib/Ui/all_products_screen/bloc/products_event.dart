@@ -18,3 +18,11 @@ implements Built<GetProducts, GetProductsBuilder> {
 
   factory GetProducts([updates(GetProductsBuilder b)]) = _$GetProducts;
 }
+
+
+abstract class GetTopSeller extends ProductsEvent  implements Built<GetTopSeller, GetTopSellerBuilder> {
+
+GetTopSeller._();
+
+factory GetTopSeller([updates(GetTopSellerBuilder b)]) = _$GetTopSeller;
+}

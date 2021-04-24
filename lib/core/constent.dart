@@ -96,3 +96,5 @@ const String LOGIN_TYPE="login_type";
 const String LOGIN_TYPE_SOCIAL="social";
 const String LOGIN_TYPE_NORMAL="normal";
 const String PASSWORD="password";
+
+const String TOP_SELLER="top_seller";

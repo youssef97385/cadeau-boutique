@@ -46,5 +46,41 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
       }
     }
+
+
+    if(event is GetTopSeller){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+          ..products.replace([])
+
+        );
+
+        final data = await _iRepository.getTopSeller();
+
+        print('get top seller Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+          ..products.replace(data)
+        );
+
+      } catch (e) {
+        print('GetTOPSELLER Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+          ..products.replace([])
+        );
+
+      }
+    }
+
+
+
   }
 }

@@ -80,7 +80,11 @@
   "min": "Min:",
   "five_out_five": "5 out of 5",
   "find": "Find",
-  "one_out_five": "1 out of 5"
+  "one_out_five": "1 out of 5",
+  "code_success":"Code has been sent successfully",
+  "enter_verfiy_code":"Enter Verification Code",
+  "verify_code":"Verify Code",
+  "resend_code":"Resend Code"
 
 
 

@@ -82,9 +82,11 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     print("******************************");
+    if(widget.type==TOP_SELLER){
+      _bloc.add(GetTopSeller());
+    }else
     _bloc.add(GetProducts((b)=>b..id = widget.id ..type = widget.type));
   }
   @override

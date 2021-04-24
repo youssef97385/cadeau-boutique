@@ -699,7 +699,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     AllProductsScreen(
-                                                        id: 1, type: 'all')));
+                                                        id: 1, type: TOP_SELLER)));
                                       },
                                       child: Text(
                                         AppLocalizations.of(context).translate("more"),

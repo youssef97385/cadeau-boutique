@@ -1,4 +1,5 @@
 import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
+import 'package:cadeaue_boutique/Ui/verify_code/verify_code.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/utils/utils.dart';
@@ -325,6 +326,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       builder: (context) => WelcomePage(),
                     ),
                   ));
+
+/*
+          print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHh");
+              WidgetsBinding.instance.addPostFrameCallback(
+              (_) => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => VerifyCode(_bloc),
+                    ),
+                  ));*/
         }
         return Scaffold(
             body: SingleChildScrollView(

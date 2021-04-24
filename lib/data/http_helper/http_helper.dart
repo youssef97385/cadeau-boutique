@@ -1356,6 +1356,44 @@ class HttpHelper implements IHttpHelper {
 
   }
 
+  @override
+  Future<BuiltList<ProductModel>> getTopSeller() async {
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      String myType;
+
+      final response = await _dio.get('app/gift/top');
+      print('all products Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<BuiltList<ProductModel>> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                FullType(
+                  BuiltList,
+                  [
+                    const FullType(ProductModel),
+                  ],
+                ),
+              ],
+            ));
+
+        print("all product list status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
 
 
 }
