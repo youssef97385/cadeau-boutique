@@ -19,6 +19,10 @@ class _$GetFilteredProducts extends GetFilteredProducts {
   final String maxPrice;
   @override
   final String age;
+  @override
+  final BuiltList<FilterItem> choices;
+  @override
+  final bool reChoose;
 
   factory _$GetFilteredProducts(
           [void Function(GetFilteredProductsBuilder) updates]) =>
@@ -30,7 +34,9 @@ class _$GetFilteredProducts extends GetFilteredProducts {
       this.gender,
       this.minPrice,
       this.maxPrice,
-      this.age})
+      this.age,
+      this.choices,
+      this.reChoose})
       : super._();
 
   @override
@@ -51,7 +57,9 @@ class _$GetFilteredProducts extends GetFilteredProducts {
         gender == other.gender &&
         minPrice == other.minPrice &&
         maxPrice == other.maxPrice &&
-        age == other.age;
+        age == other.age &&
+        choices == other.choices &&
+        reChoose == other.reChoose;
   }
 
   @override
@@ -59,11 +67,17 @@ class _$GetFilteredProducts extends GetFilteredProducts {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, occasionId.hashCode), relationId.hashCode),
-                    gender.hashCode),
-                minPrice.hashCode),
-            maxPrice.hashCode),
-        age.hashCode));
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc($jc(0, occasionId.hashCode),
+                                relationId.hashCode),
+                            gender.hashCode),
+                        minPrice.hashCode),
+                    maxPrice.hashCode),
+                age.hashCode),
+            choices.hashCode),
+        reChoose.hashCode));
   }
 
   @override
@@ -74,7 +88,9 @@ class _$GetFilteredProducts extends GetFilteredProducts {
           ..add('gender', gender)
           ..add('minPrice', minPrice)
           ..add('maxPrice', maxPrice)
-          ..add('age', age))
+          ..add('age', age)
+          ..add('choices', choices)
+          ..add('reChoose', reChoose))
         .toString();
   }
 }
@@ -107,6 +123,15 @@ class GetFilteredProductsBuilder
   String get age => _$this._age;
   set age(String age) => _$this._age = age;
 
+  ListBuilder<FilterItem> _choices;
+  ListBuilder<FilterItem> get choices =>
+      _$this._choices ??= new ListBuilder<FilterItem>();
+  set choices(ListBuilder<FilterItem> choices) => _$this._choices = choices;
+
+  bool _reChoose;
+  bool get reChoose => _$this._reChoose;
+  set reChoose(bool reChoose) => _$this._reChoose = reChoose;
+
   GetFilteredProductsBuilder();
 
   GetFilteredProductsBuilder get _$this {
@@ -118,6 +143,8 @@ class GetFilteredProductsBuilder
       _minPrice = $v.minPrice;
       _maxPrice = $v.maxPrice;
       _age = $v.age;
+      _choices = $v.choices?.toBuilder();
+      _reChoose = $v.reChoose;
       _$v = null;
     }
     return this;
@@ -136,14 +163,297 @@ class GetFilteredProductsBuilder
 
   @override
   _$GetFilteredProducts build() {
-    final _$result = _$v ??
-        new _$GetFilteredProducts._(
-            occasionId: occasionId,
-            relationId: relationId,
-            gender: gender,
-            minPrice: minPrice,
-            maxPrice: maxPrice,
-            age: age);
+    _$GetFilteredProducts _$result;
+    try {
+      _$result = _$v ??
+          new _$GetFilteredProducts._(
+              occasionId: occasionId,
+              relationId: relationId,
+              gender: gender,
+              minPrice: minPrice,
+              maxPrice: maxPrice,
+              age: age,
+              choices: _choices?.build(),
+              reChoose: reChoose);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'choices';
+        _choices?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'GetFilteredProducts', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$AddChoice extends AddChoice {
+  @override
+  final FilterItem filterItem;
+
+  factory _$AddChoice([void Function(AddChoiceBuilder) updates]) =>
+      (new AddChoiceBuilder()..update(updates)).build();
+
+  _$AddChoice._({this.filterItem}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        filterItem, 'AddChoice', 'filterItem');
+  }
+
+  @override
+  AddChoice rebuild(void Function(AddChoiceBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  AddChoiceBuilder toBuilder() => new AddChoiceBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is AddChoice && filterItem == other.filterItem;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, filterItem.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('AddChoice')
+          ..add('filterItem', filterItem))
+        .toString();
+  }
+}
+
+class AddChoiceBuilder implements Builder<AddChoice, AddChoiceBuilder> {
+  _$AddChoice _$v;
+
+  FilterItemBuilder _filterItem;
+  FilterItemBuilder get filterItem =>
+      _$this._filterItem ??= new FilterItemBuilder();
+  set filterItem(FilterItemBuilder filterItem) =>
+      _$this._filterItem = filterItem;
+
+  AddChoiceBuilder();
+
+  AddChoiceBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _filterItem = $v.filterItem.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(AddChoice other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$AddChoice;
+  }
+
+  @override
+  void update(void Function(AddChoiceBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$AddChoice build() {
+    _$AddChoice _$result;
+    try {
+      _$result = _$v ?? new _$AddChoice._(filterItem: filterItem.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'filterItem';
+        filterItem.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'AddChoice', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$DeleteChoice extends DeleteChoice {
+  @override
+  final FilterItem filterItem;
+
+  factory _$DeleteChoice([void Function(DeleteChoiceBuilder) updates]) =>
+      (new DeleteChoiceBuilder()..update(updates)).build();
+
+  _$DeleteChoice._({this.filterItem}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        filterItem, 'DeleteChoice', 'filterItem');
+  }
+
+  @override
+  DeleteChoice rebuild(void Function(DeleteChoiceBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DeleteChoiceBuilder toBuilder() => new DeleteChoiceBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DeleteChoice && filterItem == other.filterItem;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, filterItem.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('DeleteChoice')
+          ..add('filterItem', filterItem))
+        .toString();
+  }
+}
+
+class DeleteChoiceBuilder
+    implements Builder<DeleteChoice, DeleteChoiceBuilder> {
+  _$DeleteChoice _$v;
+
+  FilterItemBuilder _filterItem;
+  FilterItemBuilder get filterItem =>
+      _$this._filterItem ??= new FilterItemBuilder();
+  set filterItem(FilterItemBuilder filterItem) =>
+      _$this._filterItem = filterItem;
+
+  DeleteChoiceBuilder();
+
+  DeleteChoiceBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _filterItem = $v.filterItem.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(DeleteChoice other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DeleteChoice;
+  }
+
+  @override
+  void update(void Function(DeleteChoiceBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$DeleteChoice build() {
+    _$DeleteChoice _$result;
+    try {
+      _$result = _$v ?? new _$DeleteChoice._(filterItem: filterItem.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'filterItem';
+        filterItem.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'DeleteChoice', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ReGetItems extends ReGetItems {
+  @override
+  final BuiltList<FilterItem> choices;
+
+  factory _$ReGetItems([void Function(ReGetItemsBuilder) updates]) =>
+      (new ReGetItemsBuilder()..update(updates)).build();
+
+  _$ReGetItems._({this.choices}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(choices, 'ReGetItems', 'choices');
+  }
+
+  @override
+  ReGetItems rebuild(void Function(ReGetItemsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ReGetItemsBuilder toBuilder() => new ReGetItemsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ReGetItems && choices == other.choices;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, choices.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ReGetItems')..add('choices', choices))
+        .toString();
+  }
+}
+
+class ReGetItemsBuilder implements Builder<ReGetItems, ReGetItemsBuilder> {
+  _$ReGetItems _$v;
+
+  ListBuilder<FilterItem> _choices;
+  ListBuilder<FilterItem> get choices =>
+      _$this._choices ??= new ListBuilder<FilterItem>();
+  set choices(ListBuilder<FilterItem> choices) => _$this._choices = choices;
+
+  ReGetItemsBuilder();
+
+  ReGetItemsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _choices = $v.choices.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ReGetItems other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ReGetItems;
+  }
+
+  @override
+  void update(void Function(ReGetItemsBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ReGetItems build() {
+    _$ReGetItems _$result;
+    try {
+      _$result = _$v ?? new _$ReGetItems._(choices: choices.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'choices';
+        choices.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ReGetItems', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

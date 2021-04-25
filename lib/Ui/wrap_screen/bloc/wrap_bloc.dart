@@ -55,13 +55,16 @@ class WrapBloc extends Bloc<WrapEvent, WrapState> {
 
         final data = await _iRepository.addToCart(
             wrapId: event.wrapId ,
-            wrapColorId: event.wrapColorId);
+            wrapColorId: event.wrapColorId
+        ,wrapSizeId: event.wrapSizeId
+        );
 
         print('add cart Success data ${data}');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""
           ..success = true
+            ..successAddToCart=true
         );
 
       } catch (e) {
@@ -71,6 +74,21 @@ class WrapBloc extends Bloc<WrapEvent, WrapState> {
           ..error = "Something went wrong"
           ..success = false
         );
+
+      }
+    }
+    if(event is Clear){
+      try {
+        yield state.rebuild((b) => b
+          ..successAddToCart = false
+
+        );
+
+
+      } catch (e) {
+
+
+
 
       }
     }

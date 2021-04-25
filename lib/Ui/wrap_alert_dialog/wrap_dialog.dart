@@ -12,6 +12,8 @@ import '../../core/constent.dart';
 class FunkyOverlay extends StatefulWidget {
 
   final int wrapId;
+  final int wrapColorId;
+  final int wrapSizeId;
   final Function wrapIdCallBack;
 
   BuiltList<WrapItem> wraps;
@@ -19,7 +21,7 @@ class FunkyOverlay extends StatefulWidget {
 
 
 
-  FunkyOverlay({this.wraps ,this.wrapId,this.wrapIdCallBack});
+  FunkyOverlay({this.wraps ,this.wrapId,this.wrapIdCallBack,this.wrapColorId,this.wrapSizeId});
 
   @override
   State<StatefulWidget> createState() => FunkyOverlayState();
@@ -147,85 +149,85 @@ class FunkyOverlayState extends State<FunkyOverlay>
                      );
                    }),
                  ),
-                  // baseText(title: "Available Size:", color: Color(0xff393741) , size: 18.0),
-                  // Center(
-                  //   child: Container(
-                  //     height: 40,
-                  //     // width: size.width*0.8,
-                  //     child: ListView.builder(
-                  //       shrinkWrap: true,
-                  //         scrollDirection: Axis.horizontal,
-                  //         itemCount: sizes.length ,
-                  //         itemBuilder: (BuildContext context , int index){
-                  //           return Padding(
-                  //             padding: const EdgeInsets.only(right:24.0),
-                  //             child: GestureDetector(
-                  //               onTap: (){
-                  //                 setState(() {
-                  //                   selectedSize = index;
-                  //                 });
-                  //               },
-                  //               child: Container(
-                  //                 width: 40,
-                  //                 height: 40,
-                  //                 decoration: BoxDecoration(
-                  //                   color: selectedSize == index ?Color(0xffF2D750):Colors.white,
-                  //                   borderRadius: BorderRadius.all(Radius.circular(10)),
-                  //                   boxShadow: [
-                  //                     BoxShadow(
-                  //                       color: Colors.grey.withOpacity(0.5),
-                  //                       spreadRadius: 2,
-                  //                       blurRadius: 3,
-                  //                       offset: Offset(0, 3), // changes position of shadow
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //                 child: Center(child: baseText(title: sizes[index] , color: AppColor.darkTextColor , size: 18.0)),
-                  //               ),
-                  //             ),
-                  //           );
-                  //         }),
-                  //   ),
-                  // ),
-                  // baseText(title: "Colors:", color: Color(0xff393741) , size: 18.0),
-                  // Container(
-                  //   height: 40,
-                  //   child: ListView.builder(
-                  //       shrinkWrap: true,
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemCount: colors.length ,
-                  //       itemBuilder: (BuildContext context , int index){
-                  //         return Padding(
-                  //           padding: const EdgeInsets.only(right:24.0),
-                  //           child: GestureDetector(
-                  //               onTap: (){
-                  //                 setState(() {
-                  //                   selectedColor = index;
-                  //                 });
-                  //               },
-                  //               child:  Container(
-                  //                 width: 36,
-                  //                 height: 36,
-                  //                 decoration: BoxDecoration(
-                  //                     border: selectedColor != index? null:Border.all(color:Color(0xff707070),width: 2),
-                  //                     boxShadow: [
-                  //                       BoxShadow(
-                  //                         color: Colors.grey.withOpacity(0.5),
-                  //                         spreadRadius: 2,
-                  //                         blurRadius: 3,
-                  //                         offset: Offset(0, 3), // changes position of shadow
-                  //                       ),
-                  //                     ],
-                  //                     shape: BoxShape.circle,
-                  //                     color: colors[index]
-                  //
-                  //                 ),
-                  //                 child:selectedColor != index? Container(): Center(child: Icon(Icons.check,color: Color(0xff707070),)),
-                  //               )
-                  //           ),
-                  //         );
-                  //       }),
-                  // ),
+                  baseText(title: "Available Size:", color: Color(0xff393741) , size: 18.0),
+                  Center(
+                    child: Container(
+                      height: 40,
+                      // width: size.width*0.8,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: sizes.length ,
+                          itemBuilder: (BuildContext context , int index){
+                            return Padding(
+                              padding: const EdgeInsets.only(right:24.0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    selectedSize = index;
+                                  });
+                                },
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: selectedSize == index ?Color(0xffF2D750):Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 3,
+                                        offset: Offset(0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Center(child: baseText(title: sizes[index] , color: AppColor.darkTextColor , size: 18.0)),
+                                ),
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                  baseText(title: "Colors:", color: Color(0xff393741) , size: 18.0),
+                  Container(
+                    height: 40,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: colors.length ,
+                        itemBuilder: (BuildContext context , int index){
+                          return Padding(
+                            padding: const EdgeInsets.only(right:24.0),
+                            child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    selectedColor = index;
+                                  });
+                                },
+                                child:  Container(
+                                  width: 36,
+                                  height: 36,
+                                  decoration: BoxDecoration(
+                                      border: selectedColor != index? null:Border.all(color:Color(0xff707070),width: 2),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 3,
+                                          offset: Offset(0, 3), // changes position of shadow
+                                        ),
+                                      ],
+                                      shape: BoxShape.circle,
+                                      color: colors[index]
+
+                                  ),
+                                  child:selectedColor != index? Container(): Center(child: Icon(Icons.check,color: Color(0xff707070),)),
+                                )
+                            ),
+                          );
+                        }),
+                  ),
 
                   Container(
                     // margin: EdgeInsets.only(bottom: 80),

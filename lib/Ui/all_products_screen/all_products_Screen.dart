@@ -102,7 +102,6 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                     Container(
                       width: size.width*0.9,
                       child: GridView.builder(
-
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: state.products.length,
@@ -171,14 +170,14 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                             mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                  state.products[index].mainPrice +
-                                                      "\$",
-                                                  style: TextStyle(
-                                                      color: Color(0xff393741),
-                                                      fontSize: 15,
-                                                      decoration: TextDecoration
-                                                          .lineThrough)),
+                                              // Text(
+                                              //     state.products[index].mainPrice +
+                                              //         "\$",
+                                              //     style: TextStyle(
+                                              //         color: Color(0xff393741),
+                                              //         fontSize: 15,
+                                              //         decoration: TextDecoration
+                                              //             .lineThrough)),
                                               Text(
                                                 state.products[index].salePrice + "\$",
                                                 style: TextStyle(

@@ -34,7 +34,7 @@ var size = MediaQuery.of(context).size;
       body: Container(
         height: size.height,
         width: size.width,
-        child: Image.asset('assets/images/big.gif',fit: BoxFit.fill,),
+        child: Image.asset('assets/images/big.gif',fit: BoxFit.cover,),
       ),
     );
   }

@@ -49,6 +49,12 @@ abstract class AddToCart extends ProductEvent
   @nullable
   int get wrapColorId;
 
+  @nullable
+  int get wrapSizeId;
+
+  @nullable
+  int get giftSizeId;
+
   AddToCart._();
 
   factory AddToCart([updates(AddToCartBuilder b)]) = _$AddToCart;

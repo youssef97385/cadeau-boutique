@@ -173,11 +173,13 @@ class _$AddWrap extends AddWrap {
   final int wrapId;
   @override
   final int wrapColorId;
+  @override
+  final int wrapSizeId;
 
   factory _$AddWrap([void Function(AddWrapBuilder) updates]) =>
       (new AddWrapBuilder()..update(updates)).build();
 
-  _$AddWrap._({this.wrapId, this.wrapColorId}) : super._() {
+  _$AddWrap._({this.wrapId, this.wrapColorId, this.wrapSizeId}) : super._() {
     BuiltValueNullFieldError.checkNotNull(wrapId, 'AddWrap', 'wrapId');
   }
 
@@ -193,19 +195,22 @@ class _$AddWrap extends AddWrap {
     if (identical(other, this)) return true;
     return other is AddWrap &&
         wrapId == other.wrapId &&
-        wrapColorId == other.wrapColorId;
+        wrapColorId == other.wrapColorId &&
+        wrapSizeId == other.wrapSizeId;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, wrapId.hashCode), wrapColorId.hashCode));
+    return $jf($jc($jc($jc(0, wrapId.hashCode), wrapColorId.hashCode),
+        wrapSizeId.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AddWrap')
           ..add('wrapId', wrapId)
-          ..add('wrapColorId', wrapColorId))
+          ..add('wrapColorId', wrapColorId)
+          ..add('wrapSizeId', wrapSizeId))
         .toString();
   }
 }
@@ -221,6 +226,10 @@ class AddWrapBuilder implements Builder<AddWrap, AddWrapBuilder> {
   int get wrapColorId => _$this._wrapColorId;
   set wrapColorId(int wrapColorId) => _$this._wrapColorId = wrapColorId;
 
+  int _wrapSizeId;
+  int get wrapSizeId => _$this._wrapSizeId;
+  set wrapSizeId(int wrapSizeId) => _$this._wrapSizeId = wrapSizeId;
+
   AddWrapBuilder();
 
   AddWrapBuilder get _$this {
@@ -228,6 +237,7 @@ class AddWrapBuilder implements Builder<AddWrap, AddWrapBuilder> {
     if ($v != null) {
       _wrapId = $v.wrapId;
       _wrapColorId = $v.wrapColorId;
+      _wrapSizeId = $v.wrapSizeId;
       _$v = null;
     }
     return this;
@@ -250,7 +260,117 @@ class AddWrapBuilder implements Builder<AddWrap, AddWrapBuilder> {
         new _$AddWrap._(
             wrapId: BuiltValueNullFieldError.checkNotNull(
                 wrapId, 'AddWrap', 'wrapId'),
-            wrapColorId: wrapColorId);
+            wrapColorId: wrapColorId,
+            wrapSizeId: wrapSizeId);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ClearSuccess extends ClearSuccess {
+  factory _$ClearSuccess([void Function(ClearSuccessBuilder) updates]) =>
+      (new ClearSuccessBuilder()..update(updates)).build();
+
+  _$ClearSuccess._() : super._();
+
+  @override
+  ClearSuccess rebuild(void Function(ClearSuccessBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ClearSuccessBuilder toBuilder() => new ClearSuccessBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ClearSuccess;
+  }
+
+  @override
+  int get hashCode {
+    return 74631534;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('ClearSuccess').toString();
+  }
+}
+
+class ClearSuccessBuilder
+    implements Builder<ClearSuccess, ClearSuccessBuilder> {
+  _$ClearSuccess _$v;
+
+  ClearSuccessBuilder();
+
+  @override
+  void replace(ClearSuccess other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ClearSuccess;
+  }
+
+  @override
+  void update(void Function(ClearSuccessBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ClearSuccess build() {
+    final _$result = _$v ?? new _$ClearSuccess._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Clear extends Clear {
+  factory _$Clear([void Function(ClearBuilder) updates]) =>
+      (new ClearBuilder()..update(updates)).build();
+
+  _$Clear._() : super._();
+
+  @override
+  Clear rebuild(void Function(ClearBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ClearBuilder toBuilder() => new ClearBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Clear;
+  }
+
+  @override
+  int get hashCode {
+    return 102524199;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('Clear').toString();
+  }
+}
+
+class ClearBuilder implements Builder<Clear, ClearBuilder> {
+  _$Clear _$v;
+
+  ClearBuilder();
+
+  @override
+  void replace(Clear other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$Clear;
+  }
+
+  @override
+  void update(void Function(ClearBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Clear build() {
+    final _$result = _$v ?? new _$Clear._();
     replace(_$result);
     return _$result;
   }

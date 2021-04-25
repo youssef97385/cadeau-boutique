@@ -370,6 +370,7 @@ class HttpHelper implements IHttpHelper {
   @override
   Future<ProductModel> getProductByid({int id , String token}) async {
     try {
+      print("prid$id");
       _dio.interceptors.add(CookieManager(cookieJar));
       final response = await _dio.get('app/gift/$id/get',  options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('product Response StatusCode ${response.statusCode}');
@@ -745,6 +746,7 @@ class HttpHelper implements IHttpHelper {
     try {
       final formData = {
         "song_link": song,
+        "song_price":100
       };
 
       _dio.interceptors.add(CookieManager(cookieJar));
@@ -782,14 +784,22 @@ class HttpHelper implements IHttpHelper {
       int giftColorId,
       int wrapId,
       int wrapColorId,
+        int giftSizeId,
+        int wrapSizeId,
       String token}) async {
+
+    print("cart body ${giftSizeId} $wrapSizeId $giftColorId $wrapColorId");
     try {
       final formData = {
         "gift_id": giftId,
         "gift_color_id": giftColorId,
         "wrap_id": wrapId,
-        "wrap_color_id": wrapColorId
+        "wrap_color_id": wrapColorId,
+        "gift_size_id":giftSizeId,
+        "wrap_size_id":wrapSizeId
       };
+
+
 
       _dio.interceptors.add(CookieManager(cookieJar));
 
@@ -1133,12 +1143,16 @@ class HttpHelper implements IHttpHelper {
   }
 
   @override
-  Future<BuiltList<ProductModel>> filter({int occasionId,
-    int relationId, String gender,
-    String minPrice, String maxPrice,
+  Future<BuiltList<ProductModel>> filter({
+    int occasionId,
+    int relationId,
+    String gender,
+    String minPrice,
+    String maxPrice,
     String age}) async{
     try {
 
+      print("delete10");
 
       print("filter vars : occasionId:$occasionId   relationId $relationId  genderId $gender  minPrics $minPrice  macPrice $maxPrice  age $age");
       _dio.interceptors.add(CookieManager(cookieJar));
@@ -1159,7 +1173,7 @@ class HttpHelper implements IHttpHelper {
          url ="app/gift/search?min_price=0";
       }
 
-      if(occasionId != null){
+      if(relationId != null){
 
         url  = url +"&relation_id=$relationId";
       }
@@ -1234,7 +1248,6 @@ class HttpHelper implements IHttpHelper {
       // countryCode: countryCode,deliveryDate: deliveryDate,giftTo: giftTo,phoneNumber: phone);
 
       CheckBody checkBody = CheckBody((b)=>b
-
         ..gift_to = giftTo.toBuilder()
           ..delivery_date = deliveryDate.toBuilder()
           ..country_code = countryCode.toBuilder()
@@ -1257,20 +1270,6 @@ class HttpHelper implements IHttpHelper {
       print('checkout Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {
-        // final BaseResponse<BuiltList<OccasionModel>> baseResponse =
-        // serializers.deserialize(json.decode(response.data),
-        //     specifiedType: FullType(
-        //       BaseResponse,
-        //       [
-        //         FullType(
-        //           BuiltList,
-        //           [
-        //             const FullType(OccasionModel),
-        //           ],
-        //         ),
-        //       ],
-        //     ));
-
 
         if (response.statusCode == 200) {
           return true;

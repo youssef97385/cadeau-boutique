@@ -31,6 +31,12 @@ implements Built<CartState, CartStateBuilder> {
   @nullable
   int get totalCosts;
 
+  @nullable
+  bool get isGlobalWrab;
+
+  @nullable
+  bool get isSongAdded;
+
 
   bool get successAddToCart;
   CartState._();
@@ -45,6 +51,8 @@ implements Built<CartState, CartStateBuilder> {
       ..cart=null
       ..cartList.replace([])
         ..successAddToCart = false
+        ..isGlobalWrab = false
+        ..isSongAdded = false
 
     );
   }

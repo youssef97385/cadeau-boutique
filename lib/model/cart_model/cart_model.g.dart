@@ -32,6 +32,13 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.songPriceBeforAdd;
+    if (value != null) {
+      result
+        ..add('song_price_befor_add')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.songPrice;
     if (value != null) {
       result
@@ -125,6 +132,10 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
           result.songLink = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'song_price_befor_add':
+          result.songPriceBeforAdd = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'song_price':
           result.songPrice = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
@@ -184,6 +195,8 @@ class _$CartModel extends CartModel {
   @override
   final String songLink;
   @override
+  final String songPriceBeforAdd;
+  @override
   final int songPrice;
   @override
   final int totalPrice;
@@ -212,6 +225,7 @@ class _$CartModel extends CartModel {
   _$CartModel._(
       {this.id,
       this.songLink,
+      this.songPriceBeforAdd,
       this.songPrice,
       this.totalPrice,
       this.productsPrice,
@@ -238,6 +252,7 @@ class _$CartModel extends CartModel {
     return other is CartModel &&
         id == other.id &&
         songLink == other.songLink &&
+        songPriceBeforAdd == other.songPriceBeforAdd &&
         songPrice == other.songPrice &&
         totalPrice == other.totalPrice &&
         productsPrice == other.productsPrice &&
@@ -264,8 +279,10 @@ class _$CartModel extends CartModel {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, id.hashCode),
-                                                    songLink.hashCode),
+                                                $jc(
+                                                    $jc($jc(0, id.hashCode),
+                                                        songLink.hashCode),
+                                                    songPriceBeforAdd.hashCode),
                                                 songPrice.hashCode),
                                             totalPrice.hashCode),
                                         productsPrice.hashCode),
@@ -284,6 +301,7 @@ class _$CartModel extends CartModel {
     return (newBuiltValueToStringHelper('CartModel')
           ..add('id', id)
           ..add('songLink', songLink)
+          ..add('songPriceBeforAdd', songPriceBeforAdd)
           ..add('songPrice', songPrice)
           ..add('totalPrice', totalPrice)
           ..add('productsPrice', productsPrice)
@@ -309,6 +327,11 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
   String _songLink;
   String get songLink => _$this._songLink;
   set songLink(String songLink) => _$this._songLink = songLink;
+
+  String _songPriceBeforAdd;
+  String get songPriceBeforAdd => _$this._songPriceBeforAdd;
+  set songPriceBeforAdd(String songPriceBeforAdd) =>
+      _$this._songPriceBeforAdd = songPriceBeforAdd;
 
   int _songPrice;
   int get songPrice => _$this._songPrice;
@@ -366,6 +389,7 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
     if ($v != null) {
       _id = $v.id;
       _songLink = $v.songLink;
+      _songPriceBeforAdd = $v.songPriceBeforAdd;
       _songPrice = $v.songPrice;
       _totalPrice = $v.totalPrice;
       _productsPrice = $v.productsPrice;
@@ -401,6 +425,7 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
           new _$CartModel._(
               id: id,
               songLink: songLink,
+              songPriceBeforAdd: songPriceBeforAdd,
               songPrice: songPrice,
               totalPrice: totalPrice,
               productsPrice: productsPrice,

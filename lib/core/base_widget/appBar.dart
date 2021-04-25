@@ -10,10 +10,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 Widget baseAppBar(Size size , BuildContext context , [Function openDrawer,showHum=false]){
   return
     Container(
+
       height: size.height*0.1,
-      color: Colors.white,
+
       child: Padding(
-        padding: const EdgeInsets.only(top:16.0,left: 24 , right: 24 , bottom: 8),
+        padding: const EdgeInsets.only(top:16.0,left: 24 , right: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

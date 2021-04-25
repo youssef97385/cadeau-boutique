@@ -88,6 +88,8 @@ int giftId,
   int giftColorId,
   int wrapId,
   int wrapColorId,
+  int giftSizeId,
+  int wrapSizeId,
   String token
 });
 

@@ -15,17 +15,29 @@ class _$SearchState extends SearchState {
   final String error;
   @override
   final BuiltList<ProductModel> products;
+  @override
+  final BuiltList<FilterItem> choices;
+  @override
+  final String url;
 
   factory _$SearchState([void Function(SearchStateBuilder) updates]) =>
       (new SearchStateBuilder()..update(updates)).build();
 
-  _$SearchState._({this.success, this.isLoading, this.error, this.products})
+  _$SearchState._(
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.products,
+      this.choices,
+      this.url})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'SearchState', 'success');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, 'SearchState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'SearchState', 'error');
     BuiltValueNullFieldError.checkNotNull(products, 'SearchState', 'products');
+    BuiltValueNullFieldError.checkNotNull(choices, 'SearchState', 'choices');
+    BuiltValueNullFieldError.checkNotNull(url, 'SearchState', 'url');
   }
 
   @override
@@ -42,14 +54,21 @@ class _$SearchState extends SearchState {
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
-        products == other.products;
+        products == other.products &&
+        choices == other.choices &&
+        url == other.url;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode),
-        products.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                    error.hashCode),
+                products.hashCode),
+            choices.hashCode),
+        url.hashCode));
   }
 
   @override
@@ -58,7 +77,9 @@ class _$SearchState extends SearchState {
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
-          ..add('products', products))
+          ..add('products', products)
+          ..add('choices', choices)
+          ..add('url', url))
         .toString();
   }
 }
@@ -84,6 +105,15 @@ class SearchStateBuilder implements Builder<SearchState, SearchStateBuilder> {
   set products(ListBuilder<ProductModel> products) =>
       _$this._products = products;
 
+  ListBuilder<FilterItem> _choices;
+  ListBuilder<FilterItem> get choices =>
+      _$this._choices ??= new ListBuilder<FilterItem>();
+  set choices(ListBuilder<FilterItem> choices) => _$this._choices = choices;
+
+  String _url;
+  String get url => _$this._url;
+  set url(String url) => _$this._url = url;
+
   SearchStateBuilder();
 
   SearchStateBuilder get _$this {
@@ -93,6 +123,8 @@ class SearchStateBuilder implements Builder<SearchState, SearchStateBuilder> {
       _isLoading = $v.isLoading;
       _error = $v.error;
       _products = $v.products.toBuilder();
+      _choices = $v.choices.toBuilder();
+      _url = $v.url;
       _$v = null;
     }
     return this;
@@ -121,12 +153,17 @@ class SearchStateBuilder implements Builder<SearchState, SearchStateBuilder> {
                   isLoading, 'SearchState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'SearchState', 'error'),
-              products: products.build());
+              products: products.build(),
+              choices: choices.build(),
+              url: BuiltValueNullFieldError.checkNotNull(
+                  url, 'SearchState', 'url'));
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'products';
         products.build();
+        _$failedField = 'choices';
+        choices.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'SearchState', _$failedField, e.toString());

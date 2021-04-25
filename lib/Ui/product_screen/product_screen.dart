@@ -24,10 +24,6 @@ class ProductScreen extends StatefulWidget {
   ProductScreen({this.id,this.img});
 
 
-
-
-
-
   @override
   _ProductScreenState createState() => _ProductScreenState();
 }
@@ -38,6 +34,8 @@ class _ProductScreenState extends State<ProductScreen> {
 
 
   int myWrapId = -1;
+  int myWrapColorId = -1;
+  int myWrapSizeId = -1;
 
   final _bloc = sl<ProductBloc>();
 
@@ -51,10 +49,10 @@ class _ProductScreenState extends State<ProductScreen> {
   ];
   int selectedSize = -1;
   int selectedColor = -1;
-
-  String selectedImage;
+  String selectedImage , selectedPrice;
 
   bool imageChanged = false;
+  bool priceChanged = false;
 
   int getWrapId(){
     setState(() {
@@ -73,6 +71,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("cart body3$selectedSize");
 
     var size = MediaQuery
         .of(context)
@@ -80,12 +79,13 @@ class _ProductScreenState extends State<ProductScreen> {
     return BlocBuilder(
       cubit: _bloc,
       builder: (BuildContext context, ProductState state) {
+
         if (state.successAddToCart) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             showSuccsess();
           });
         }
-        // print("my product "+ (state.product.image == null).toString() + "   "+state.product.toString() );
+
         return Stack(
           children: [
             Scaffold(
@@ -212,6 +212,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                        },
                                      )..show();
                                    }else{
+                                     print("wrapTest${state.wraps[0].sizes}");
                                      if(!state.product.isFavourite){
                                        _bloc.add(AddToFavourite((b)=>b..id = widget.id));
                                      }else{
@@ -238,10 +239,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                      SvgPicture.asset(
                                          "assets/images/favourite.svg")
 
-                                   //
-                                   // !state.product.isFavourite && !state.removed?
-                                   // SvgPicture.asset(
-                                   //     "assets/images/favourite.svg"):Icon(Icons.favorite,color: Colors.red,),
+
                                  ),
                                ))
                              ],
@@ -259,15 +257,11 @@ class _ProductScreenState extends State<ProductScreen> {
                              children: [
                                Row(
                                  children: [
-                                   state.product.salePrice==0?null:
-                                   baseText(color: AppColor.darkTextColor,
-                                       title: "\$ "+state.product.mainPrice,
-                                       size: 20.0,
-                                       decoration: TextDecoration.lineThrough),
+
                                    SizedBox(width: 10,),
 
                                    baseText(color: AppColor.darkYellow,
-                                       title: "\$ "+state.product.salePrice == 0?state.product.mainPrice:state.product.salePrice,
+                                       title:priceChanged?"\$ $selectedPrice": "\$ "+state.product.salePrice,
                                        size: 20.0),
                                  ],
                                ),
@@ -331,6 +325,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                        onTap: () {
                                          setState(() {
                                            selectedSize = index;
+                                           print("cart body2$selectedSize");
+                                           selectedPrice=state.product.sizes[index].price;
+                                           priceChanged = true;
                                          });
                                        },
                                        child: Container(
@@ -400,6 +397,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                            });
                                          },
+
                                          child: Container(
                                            width: 36,
                                            height: 36,
@@ -541,9 +539,25 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                      // print("wrap id test ${myWrapId}");
                                      if(myWrapId == -1){
-                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id ));
+
+                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id
+                                         ..giftSizeId=selectedSize==-1?
+                                         null:
+                                         state.product.sizes[selectedSize].id
+                                       ..giftColorId = selectedColor==-1?
+                                       null:
+                                       state.product.colors[selectedColor].id
+                                       ));
+
                                      }else{
-                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId));
+                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId
+                                         ..giftSizeId=selectedSize==-1?
+                                         null:
+                                         state.product.sizes[selectedSize].id
+                                         ..giftColorId = selectedColor==-1?
+                                         null:
+                                         state.product.colors[selectedColor].id
+                                       ));
                                      }
 
                                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));

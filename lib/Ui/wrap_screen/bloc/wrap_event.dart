@@ -45,8 +45,31 @@ abstract class AddWrap extends WrapEvent
   @nullable
   int get wrapColorId;
 
+  @nullable
+  int get wrapSizeId;
+
 
   AddWrap._();
 
   factory AddWrap([updates(AddWrapBuilder b)]) = _$AddWrap;
+}
+abstract class ClearSuccess extends WrapEvent
+    implements Built<ClearSuccess, ClearSuccessBuilder> {
+
+  //fields go here
+
+
+  ClearSuccess._();
+
+  factory ClearSuccess([updates(ClearSuccessBuilder b)]) = _$ClearSuccess;
+}
+abstract class Clear extends WrapEvent
+    implements Built<Clear, ClearBuilder> {
+
+  //fields go here
+
+
+  Clear._();
+
+  factory Clear([updates(ClearBuilder b)]) = _$Clear;
 }
