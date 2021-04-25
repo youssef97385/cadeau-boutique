@@ -97,6 +97,8 @@ abstract class AddToCart extends CartEvent
   @nullable
   int get wrapColorId;
 
+
+
   AddToCart._();
 
   factory AddToCart([updates(AddToCartBuilder b)]) = _$AddToCart;
@@ -111,4 +113,17 @@ abstract class ClearSuccess extends CartEvent
   ClearSuccess._();
 
   factory ClearSuccess([updates(ClearSuccessBuilder b)]) = _$ClearSuccess;
+}
+
+abstract class ClearGlobal extends CartEvent
+    implements Built<ClearGlobal, ClearGlobalBuilder> {
+
+  //fields go here
+
+
+
+
+  ClearGlobal._();
+
+  factory ClearGlobal([updates(ClearGlobalBuilder b)]) = _$ClearGlobal;
 }

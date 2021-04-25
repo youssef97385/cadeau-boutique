@@ -32,7 +32,7 @@ class _PickerScreenState extends State<PickerScreen> {
   int pickedOccasion = -1;
   int pickedRelation = -1;
   int index = 1;
-  int value = 50;
+  int value = 0;
 
   String genderValue , selectedOccasion , selectedRelation;
   String age;
@@ -992,7 +992,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 onTap: (){
                                   setState(() {
                                     if(maxPrice == null){
-                                      maxPrice = 300;
+                                      maxPrice = 200;
                                     }
                                    else{
                                       maxPrice +=100;
@@ -1018,7 +1018,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 width: size.width*0.15,
                                 child: Center(
                                   child: Text(
-                                    maxPrice == null?"200":maxPrice.toString(),
+                                    maxPrice == null?"100":maxPrice.toString(),
                                     style: TextStyle(
                                         color: Color(0xff515A6B), fontSize: 21),
                                   ),
@@ -1031,7 +1031,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 onTap: (){
                                   setState(() {
                                     if(maxPrice == null){
-                                      maxPrice = 100;
+                                      maxPrice = 0;
                                     }
                                     else if(maxPrice == 0){
 
@@ -1085,7 +1085,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 onTap: (){
                                   setState(() {
                                     if(minPrice == null){
-                                      minPrice = 300;
+                                      minPrice = 100;
                                     }
                                     else{
                                       minPrice += 100;
@@ -1112,7 +1112,7 @@ class _PickerScreenState extends State<PickerScreen> {
                                 width: size.width*0.15,
                                 child: Center(
                                   child: Text(
-                                    minPrice == null ?"200":minPrice.toString(),
+                                    minPrice == null ?"0":minPrice.toString(),
                                     style: TextStyle(
                                         color: Color(0xff515A6B), fontSize: 21),
                                   ),

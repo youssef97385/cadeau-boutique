@@ -21,7 +21,20 @@ class _$SizeModelSerializer implements StructuredSerializer<SizeModel> {
       'size',
       serializers.serialize(object.size, specifiedType: const FullType(String)),
     ];
-
+    Object value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.price;
+    if (value != null) {
+      result
+        ..add('price')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -40,6 +53,14 @@ class _$SizeModelSerializer implements StructuredSerializer<SizeModel> {
           result.size = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'price':
+          result.price = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -50,11 +71,15 @@ class _$SizeModelSerializer implements StructuredSerializer<SizeModel> {
 class _$SizeModel extends SizeModel {
   @override
   final String size;
+  @override
+  final int id;
+  @override
+  final String price;
 
   factory _$SizeModel([void Function(SizeModelBuilder) updates]) =>
       (new SizeModelBuilder()..update(updates)).build();
 
-  _$SizeModel._({this.size}) : super._() {
+  _$SizeModel._({this.size, this.id, this.price}) : super._() {
     BuiltValueNullFieldError.checkNotNull(size, 'SizeModel', 'size');
   }
 
@@ -68,17 +93,23 @@ class _$SizeModel extends SizeModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SizeModel && size == other.size;
+    return other is SizeModel &&
+        size == other.size &&
+        id == other.id &&
+        price == other.price;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, size.hashCode));
+    return $jf($jc($jc($jc(0, size.hashCode), id.hashCode), price.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SizeModel')..add('size', size))
+    return (newBuiltValueToStringHelper('SizeModel')
+          ..add('size', size)
+          ..add('id', id)
+          ..add('price', price))
         .toString();
   }
 }
@@ -90,12 +121,22 @@ class SizeModelBuilder implements Builder<SizeModel, SizeModelBuilder> {
   String get size => _$this._size;
   set size(String size) => _$this._size = size;
 
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
+
+  String _price;
+  String get price => _$this._price;
+  set price(String price) => _$this._price = price;
+
   SizeModelBuilder();
 
   SizeModelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _size = $v.size;
+      _id = $v.id;
+      _price = $v.price;
       _$v = null;
     }
     return this;
@@ -117,7 +158,9 @@ class SizeModelBuilder implements Builder<SizeModel, SizeModelBuilder> {
     final _$result = _$v ??
         new _$SizeModel._(
             size: BuiltValueNullFieldError.checkNotNull(
-                size, 'SizeModel', 'size'));
+                size, 'SizeModel', 'size'),
+            id: id,
+            price: price);
     replace(_$result);
     return _$result;
   }

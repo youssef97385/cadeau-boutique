@@ -287,13 +287,14 @@ class Repository implements IRepository {
 
   @override
   Future<CartModel> addToCart(
-      {int giftId, int giftColorId, int wrapId, int wrapColorId}) async {
+      {int giftId, int giftColorId, int wrapId, int wrapColorId,int giftSizeId,int wrapSizeId}) async {
     final token = await _iprefHelper.getToken();
     final cart = await _ihttpHelper.addToCart(
         giftId: giftId,
         wrapId: wrapId,
         giftColorId: giftColorId,
         wrapColorId: wrapColorId,
+        giftSizeId: giftSizeId,
         token: token);
     return cart;
   }
@@ -440,6 +441,7 @@ class Repository implements IRepository {
       String minPrice,
       String maxPrice,
       String age}) async{
+    print("delete9 $occasionId $relationId $gender $minPrice $maxPrice $age");
 
     final filteredProducts = await _ihttpHelper.filter(
         age: age,

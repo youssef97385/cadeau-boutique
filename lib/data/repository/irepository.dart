@@ -73,6 +73,8 @@ abstract class IRepository {
     int giftColorId,
     int wrapId,
     int wrapColorId,
+    int wrapSizeId,
+    int giftSizeId,
 
   });
 

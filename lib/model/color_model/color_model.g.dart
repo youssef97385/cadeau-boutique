@@ -18,6 +18,8 @@ class _$ColorModelSerializer implements StructuredSerializer<ColorModel> {
   Iterable<Object> serialize(Serializers serializers, ColorModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'color',
       serializers.serialize(object.color,
           specifiedType: const FullType(String)),
@@ -44,6 +46,10 @@ class _$ColorModelSerializer implements StructuredSerializer<ColorModel> {
       iterator.moveNext();
       final Object value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'color':
           result.color = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -61,6 +67,8 @@ class _$ColorModelSerializer implements StructuredSerializer<ColorModel> {
 
 class _$ColorModel extends ColorModel {
   @override
+  final int id;
+  @override
   final String color;
   @override
   final String image;
@@ -68,7 +76,8 @@ class _$ColorModel extends ColorModel {
   factory _$ColorModel([void Function(ColorModelBuilder) updates]) =>
       (new ColorModelBuilder()..update(updates)).build();
 
-  _$ColorModel._({this.color, this.image}) : super._() {
+  _$ColorModel._({this.id, this.color, this.image}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'ColorModel', 'id');
     BuiltValueNullFieldError.checkNotNull(color, 'ColorModel', 'color');
   }
 
@@ -82,17 +91,21 @@ class _$ColorModel extends ColorModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ColorModel && color == other.color && image == other.image;
+    return other is ColorModel &&
+        id == other.id &&
+        color == other.color &&
+        image == other.image;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, color.hashCode), image.hashCode));
+    return $jf($jc($jc($jc(0, id.hashCode), color.hashCode), image.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ColorModel')
+          ..add('id', id)
           ..add('color', color)
           ..add('image', image))
         .toString();
@@ -101,6 +114,10 @@ class _$ColorModel extends ColorModel {
 
 class ColorModelBuilder implements Builder<ColorModel, ColorModelBuilder> {
   _$ColorModel _$v;
+
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   String _color;
   String get color => _$this._color;
@@ -115,6 +132,7 @@ class ColorModelBuilder implements Builder<ColorModel, ColorModelBuilder> {
   ColorModelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _color = $v.color;
       _image = $v.image;
       _$v = null;
@@ -137,6 +155,7 @@ class ColorModelBuilder implements Builder<ColorModel, ColorModelBuilder> {
   _$ColorModel build() {
     final _$result = _$v ??
         new _$ColorModel._(
+            id: BuiltValueNullFieldError.checkNotNull(id, 'ColorModel', 'id'),
             color: BuiltValueNullFieldError.checkNotNull(
                 color, 'ColorModel', 'color'),
             image: image);

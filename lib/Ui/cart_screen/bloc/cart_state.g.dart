@@ -26,6 +26,10 @@ class _$CartState extends CartState {
   @override
   final int totalCosts;
   @override
+  final bool isGlobalWrab;
+  @override
+  final bool isSongAdded;
+  @override
   final bool successAddToCart;
 
   factory _$CartState([void Function(CartStateBuilder) updates]) =>
@@ -41,6 +45,8 @@ class _$CartState extends CartState {
       this.productsCost,
       this.wrapsCost,
       this.totalCosts,
+      this.isGlobalWrab,
+      this.isSongAdded,
       this.successAddToCart})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'CartState', 'success');
@@ -73,6 +79,8 @@ class _$CartState extends CartState {
         productsCost == other.productsCost &&
         wrapsCost == other.wrapsCost &&
         totalCosts == other.totalCosts &&
+        isGlobalWrab == other.isGlobalWrab &&
+        isSongAdded == other.isSongAdded &&
         successAddToCart == other.successAddToCart;
   }
 
@@ -86,15 +94,19 @@ class _$CartState extends CartState {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, success.hashCode),
-                                        isLoading.hashCode),
-                                    error.hashCode),
-                                cart.hashCode),
-                            cartList.hashCode),
-                        wraps.hashCode),
-                    productsCost.hashCode),
-                wrapsCost.hashCode),
-            totalCosts.hashCode),
+                                    $jc(
+                                        $jc(
+                                            $jc($jc(0, success.hashCode),
+                                                isLoading.hashCode),
+                                            error.hashCode),
+                                        cart.hashCode),
+                                    cartList.hashCode),
+                                wraps.hashCode),
+                            productsCost.hashCode),
+                        wrapsCost.hashCode),
+                    totalCosts.hashCode),
+                isGlobalWrab.hashCode),
+            isSongAdded.hashCode),
         successAddToCart.hashCode));
   }
 
@@ -110,6 +122,8 @@ class _$CartState extends CartState {
           ..add('productsCost', productsCost)
           ..add('wrapsCost', wrapsCost)
           ..add('totalCosts', totalCosts)
+          ..add('isGlobalWrab', isGlobalWrab)
+          ..add('isSongAdded', isSongAdded)
           ..add('successAddToCart', successAddToCart))
         .toString();
   }
@@ -156,6 +170,14 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
   int get totalCosts => _$this._totalCosts;
   set totalCosts(int totalCosts) => _$this._totalCosts = totalCosts;
 
+  bool _isGlobalWrab;
+  bool get isGlobalWrab => _$this._isGlobalWrab;
+  set isGlobalWrab(bool isGlobalWrab) => _$this._isGlobalWrab = isGlobalWrab;
+
+  bool _isSongAdded;
+  bool get isSongAdded => _$this._isSongAdded;
+  set isSongAdded(bool isSongAdded) => _$this._isSongAdded = isSongAdded;
+
   bool _successAddToCart;
   bool get successAddToCart => _$this._successAddToCart;
   set successAddToCart(bool successAddToCart) =>
@@ -175,6 +197,8 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
       _productsCost = $v.productsCost;
       _wrapsCost = $v.wrapsCost;
       _totalCosts = $v.totalCosts;
+      _isGlobalWrab = $v.isGlobalWrab;
+      _isSongAdded = $v.isSongAdded;
       _successAddToCart = $v.successAddToCart;
       _$v = null;
     }
@@ -210,6 +234,8 @@ class CartStateBuilder implements Builder<CartState, CartStateBuilder> {
               productsCost: productsCost,
               wrapsCost: wrapsCost,
               totalCosts: totalCosts,
+              isGlobalWrab: isGlobalWrab,
+              isSongAdded: isSongAdded,
               successAddToCart: BuiltValueNullFieldError.checkNotNull(
                   successAddToCart, 'CartState', 'successAddToCart'));
     } catch (_) {

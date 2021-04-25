@@ -15,6 +15,8 @@ implements Built<WrapState, WrapStateBuilder> {
   String get error;
   WrapItem get wrap;
 
+  bool get successAddToCart;
+
   WrapState._();
 
   factory WrapState([updates(WrapStateBuilder b)]) = _$WrapState;
@@ -24,6 +26,7 @@ implements Built<WrapState, WrapStateBuilder> {
       ..isLoading = false
       ..success = false
       ..wrap = null
+        ..successAddToCart=false
     );
   }
 }

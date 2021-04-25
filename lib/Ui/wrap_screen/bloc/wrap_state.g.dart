@@ -15,16 +15,25 @@ class _$WrapState extends WrapState {
   final String error;
   @override
   final WrapItem wrap;
+  @override
+  final bool successAddToCart;
 
   factory _$WrapState([void Function(WrapStateBuilder) updates]) =>
       (new WrapStateBuilder()..update(updates)).build();
 
-  _$WrapState._({this.success, this.isLoading, this.error, this.wrap})
+  _$WrapState._(
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.wrap,
+      this.successAddToCart})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'WrapState', 'success');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'WrapState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'WrapState', 'error');
     BuiltValueNullFieldError.checkNotNull(wrap, 'WrapState', 'wrap');
+    BuiltValueNullFieldError.checkNotNull(
+        successAddToCart, 'WrapState', 'successAddToCart');
   }
 
   @override
@@ -41,14 +50,18 @@ class _$WrapState extends WrapState {
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
-        wrap == other.wrap;
+        wrap == other.wrap &&
+        successAddToCart == other.successAddToCart;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode),
-        wrap.hashCode));
+        $jc(
+            $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                error.hashCode),
+            wrap.hashCode),
+        successAddToCart.hashCode));
   }
 
   @override
@@ -57,7 +70,8 @@ class _$WrapState extends WrapState {
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
-          ..add('wrap', wrap))
+          ..add('wrap', wrap)
+          ..add('successAddToCart', successAddToCart))
         .toString();
   }
 }
@@ -81,6 +95,11 @@ class WrapStateBuilder implements Builder<WrapState, WrapStateBuilder> {
   WrapItemBuilder get wrap => _$this._wrap ??= new WrapItemBuilder();
   set wrap(WrapItemBuilder wrap) => _$this._wrap = wrap;
 
+  bool _successAddToCart;
+  bool get successAddToCart => _$this._successAddToCart;
+  set successAddToCart(bool successAddToCart) =>
+      _$this._successAddToCart = successAddToCart;
+
   WrapStateBuilder();
 
   WrapStateBuilder get _$this {
@@ -90,6 +109,7 @@ class WrapStateBuilder implements Builder<WrapState, WrapStateBuilder> {
       _isLoading = $v.isLoading;
       _error = $v.error;
       _wrap = $v.wrap.toBuilder();
+      _successAddToCart = $v.successAddToCart;
       _$v = null;
     }
     return this;
@@ -118,7 +138,9 @@ class WrapStateBuilder implements Builder<WrapState, WrapStateBuilder> {
                   isLoading, 'WrapState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'WrapState', 'error'),
-              wrap: wrap.build());
+              wrap: wrap.build(),
+              successAddToCart: BuiltValueNullFieldError.checkNotNull(
+                  successAddToCart, 'WrapState', 'successAddToCart'));
     } catch (_) {
       String _$failedField;
       try {

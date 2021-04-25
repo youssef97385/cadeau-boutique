@@ -832,19 +832,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
                                                                 children: [
-                                                                  Text(
-                                                                      state
-                                                                              .products[
-                                                                                  index]
-                                                                              .mainPrice +
-                                                                          "\$",
-                                                                      style: TextStyle(
-                                                                          color: Color(
-                                                                              0xff393741),
-                                                                          fontSize:
-                                                                              15,
-                                                                          decoration:
-                                                                              TextDecoration.lineThrough)),
+                                                                  // Text(
+                                                                  //     state
+                                                                  //             .products[
+                                                                  //                 index]
+                                                                  //             .mainPrice +
+                                                                  //         "\$",
+                                                                  //     style: TextStyle(
+                                                                  //         color: Color(
+                                                                  //             0xff393741),
+                                                                  //         fontSize:
+                                                                  //             15,
+                                                                  //         decoration:
+                                                                  //             TextDecoration.lineThrough)),
                                                                   Text(
                                                                     state.products[index]
                                                                             .salePrice +
@@ -1024,8 +1024,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 30.0,
-                                                right: 30,
+                                                left: 16.0,
+                                                right: 16,
                                                 bottom: 20),
                                             child: Row(
                                               mainAxisAlignment:

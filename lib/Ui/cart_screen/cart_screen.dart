@@ -73,13 +73,16 @@ class _CartScreenState extends State<CartScreen> {
     return BlocBuilder(
         cubit: _bloc,
         builder: (BuildContext context, CartState state) {
+          print("cart after global ${state.cart.globalWrap}");
           if (state.successAddToCart) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               showSuccsess();
             });
           }
           return state.cartList.isEmpty
-              ? EmptyCart(isLoading: state.isLoading,)
+              ? EmptyCart(
+                  isLoading: state.isLoading,
+                )
               : Scaffold(
                   backgroundColor: Colors.white,
                   body: Stack(
@@ -88,9 +91,9 @@ class _CartScreenState extends State<CartScreen> {
                         child: Column(
                           children: [
                             baseAppBar(size, context),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
                             state.cartList.isEmpty
                                 ? Container()
                                 : Center(
@@ -102,703 +105,712 @@ class _CartScreenState extends State<CartScreen> {
                                           itemCount: state.cartList.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
-                                            return Column(
-                                              children: [
-                                                state.cartList[index].gift ==
-                                                        null
-                                                    ? Container()
-                                                    : Container(
-                                                        width: size.width * 0.9,
-                                                        height:
-                                                            size.height * 0.3,
-                                                        // color: Colors.red,
-                                                        child: Column(
-                                                          children: [
-                                                            Container(
-                                                              height:
-                                                                  size.height *
-                                                                      0.05,
-                                                              width: size.width,
-                                                              // color: Colors.amber,
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  // SizedBox(
-                                                                  //   height: 5,
-                                                                  // ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              height:
-                                                                  size.height *
-                                                                      0.18,
-                                                              // color: Colors.green,
-                                                              child: Row(
-                                                                children: [
-                                                                  ///image
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            size.height *
-                                                                                0.02),
-                                                                    child:
-                                                                        Container(
-                                                                      width:
-                                                                          size.width *
-                                                                              .3,
-                                                                      // color: Colors.red,
+                                            return Container(
+                                              child: Column(
+                                                children: [
+                                                  ///Gift item ********
+                                                  state.cartList[index].gift ==
+                                                          null
+                                                      ? Container()
+                                                      : Container(
+                                                          width:
+                                                              size.width * 0.9,
+                                                          height:
+                                                              size.height * 0.3,
+                                                          // color: Colors.red,
+                                                          child: Column(
+                                                            children: [
+                                                              Container(
+                                                                height:
+                                                                    size.height *
+                                                                        0.18,
+                                                                // color: Colors.green,
+                                                                child: Row(
+                                                                  children: [
+                                                                    ///image
+                                                                    Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          vertical:
+                                                                              size.height * 0.02),
                                                                       child:
-                                                                          ClipRRect(
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12)),
-                                                                        child: Image
-                                                                            .network(
-                                                                          BaseImgUrl +
-                                                                              state.cartList[index].gift.image,
-                                                                          fit: BoxFit
-                                                                              .fill,
+                                                                          Container(
+                                                                        width: size.width *
+                                                                            .3,
+                                                                        // color: Colors.red,
+                                                                        child:
+                                                                            ClipRRect(
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(12)),
+                                                                          child:
+                                                                              Image.network(
+                                                                            BaseImgUrl +
+                                                                                state.cartList[index].gift.image,
+                                                                            fit:
+                                                                                BoxFit.fill,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: size
-                                                                            .width *
-                                                                        0.05,
-                                                                  ),
-
-                                                                  ///price
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            size.height *
-                                                                                0.02),
-                                                                    child: Container(
-                                                                        width: size.width * 0.3,
-                                                                        // color: Colors.amberAccent,
-                                                                        child: Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceAround,
-                                                                          children: [
-                                                                            Column(
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                  children: [
-                                                                                    baseText(color: AppColor.darkTextColor, title: state.cartList[index].gift.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
-                                                                                  ],
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  height: size.height * 0.005,
-                                                                                ),
-                                                                                baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0),
-                                                                              ],
-                                                                            ),
-                                                                            // SizedBox(
-                                                                            //   height: 20,
-                                                                            // ),
-
-                                                                            // SizedBox(
-                                                                            //   height: 20,
-                                                                            // ),
-                                                                            state.cartList[index].wrap == null
-                                                                                ? Container()
-                                                                                : Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                                        children: [
-                                                                                          baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
-                                                                                        ],
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        height: size.height * 0.005,
-                                                                                      ),
-                                                                                      baseText(
-                                                                                        color: AppColor.darkYellow,
-                                                                                        title: " \$" + state.cartList[index].wrap.mainPrice,
-                                                                                        size: size.width * 0.04,
-                                                                                      ),
-                                                                                    ],
-                                                                                  )
-                                                                          ],
-                                                                        )),
-                                                                  ),
-
-                                                                  SizedBox(
-                                                                    width: size
-                                                                            .width *
-                                                                        0.05,
-                                                                  ),
-
-                                                                  ///delete and fav icons
-
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            size.height *
-                                                                                0.02),
-                                                                    child:
-                                                                        Container(
+                                                                    SizedBox(
                                                                       width: size
                                                                               .width *
-                                                                          0.15,
-                                                                      // color: Colors.blue,
-                                                                      child:
-                                                                          Column(
-                                                                        children: [
-//                                                       InkWell(
-//                                                         onTap:(){
-//                                                           _bloc.add(RemoveItem((b)=>b..id = state.cartList[index].id));
-//                                                         },
-//                                                         child: Container(
-//                                                           height: 26,
-//                                                           width: 33,
-//                                                           child: Container(
-// // color: Colors.blueAccent,
-//                                                               child: Image.asset(
-//                                                                   "assets/images/delete.png")),
-//                                                           decoration: BoxDecoration(
-//                                                             borderRadius: BorderRadius.all(
-//                                                                 Radius.circular(10)),
-//                                                             boxShadow: [
-//                                                               BoxShadow(
-//                                                                 offset: Offset(1, 1),
-//                                                                 color: Colors.grey
-//                                                                     .withOpacity(0.6),
-//                                                                 blurRadius: 2,
-//                                                                 spreadRadius: 1,
-//                                                               ),
-//                                                             ],
-//                                                             gradient: LinearGradient(
-//                                                               colors: [
-//                                                                 AppColor.darkYellow,
-//                                                                 AppColor.lightYellow
-//                                                               ],
-//                                                               stops: [0.1, 0.96],
-//                                                             ),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       SizedBox(
-//                                                         height: 10,
-//                                                       ),
+                                                                          0.05,
+                                                                    ),
 
-                                                                          Row(
+                                                                    ///price
+                                                                    Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          vertical:
+                                                                              size.height * 0.02),
+                                                                      child: Container(
+                                                                          width: size.width * 0.55,
+                                                                          // color: Colors.amberAccent,
+                                                                          child: Column(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
                                                                             mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
+                                                                                MainAxisAlignment.spaceAround,
                                                                             children: [
-                                                                              InkWell(
-                                                                                onTap: () {
-                                                                                  if (state.cartList[index].wrap == null) {
-                                                                                    _bloc.add(AddToCart((b) => b..giftId = state.cartList[index].gift.id));
-                                                                                  } else {
-                                                                                    _bloc.add(AddToCart((b) => b
-                                                                                      ..giftId = state.cartList[index].gift.id
-                                                                                      ..wrapId = state.cartList[index].wrap.id));
-                                                                                  }
-                                                                                },
-                                                                                child: Container(
-                                                                                  width: 20,
-                                                                                  height: 20,
-                                                                                  decoration: BoxDecoration(
-                                                                                    boxShadow: [
-                                                                                      BoxShadow(
-                                                                                        color: Colors.grey.withOpacity(0.5),
-                                                                                        spreadRadius: 2,
-                                                                                        blurRadius: 3,
-                                                                                        offset: Offset(0, 3), // changes position of shadow
-                                                                                      ),
-                                                                                    ],
-                                                                                    shape: BoxShape.circle,
-                                                                                    color: AppColor.darkYellow,
+                                                                              Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  baseText(color: AppColor.darkTextColor, title: state.cartList[index].gift.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                  SizedBox(
+                                                                                    height: size.height * 0.005,
                                                                                   ),
-                                                                                  child: Center(
-                                                                                      child: Icon(
-                                                                                    Icons.add,
-                                                                                    color: Colors.white,
-                                                                                    size: 12,
-                                                                                  )),
-                                                                                ),
+                                                                                  baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0),
+                                                                                ],
                                                                               ),
-                                                                              SizedBox(
-                                                                                width: 15,
-                                                                              ),
-                                                                              InkWell(
-                                                                                onTap: () {
-                                                                                  _bloc.add(RemoveItem((b) => b..id = state.cartList[index].id));
-                                                                                },
-                                                                                child: Container(
-                                                                                  width: 20,
-                                                                                  height: 20,
-                                                                                  decoration: BoxDecoration(
-                                                                                    boxShadow: [
-                                                                                      BoxShadow(
-                                                                                        color: Colors.grey.withOpacity(0.5),
-                                                                                        spreadRadius: 2,
-                                                                                        blurRadius: 3,
-                                                                                        offset: Offset(0, 3), // changes position of shadow
-                                                                                      ),
-                                                                                    ],
-                                                                                    shape: BoxShape.circle,
-                                                                                    color: Color(0xffb1b1b1),
-                                                                                  ),
-                                                                                  child: Center(
-                                                                                      child: Icon(
-                                                                                    Icons.remove,
-                                                                                    color: Colors.white,
-                                                                                    size: 12,
-                                                                                  )),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
 
-                                                                          SizedBox(
-                                                                            height:
-                                                                                20,
-                                                                          ),
-
-                                                                          state.cartList[index].wrap != null
-                                                                              ? InkWell(
-                                                                                  onTap: () {
-                                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => WrapScreen(id: state.cartList[index].wrap.id)));
-                                                                                  },
-                                                                                  child: Container(
-                                                                                    height: 33,
-                                                                                    width: 40,
-                                                                                    child: Container(
-// color: Colors.blueAccent,
-                                                                                        child: Padding(
-                                                                                      padding: const EdgeInsets.all(6.0),
-                                                                                      child: SvgPicture.asset("assets/images/gift-box (1).svg"),
-                                                                                    )),
-                                                                                    decoration: BoxDecoration(
-                                                                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                        boxShadow: [
-                                                                                          BoxShadow(
-                                                                                            offset: Offset(1, 1),
-                                                                                            color: Colors.grey.withOpacity(0.6),
-                                                                                            blurRadius: 2,
-                                                                                            spreadRadius: 1,
-                                                                                          ),
-                                                                                        ],
-                                                                                        color: Colors.white),
-                                                                                  ),
-                                                                                )
-                                                                              : Container(),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            (state.cartList[index].totalPrice ==
-                                                                        null ||
-                                                                    state.cartList[index]
-                                                                            .totalPrice ==
-                                                                        0)
-                                                                ? Container()
-                                                                : Container(
-                                                                    height: size
-                                                                            .height *
-                                                                        0.04,
-                                                                    // color: Colors.blue,
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .symmetric(
-                                                                          horizontal:
-                                                                              8.0),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          baseText(
-                                                                              title: "Total",
-                                                                              color: AppColor.darkTextColor,
-                                                                              size: 18.0),
-                                                                          baseText(
-                                                                              color: AppColor.darkYellow,
-                                                                              title: "\$ ${state.cartList[index].totalPrice}",
-                                                                              size: 20.0),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                            SizedBox(
-                                                              height:
-                                                                  size.height *
-                                                                      0.02,
-                                                            ),
-                                                            Container(
-                                                              height: 1,
-                                                              width:
-                                                                  size.width *
-                                                                      0.85,
-                                                              color: AppColor
-                                                                  .darkYellow,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                state.cartList[index].wrap ==
-                                                        null
-                                                    ? Container()
-                                                    : state.cartList[index].gift != null?Container():
-                                                Container(
-                                                        width: size.width * 0.9,
-                                                        height:
-                                                            size.height * 0.3,
-                                                        // color: Colors.red,
-                                                        child: Column(
-                                                          children: [
-                                                            Container(
-                                                              height:
-                                                                  size.height *
-                                                                      0.05,
-                                                              width: size.width,
-                                                              // color: Colors.amber,
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  // SizedBox(
-                                                                  //   height: 5,
-                                                                  // ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              height:
-                                                                  size.height *
-                                                                      0.18,
-                                                              // color: Colors.green,
-                                                              child: Row(
-                                                                children: [
-                                                                  ///image
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            size.height *
-                                                                                0.02),
-                                                                    child:
-                                                                        Container(
-                                                                      width:
-                                                                          size.width *
-                                                                              .3,
-                                                                      // color: Colors.red,
-                                                                      child:
-                                                                          ClipRRect(
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12)),
-                                                                        child: Image
-                                                                            .network(
-                                                                          BaseImgUrl +
-                                                                              state.cartList[index].wrap.image,
-                                                                          fit: BoxFit
-                                                                              .fill,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: size
-                                                                            .width *
-                                                                        0.05,
-                                                                  ),
-
-                                                                  ///price
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            size.height *
-                                                                                0.02),
-                                                                    child: Container(
-                                                                        width: size.width * 0.3,
-                                                                        // color: Colors.amberAccent,
-                                                                        child: Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceAround,
-                                                                          children: [
-                                                                            Column(
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                  children: [
-                                                                                    baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
-                                                                                  ],
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  height: size.height * 0.005,
-                                                                                ),
-                                                                                baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].wrap.mainPrice, size: 16.0),
-                                                                              ],
-                                                                            ),
-                                                                            // SizedBox(
-                                                                            //   height: 20,
-                                                                            // ),
-
-                                                                            // SizedBox(
-                                                                            //   height: 20,
-                                                                            // ),
-                                                                            state.cartList[index].wrap == null
-                                                                                ? Container()
-
-                                                                                :
-                                                                            state.cartList[index].gift == null?Container():
-                                                                            Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              state.cartList[index].wrap == null
+                                                                                  ? Container()
+                                                                                  : Row(
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
                                                                                     children: [
-                                                                                      Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                                        children: [
-                                                                                          baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
-                                                                                        ],
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        height: size.height * 0.005,
-                                                                                      ),
-                                                                                      baseText(
-                                                                                        color: AppColor.darkYellow,
-                                                                                        title: " \$" + state.cartList[index].wrap.mainPrice,
-                                                                                        size: size.width * 0.04,
-                                                                                      ),
+                                                                                      baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
                                                                                     ],
-                                                                                  )
-                                                                          ],
-                                                                        )),
-                                                                  ),
-
-                                                                  SizedBox(
-                                                                    width: size
-                                                                            .width *
-                                                                        0.05,
-                                                                  ),
-
-                                                                  ///delete and fav icons
-
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            size.height *
-                                                                                0.02),
-                                                                    child:
-                                                                        Container(
-                                                                      width: size
-                                                                              .width *
-                                                                          0.15,
-                                                                      // color: Colors.blue,
-                                                                      child:
-                                                                          Column(
-                                                                        children: [
-
-
-                                                                          InkWell(
-                                                                            onTap:
-                                                                                () {
-                                                                              _bloc.add(RemoveItem((b) => b..id = state.cartList[index].id));
-                                                                            },
-                                                                            child:
-                                                                                Container(
-                                                                              height: 26,
-                                                                              width: 33,
-                                                                              child: Container(
-// color: Colors.blueAccent,
-                                                                                  child: Image.asset("assets/images/delete.png")),
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    offset: Offset(1, 1),
-                                                                                    color: Colors.grey.withOpacity(0.6),
-                                                                                    blurRadius: 2,
-                                                                                    spreadRadius: 1,
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height: size.height * 0.005,
+                                                                                  ),
+                                                                                  baseText(
+                                                                                    color: AppColor.darkYellow,
+                                                                                    title: " \$" + state.cartList[index].wrap.mainPrice,
+                                                                                    size: size.width * 0.04,
                                                                                   ),
                                                                                 ],
-                                                                                gradient: LinearGradient(
-                                                                                  colors: [
-                                                                                    AppColor.darkYellow,
-                                                                                    AppColor.lightYellow
-                                                                                  ],
-                                                                                  stops: [
-                                                                                    0.1,
-                                                                                    0.96
-                                                                                  ],
-                                                                                ),
                                                                               ),
+                                                                              (state.cartList[index].totalPrice ==
+                                                                                  null ||
+                                                                                  state.cartList[index]
+                                                                                      .totalPrice ==
+                                                                                      0)?Container():
+                                                                              Row(
+                                                                                crossAxisAlignment: CrossAxisAlignment.start
+                                                                                ,
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                  SizedBox(
+                                                                                    height: size.height * 0.005,
+                                                                                  ),
+                                                                                  baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 16.0),
+                                                                                ],
+                                                                              ),
+
+
+
+
+
+                                                                            ],
+                                                                          )),
+                                                                    ),
+
+
+
+                                                                    ///delete and fav icons
+
+
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                children: [
+                                                                  Container(
+                                                              width:size.width*0.3,
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+
+
+                                                                        InkWell(
+                                                                          onTap: () {
+                                                                            _bloc.add(RemoveItem((b) => b
+                                                                              ..id = state
+                                                                                  .cartList[index]
+                                                                                  .id));
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            width: 24,
+                                                                            height:
+                                                                                24,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color:
+                                                                                      Colors.grey.withOpacity(0.5),
+                                                                                  spreadRadius:
+                                                                                      2,
+                                                                                  blurRadius:
+                                                                                      3,
+                                                                                  offset:
+                                                                                      Offset(0, 3), // changes position of shadow
+                                                                                ),
+                                                                              ],
+                                                                              shape: BoxShape
+                                                                                  .circle,
+                                                                              color: Color(
+                                                                                  0xffb1b1b1),
+                                                                            ),
+                                                                            child: Center(
+                                                                                child: Icon(
+                                                                              Icons
+                                                                                  .remove,
+                                                                              color: Colors
+                                                                                  .white,
+                                                                              size:
+                                                                                  12,
+                                                                            )),
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width: size.width*0.1,
+                                                                        ),
+                                                                        InkWell(
+                                                                          onTap: () {
+                                                                            if (state
+                                                                                .cartList[index]
+                                                                                .wrap ==
+                                                                                null) {
+                                                                              _bloc.add(AddToCart((b) => b
+                                                                                ..giftId = state
+                                                                                    .cartList[index]
+                                                                                    .gift
+                                                                                    .id));
+                                                                            } else {
+                                                                              _bloc.add(AddToCart((b) => b
+                                                                                ..giftId = state.cartList[index].gift.id
+                                                                                ..wrapId = state.cartList[index].wrap.id));
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                          Container(
+                                                                            width: 24,
+                                                                            height:
+                                                                            24,
+                                                                            decoration:
+                                                                            BoxDecoration(
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color:
+                                                                                  Colors.grey.withOpacity(0.5),
+                                                                                  spreadRadius:
+                                                                                  2,
+                                                                                  blurRadius:
+                                                                                  3,
+                                                                                  offset:
+                                                                                  Offset(0, 3), // changes position of shadow
+                                                                                ),
+                                                                              ],
+                                                                              shape: BoxShape
+                                                                                  .circle,
+                                                                              color: AppColor
+                                                                                  .darkYellow,
+                                                                            ),
+                                                                            child: Center(
+                                                                                child: Icon(
+                                                                                  Icons
+                                                                                      .add,
+                                                                                  color: Colors
+                                                                                      .white,
+                                                                                  size:
+                                                                                  12,
+                                                                                )),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Row(
+                                                                    children: [
+                                                                      state.cartList[index].wrap != null
+                                                                          ? Row(
+                                                                            children: [
+                                                                              InkWell(
+                                                                        onTap: () {
+                                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => WrapScreen(id: state.cartList[index].wrap.id)));
+                                                                        },
+                                                                        child: Container(
+                                                                              height: 26,
+                                                                              width: 26,
+                                                                              child: Container(
+// color: Colors.blueAccent,
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.all(6.0),
+                                                                                    child: SvgPicture.asset("assets/images/gift-box (3).svg"),
+                                                                                  )),
+                                                                              decoration: BoxDecoration(
+                                                                                  // borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                  shape: BoxShape.circle,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      offset: Offset(1, 1),
+                                                                                      color: Colors.grey.withOpacity(0.6),
+                                                                                      blurRadius: 2,
+                                                                                      spreadRadius: 1,
+                                                                                    ),
+                                                                                  ],
+                                                                                  color: AppColor.darkYellow),
+                                                                        ),
+                                                                      ),
+                                                                              SizedBox(width: size.width*0.02,)
+                                                                            ],
+                                                                          )
+
+                                                                          : Container(),
+
+                                                                      InkWell(
+                                                                        onTap: () {
+                                                                         ///ToDo
+                                                                          ///add to fav
+                                                                        },
+                                                                        child: Container(
+                                                                          height: 26,
+                                                                          width: 26,
+                                                                          child: Container(
+// color: Colors.blueAccent,
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(6.0),
+                                                                                child: SvgPicture.asset("assets/images/favourite.svg"),
+                                                                              )),
+                                                                          decoration: BoxDecoration(
+                                                                            // borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                              shape: BoxShape.circle,
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  offset: Offset(1, 1),
+                                                                                  color: Colors.grey.withOpacity(0.6),
+                                                                                  blurRadius: 2,
+                                                                                  spreadRadius: 1,
+                                                                                ),
+                                                                              ],
+                                                                              color: AppColor.darkYellow),
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: size.width*0.02,),
+                                                                      InkWell(
+                                                                        onTap: () {
+                                                                          _bloc.add(RemoveItem((b) => b
+                                                                            ..id = state
+                                                                                .cartList[index]
+                                                                                .id));
+                                                                        },
+                                                                        child: Container(
+                                                                          height: 26,
+                                                                          width: 26,
+                                                                          child: Container(
+// color: Colors.blueAccent,
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(6.0),
+                                                                                child: SvgPicture.asset("assets/images/delete.svg"),
+                                                                              )),
+                                                                          decoration: BoxDecoration(
+                                                                            // borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                              shape: BoxShape.circle,
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  offset: Offset(1, 1),
+                                                                                  color: Colors.grey.withOpacity(0.6),
+                                                                                  blurRadius: 2,
+                                                                                  spreadRadius: 1,
+                                                                                ),
+                                                                              ],
+                                                                              color: AppColor.darkYellow),
+                                                                        ),
+                                                                      )
+
+                                                                    ],
+                                                                  ),
+
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                height:
+                                                                    size.height *
+                                                                        0.02,
+                                                              ),
+                                                              Container(
+                                                                height: 1,
+                                                                width:
+                                                                    size.width *
+                                                                        0.85,
+                                                                color: AppColor
+                                                                    .darkYellow,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+
+                                                  ///wrap item ********
+                                                  state.cartList[index].wrap ==
+                                                          null
+                                                      ? Container()
+                                                      : state.cartList[index]
+                                                                  .gift !=
+                                                              null
+                                                          ? Container()
+                                                          :
+
+                                                  Container(
+                                                              width:
+                                                                  size.width *
+                                                                      0.9,
+                                                              height:
+                                                                  size.height *
+                                                                      0.3,
+                                                              // color: Colors.red,
+                                                              child: Column(
+                                                                children: [
+
+                                                                  Container(
+                                                                    height: size
+                                                                            .height *
+                                                                        0.18,
+                                                                    // color: Colors.green,
+                                                                    child: Row(
+                                                                      children: [
+                                                                        ///image
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.symmetric(vertical: size.height * 0.02),
+                                                                          child:
+                                                                              Container(
+                                                                            width:
+                                                                                size.width * .3,
+                                                                            // color: Colors.red,
+                                                                            child:
+                                                                                Column(
+                                                                              children: [
+                                                                                ClipRRect(
+                                                                                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                                                                                  child: Image.network(
+                                                                                    BaseImgUrl + state.cartList[index].wrap.image,
+                                                                                    fit: BoxFit.fill,
+                                                                                  ),
+                                                                                ),
+                                                                              ],
                                                                             ),
                                                                           ),
-                                                                          SizedBox(
-                                                                            height:
-                                                                                10,
-                                                                          ),
-                                                                          state.cartList[index].wrap != null && state.cartList[index].gift!= null
-                                                                              ? InkWell(
-                                                                                  onTap: () {
-                                                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => WrapScreen(id: state.cartList[index].wrap.id)));
-                                                                                  },
-                                                                                  child: Container(
-                                                                                    height: 26,
-                                                                                    width: 33,
-                                                                                    child: Container(
-// color: Colors.blueAccent,
-                                                                                        child: Padding(
-                                                                                      padding: const EdgeInsets.all(6.0),
-                                                                                      child: SvgPicture.asset("assets/images/gift-box (1).svg"),
-                                                                                    )),
-                                                                                    decoration: BoxDecoration(
-                                                                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                        boxShadow: [
-                                                                                          BoxShadow(
-                                                                                            offset: Offset(1, 1),
-                                                                                            color: Colors.grey.withOpacity(0.6),
-                                                                                            blurRadius: 2,
-                                                                                            spreadRadius: 1,
-                                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              size.width * 0.05,
+                                                                        ),
+
+                                                                        ///price
+                                                                        Padding(
+                                                                          padding: EdgeInsets.symmetric(
+                                                                              vertical:
+                                                                              size.height * 0.02),
+                                                                          child: Container(
+                                                                              width: size.width * 0.55,
+                                                                              // color: Colors.amberAccent,
+                                                                              child: Column(
+                                                                                crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                                mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceAround,
+                                                                                children: [
+
+                                                                                  state.cartList[index].wrap == null
+                                                                                      ? Container()
+                                                                                      : Row(
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Row(
+                                                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                                                        children: [
+                                                                                          baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
                                                                                         ],
-                                                                                        color: Colors.white),
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        height: size.height * 0.005,
+                                                                                      ),
+                                                                                      baseText(
+                                                                                        color: AppColor.darkYellow,
+                                                                                        title: " \$" + state.cartList[index].wrap.mainPrice,
+                                                                                        size: size.width * 0.04,
+                                                                                      ),
+                                                                                    ],
                                                                                   ),
-                                                                                )
-                                                                              : Container()
+                                                                                  (state.cartList[index].totalPrice ==
+                                                                                      null ||
+                                                                                      state.cartList[index]
+                                                                                          .totalPrice ==
+                                                                                          0)?Container():
+                                                                                  Row(
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start
+                                                                                    ,
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                      SizedBox(
+                                                                                        height: size.height * 0.005,
+                                                                                      ),
+                                                                                      baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 16.0),
+                                                                                    ],
+                                                                                  ),
+
+
+
+
+
+                                                                                ],
+                                                                              )),
+                                                                        ),
+
+                                                                        // Padding(
+                                                                        //   padding:
+                                                                        //       EdgeInsets.symmetric(vertical: size.height * 0.02),
+                                                                        //   child: Container(
+                                                                        //       width: size.width * 0.3,
+                                                                        //       // color: Colors.amberAccent,
+                                                                        //       child: Column(
+                                                                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                                        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                        //         children: [
+                                                                        //           Row(
+                                                                        //             crossAxisAlignment: CrossAxisAlignment.start,
+                                                                        //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                        //             children: [
+                                                                        //               Row(
+                                                                        //                 mainAxisAlignment: MainAxisAlignment.start,
+                                                                        //
+                                                                        //                 children: [
+                                                                        //                   baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                        //                 ],
+                                                                        //               ),
+                                                                        //               SizedBox(
+                                                                        //                 height: size.height * 0.005,
+                                                                        //               ),
+                                                                        //               baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].wrap.mainPrice, size: 16.0),
+                                                                        //             ],
+                                                                        //           ),
+                                                                        //           Row(
+                                                                        //             crossAxisAlignment: CrossAxisAlignment.start,
+                                                                        //             children: [
+                                                                        //               Row(
+                                                                        //                 mainAxisAlignment: MainAxisAlignment.start,
+                                                                        //                 children: [
+                                                                        //                   baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                        //                 ],
+                                                                        //               ),
+                                                                        //               SizedBox(
+                                                                        //                 height: size.height * 0.005,
+                                                                        //               ),
+                                                                        //               baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 16.0),
+                                                                        //             ],
+                                                                        //           ),
+                                                                        //
+                                                                        //
+                                                                        //         ],
+                                                                        //       )),
+                                                                        // ),
+
+
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:size.width*0.3,
+                                                                        child: Row(
+                                                                          mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                          children: [
+
+
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                _bloc.add(RemoveItem((b) => b
+                                                                                  ..id = state
+                                                                                      .cartList[index]
+                                                                                      .id));
+                                                                              },
+                                                                              child:
+                                                                              Container(
+                                                                                width: 24,
+                                                                                height:
+                                                                                24,
+                                                                                decoration:
+                                                                                BoxDecoration(
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color:
+                                                                                      Colors.grey.withOpacity(0.5),
+                                                                                      spreadRadius:
+                                                                                      2,
+                                                                                      blurRadius:
+                                                                                      3,
+                                                                                      offset:
+                                                                                      Offset(0, 3), // changes position of shadow
+                                                                                    ),
+                                                                                  ],
+                                                                                  shape: BoxShape
+                                                                                      .circle,
+                                                                                  color: Color(
+                                                                                      0xffb1b1b1),
+                                                                                ),
+                                                                                child: Center(
+                                                                                    child: Icon(
+                                                                                      Icons
+                                                                                          .remove,
+                                                                                      color: Colors
+                                                                                          .white,
+                                                                                      size:
+                                                                                      12,
+                                                                                    )),
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: size.width*0.1,
+                                                                            ),
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                if (state
+                                                                                    .cartList[index]
+                                                                                    .wrap ==
+                                                                                    null) {
+                                                                                  _bloc.add(AddToCart((b) => b
+                                                                                    ..giftId = state
+                                                                                        .cartList[index]
+                                                                                        .gift
+                                                                                        .id));
+                                                                                } else {
+                                                                                  _bloc.add(AddToCart((b) => b
+                                                                                    ..giftId = state.cartList[index].gift.id
+                                                                                    ..wrapId = state.cartList[index].wrap.id));
+                                                                                }
+                                                                              },
+                                                                              child:
+                                                                              Container(
+                                                                                width: 24,
+                                                                                height:
+                                                                                24,
+                                                                                decoration:
+                                                                                BoxDecoration(
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color:
+                                                                                      Colors.grey.withOpacity(0.5),
+                                                                                      spreadRadius:
+                                                                                      2,
+                                                                                      blurRadius:
+                                                                                      3,
+                                                                                      offset:
+                                                                                      Offset(0, 3), // changes position of shadow
+                                                                                    ),
+                                                                                  ],
+                                                                                  shape: BoxShape
+                                                                                      .circle,
+                                                                                  color: AppColor
+                                                                                      .darkYellow,
+                                                                                ),
+                                                                                child: Center(
+                                                                                    child: Icon(
+                                                                                      Icons
+                                                                                          .add,
+                                                                                      color: Colors
+                                                                                          .white,
+                                                                                      size:
+                                                                                      12,
+                                                                                    )),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Row(
+                                                                        children: [
+
+                                                                          InkWell(
+                                                                            onTap: () {
+                                                                              _bloc.add(RemoveItem((b) => b
+                                                                                ..id = state
+                                                                                    .cartList[index]
+                                                                                    .id));
+                                                                            },
+                                                                            child: Container(
+                                                                              height: 26,
+                                                                              width: 26,
+                                                                              child: Container(
+// color: Colors.blueAccent,
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.all(6.0),
+                                                                                    child: SvgPicture.asset("assets/images/delete.svg"),
+                                                                                  )),
+                                                                              decoration: BoxDecoration(
+                                                                                // borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                  shape: BoxShape.circle,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      offset: Offset(1, 1),
+                                                                                      color: Colors.grey.withOpacity(0.6),
+                                                                                      blurRadius: 2,
+                                                                                      spreadRadius: 1,
+                                                                                    ),
+                                                                                  ],
+                                                                                  color: AppColor.darkYellow),
+                                                                            ),
+                                                                          )
+
                                                                         ],
                                                                       ),
-                                                                    ),
+
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: size
+                                                                            .height *
+                                                                        0.02,
+                                                                  ),
+                                                                  Container(
+                                                                    height: 1,
+                                                                    width: size
+                                                                            .width *
+                                                                        0.85,
+                                                                    color: AppColor
+                                                                        .darkYellow,
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            (state.cartList[index].totalPrice ==
-                                                                        null ||
-                                                                    state.cartList[index]
-                                                                            .totalPrice ==
-                                                                        0)
-                                                                ? Container()
-                                                                : Container(
-                                                                    height: size
-                                                                            .height *
-                                                                        0.04,
-                                                                    // color: Colors.blue,
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .symmetric(
-                                                                          horizontal:
-                                                                              8.0),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          baseText(
-                                                                              title: "Total",
-                                                                              color: AppColor.darkTextColor,
-                                                                              size: 18.0),
-                                                                          // Row(
-                                                                          //   mainAxisAlignment:
-                                                                          //   MainAxisAlignment.start,
-                                                                          //   children: [
-                                                                          //     Container(
-                                                                          //       width: 20,
-                                                                          //       height: 20,
-                                                                          //       decoration: BoxDecoration(
-                                                                          //         boxShadow: [
-                                                                          //           BoxShadow(
-                                                                          //             color: Colors.grey
-                                                                          //                 .withOpacity(0.5),
-                                                                          //             spreadRadius: 2,
-                                                                          //             blurRadius: 3,
-                                                                          //             offset: Offset(0,
-                                                                          //                 3), // changes position of shadow
-                                                                          //           ),
-                                                                          //         ],
-                                                                          //         shape: BoxShape.circle,
-                                                                          //         color: Color(0xffb1b1b1),
-                                                                          //       ),
-                                                                          //       child: Center(
-                                                                          //           child: Icon(
-                                                                          //             Icons.remove,
-                                                                          //             color: Colors.white,
-                                                                          //             size: 12,
-                                                                          //           )),
-                                                                          //     ),
-                                                                          //     SizedBox(
-                                                                          //       width: 15,
-                                                                          //     ),
-                                                                          //     Text(
-                                                                          //       "1",
-                                                                          //       style: TextStyle(
-                                                                          //         color: AppColor.darkYellow,
-                                                                          //         fontSize: 16,
-                                                                          //       ),
-                                                                          //     ),
-                                                                          //     SizedBox(
-                                                                          //       width: 15,
-                                                                          //     ),
-                                                                          //     Container(
-                                                                          //       width: 20,
-                                                                          //       height: 20,
-                                                                          //       decoration: BoxDecoration(
-                                                                          //         boxShadow: [
-                                                                          //           BoxShadow(
-                                                                          //             color: Colors.grey
-                                                                          //                 .withOpacity(0.5),
-                                                                          //             spreadRadius: 2,
-                                                                          //             blurRadius: 3,
-                                                                          //             offset: Offset(0,
-                                                                          //                 3), // changes position of shadow
-                                                                          //           ),
-                                                                          //         ],
-                                                                          //         shape: BoxShape.circle,
-                                                                          //         color: AppColor.darkYellow,
-                                                                          //       ),
-                                                                          //       child: Center(
-                                                                          //           child: Icon(
-                                                                          //             Icons.add,
-                                                                          //             color: Colors.white,
-                                                                          //             size: 12,
-                                                                          //           )),
-                                                                          //     ),
-                                                                          //   ],
-                                                                          // ),
-                                                                          baseText(
-                                                                              color: AppColor.darkYellow,
-                                                                              title: "\$ ${state.cartList[index].totalPrice}",
-                                                                              size: 20.0),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                            SizedBox(
-                                                              height:
-                                                                  size.height *
-                                                                      0.02,
-                                                            ),
-                                                            Container(
-                                                              height: 1,
-                                                              width:
-                                                                  size.width *
-                                                                      0.85,
-                                                              color: AppColor
-                                                                  .darkYellow,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                              ],
+                                                ],
+                                              ),
                                             );
                                           }),
                                     ),
@@ -809,10 +821,12 @@ class _CartScreenState extends State<CartScreen> {
                             Column(
                               children: [
                                 baseText(
-                                    title: (state.cart.globalWrap != null &&
-                                            !editGlobalWrap)
+                                    title: (
+                                            // state.cart.globalWrap != null &&
+                                            //     !editGlobalWrap
+                                            state.isGlobalWrab)
                                         ? "One Wrap For All Gifts"
-                                        : "Add One Wrap For All Products",
+                                        : "Add One Wrap For All Gifts",
                                     color: AppColor.lightTextColor,
                                     size: 17.0),
                                 SizedBox(
@@ -823,8 +837,10 @@ class _CartScreenState extends State<CartScreen> {
                                     :
 
                                     ///here global wrap
-                                    (state.cart.globalWrap != null &&
-                                            !editGlobalWrap)
+                                    (
+                                            // state.cart.globalWrap != null &&
+                                            //     !editGlobalWrap
+                                            state.isGlobalWrab)
                                         ? Container(
                                             width: size.width * 0.9,
                                             height: size.height * 0.3,
@@ -1027,10 +1043,14 @@ class _CartScreenState extends State<CartScreen> {
                                                     child: FlatButton(
                                                       // splashColor: Colors.red,
                                                       onPressed: () {
-                                                        setState(() {
-                                                          editGlobalWrap =
-                                                              !editGlobalWrap;
-                                                        });
+                                                        // setState(() {
+                                                        //   editGlobalWrap =
+                                                        //       !editGlobalWrap;
+                                                        // });
+
+                                                        _bloc
+                                                            .add(ClearGlobal());
+
                                                         // if(selectedWrap == -1){
                                                         //   AwesomeDialog(
                                                         //     context: context,
@@ -1062,9 +1082,12 @@ class _CartScreenState extends State<CartScreen> {
                                                         // }
                                                       },
                                                       child: Text(
-                                                        (state.cart.globalWrap !=
-                                                                    null &&
-                                                                !editGlobalWrap)
+                                                        (
+                                                                // state.cart.globalWrap !=
+                                                                //         null &&
+                                                                //     !editGlobalWrap
+                                                                state
+                                                                    .isGlobalWrab)
                                                             ? "Edit"
                                                             : 'Add Wrap For All Gifts ',
                                                         style: TextStyle(
@@ -1320,24 +1343,26 @@ class _CartScreenState extends State<CartScreen> {
                                                               },
                                                             )..show();
                                                           } else {
-                                                            print(
-                                                                "test wrap id3$wrapId");
+                                                            // setState(() {
+                                                            //   // selectedWrap = state.wraps[0].wrapItems[index].id;
+                                                            //   editGlobalWrap =
+                                                            //   !editGlobalWrap;
+                                                            // });
+
                                                             _bloc.add(
                                                                 AddGlobalWrap(
                                                                     (b) => b
                                                                       ..wrapId =
                                                                           wrapId));
-                                                            setState(() {
-                                                              // selectedWrap = state.wraps[0].wrapItems[index].id;
-                                                              editGlobalWrap =
-                                                                  !editGlobalWrap;
-                                                            });
                                                           }
                                                         },
                                                         child: Text(
-                                                          (state.cart.globalWrap !=
-                                                                      null &&
-                                                                  !editGlobalWrap)
+                                                          (
+                                                                  // state.cart.globalWrap !=
+                                                                  //         null &&
+                                                                  //     !editGlobalWrap
+                                                                  state
+                                                                      .isGlobalWrab)
                                                               ? "Edit"
                                                               : 'Add Wrap For All Gifts ',
                                                           style: TextStyle(
@@ -1654,7 +1679,8 @@ class _CartScreenState extends State<CartScreen> {
                                         ),
                                       ),
                                       baseText(
-                                          title: "\$ 100",
+                                          title:
+                                              "\$${state.cart.songPriceBeforAdd ?? 0}",
                                           color: AppColor.darkYellow,
                                           size: 26.0),
                                     ],
@@ -1740,7 +1766,7 @@ class _CartScreenState extends State<CartScreen> {
                                       ],
                                     ),
                                   ),
-                            state.cart.songPrice == 0
+                            state.isSongAdded == false
                                 ? Container()
                                 : Column(
                                     children: [
@@ -1759,8 +1785,8 @@ class _CartScreenState extends State<CartScreen> {
                                                 color: AppColor.darkTextColor,
                                                 size: 16.0),
                                             baseText(
-                                                title: "\$" +
-                                                    state.cart.songPrice
+                                                title: "\$ " +
+                                                    state.cart.songPriceBeforAdd
                                                         .toString(),
                                                 color: AppColor.darkYellow,
                                                 size: 16.0),
@@ -1860,31 +1886,23 @@ class _CartScreenState extends State<CartScreen> {
                   ));
         });
   }
-  showSuccsess(){
+
+  showSuccsess() {
     _bloc.add(ClearSuccess());
     AwesomeDialog(
       context: context,
-      customHeader:
-      Container(
+      customHeader: Container(
         child: Icon(
-          Icons
-              .error_outline,
+          Icons.error_outline,
           size: 100,
-          color: AppColor
-              .darkYellow,
+          color: AppColor.darkYellow,
         ),
       ),
-      btnOkColor: AppColor
-          .darkYellow,
-      dialogType:
-      DialogType
-          .SUCCES,
-      animType: AnimType
-          .BOTTOMSLIDE,
+      btnOkColor: AppColor.darkYellow,
+      dialogType: DialogType.SUCCES,
+      animType: AnimType.BOTTOMSLIDE,
       title: 'Successfully Added To Cart',
-      desc:
-      '',
-
+      desc: '',
     )..show();
   }
 }

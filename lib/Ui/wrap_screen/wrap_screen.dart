@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_event.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_event.dart';
@@ -6,6 +7,7 @@ import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'bloc/wrap_event.dart';
@@ -58,7 +60,12 @@ class _WrapScreenState extends State<WrapScreen> {
     return BlocBuilder(
       cubit: _bloc,
       builder: (BuildContext context, WrapState state) {
-        print("my product "+ (state.wrap.image == null).toString() + "   "+state.wrap.toString() );
+        if (state.successAddToCart) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            showSuccsess();
+          });
+        }
+        // print("my product "+ (state.wrap.image == null).toString() + "   "+state.wrap.toString() );
         return Stack(
           children: [
             Scaffold(
@@ -139,9 +146,9 @@ class _WrapScreenState extends State<WrapScreen> {
                             Row(
                               children: [
                                 baseText(color: AppColor.darkTextColor,
-                                    title: "\$ "+state.wrap.mainPrice,
+                                    title:selectedSize==-1? "\$ "+state.wrap.mainPrice:"\$ "+state.wrap.sizes[selectedSize].price,
                                     size: 20.0,
-                                    decoration: TextDecoration.lineThrough),
+                                 ),
                                 // SizedBox(width: 10,),
                                 // baseText(color: AppColor.darkYellow,
                                 //     title: "\$ "+state.wrap.salePrice,
@@ -377,7 +384,11 @@ class _WrapScreenState extends State<WrapScreen> {
                                 onPressed: () {
                                   _bloc.add(AddWrap((b) =>
                                   b
-                                    ..wrapId = widget.id));
+                                    ..wrapId = widget.id
+                                  ..wrapColorId = selectedColor==-1?null:state.wrap.colors[selectedColor].id
+                                      ..wrapSizeId = selectedSize==-1?null:state.wrap.sizes[selectedSize].id
+
+                                  ));
                                 },
                                 child: Text(
                                   'Add To Cart',
@@ -407,5 +418,32 @@ class _WrapScreenState extends State<WrapScreen> {
   }
   Color hexToColor(String code) {
     return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  }
+  showSuccsess(){
+     _bloc.add(Clear());
+    AwesomeDialog(
+      context: context,
+      customHeader:
+      Container(
+        child: Icon(
+          Icons
+              .error_outline,
+          size: 100,
+          color: AppColor
+              .darkYellow,
+        ),
+      ),
+      btnOkColor: AppColor
+          .darkYellow,
+      dialogType:
+      DialogType
+          .SUCCES,
+      animType: AnimType
+          .BOTTOMSLIDE,
+      title: 'Successfully Added To Cart',
+      desc:
+      '',
+
+    )..show();
   }
 }

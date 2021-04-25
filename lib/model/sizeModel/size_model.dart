@@ -15,6 +15,11 @@ abstract class SizeModel implements Built<SizeModel, SizeModelBuilder> {
 
   String get size;
 
+  @nullable
+  int get id;
+  @nullable
+  String get price;
+
   SizeModel._();
 
   factory SizeModel([updates(SizeModelBuilder b)]) = _$SizeModel;

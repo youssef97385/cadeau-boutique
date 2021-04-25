@@ -168,11 +168,21 @@ class _$AddToCart extends AddToCart {
   final int wrapId;
   @override
   final int wrapColorId;
+  @override
+  final int wrapSizeId;
+  @override
+  final int giftSizeId;
 
   factory _$AddToCart([void Function(AddToCartBuilder) updates]) =>
       (new AddToCartBuilder()..update(updates)).build();
 
-  _$AddToCart._({this.giftId, this.giftColorId, this.wrapId, this.wrapColorId})
+  _$AddToCart._(
+      {this.giftId,
+      this.giftColorId,
+      this.wrapId,
+      this.wrapColorId,
+      this.wrapSizeId,
+      this.giftSizeId})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(giftId, 'AddToCart', 'giftId');
   }
@@ -191,15 +201,21 @@ class _$AddToCart extends AddToCart {
         giftId == other.giftId &&
         giftColorId == other.giftColorId &&
         wrapId == other.wrapId &&
-        wrapColorId == other.wrapColorId;
+        wrapColorId == other.wrapColorId &&
+        wrapSizeId == other.wrapSizeId &&
+        giftSizeId == other.giftSizeId;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, giftId.hashCode), giftColorId.hashCode),
-            wrapId.hashCode),
-        wrapColorId.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, giftId.hashCode), giftColorId.hashCode),
+                    wrapId.hashCode),
+                wrapColorId.hashCode),
+            wrapSizeId.hashCode),
+        giftSizeId.hashCode));
   }
 
   @override
@@ -208,7 +224,9 @@ class _$AddToCart extends AddToCart {
           ..add('giftId', giftId)
           ..add('giftColorId', giftColorId)
           ..add('wrapId', wrapId)
-          ..add('wrapColorId', wrapColorId))
+          ..add('wrapColorId', wrapColorId)
+          ..add('wrapSizeId', wrapSizeId)
+          ..add('giftSizeId', giftSizeId))
         .toString();
   }
 }
@@ -232,6 +250,14 @@ class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
   int get wrapColorId => _$this._wrapColorId;
   set wrapColorId(int wrapColorId) => _$this._wrapColorId = wrapColorId;
 
+  int _wrapSizeId;
+  int get wrapSizeId => _$this._wrapSizeId;
+  set wrapSizeId(int wrapSizeId) => _$this._wrapSizeId = wrapSizeId;
+
+  int _giftSizeId;
+  int get giftSizeId => _$this._giftSizeId;
+  set giftSizeId(int giftSizeId) => _$this._giftSizeId = giftSizeId;
+
   AddToCartBuilder();
 
   AddToCartBuilder get _$this {
@@ -241,6 +267,8 @@ class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
       _giftColorId = $v.giftColorId;
       _wrapId = $v.wrapId;
       _wrapColorId = $v.wrapColorId;
+      _wrapSizeId = $v.wrapSizeId;
+      _giftSizeId = $v.giftSizeId;
       _$v = null;
     }
     return this;
@@ -265,7 +293,9 @@ class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
                 giftId, 'AddToCart', 'giftId'),
             giftColorId: giftColorId,
             wrapId: wrapId,
-            wrapColorId: wrapColorId);
+            wrapColorId: wrapColorId,
+            wrapSizeId: wrapSizeId,
+            giftSizeId: giftSizeId);
     replace(_$result);
     return _$result;
   }

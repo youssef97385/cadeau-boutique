@@ -1,6 +1,7 @@
 library search_state;
 
 import 'package:built_value/built_value.dart';
+import 'package:cadeaue_boutique/model/filter_body/filter_item.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 
 import 'package:built_collection/built_collection.dart';
@@ -18,6 +19,10 @@ implements Built<SearchState, SearchStateBuilder> {
 
   BuiltList<ProductModel> get products;
 
+  BuiltList<FilterItem> get choices;
+
+  String get url;
+
   SearchState._();
 
   factory SearchState([updates(SearchStateBuilder b)]) = _$SearchState;
@@ -28,7 +33,8 @@ implements Built<SearchState, SearchStateBuilder> {
       ..isLoading = false
       ..success = false
       ..products.replace([])
-
+      ..choices.replace([])
+        ..url=""
     );
   }
 }

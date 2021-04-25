@@ -111,6 +111,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
 
     if(event is AddToCart){
+      print("cart body4${event.giftSizeId}");
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
@@ -122,7 +123,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             giftId: event.giftId ,
             giftColorId: event.giftColorId ,
             wrapId: event.wrapId ,
-            wrapColorId: event.wrapColorId);
+            wrapColorId: event.wrapColorId,
+        giftSizeId: event.giftSizeId,
+        wrapSizeId: event.wrapSizeId);
 
         print('add cart Success data ${data}');
         yield state.rebuild((b) => b
