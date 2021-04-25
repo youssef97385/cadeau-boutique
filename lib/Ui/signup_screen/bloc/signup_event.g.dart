@@ -17,12 +17,19 @@ class _$TrySignup extends TrySignup {
   final String name;
   @override
   final String password;
+  @override
+  final String smsCode;
 
   factory _$TrySignup([void Function(TrySignupBuilder) updates]) =>
       (new TrySignupBuilder()..update(updates)).build();
 
   _$TrySignup._(
-      {this.countryCode, this.phone, this.gender, this.name, this.password})
+      {this.countryCode,
+      this.phone,
+      this.gender,
+      this.name,
+      this.password,
+      this.smsCode})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         countryCode, 'TrySignup', 'countryCode');
@@ -30,6 +37,7 @@ class _$TrySignup extends TrySignup {
     BuiltValueNullFieldError.checkNotNull(gender, 'TrySignup', 'gender');
     BuiltValueNullFieldError.checkNotNull(name, 'TrySignup', 'name');
     BuiltValueNullFieldError.checkNotNull(password, 'TrySignup', 'password');
+    BuiltValueNullFieldError.checkNotNull(smsCode, 'TrySignup', 'smsCode');
   }
 
   @override
@@ -47,17 +55,20 @@ class _$TrySignup extends TrySignup {
         phone == other.phone &&
         gender == other.gender &&
         name == other.name &&
-        password == other.password;
+        password == other.password &&
+        smsCode == other.smsCode;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, countryCode.hashCode), phone.hashCode),
-                gender.hashCode),
-            name.hashCode),
-        password.hashCode));
+            $jc(
+                $jc($jc($jc(0, countryCode.hashCode), phone.hashCode),
+                    gender.hashCode),
+                name.hashCode),
+            password.hashCode),
+        smsCode.hashCode));
   }
 
   @override
@@ -67,7 +78,8 @@ class _$TrySignup extends TrySignup {
           ..add('phone', phone)
           ..add('gender', gender)
           ..add('name', name)
-          ..add('password', password))
+          ..add('password', password)
+          ..add('smsCode', smsCode))
         .toString();
   }
 }
@@ -95,6 +107,10 @@ class TrySignupBuilder implements Builder<TrySignup, TrySignupBuilder> {
   String get password => _$this._password;
   set password(String password) => _$this._password = password;
 
+  String _smsCode;
+  String get smsCode => _$this._smsCode;
+  set smsCode(String smsCode) => _$this._smsCode = smsCode;
+
   TrySignupBuilder();
 
   TrySignupBuilder get _$this {
@@ -105,6 +121,7 @@ class TrySignupBuilder implements Builder<TrySignup, TrySignupBuilder> {
       _gender = $v.gender;
       _name = $v.name;
       _password = $v.password;
+      _smsCode = $v.smsCode;
       _$v = null;
     }
     return this;
@@ -134,7 +151,9 @@ class TrySignupBuilder implements Builder<TrySignup, TrySignupBuilder> {
             name: BuiltValueNullFieldError.checkNotNull(
                 name, 'TrySignup', 'name'),
             password: BuiltValueNullFieldError.checkNotNull(
-                password, 'TrySignup', 'password'));
+                password, 'TrySignup', 'password'),
+            smsCode: BuiltValueNullFieldError.checkNotNull(
+                smsCode, 'TrySignup', 'smsCode'));
     replace(_$result);
     return _$result;
   }
@@ -297,6 +316,243 @@ class ClearErrorBuilder implements Builder<ClearError, ClearErrorBuilder> {
   @override
   _$ClearError build() {
     final _$result = _$v ?? new _$ClearError._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$TryCheckPhone extends TryCheckPhone {
+  @override
+  final String countryCode;
+  @override
+  final String phone;
+
+  factory _$TryCheckPhone([void Function(TryCheckPhoneBuilder) updates]) =>
+      (new TryCheckPhoneBuilder()..update(updates)).build();
+
+  _$TryCheckPhone._({this.countryCode, this.phone}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        countryCode, 'TryCheckPhone', 'countryCode');
+    BuiltValueNullFieldError.checkNotNull(phone, 'TryCheckPhone', 'phone');
+  }
+
+  @override
+  TryCheckPhone rebuild(void Function(TryCheckPhoneBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  TryCheckPhoneBuilder toBuilder() => new TryCheckPhoneBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is TryCheckPhone &&
+        countryCode == other.countryCode &&
+        phone == other.phone;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, countryCode.hashCode), phone.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('TryCheckPhone')
+          ..add('countryCode', countryCode)
+          ..add('phone', phone))
+        .toString();
+  }
+}
+
+class TryCheckPhoneBuilder
+    implements Builder<TryCheckPhone, TryCheckPhoneBuilder> {
+  _$TryCheckPhone _$v;
+
+  String _countryCode;
+  String get countryCode => _$this._countryCode;
+  set countryCode(String countryCode) => _$this._countryCode = countryCode;
+
+  String _phone;
+  String get phone => _$this._phone;
+  set phone(String phone) => _$this._phone = phone;
+
+  TryCheckPhoneBuilder();
+
+  TryCheckPhoneBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _countryCode = $v.countryCode;
+      _phone = $v.phone;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(TryCheckPhone other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$TryCheckPhone;
+  }
+
+  @override
+  void update(void Function(TryCheckPhoneBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$TryCheckPhone build() {
+    final _$result = _$v ??
+        new _$TryCheckPhone._(
+            countryCode: BuiltValueNullFieldError.checkNotNull(
+                countryCode, 'TryCheckPhone', 'countryCode'),
+            phone: BuiltValueNullFieldError.checkNotNull(
+                phone, 'TryCheckPhone', 'phone'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$TrySendSms extends TrySendSms {
+  @override
+  final String countryCode;
+  @override
+  final String phone;
+
+  factory _$TrySendSms([void Function(TrySendSmsBuilder) updates]) =>
+      (new TrySendSmsBuilder()..update(updates)).build();
+
+  _$TrySendSms._({this.countryCode, this.phone}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        countryCode, 'TrySendSms', 'countryCode');
+    BuiltValueNullFieldError.checkNotNull(phone, 'TrySendSms', 'phone');
+  }
+
+  @override
+  TrySendSms rebuild(void Function(TrySendSmsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  TrySendSmsBuilder toBuilder() => new TrySendSmsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is TrySendSms &&
+        countryCode == other.countryCode &&
+        phone == other.phone;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, countryCode.hashCode), phone.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('TrySendSms')
+          ..add('countryCode', countryCode)
+          ..add('phone', phone))
+        .toString();
+  }
+}
+
+class TrySendSmsBuilder implements Builder<TrySendSms, TrySendSmsBuilder> {
+  _$TrySendSms _$v;
+
+  String _countryCode;
+  String get countryCode => _$this._countryCode;
+  set countryCode(String countryCode) => _$this._countryCode = countryCode;
+
+  String _phone;
+  String get phone => _$this._phone;
+  set phone(String phone) => _$this._phone = phone;
+
+  TrySendSmsBuilder();
+
+  TrySendSmsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _countryCode = $v.countryCode;
+      _phone = $v.phone;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(TrySendSms other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$TrySendSms;
+  }
+
+  @override
+  void update(void Function(TrySendSmsBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$TrySendSms build() {
+    final _$result = _$v ??
+        new _$TrySendSms._(
+            countryCode: BuiltValueNullFieldError.checkNotNull(
+                countryCode, 'TrySendSms', 'countryCode'),
+            phone: BuiltValueNullFieldError.checkNotNull(
+                phone, 'TrySendSms', 'phone'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ResetSignUp extends ResetSignUp {
+  factory _$ResetSignUp([void Function(ResetSignUpBuilder) updates]) =>
+      (new ResetSignUpBuilder()..update(updates)).build();
+
+  _$ResetSignUp._() : super._();
+
+  @override
+  ResetSignUp rebuild(void Function(ResetSignUpBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ResetSignUpBuilder toBuilder() => new ResetSignUpBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ResetSignUp;
+  }
+
+  @override
+  int get hashCode {
+    return 1063799197;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('ResetSignUp').toString();
+  }
+}
+
+class ResetSignUpBuilder implements Builder<ResetSignUp, ResetSignUpBuilder> {
+  _$ResetSignUp _$v;
+
+  ResetSignUpBuilder();
+
+  @override
+  void replace(ResetSignUp other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ResetSignUp;
+  }
+
+  @override
+  void update(void Function(ResetSignUpBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ResetSignUp build() {
+    final _$result = _$v ?? new _$ResetSignUp._();
     replace(_$result);
     return _$result;
   }

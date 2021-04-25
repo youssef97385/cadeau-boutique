@@ -17,6 +17,7 @@ import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/core/error/error.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
 import 'package:dio/dio.dart';
@@ -61,6 +62,7 @@ class HttpHelper implements IHttpHelper {
       String gender,
       String name,
       String password,
+      String smsCode,
       String lng}) async {
     try {
       final formData = {
@@ -69,7 +71,7 @@ class HttpHelper implements IHttpHelper {
         "gender": gender,
         "name": name,
         "password": password,
-        "sms_code": "545454",
+        "sms_code": smsCode,
       };
       _dio.interceptors.add(CookieManager(cookieJar));
       final response =
@@ -1395,5 +1397,60 @@ class HttpHelper implements IHttpHelper {
     }
   }
 
+  @override
+  Future<bool>checkoutPhoneNumber({String countryCode, String phone}) async {
+    try {
+      final formData = {
+        "country_code": countryCode,
+        "phone_number": phone,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response =
+      await _dio.post('auth/app/check/data', data: formData);
+      print(' StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<SmsResponse> sendSms({String countryCode, String phone}) async {
+    try {
+      final formData = {
+        "country_code": countryCode,
+        "phone_number": phone,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response =
+      await _dio.post('auth/app/send/code', data: formData);
+      print(' StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final SmsResponse baseResponse = serializers.deserialize(
+            json.decode(response.data),
+            specifiedType: FullType(SmsResponse));
+
+        if (baseResponse != null) {
+          return baseResponse;
+        } else {
+          throw NetworkException();
+        }
+      }
+      else{
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
 
 }

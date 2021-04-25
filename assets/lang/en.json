@@ -84,8 +84,12 @@
   "code_success":"Code has been sent successfully",
   "enter_verfiy_code":"Enter Verification Code",
   "verify_code":"Verify Code",
-  "resend_code":"Resend Code"
-
+  "resend_code":"Resend Code",
+  "number_already_exists": "This number already exists",
+  "something_wrong": "Something went wrong",
+  "error_code":"wrong code",
+  "searchText":"Search",
+  "select_code": "Select your country code"
 
 
 }

@@ -23,6 +23,7 @@ import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
+import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 
 
 
@@ -30,7 +31,7 @@ import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 
 abstract class IHttpHelper {
 
-Future<SignupResponse> signup({String countryCode , String phone , String gender , String name , String password});
+Future<SignupResponse> signup({String countryCode , String phone , String gender , String name , String password,String smsCode,});
 
 Future<SignupResponse> signIn({String countryCode , String phone , String password});
 
@@ -175,5 +176,9 @@ Future<MainGift> getMainGift();
 
 
 Future<BuiltList<ProductModel>> getTopSeller();
+
+Future<bool>checkoutPhoneNumber({String countryCode,String phone});
+
+Future<SmsResponse>sendSms({String countryCode,String phone});
 
 }

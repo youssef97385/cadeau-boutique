@@ -13,15 +13,28 @@ class _$SignupState extends SignupState {
   final bool isLoading;
   @override
   final String error;
+  @override
+  final String smsCode;
+  @override
+  final bool openHomepage;
 
   factory _$SignupState([void Function(SignupStateBuilder) updates]) =>
       (new SignupStateBuilder()..update(updates)).build();
 
-  _$SignupState._({this.success, this.isLoading, this.error}) : super._() {
+  _$SignupState._(
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.smsCode,
+      this.openHomepage})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'SignupState', 'success');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, 'SignupState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'SignupState', 'error');
+    BuiltValueNullFieldError.checkNotNull(smsCode, 'SignupState', 'smsCode');
+    BuiltValueNullFieldError.checkNotNull(
+        openHomepage, 'SignupState', 'openHomepage');
   }
 
   @override
@@ -37,13 +50,19 @@ class _$SignupState extends SignupState {
     return other is SignupState &&
         success == other.success &&
         isLoading == other.isLoading &&
-        error == other.error;
+        error == other.error &&
+        smsCode == other.smsCode &&
+        openHomepage == other.openHomepage;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                error.hashCode),
+            smsCode.hashCode),
+        openHomepage.hashCode));
   }
 
   @override
@@ -51,7 +70,9 @@ class _$SignupState extends SignupState {
     return (newBuiltValueToStringHelper('SignupState')
           ..add('success', success)
           ..add('isLoading', isLoading)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('smsCode', smsCode)
+          ..add('openHomepage', openHomepage))
         .toString();
   }
 }
@@ -71,6 +92,14 @@ class SignupStateBuilder implements Builder<SignupState, SignupStateBuilder> {
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  String _smsCode;
+  String get smsCode => _$this._smsCode;
+  set smsCode(String smsCode) => _$this._smsCode = smsCode;
+
+  bool _openHomepage;
+  bool get openHomepage => _$this._openHomepage;
+  set openHomepage(bool openHomepage) => _$this._openHomepage = openHomepage;
+
   SignupStateBuilder();
 
   SignupStateBuilder get _$this {
@@ -79,6 +108,8 @@ class SignupStateBuilder implements Builder<SignupState, SignupStateBuilder> {
       _success = $v.success;
       _isLoading = $v.isLoading;
       _error = $v.error;
+      _smsCode = $v.smsCode;
+      _openHomepage = $v.openHomepage;
       _$v = null;
     }
     return this;
@@ -104,7 +135,11 @@ class SignupStateBuilder implements Builder<SignupState, SignupStateBuilder> {
             isLoading: BuiltValueNullFieldError.checkNotNull(
                 isLoading, 'SignupState', 'isLoading'),
             error: BuiltValueNullFieldError.checkNotNull(
-                error, 'SignupState', 'error'));
+                error, 'SignupState', 'error'),
+            smsCode: BuiltValueNullFieldError.checkNotNull(
+                smsCode, 'SignupState', 'smsCode'),
+            openHomepage: BuiltValueNullFieldError.checkNotNull(
+                openHomepage, 'SignupState', 'openHomepage'));
     replace(_$result);
     return _$result;
   }

@@ -18,6 +18,7 @@ import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
+import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/wrap_model/base_wrap.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_item.dart';
@@ -54,13 +55,15 @@ class Repository implements IRepository {
       String phone,
       String gender,
       String name,
+      String smsCode,
       String password}) async {
     final user = await _ihttpHelper.signup(
         name: name,
         gender: gender,
         password: password,
         countryCode: countryCode,
-        phone: phone);
+        phone: phone,
+    smsCode: smsCode);
     final save = await _iprefHelper.saveToken(user.token);
 
 
@@ -548,5 +551,20 @@ class Repository implements IRepository {
   Future<BuiltList<ProductModel>> getTopSeller() async{
     final products = await _ihttpHelper.getTopSeller();
     return products;
+  }
+
+  @override
+  Future<bool>checkoutPhoneNumber({String countryCode,String phone})async{
+
+    var item=await _ihttpHelper.checkoutPhoneNumber(
+        countryCode: countryCode,phone: phone);
+    return item;
+  }
+
+  @override
+  Future<SmsResponse>sendSms({String countryCode, String phone}) async{
+    var item=await _ihttpHelper.sendSms(
+        countryCode: countryCode,phone: phone);
+    return item;
   }
 }

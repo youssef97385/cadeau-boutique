@@ -318,10 +318,21 @@ class _MainDrawerState extends State<MainDrawer> {
                     ),
                     child: FlatButton(
                       // splashColor: Colors.red,
-                      onPressed: () {
+                      onPressed: () async {
 
+                        var state=   await  openLogout(context);
+                        print("------------------ ");
 
-                        AwesomeDialog(
+                        //Navigator.of(context).pop();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SigninScreen()
+                            ),
+                            ModalRoute.withName("/signin_screen")
+                        );
+
+                   /*  var x=   AwesomeDialog(
                           context: context,
 
                           btnOkColor: AppColor.darkYellow,
@@ -332,20 +343,9 @@ class _MainDrawerState extends State<MainDrawer> {
                           btnCancelOnPress: () { },
                           btnOkOnPress: () async {
 
-                     var state=   await  openLogout(context);
-                     print("------------------ ");
-
-                     Navigator.of(context).pop();
-                     Navigator.pushAndRemoveUntil(
-                         context,
-                         MaterialPageRoute(
-                             builder: (context) => SigninScreen()
-                         ),
-                         ModalRoute.withName("/signin_screen")
-                     );
 
                           },
-                        )..show();
+                        )..show();*/
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

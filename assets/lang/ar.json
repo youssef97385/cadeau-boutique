@@ -84,7 +84,12 @@
   "code_success":"تم ارسال الكود بنجاح",
   "enter_verfiy_code":"ادخل كود التأكيد",
   "verify_code":"تأكيد الكود",
-  "resend_code":"اعادة ارسال"
+  "resend_code":"اعادة ارسال",
+  "number_already_exists": "رقم محجوز سابقا",
+  "something_wrong": "حدث خطأ حاول لاحقا",
+  "error_code":"كود غير صحيح",
+  "searchText":"بحث",
+  "select_code": "اختر كود الدولة"
 
 
 

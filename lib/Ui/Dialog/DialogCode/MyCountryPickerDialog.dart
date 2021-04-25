@@ -24,9 +24,9 @@ class MyCountryPickerDialog extends StatelessWidget {
     return CountryPickerDialog(
         titlePadding: EdgeInsets.all(8.0),
         searchCursorColor: Colors.black,
-        searchInputDecoration: InputDecoration(hintText: searchHint==null?AppLocalizations.of(context).translate('search'):searchHint),
+        searchInputDecoration: InputDecoration(hintText: searchHint==null?"search":searchHint),
         isSearchable: true,
-        title: Text(selectHint==null?AppLocalizations.of(context).translate('select_your_country_code'):selectHint),
+        title: Text(selectHint==null?"select your country code":selectHint),
         onValuePicked: onValuePicked,
         itemBuilder: (Country country) {
           return Container(

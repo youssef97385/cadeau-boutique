@@ -14,6 +14,10 @@ implements Built<SignupState, SignupStateBuilder> {
   bool get isLoading;
   String get error;
 
+  String get smsCode;
+
+  bool get openHomepage;
+
   SignupState._();
 
   factory SignupState([updates(SignupStateBuilder b)]) = _$SignupState;
@@ -23,6 +27,9 @@ implements Built<SignupState, SignupStateBuilder> {
       ..error = ""
       ..isLoading = false
       ..success = false
+      ..smsCode=""
+      ..openHomepage=false
+
       );
   }
 }

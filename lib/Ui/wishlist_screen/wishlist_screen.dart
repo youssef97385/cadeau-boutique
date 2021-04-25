@@ -1,4 +1,6 @@
- import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
+ import 'package:cadeaue_boutique/Ui/empty_page/empty_page.dart';
+import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/injectoin.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
@@ -53,6 +55,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 children: [
                   baseAppBar(size , context),
                   SizedBox(height: 20,),
+
+                  (state.products.isEmpty &&!state.isLoading)?EmptyPage(size: size,
+                    title: AppLocalizations.of(context).translate("your_tack_order_is_empty"),
+                  ):
                   Center(
                     child: Container(
                       width: size.width*0.85,

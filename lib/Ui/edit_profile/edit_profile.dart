@@ -107,6 +107,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     _bloc.add(InitEvent());
 
+    print("---------------------- ${widget.countryCodeUser}");
+
+    if(widget.countryCodeUser==null ||widget.countryCodeUser.isEmpty)
+      selectedCountry=initCountry("966");
+    else
     selectedCountry=initCountry(widget.countryCodeUser);
     controllerName=TextEditingController(text: widget.nameUser);
     if(widget.phoneUser==null||widget.phoneUser=="0")

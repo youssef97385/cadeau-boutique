@@ -169,7 +169,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                           padding: const EdgeInsets.only(left:8.0),
                                           child: Container(
                                             height: size.height*0.07,
-                                            child: baseText(title: "Add New :" , color: AppColor.textColor , size:18.0 ),
+                                            child: baseText(title: "" , color: AppColor.textColor , size:18.0 ),
                                           ),
                                         )
                                       ],
@@ -396,66 +396,62 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            // margin: EdgeInsets.only(bottom: 80),
-                                            height: size.height * 0.07,
-                                            width: size.width * .41,
 
-                                          ),
-                                          SizedBox(width: size.width*0.03,),
-                                          Container(
-                                            // margin: EdgeInsets.only(bottom: 80),
-                                            height: size.height * 0.07,
-                                            width: size.width * .41,
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  AppColor.darkYellow,
-                                                  AppColor.lightYellow
-                                                ],
-                                                stops: [0.1, 0.96],
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  offset: Offset(1, 1),
-                                                  color: Colors.grey.withOpacity(0.6),
-                                                  blurRadius: 5,
-                                                  spreadRadius: 3,
+                                          Flexible(
+                                            child: Container(
+                                              // margin: EdgeInsets.only(bottom: 80),
+                                              height: size.height * 0.07,
+                                              width: size.width * .41,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    AppColor.darkYellow,
+                                                    AppColor.lightYellow
+                                                  ],
+                                                  stops: [0.1, 0.96],
                                                 ),
-                                              ],
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    offset: Offset(1, 1),
+                                                    color: Colors.grey.withOpacity(0.6),
+                                                    blurRadius: 5,
+                                                    spreadRadius: 3,
+                                                  ),
+                                                ],
 
-                                              borderRadius: BorderRadius.circular(40),
-                                            ),
-                                            child: FlatButton(
-                                              // splashColor: Colors.red,
-                                              onPressed: () {
+                                                borderRadius: BorderRadius.circular(40),
+                                              ),
+                                              child: FlatButton(
+                                                // splashColor: Colors.red,
+                                                onPressed: () {
 
-                                                if(
-                                                    IsNullOrEmpty(cityController.text)||
-                                                    IsNullOrEmpty(stateController.text)||
-                                                    IsNullOrEmpty(zipController.text)||
-                                                    IsNullOrEmpty(addressController.text))
-                                                {
+                                                  if(
+                                                      IsNullOrEmpty(cityController.text)||
+                                                      IsNullOrEmpty(stateController.text)||
+                                                      IsNullOrEmpty(zipController.text)||
+                                                      IsNullOrEmpty(addressController.text))
+                                                  {
 
-                                                  error(AppLocalizations.of(context).translate("plz_fill_all_fields"));
-                                                }
+                                                    error(AppLocalizations.of(context).translate("plz_fill_all_fields"));
+                                                  }
 
-                                                else{
+                                                  else{
 
-                                                  _bloc.add(ProfileAddressRequset((b) => b
-                                                    ..address =addressController.text
-                                                    ..state = stateController.text
-                                                    ..zip_code = zipController.text
-                                                    ..city = cityController.text));
+                                                    _bloc.add(ProfileAddressRequset((b) => b
+                                                      ..address =addressController.text
+                                                      ..state = stateController.text
+                                                      ..zip_code = zipController.text
+                                                      ..city = cityController.text));
 
-                                                }
-                                              },
-                                              child: Text(
-                                                AppLocalizations.of(context).translate('add'),
-                                                style: TextStyle(
-                                                  color: AppColor.textColor,
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500,
+                                                  }
+                                                },
+                                                child: Text(
+                                                  AppLocalizations.of(context).translate('add'),
+                                                  style: TextStyle(
+                                                    color: AppColor.textColor,
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ),
                                             ),

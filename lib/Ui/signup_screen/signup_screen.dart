@@ -318,23 +318,39 @@ class _SignupScreenState extends State<SignupScreen> {
     return BlocBuilder(
       cubit: _bloc,
       builder: (BuildContext context, SignupState state) {
-        error(state.error);
+        if(state.error=="Something went wrong")
+        error(AppLocalizations.of(context).translate("something_wrong"));
+        else if(state.error=="This number already exists")
+          error(AppLocalizations.of(context).translate("number_already_exists"));
+        else
+          error(state.error);
         if (state.success) {
-          WidgetsBinding.instance.addPostFrameCallback(
+      /*    WidgetsBinding.instance.addPostFrameCallback(
               (_) => Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => WelcomePage(),
                     ),
-                  ));
+                  ));*/
 
-/*
+
+
+
           print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHh");
               WidgetsBinding.instance.addPostFrameCallback(
               (_) => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => VerifyCode(_bloc),
+                      builder: (context) => VerifyCode(_bloc,
+                      password: password,
+                      name: name,
+                      countryCode: countryCode,
+                      gender: gender,
+                      phone: phone,
+                      smsCode: state.smsCode,),
                     ),
-                  ));*/
+                  ));
+
+
+              _bloc.add(ResetSignUp());
         }
         return Scaffold(
             body: SingleChildScrollView(
@@ -451,6 +467,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                         child: Form(
                                           key: registerKey,
                                           child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               SizedBox(
                                                 height: size.height * .07,
@@ -765,12 +782,17 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 child: FlatButton(
                                                   // splashColor: Colors.red,
                                                   onPressed: () {
-                                                    _bloc.add(TrySignup((b) => b
+                                              /*      _bloc.add(TrySignup((b) => b
                                                       ..password = password
                                                       ..name = name
                                                       ..countryCode = countryCode
                                                       ..phone = phone
-                                                      ..gender = gender));
+                                                      ..gender = gender));*/
+
+                                                    _bloc.add(TryCheckPhone((b) => b
+                                                      ..countryCode = countryCode
+                                                      ..phone = phone
+                                                      ));
                                                   },
                                                   child: Text(
                                                     AppLocalizations.of(context).translate('sign_up'),
@@ -785,7 +807,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                               SizedBox(
                                                 height: size.height * 0.03,
                                               ),
-                                              Text(
+                                       /*       Text(
                                                 AppLocalizations.of(context).translate("or_signup_with"),
                                                 style: TextStyle(
                                                     fontSize: 14,
@@ -793,14 +815,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                               ),
                                               SizedBox(
                                                 height: size.height * 0.03,
-                                              ),
+                                              ),*/
                                               Container(
                                                 height: size.height * 0.05,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                                   children: [
-                                                    GestureDetector(
+                                               /*     GestureDetector(
                                                       onTap:(){
                                                       _loginWithFb();
                                                       // loginGmail();
@@ -886,7 +908,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                             height: 38,
                                                             width: 38,
                                                           ),
-                                                        )),
+                                                        )),*/
                                                   ],
                                                 ),
                                               )
