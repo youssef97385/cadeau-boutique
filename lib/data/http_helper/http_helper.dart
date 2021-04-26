@@ -1290,7 +1290,8 @@ class HttpHelper implements IHttpHelper {
   Future<BuiltList<WrapItem>> getWrapsBygiftId({int giftId , String token}) async{
     try {
       _dio.interceptors.add(CookieManager(cookieJar));
-      final response = await _dio.get('cart/get/wraps/by/gift/$giftId', options: Options(headers: {"Authorization": 'Bearer ' + token}));
+       final response = await _dio.get('cart/get/wraps/by/gift/$giftId', options: Options(headers: {"Authorization": 'Bearer ' + token}));
+       // final response = await _dio.get('data/get/wraps/without/paginate', options: Options(headers: {"Authorization": 'Bearer ' + token}));
       print('wrap Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {

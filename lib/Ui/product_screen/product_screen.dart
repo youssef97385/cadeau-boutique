@@ -212,7 +212,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                        },
                                      )..show();
                                    }else{
-                                     print("wrapTest${state.wraps[0].sizes}");
+                                     print("wrapTest${state.wraps[0].wrapItems[0].sizes}");
                                      if(!state.product.isFavourite){
                                        _bloc.add(AddToFavourite((b)=>b..id = widget.id));
                                      }else{
@@ -489,12 +489,26 @@ class _ProductScreenState extends State<ProductScreen> {
                                      else{
                                       showDialog(
                                         context: context,
-                                        builder: (_) => FunkyOverlay(wraps: state.wraps,wrapIdCallBack: (wrapId){
+                                        builder: (_) => FunkyOverlay(wraps: state.wraps[0].wrapItems,pickedWrapSizeId: -1,pickedWrapColorId: -1,pickedWrapId: -1,wrapIdCallBack: (wrapId){
                                           setState(() {
                                             myWrapId = wrapId;
 
+
                                           });
-                                        },),
+                                        },
+                                        wrapColorIdCallBack: (wrapColorId){
+                                          setState(() {
+                                            myWrapColorId = wrapColorId;
+                                            print("wrapinfo $myWrapColorId");
+                                          });
+                                        },
+                                        wrapSizeIdCallBack:(wrapSizeId){
+
+
+                                            myWrapSizeId = wrapSizeId;
+                                            print("wrapinfo1 $myWrapSizeId");
+                                        } ,
+                                        ),
 
                                       );
                                     }
@@ -554,9 +568,16 @@ class _ProductScreenState extends State<ProductScreen> {
                                          ..giftSizeId=selectedSize==-1?
                                          null:
                                          state.product.sizes[selectedSize].id
+
                                          ..giftColorId = selectedColor==-1?
                                          null:
                                          state.product.colors[selectedColor].id
+                                         ..wrapColorId=myWrapColorId==-1?
+                                         null:
+                                         myWrapColorId
+                                         ..wrapSizeId=myWrapSizeId==-1?
+                                         null:
+                                         myWrapSizeId
                                        ));
                                      }
 

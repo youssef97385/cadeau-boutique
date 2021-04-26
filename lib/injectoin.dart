@@ -26,6 +26,7 @@ import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
 import 'package:cadeaue_boutique/Ui/edit_profile/bloc/edit_profile_bloc.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_bloc.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/bloc/checkout_success_bloc.dart';
+import 'package:cadeaue_boutique/Ui/edit_wrap_item/bloc/edit_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -114,4 +115,7 @@ Future iniGetIt() async {
 
   ///  Profile Address
   sl.registerFactory(() => TrackScreenBloc(sl()));
+
+  ///  EditBloc
+  sl.registerFactory(() => EditBloc(sl()));
 }
