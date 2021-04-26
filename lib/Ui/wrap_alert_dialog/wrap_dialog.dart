@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
@@ -15,13 +16,21 @@ class FunkyOverlay extends StatefulWidget {
   final int wrapColorId;
   final int wrapSizeId;
   final Function wrapIdCallBack;
+  final Function wrapSizeIdCallBack;
+  final Function wrapColorIdCallBack;
+
+  int pickedWrapId;
+  int pickedWrapColorId;
+  int pickedWrapSizeId;
+
 
   BuiltList<WrapItem> wraps;
+  BuiltList<WrapModel> wraps2;
 
 
 
 
-  FunkyOverlay({this.wraps ,this.wrapId,this.wrapIdCallBack,this.wrapColorId,this.wrapSizeId});
+  FunkyOverlay({this.wraps ,this.wrapId,this.wrapIdCallBack,this.wrapColorId,this.wrapSizeId,this.wraps2,this.wrapColorIdCallBack,this.wrapSizeIdCallBack,this.pickedWrapId,this.pickedWrapSizeId,this.pickedWrapColorId});
 
   @override
   State<StatefulWidget> createState() => FunkyOverlayState();
@@ -32,6 +41,12 @@ class FunkyOverlayState extends State<FunkyOverlay>
 
   int selectedWrap = -1;
   int wrapId = -1;
+  int wrapIdColorId= -1;
+  int wrapSizeId= -1;
+
+  int pickedWrap;
+  int pickedColorId;
+  int pickedSizeId;
 
   AnimationController controller;
   Animation<double> scaleAnimation;
@@ -45,6 +60,11 @@ class FunkyOverlayState extends State<FunkyOverlay>
   @override
   void initState() {
     super.initState();
+
+    pickedWrap = widget.pickedWrapId;
+    pickedSizeId = widget.pickedWrapSizeId;
+    pickedColorId= widget.pickedWrapColorId;
+
 
     controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 800));
@@ -93,7 +113,9 @@ class FunkyOverlayState extends State<FunkyOverlay>
                            setState(() {
                              selectedWrap = index;
                              wrapId = widget.wraps[index].id;
-                             widget.wrapIdCallBack(wrapId);
+
+                             pickedWrap = -1;
+                             // widget.wrapIdCallBack(wrapId);
 
 
                            });
@@ -112,7 +134,7 @@ class FunkyOverlayState extends State<FunkyOverlay>
                                    height: 114,
                                    width: 160,
                                    decoration: BoxDecoration(
-                                     color:  selectedWrap == index
+                                     color:  selectedWrap == index || (pickedWrap!=-1&& pickedWrap ==widget.wraps[index].id)
                                          ? AppColor.lightYellow
                                          : Color(0xffEDEDED),
                                      borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -149,85 +171,104 @@ class FunkyOverlayState extends State<FunkyOverlay>
                      );
                    }),
                  ),
-                  baseText(title: "Available Size:", color: Color(0xff393741) , size: 18.0),
-                  Center(
-                    child: Container(
-                      height: 40,
-                      // width: size.width*0.8,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: sizes.length ,
-                          itemBuilder: (BuildContext context , int index){
-                            return Padding(
-                              padding: const EdgeInsets.only(right:24.0),
-                              child: GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    selectedSize = index;
-                                  });
-                                },
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: selectedSize == index ?Color(0xffF2D750):Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 3,
-                                        offset: Offset(0, 3), // changes position of shadow
-                                      ),
-                                    ],
-                                  ),
-                                  child: Center(child: baseText(title: sizes[index] , color: AppColor.darkTextColor , size: 18.0)),
-                                ),
-                              ),
-                            );
-                          }),
-                    ),
-                  ),
-                  baseText(title: "Colors:", color: Color(0xff393741) , size: 18.0),
-                  Container(
-                    height: 40,
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: colors.length ,
-                        itemBuilder: (BuildContext context , int index){
-                          return Padding(
-                            padding: const EdgeInsets.only(right:24.0),
-                            child: GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    selectedColor = index;
-                                  });
-                                },
-                                child:  Container(
-                                  width: 36,
-                                  height: 36,
-                                  decoration: BoxDecoration(
-                                      border: selectedColor != index? null:Border.all(color:Color(0xff707070),width: 2),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 3,
-                                          offset: Offset(0, 3), // changes position of shadow
-                                        ),
-                                      ],
-                                      shape: BoxShape.circle,
-                                      color: colors[index]
 
+
+
+                  (selectedWrap != -1 && widget.wraps[selectedWrap].sizes.isNotEmpty)?
+
+                  Column(
+                    children: [
+                      baseText(title: "Available Size:", color: Color(0xff393741) , size: 18.0),
+                      Center(
+                        child: Container(
+                          height: 40,
+                          // width: size.width*0.8,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: widget.wraps[selectedWrap].sizes.length ,
+                              itemBuilder: (BuildContext context , int index){
+                                return Padding(
+                                  padding: const EdgeInsets.only(right:24.0),
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      setState(() {
+                                        selectedSize = index;
+                                        wrapSizeId = widget.wraps[selectedWrap].sizes[index].id;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: selectedSize == index ?Color(0xffF2D750):Colors.white,
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 3,
+                                            offset: Offset(0, 3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(child: baseText(title: widget.wraps[selectedWrap].sizes[index].size , color: AppColor.darkTextColor , size: 18.0)),
+                                    ),
                                   ),
-                                  child:selectedColor != index? Container(): Center(child: Icon(Icons.check,color: Color(0xff707070),)),
-                                )
-                            ),
-                          );
-                        }),
-                  ),
+                                );
+                              }),
+                        ),
+                      ),
+                    ],
+                  ) :Container(),
+
+                  (selectedWrap != -1 && widget.wraps[selectedWrap].colors.isNotEmpty)?
+                  Column(
+                    children: [
+                      baseText(title: "Colors:", color: Color(0xff393741) , size: 18.0),
+                      Container(
+                        height: 40,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.wraps[selectedWrap].colors.length ,
+                            itemBuilder: (BuildContext context , int index){
+                              return Padding(
+                                padding: const EdgeInsets.only(right:24.0),
+                                child: GestureDetector(
+                                    onTap: (){
+                                      setState(() {
+                                        selectedColor = index;
+                                        wrapIdColorId=widget.wraps[selectedWrap].colors[index].id;
+                                      });
+                                    },
+                                    child:  Container(
+                                      width: 36,
+                                      height: 36,
+                                      decoration: BoxDecoration(
+                                          border: selectedColor != index? null:Border.all(color:Color(0xff707070),width: 2),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 3,
+                                              offset: Offset(0, 3), // changes position of shadow
+                                            ),
+                                          ],
+                                          shape: BoxShape.circle,
+                                          color:
+                                          hexToColor(widget.wraps[selectedWrap].colors[index].color)
+
+
+                                      ),
+                                      child:selectedColor != index? Container(): Center(child: Icon(Icons.check,color: Color(0xff707070),)),
+                                    )
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ):Container(),
 
                   Container(
                     // margin: EdgeInsets.only(bottom: 80),
@@ -254,6 +295,12 @@ class FunkyOverlayState extends State<FunkyOverlay>
                     child: FlatButton(
                       // splashColor: Colors.red,
                       onPressed: () {
+
+                        print("wrapinfo3 $wrapId $wrapIdColorId $wrapSizeId");
+                        widget.wrapIdCallBack(wrapId);
+                        widget.wrapColorIdCallBack(wrapIdColorId);
+                        widget.wrapSizeIdCallBack(wrapSizeId);
+
                         Navigator.pop(context);
                       },
                       child: Text(
@@ -276,6 +323,8 @@ class FunkyOverlayState extends State<FunkyOverlay>
   }
 
 
-
+  Color hexToColor(String code) {
+    return new Color(int.parse(code.substring(1, code.length), radix: 16) + 0xFF000000);
+  }
 
 }

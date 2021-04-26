@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of product_state;
+part of edit_state;
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$ProductState extends ProductState {
+class _$EditState extends EditState {
   @override
   final bool success;
   @override
@@ -21,48 +21,53 @@ class _$ProductState extends ProductState {
   final bool removed;
   @override
   final bool successAddToCart;
+  @override
+  final bool successRemoved;
 
-  factory _$ProductState([void Function(ProductStateBuilder) updates]) =>
-      (new ProductStateBuilder()..update(updates)).build();
+  factory _$EditState([void Function(EditStateBuilder) updates]) =>
+      (new EditStateBuilder()..update(updates)).build();
 
-  _$ProductState._(
+  _$EditState._(
       {this.success,
       this.isLoading,
       this.error,
       this.product,
       this.wraps,
       this.removed,
-      this.successAddToCart})
+      this.successAddToCart,
+      this.successRemoved})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(success, 'ProductState', 'success');
+    BuiltValueNullFieldError.checkNotNull(success, 'EditState', 'success');
+    BuiltValueNullFieldError.checkNotNull(isLoading, 'EditState', 'isLoading');
+    BuiltValueNullFieldError.checkNotNull(error, 'EditState', 'error');
+    BuiltValueNullFieldError.checkNotNull(product, 'EditState', 'product');
+    BuiltValueNullFieldError.checkNotNull(wraps, 'EditState', 'wraps');
+    BuiltValueNullFieldError.checkNotNull(removed, 'EditState', 'removed');
     BuiltValueNullFieldError.checkNotNull(
-        isLoading, 'ProductState', 'isLoading');
-    BuiltValueNullFieldError.checkNotNull(error, 'ProductState', 'error');
-    BuiltValueNullFieldError.checkNotNull(product, 'ProductState', 'product');
-    BuiltValueNullFieldError.checkNotNull(wraps, 'ProductState', 'wraps');
-    BuiltValueNullFieldError.checkNotNull(removed, 'ProductState', 'removed');
+        successAddToCart, 'EditState', 'successAddToCart');
     BuiltValueNullFieldError.checkNotNull(
-        successAddToCart, 'ProductState', 'successAddToCart');
+        successRemoved, 'EditState', 'successRemoved');
   }
 
   @override
-  ProductState rebuild(void Function(ProductStateBuilder) updates) =>
+  EditState rebuild(void Function(EditStateBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ProductStateBuilder toBuilder() => new ProductStateBuilder()..replace(this);
+  EditStateBuilder toBuilder() => new EditStateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ProductState &&
+    return other is EditState &&
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
         product == other.product &&
         wraps == other.wraps &&
         removed == other.removed &&
-        successAddToCart == other.successAddToCart;
+        successAddToCart == other.successAddToCart &&
+        successRemoved == other.successRemoved;
   }
 
   @override
@@ -71,31 +76,33 @@ class _$ProductState extends ProductState {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
-                        error.hashCode),
-                    product.hashCode),
-                wraps.hashCode),
-            removed.hashCode),
-        successAddToCart.hashCode));
+                    $jc(
+                        $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                            error.hashCode),
+                        product.hashCode),
+                    wraps.hashCode),
+                removed.hashCode),
+            successAddToCart.hashCode),
+        successRemoved.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ProductState')
+    return (newBuiltValueToStringHelper('EditState')
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('product', product)
           ..add('wraps', wraps)
           ..add('removed', removed)
-          ..add('successAddToCart', successAddToCart))
+          ..add('successAddToCart', successAddToCart)
+          ..add('successRemoved', successRemoved))
         .toString();
   }
 }
 
-class ProductStateBuilder
-    implements Builder<ProductState, ProductStateBuilder> {
-  _$ProductState _$v;
+class EditStateBuilder implements Builder<EditState, EditStateBuilder> {
+  _$EditState _$v;
 
   bool _success;
   bool get success => _$this._success;
@@ -128,9 +135,14 @@ class ProductStateBuilder
   set successAddToCart(bool successAddToCart) =>
       _$this._successAddToCart = successAddToCart;
 
-  ProductStateBuilder();
+  bool _successRemoved;
+  bool get successRemoved => _$this._successRemoved;
+  set successRemoved(bool successRemoved) =>
+      _$this._successRemoved = successRemoved;
 
-  ProductStateBuilder get _$this {
+  EditStateBuilder();
+
+  EditStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _success = $v.success;
@@ -140,40 +152,43 @@ class ProductStateBuilder
       _wraps = $v.wraps.toBuilder();
       _removed = $v.removed;
       _successAddToCart = $v.successAddToCart;
+      _successRemoved = $v.successRemoved;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(ProductState other) {
+  void replace(EditState other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$ProductState;
+    _$v = other as _$EditState;
   }
 
   @override
-  void update(void Function(ProductStateBuilder) updates) {
+  void update(void Function(EditStateBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$ProductState build() {
-    _$ProductState _$result;
+  _$EditState build() {
+    _$EditState _$result;
     try {
       _$result = _$v ??
-          new _$ProductState._(
+          new _$EditState._(
               success: BuiltValueNullFieldError.checkNotNull(
-                  success, 'ProductState', 'success'),
+                  success, 'EditState', 'success'),
               isLoading: BuiltValueNullFieldError.checkNotNull(
-                  isLoading, 'ProductState', 'isLoading'),
+                  isLoading, 'EditState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
-                  error, 'ProductState', 'error'),
+                  error, 'EditState', 'error'),
               product: product.build(),
               wraps: wraps.build(),
               removed: BuiltValueNullFieldError.checkNotNull(
-                  removed, 'ProductState', 'removed'),
+                  removed, 'EditState', 'removed'),
               successAddToCart: BuiltValueNullFieldError.checkNotNull(
-                  successAddToCart, 'ProductState', 'successAddToCart'));
+                  successAddToCart, 'EditState', 'successAddToCart'),
+              successRemoved: BuiltValueNullFieldError.checkNotNull(
+                  successRemoved, 'EditState', 'successRemoved'));
     } catch (_) {
       String _$failedField;
       try {
@@ -183,7 +198,7 @@ class ProductStateBuilder
         wraps.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'ProductState', _$failedField, e.toString());
+            'EditState', _$failedField, e.toString());
       }
       rethrow;
     }

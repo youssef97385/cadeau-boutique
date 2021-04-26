@@ -88,8 +88,6 @@ class WrapBloc extends Bloc<WrapEvent, WrapState> {
       } catch (e) {
 
 
-
-
       }
     }
   }

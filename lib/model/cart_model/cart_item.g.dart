@@ -56,6 +56,18 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
         ..add('total_price')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.giftSizeId;
+    if (value != null) {
+      result
+        ..add('gift_size_id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.wrapSizeId;
+    if (value != null) {
+      result
+        ..add('wrap_size_id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -94,6 +106,14 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
           result.totalPrice = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'gift_size_id':
+          result.giftSizeId = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'wrap_size_id':
+          result.wrapSizeId = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -114,6 +134,10 @@ class _$CartItem extends CartItem {
   final ColorModel wrapColor;
   @override
   final int totalPrice;
+  @override
+  final int giftSizeId;
+  @override
+  final int wrapSizeId;
 
   factory _$CartItem([void Function(CartItemBuilder) updates]) =>
       (new CartItemBuilder()..update(updates)).build();
@@ -124,7 +148,9 @@ class _$CartItem extends CartItem {
       this.giftColor,
       this.wrap,
       this.wrapColor,
-      this.totalPrice})
+      this.totalPrice,
+      this.giftSizeId,
+      this.wrapSizeId})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'CartItem', 'id');
   }
@@ -145,7 +171,9 @@ class _$CartItem extends CartItem {
         giftColor == other.giftColor &&
         wrap == other.wrap &&
         wrapColor == other.wrapColor &&
-        totalPrice == other.totalPrice;
+        totalPrice == other.totalPrice &&
+        giftSizeId == other.giftSizeId &&
+        wrapSizeId == other.wrapSizeId;
   }
 
   @override
@@ -153,11 +181,15 @@ class _$CartItem extends CartItem {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, id.hashCode), gift.hashCode),
-                    giftColor.hashCode),
-                wrap.hashCode),
-            wrapColor.hashCode),
-        totalPrice.hashCode));
+                $jc(
+                    $jc(
+                        $jc($jc($jc(0, id.hashCode), gift.hashCode),
+                            giftColor.hashCode),
+                        wrap.hashCode),
+                    wrapColor.hashCode),
+                totalPrice.hashCode),
+            giftSizeId.hashCode),
+        wrapSizeId.hashCode));
   }
 
   @override
@@ -168,7 +200,9 @@ class _$CartItem extends CartItem {
           ..add('giftColor', giftColor)
           ..add('wrap', wrap)
           ..add('wrapColor', wrapColor)
-          ..add('totalPrice', totalPrice))
+          ..add('totalPrice', totalPrice)
+          ..add('giftSizeId', giftSizeId)
+          ..add('wrapSizeId', wrapSizeId))
         .toString();
   }
 }
@@ -202,6 +236,14 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
   int get totalPrice => _$this._totalPrice;
   set totalPrice(int totalPrice) => _$this._totalPrice = totalPrice;
 
+  int _giftSizeId;
+  int get giftSizeId => _$this._giftSizeId;
+  set giftSizeId(int giftSizeId) => _$this._giftSizeId = giftSizeId;
+
+  int _wrapSizeId;
+  int get wrapSizeId => _$this._wrapSizeId;
+  set wrapSizeId(int wrapSizeId) => _$this._wrapSizeId = wrapSizeId;
+
   CartItemBuilder();
 
   CartItemBuilder get _$this {
@@ -213,6 +255,8 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
       _wrap = $v.wrap?.toBuilder();
       _wrapColor = $v.wrapColor?.toBuilder();
       _totalPrice = $v.totalPrice;
+      _giftSizeId = $v.giftSizeId;
+      _wrapSizeId = $v.wrapSizeId;
       _$v = null;
     }
     return this;
@@ -240,7 +284,9 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
               giftColor: _giftColor?.build(),
               wrap: _wrap?.build(),
               wrapColor: _wrapColor?.build(),
-              totalPrice: totalPrice);
+              totalPrice: totalPrice,
+              giftSizeId: giftSizeId,
+              wrapSizeId: wrapSizeId);
     } catch (_) {
       String _$failedField;
       try {
