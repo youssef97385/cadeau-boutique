@@ -295,6 +295,7 @@ class Repository implements IRepository {
         giftColorId: giftColorId,
         wrapColorId: wrapColorId,
         giftSizeId: giftSizeId,
+        wrapSizeId: wrapSizeId,
         token: token);
     return cart;
   }

@@ -39,6 +39,11 @@ abstract class WrapItem implements Built<WrapItem, WrapItemBuilder> {
   @nullable
   BuiltList<ColorModel> get colors;
 
+  @BuiltValueField(wireName: "description")
+  @nullable
+  String get description;
+
+
   WrapItem._();
 
   factory WrapItem([updates(WrapItemBuilder b)]) = _$WrapItem;

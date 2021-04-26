@@ -1908,7 +1908,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       id:  state
                                                                           .wraps[wrapIndex]
                                                                           .wrapItems[index]
-                                                                          .id)));
+                                                                          .id,isFromCart: false,)));
                                                         },
                                                         child: Container(
                                                           width: 130,

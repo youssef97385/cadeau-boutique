@@ -69,6 +69,13 @@ class _$WrapItemSerializer implements StructuredSerializer<WrapItem> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(ColorModel)])));
     }
+    value = object.description;
+    if (value != null) {
+      result
+        ..add('description')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -115,6 +122,10 @@ class _$WrapItemSerializer implements StructuredSerializer<WrapItem> {
                       BuiltList, const [const FullType(ColorModel)]))
               as BuiltList<Object>);
           break;
+        case 'description':
+          result.description = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -137,6 +148,8 @@ class _$WrapItem extends WrapItem {
   final BuiltList<SizeModel> sizes;
   @override
   final BuiltList<ColorModel> colors;
+  @override
+  final String description;
 
   factory _$WrapItem([void Function(WrapItemBuilder) updates]) =>
       (new WrapItemBuilder()..update(updates)).build();
@@ -148,7 +161,8 @@ class _$WrapItem extends WrapItem {
       this.image,
       this.mainPrice,
       this.sizes,
-      this.colors})
+      this.colors,
+      this.description})
       : super._();
 
   @override
@@ -168,7 +182,8 @@ class _$WrapItem extends WrapItem {
         image == other.image &&
         mainPrice == other.mainPrice &&
         sizes == other.sizes &&
-        colors == other.colors;
+        colors == other.colors &&
+        description == other.description;
   }
 
   @override
@@ -177,12 +192,14 @@ class _$WrapItem extends WrapItem {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, id.hashCode), nameAr.hashCode),
-                        nameEn.hashCode),
-                    image.hashCode),
-                mainPrice.hashCode),
-            sizes.hashCode),
-        colors.hashCode));
+                    $jc(
+                        $jc($jc($jc(0, id.hashCode), nameAr.hashCode),
+                            nameEn.hashCode),
+                        image.hashCode),
+                    mainPrice.hashCode),
+                sizes.hashCode),
+            colors.hashCode),
+        description.hashCode));
   }
 
   @override
@@ -194,7 +211,8 @@ class _$WrapItem extends WrapItem {
           ..add('image', image)
           ..add('mainPrice', mainPrice)
           ..add('sizes', sizes)
-          ..add('colors', colors))
+          ..add('colors', colors)
+          ..add('description', description))
         .toString();
   }
 }
@@ -232,6 +250,10 @@ class WrapItemBuilder implements Builder<WrapItem, WrapItemBuilder> {
       _$this._colors ??= new ListBuilder<ColorModel>();
   set colors(ListBuilder<ColorModel> colors) => _$this._colors = colors;
 
+  String _description;
+  String get description => _$this._description;
+  set description(String description) => _$this._description = description;
+
   WrapItemBuilder();
 
   WrapItemBuilder get _$this {
@@ -244,6 +266,7 @@ class WrapItemBuilder implements Builder<WrapItem, WrapItemBuilder> {
       _mainPrice = $v.mainPrice;
       _sizes = $v.sizes?.toBuilder();
       _colors = $v.colors?.toBuilder();
+      _description = $v.description;
       _$v = null;
     }
     return this;
@@ -272,7 +295,8 @@ class WrapItemBuilder implements Builder<WrapItem, WrapItemBuilder> {
               image: image,
               mainPrice: mainPrice,
               sizes: _sizes?.build(),
-              colors: _colors?.build());
+              colors: _colors?.build(),
+              description: description);
     } catch (_) {
       String _$failedField;
       try {
