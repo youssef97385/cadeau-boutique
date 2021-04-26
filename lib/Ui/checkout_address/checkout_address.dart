@@ -613,7 +613,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                             if(state.recievers.isEmpty){
 
 
-                              error("Please_add_receivers_to_continue");
+                              error(AppLocalizations.of(context).translate(("Please_add_receivers_to_continue")));
                             }else
                             Navigator.push(
                               context,

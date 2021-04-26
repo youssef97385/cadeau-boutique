@@ -57,8 +57,8 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    var lang=Localizations.localeOf(context).toString();
-    _AppBloc.add(IniEvent((b)=>b ..langDevice=lang.toLowerCase()));
+  //  var lang=Localizations.localeOf(context).toString();
+    _AppBloc.add(IniEvent((b)=>b ..langDevice="en"));
     return BlocBuilder(
         cubit: _AppBloc,
         builder: (BuildContext context, AppState state) {

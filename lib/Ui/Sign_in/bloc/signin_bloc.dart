@@ -30,6 +30,8 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     if(event is InitStateSignUp){
 
 
+
+      print("HHHHH  $loginType");
       if(loginType==LOGIN_TYPE_SOCIAL&& !state.isLoading )
         add(TrySocialSignin((b) => b
           ..phoneNumber = '${DateTime.now().microsecondsSinceEpoch}'

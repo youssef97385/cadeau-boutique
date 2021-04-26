@@ -29,8 +29,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       if(event.langDevice.contains("en")){
        langNumber=AppLanguageKeys.EN;
       print("lang 0");}
-      else { langNumber=AppLanguageKeys.AR;
+      else if(event.langDevice.contains("ar")) { langNumber=AppLanguageKeys.AR;
       print("lang 1");}
+
+      else   langNumber=AppLanguageKeys.EN;
      await _repository.setAppLanguage(langNumber);
 
       final language = await _repository.getAppLanguage();

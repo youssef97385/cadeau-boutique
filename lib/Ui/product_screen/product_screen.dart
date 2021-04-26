@@ -537,28 +537,55 @@ class _ProductScreenState extends State<ProductScreen> {
                                    // splashColor: Colors.red,
                                    onPressed: () {
 
-                                     // print("wrap id test ${myWrapId}");
-                                     if(myWrapId == -1){
-
-                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id
-                                         ..giftSizeId=selectedSize==-1?
-                                         null:
-                                         state.product.sizes[selectedSize].id
-                                       ..giftColorId = selectedColor==-1?
-                                       null:
-                                       state.product.colors[selectedColor].id
-                                       ));
-
-                                     }else{
-                                       _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId
-                                         ..giftSizeId=selectedSize==-1?
-                                         null:
-                                         state.product.sizes[selectedSize].id
-                                         ..giftColorId = selectedColor==-1?
-                                         null:
-                                         state.product.colors[selectedColor].id
-                                       ));
+                                     if(state.wraps.isEmpty){
+                                       AwesomeDialog(
+                                         context: context,
+                                         customHeader: Container(
+                                           child: Icon(
+                                             Icons.error_outline,
+                                             size: 100,
+                                             color: AppColor.darkYellow,
+                                           ),
+                                         ),
+                                         btnOkColor: AppColor.darkYellow,
+                                         dialogType: DialogType.INFO,
+                                         animType: AnimType.BOTTOMSLIDE,
+                                         title: 'Login',
+                                         desc: 'You must be logged in',
+                                         btnCancelOnPress: () { },
+                                         btnOkOnPress: () {
+                                           WidgetsBinding.instance.addPostFrameCallback((_) =>
+                                               Navigator.of(context).push(
+                                                   MaterialPageRoute(builder: (context) => SigninScreen())));
+                                         },
+                                       )..show();
                                      }
+                                     // print("wrap id test ${myWrapId}");
+                                   else{
+                                       if(myWrapId == -1){
+
+                                         _bloc.add(AddToCart((b)=> b..giftId = widget.id
+                                           ..giftSizeId=selectedSize==-1?
+                                           null:
+                                           state.product.sizes[selectedSize].id
+                                           ..giftColorId = selectedColor==-1?
+                                           null:
+                                           state.product.colors[selectedColor].id
+                                         ));
+
+                                       }else{
+                                         _bloc.add(AddToCart((b)=> b..giftId = widget.id ..wrapId = myWrapId
+                                           ..giftSizeId=selectedSize==-1?
+                                           null:
+                                           state.product.sizes[selectedSize].id
+                                           ..giftColorId = selectedColor==-1?
+                                           null:
+                                           state.product.colors[selectedColor].id
+                                         ));
+                                       }
+                                     }
+
+
 
                                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                                    },

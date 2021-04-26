@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
+
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
@@ -197,7 +198,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
-                              hintText: AppLocalizations.of(context).translate("gift_to"),
+                              hintText: "gift to",
                               contentPadding:
                               EdgeInsets.only(left:16 , top:size.height*0.02 , ),
                               suffixIcon: false
@@ -297,7 +298,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                                         disabledBorder:
                                         InputBorder.none,
                                         // labelText: "Phone Number",
-                                        hintText: AppLocalizations.of(context).translate("phone_number"),
+                                        hintText: "phone number",
                                         contentPadding:
                                         EdgeInsets.all( 12),
                                         suffixIcon: false
@@ -396,7 +397,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
-                              hintText: AppLocalizations.of(context).translate("delevery_address"),
+                              hintText: "delevery address" ,
                               contentPadding:
                               EdgeInsets.only(left:16 , top:size.height*0.02 , ),
                               suffixIcon: false
@@ -456,7 +457,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                             Navigator.pop(context);
                           },
                           child: Text(
-                            AppLocalizations.of(context).translate('delete'),
+                            "delete" ,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 13,
@@ -502,7 +503,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
 
                           },
                           child: Text(
-                            AppLocalizations.of(context).translate('update'),
+                           "update" ,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
