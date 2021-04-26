@@ -90,5 +90,56 @@ class WrapBloc extends Bloc<WrapEvent, WrapState> {
 
       }
     }
+    if (event is RemoveItemWrap) {
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false);
+
+        final data = await _iRepository.removeCartItem(cartItemId: event.id);
+
+        print('remove Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+       );
+      } catch (e) {
+        print('remove Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false);
+      }
+    }
+    if (event is AddToCartWrap) {
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false);
+
+        final data = await _iRepository.addToCart(
+            giftId: event.giftId,
+            giftColorId: event.giftColorId,
+            wrapId: event.wrapId,
+            wrapColorId: event.wrapColorId);
+
+        print('add cart Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+          ..successAddToCart = true);
+      } catch (e) {
+        print('add cart Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+          ..successAddToCart = false);
+      }
+    }
   }
 }

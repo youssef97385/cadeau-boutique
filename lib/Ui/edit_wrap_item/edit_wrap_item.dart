@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,12 +19,15 @@ import 'package:cadeaue_boutique/Ui/wrap_alert_dialog/wrap_dialog.dart';
 import 'package:cadeaue_boutique/injectoin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_event.dart';
 class EditWrapItem extends StatefulWidget {
 
   CartItem cartItem;
 
+  CartBloc bloc;
 
-  EditWrapItem({this.cartItem});
+
+  EditWrapItem({this.cartItem,this.bloc});
 
   @override
   _EditWrapItemState createState() => _EditWrapItemState();
@@ -106,9 +110,11 @@ class _EditWrapItemState extends State<EditWrapItem> {
       builder: (BuildContext context, EditState state) {
 
         if (state.successRemoved) {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>CartScreen()));
-          });
+          widget.bloc.add(GetCartInfo());
+          Navigator.pop(context);
+          // SchedulerBinding.instance.addPostFrameCallback((_) {
+          //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+          // });
         }
 
         return Stack(
@@ -238,9 +244,9 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                       }else{
                                         print("wrapTest${state.wraps[0].wrapItems[0].sizes}");
                                         if(!state.product.isFavourite){
-                                          _bloc.add(AddToFavourite((b)=>b..id = widget.cartItem.gift.id));
+                                          _bloc.add(AddToFavouriteEdit((b)=>b..id = widget.cartItem.gift.id));
                                         }else{
-                                          _bloc.add(RemoveFavourite((b)=>b..id = widget.cartItem.gift.id));
+                                          _bloc.add(RemoveFavouriteEdit((b)=>b..id = widget.cartItem.gift.id));
                                         }
 
 
@@ -578,10 +584,11 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                     // splashColor: Colors.red,
                                     onPressed: () {
 
+                                      widget.bloc.add(GetCartInfo());
                                       // print("wrap id test ${myWrapId}");
                                       if(myWrapId == -1){
 
-                                        _bloc.add(AddToCart((b)=> b..giftId = widget.cartItem.gift.id
+                                        _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id
                                           ..giftSizeId=selectedSize==-1?
                                           null:
                                           state.product.sizes[selectedSize].id
@@ -592,9 +599,9 @@ class _EditWrapItemState extends State<EditWrapItem> {
 
                                       }else{
 
-                                        _bloc.add(RemoveItem((b)=>b..id=widget.cartItem.id));
+                                        _bloc.add(RemoveItemEdit((b)=>b..id=widget.cartItem.id));
 
-                                        _bloc.add(AddToCart((b)=> b..giftId = widget.cartItem.gift.id ..wrapId = myWrapId
+                                        _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id ..wrapId = myWrapId
                                           ..giftSizeId=selectedSize==-1?
                                           null:
                                           state.product.sizes[selectedSize].id
@@ -645,7 +652,7 @@ class _EditWrapItemState extends State<EditWrapItem> {
     return new Color(int.parse(code.substring(1, code.length), radix: 16) + 0xFF000000);
   }
   showSuccsess(){
-    _bloc.add(ClearSuccess());
+    _bloc.add(ClearSuccessEdit());
     AwesomeDialog(
       context: context,
       customHeader:

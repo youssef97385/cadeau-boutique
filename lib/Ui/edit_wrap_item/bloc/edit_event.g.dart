@@ -81,29 +81,31 @@ class GetProductBuilder implements Builder<GetProduct, GetProductBuilder> {
   }
 }
 
-class _$AddToFavourite extends AddToFavourite {
+class _$AddToFavouriteEdit extends AddToFavouriteEdit {
   @override
   final int id;
 
-  factory _$AddToFavourite([void Function(AddToFavouriteBuilder) updates]) =>
-      (new AddToFavouriteBuilder()..update(updates)).build();
+  factory _$AddToFavouriteEdit(
+          [void Function(AddToFavouriteEditBuilder) updates]) =>
+      (new AddToFavouriteEditBuilder()..update(updates)).build();
 
-  _$AddToFavourite._({this.id}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'AddToFavourite', 'id');
+  _$AddToFavouriteEdit._({this.id}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'AddToFavouriteEdit', 'id');
   }
 
   @override
-  AddToFavourite rebuild(void Function(AddToFavouriteBuilder) updates) =>
+  AddToFavouriteEdit rebuild(
+          void Function(AddToFavouriteEditBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AddToFavouriteBuilder toBuilder() =>
-      new AddToFavouriteBuilder()..replace(this);
+  AddToFavouriteEditBuilder toBuilder() =>
+      new AddToFavouriteEditBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AddToFavourite && id == other.id;
+    return other is AddToFavouriteEdit && id == other.id;
   }
 
   @override
@@ -113,22 +115,22 @@ class _$AddToFavourite extends AddToFavourite {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AddToFavourite')..add('id', id))
+    return (newBuiltValueToStringHelper('AddToFavouriteEdit')..add('id', id))
         .toString();
   }
 }
 
-class AddToFavouriteBuilder
-    implements Builder<AddToFavourite, AddToFavouriteBuilder> {
-  _$AddToFavourite _$v;
+class AddToFavouriteEditBuilder
+    implements Builder<AddToFavouriteEdit, AddToFavouriteEditBuilder> {
+  _$AddToFavouriteEdit _$v;
 
   int _id;
   int get id => _$this._id;
   set id(int id) => _$this._id = id;
 
-  AddToFavouriteBuilder();
+  AddToFavouriteEditBuilder();
 
-  AddToFavouriteBuilder get _$this {
+  AddToFavouriteEditBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
@@ -138,28 +140,28 @@ class AddToFavouriteBuilder
   }
 
   @override
-  void replace(AddToFavourite other) {
+  void replace(AddToFavouriteEdit other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$AddToFavourite;
+    _$v = other as _$AddToFavouriteEdit;
   }
 
   @override
-  void update(void Function(AddToFavouriteBuilder) updates) {
+  void update(void Function(AddToFavouriteEditBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AddToFavourite build() {
+  _$AddToFavouriteEdit build() {
     final _$result = _$v ??
-        new _$AddToFavourite._(
+        new _$AddToFavouriteEdit._(
             id: BuiltValueNullFieldError.checkNotNull(
-                id, 'AddToFavourite', 'id'));
+                id, 'AddToFavouriteEdit', 'id'));
     replace(_$result);
     return _$result;
   }
 }
 
-class _$AddToCart extends AddToCart {
+class _$AddToCartEdit extends AddToCartEdit {
   @override
   final int giftId;
   @override
@@ -173,10 +175,10 @@ class _$AddToCart extends AddToCart {
   @override
   final int giftSizeId;
 
-  factory _$AddToCart([void Function(AddToCartBuilder) updates]) =>
-      (new AddToCartBuilder()..update(updates)).build();
+  factory _$AddToCartEdit([void Function(AddToCartEditBuilder) updates]) =>
+      (new AddToCartEditBuilder()..update(updates)).build();
 
-  _$AddToCart._(
+  _$AddToCartEdit._(
       {this.giftId,
       this.giftColorId,
       this.wrapId,
@@ -184,20 +186,20 @@ class _$AddToCart extends AddToCart {
       this.wrapSizeId,
       this.giftSizeId})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(giftId, 'AddToCart', 'giftId');
+    BuiltValueNullFieldError.checkNotNull(giftId, 'AddToCartEdit', 'giftId');
   }
 
   @override
-  AddToCart rebuild(void Function(AddToCartBuilder) updates) =>
+  AddToCartEdit rebuild(void Function(AddToCartEditBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AddToCartBuilder toBuilder() => new AddToCartBuilder()..replace(this);
+  AddToCartEditBuilder toBuilder() => new AddToCartEditBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AddToCart &&
+    return other is AddToCartEdit &&
         giftId == other.giftId &&
         giftColorId == other.giftColorId &&
         wrapId == other.wrapId &&
@@ -220,7 +222,7 @@ class _$AddToCart extends AddToCart {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AddToCart')
+    return (newBuiltValueToStringHelper('AddToCartEdit')
           ..add('giftId', giftId)
           ..add('giftColorId', giftColorId)
           ..add('wrapId', wrapId)
@@ -231,8 +233,9 @@ class _$AddToCart extends AddToCart {
   }
 }
 
-class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
-  _$AddToCart _$v;
+class AddToCartEditBuilder
+    implements Builder<AddToCartEdit, AddToCartEditBuilder> {
+  _$AddToCartEdit _$v;
 
   int _giftId;
   int get giftId => _$this._giftId;
@@ -258,9 +261,9 @@ class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
   int get giftSizeId => _$this._giftSizeId;
   set giftSizeId(int giftSizeId) => _$this._giftSizeId = giftSizeId;
 
-  AddToCartBuilder();
+  AddToCartEditBuilder();
 
-  AddToCartBuilder get _$this {
+  AddToCartEditBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _giftId = $v.giftId;
@@ -275,22 +278,22 @@ class AddToCartBuilder implements Builder<AddToCart, AddToCartBuilder> {
   }
 
   @override
-  void replace(AddToCart other) {
+  void replace(AddToCartEdit other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$AddToCart;
+    _$v = other as _$AddToCartEdit;
   }
 
   @override
-  void update(void Function(AddToCartBuilder) updates) {
+  void update(void Function(AddToCartEditBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AddToCart build() {
+  _$AddToCartEdit build() {
     final _$result = _$v ??
-        new _$AddToCart._(
+        new _$AddToCartEdit._(
             giftId: BuiltValueNullFieldError.checkNotNull(
-                giftId, 'AddToCart', 'giftId'),
+                giftId, 'AddToCartEdit', 'giftId'),
             giftColorId: giftColorId,
             wrapId: wrapId,
             wrapColorId: wrapColorId,
@@ -378,29 +381,31 @@ class GetWrapByGiftBuilder
   }
 }
 
-class _$RemoveFavourite extends RemoveFavourite {
+class _$RemoveFavouriteEdit extends RemoveFavouriteEdit {
   @override
   final int id;
 
-  factory _$RemoveFavourite([void Function(RemoveFavouriteBuilder) updates]) =>
-      (new RemoveFavouriteBuilder()..update(updates)).build();
+  factory _$RemoveFavouriteEdit(
+          [void Function(RemoveFavouriteEditBuilder) updates]) =>
+      (new RemoveFavouriteEditBuilder()..update(updates)).build();
 
-  _$RemoveFavourite._({this.id}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'RemoveFavourite', 'id');
+  _$RemoveFavouriteEdit._({this.id}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'RemoveFavouriteEdit', 'id');
   }
 
   @override
-  RemoveFavourite rebuild(void Function(RemoveFavouriteBuilder) updates) =>
+  RemoveFavouriteEdit rebuild(
+          void Function(RemoveFavouriteEditBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  RemoveFavouriteBuilder toBuilder() =>
-      new RemoveFavouriteBuilder()..replace(this);
+  RemoveFavouriteEditBuilder toBuilder() =>
+      new RemoveFavouriteEditBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is RemoveFavourite && id == other.id;
+    return other is RemoveFavouriteEdit && id == other.id;
   }
 
   @override
@@ -410,22 +415,22 @@ class _$RemoveFavourite extends RemoveFavourite {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('RemoveFavourite')..add('id', id))
+    return (newBuiltValueToStringHelper('RemoveFavouriteEdit')..add('id', id))
         .toString();
   }
 }
 
-class RemoveFavouriteBuilder
-    implements Builder<RemoveFavourite, RemoveFavouriteBuilder> {
-  _$RemoveFavourite _$v;
+class RemoveFavouriteEditBuilder
+    implements Builder<RemoveFavouriteEdit, RemoveFavouriteEditBuilder> {
+  _$RemoveFavouriteEdit _$v;
 
   int _id;
   int get id => _$this._id;
   set id(int id) => _$this._id = id;
 
-  RemoveFavouriteBuilder();
+  RemoveFavouriteEditBuilder();
 
-  RemoveFavouriteBuilder get _$this {
+  RemoveFavouriteEditBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
@@ -435,104 +440,107 @@ class RemoveFavouriteBuilder
   }
 
   @override
-  void replace(RemoveFavourite other) {
+  void replace(RemoveFavouriteEdit other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$RemoveFavourite;
+    _$v = other as _$RemoveFavouriteEdit;
   }
 
   @override
-  void update(void Function(RemoveFavouriteBuilder) updates) {
+  void update(void Function(RemoveFavouriteEditBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$RemoveFavourite build() {
+  _$RemoveFavouriteEdit build() {
     final _$result = _$v ??
-        new _$RemoveFavourite._(
+        new _$RemoveFavouriteEdit._(
             id: BuiltValueNullFieldError.checkNotNull(
-                id, 'RemoveFavourite', 'id'));
+                id, 'RemoveFavouriteEdit', 'id'));
     replace(_$result);
     return _$result;
   }
 }
 
-class _$ClearSuccess extends ClearSuccess {
-  factory _$ClearSuccess([void Function(ClearSuccessBuilder) updates]) =>
-      (new ClearSuccessBuilder()..update(updates)).build();
+class _$ClearSuccessEdit extends ClearSuccessEdit {
+  factory _$ClearSuccessEdit(
+          [void Function(ClearSuccessEditBuilder) updates]) =>
+      (new ClearSuccessEditBuilder()..update(updates)).build();
 
-  _$ClearSuccess._() : super._();
+  _$ClearSuccessEdit._() : super._();
 
   @override
-  ClearSuccess rebuild(void Function(ClearSuccessBuilder) updates) =>
+  ClearSuccessEdit rebuild(void Function(ClearSuccessEditBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ClearSuccessBuilder toBuilder() => new ClearSuccessBuilder()..replace(this);
+  ClearSuccessEditBuilder toBuilder() =>
+      new ClearSuccessEditBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ClearSuccess;
+    return other is ClearSuccessEdit;
   }
 
   @override
   int get hashCode {
-    return 74631534;
+    return 358167539;
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('ClearSuccess').toString();
+    return newBuiltValueToStringHelper('ClearSuccessEdit').toString();
   }
 }
 
-class ClearSuccessBuilder
-    implements Builder<ClearSuccess, ClearSuccessBuilder> {
-  _$ClearSuccess _$v;
+class ClearSuccessEditBuilder
+    implements Builder<ClearSuccessEdit, ClearSuccessEditBuilder> {
+  _$ClearSuccessEdit _$v;
 
-  ClearSuccessBuilder();
+  ClearSuccessEditBuilder();
 
   @override
-  void replace(ClearSuccess other) {
+  void replace(ClearSuccessEdit other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$ClearSuccess;
+    _$v = other as _$ClearSuccessEdit;
   }
 
   @override
-  void update(void Function(ClearSuccessBuilder) updates) {
+  void update(void Function(ClearSuccessEditBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$ClearSuccess build() {
-    final _$result = _$v ?? new _$ClearSuccess._();
+  _$ClearSuccessEdit build() {
+    final _$result = _$v ?? new _$ClearSuccessEdit._();
     replace(_$result);
     return _$result;
   }
 }
 
-class _$RemoveItem extends RemoveItem {
+class _$RemoveItemEdit extends RemoveItemEdit {
   @override
   final int id;
 
-  factory _$RemoveItem([void Function(RemoveItemBuilder) updates]) =>
-      (new RemoveItemBuilder()..update(updates)).build();
+  factory _$RemoveItemEdit([void Function(RemoveItemEditBuilder) updates]) =>
+      (new RemoveItemEditBuilder()..update(updates)).build();
 
-  _$RemoveItem._({this.id}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'RemoveItem', 'id');
+  _$RemoveItemEdit._({this.id}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'RemoveItemEdit', 'id');
   }
 
   @override
-  RemoveItem rebuild(void Function(RemoveItemBuilder) updates) =>
+  RemoveItemEdit rebuild(void Function(RemoveItemEditBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  RemoveItemBuilder toBuilder() => new RemoveItemBuilder()..replace(this);
+  RemoveItemEditBuilder toBuilder() =>
+      new RemoveItemEditBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is RemoveItem && id == other.id;
+    return other is RemoveItemEdit && id == other.id;
   }
 
   @override
@@ -542,21 +550,22 @@ class _$RemoveItem extends RemoveItem {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('RemoveItem')..add('id', id))
+    return (newBuiltValueToStringHelper('RemoveItemEdit')..add('id', id))
         .toString();
   }
 }
 
-class RemoveItemBuilder implements Builder<RemoveItem, RemoveItemBuilder> {
-  _$RemoveItem _$v;
+class RemoveItemEditBuilder
+    implements Builder<RemoveItemEdit, RemoveItemEditBuilder> {
+  _$RemoveItemEdit _$v;
 
   int _id;
   int get id => _$this._id;
   set id(int id) => _$this._id = id;
 
-  RemoveItemBuilder();
+  RemoveItemEditBuilder();
 
-  RemoveItemBuilder get _$this {
+  RemoveItemEditBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
@@ -566,21 +575,22 @@ class RemoveItemBuilder implements Builder<RemoveItem, RemoveItemBuilder> {
   }
 
   @override
-  void replace(RemoveItem other) {
+  void replace(RemoveItemEdit other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$RemoveItem;
+    _$v = other as _$RemoveItemEdit;
   }
 
   @override
-  void update(void Function(RemoveItemBuilder) updates) {
+  void update(void Function(RemoveItemEditBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$RemoveItem build() {
+  _$RemoveItemEdit build() {
     final _$result = _$v ??
-        new _$RemoveItem._(
-            id: BuiltValueNullFieldError.checkNotNull(id, 'RemoveItem', 'id'));
+        new _$RemoveItemEdit._(
+            id: BuiltValueNullFieldError.checkNotNull(
+                id, 'RemoveItemEdit', 'id'));
     replace(_$result);
     return _$result;
   }

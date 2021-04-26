@@ -18,22 +18,22 @@ abstract class GetProduct extends EditEvent
   factory GetProduct([updates(GetProductBuilder b)]) = _$GetProduct;
 }
 
-abstract class AddToFavourite extends EditEvent
-    implements Built<AddToFavourite, AddToFavouriteBuilder> {
+abstract class AddToFavouriteEdit extends EditEvent
+    implements Built<AddToFavouriteEdit, AddToFavouriteEditBuilder> {
 
   //fields go here
 
   int get id;
 
-  AddToFavourite._();
+  AddToFavouriteEdit._();
 
-  factory AddToFavourite([updates(AddToFavouriteBuilder b)]) = _$AddToFavourite;
+  factory AddToFavouriteEdit([updates(AddToFavouriteEditBuilder b)]) = _$AddToFavouriteEdit;
 }
 
 
 
-abstract class AddToCart extends EditEvent
-    implements Built<AddToCart, AddToCartBuilder> {
+abstract class AddToCartEdit extends EditEvent
+    implements Built<AddToCartEdit, AddToCartEditBuilder> {
 
   //fields go here
 
@@ -55,9 +55,9 @@ abstract class AddToCart extends EditEvent
   @nullable
   int get giftSizeId;
 
-  AddToCart._();
+  AddToCartEdit._();
 
-  factory AddToCart([updates(AddToCartBuilder b)]) = _$AddToCart;
+  factory AddToCartEdit([updates(AddToCartEditBuilder b)]) = _$AddToCartEdit;
 }
 
 abstract class GetWrapByGift extends EditEvent
@@ -72,36 +72,36 @@ abstract class GetWrapByGift extends EditEvent
   factory GetWrapByGift([updates(GetWrapByGiftBuilder b)]) = _$GetWrapByGift;
 }
 
-abstract class RemoveFavourite extends EditEvent
-    implements Built<RemoveFavourite, RemoveFavouriteBuilder> {
+abstract class RemoveFavouriteEdit extends EditEvent
+    implements Built<RemoveFavouriteEdit, RemoveFavouriteEditBuilder> {
 
   //fields go here
 
   int get id;
 
-  RemoveFavourite._();
+  RemoveFavouriteEdit._();
 
-  factory RemoveFavourite([updates(RemoveFavouriteBuilder b)]) = _$RemoveFavourite;
+  factory RemoveFavouriteEdit([updates(RemoveFavouriteEditBuilder b)]) = _$RemoveFavouriteEdit;
 }
-abstract class ClearSuccess extends EditEvent
-    implements Built<ClearSuccess, ClearSuccessBuilder> {
+abstract class ClearSuccessEdit extends EditEvent
+    implements Built<ClearSuccessEdit, ClearSuccessEditBuilder> {
 
   //fields go here
 
 
-  ClearSuccess._();
+  ClearSuccessEdit._();
 
-  factory ClearSuccess([updates(ClearSuccessBuilder b)]) = _$ClearSuccess;
+  factory ClearSuccessEdit([updates(ClearSuccessEditBuilder b)]) = _$ClearSuccessEdit;
 }
 
-abstract class RemoveItem extends EditEvent
-    implements Built<RemoveItem, RemoveItemBuilder> {
+abstract class RemoveItemEdit extends EditEvent
+    implements Built<RemoveItemEdit, RemoveItemEditBuilder> {
 
   //fields go here
 
   int get id;
 
-  RemoveItem._();
+  RemoveItemEdit._();
 
-  factory RemoveItem([updates(RemoveItemBuilder b)]) = _$RemoveItem;
+  factory RemoveItemEdit([updates(RemoveItemEditBuilder b)]) = _$RemoveItemEdit;
 }

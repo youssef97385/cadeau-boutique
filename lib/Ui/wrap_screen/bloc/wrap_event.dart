@@ -73,3 +73,38 @@ abstract class Clear extends WrapEvent
 
   factory Clear([updates(ClearBuilder b)]) = _$Clear;
 }
+
+abstract class AddToCartWrap extends WrapEvent
+    implements Built<AddToCartWrap, AddToCartWrapBuilder> {
+
+  //fields go here
+
+
+  int get giftId;
+
+  @nullable
+  int get giftColorId;
+
+  @nullable
+  int get wrapId;
+
+  @nullable
+  int get wrapColorId;
+
+
+
+  AddToCartWrap._();
+
+  factory AddToCartWrap([updates(AddToCartWrapBuilder b)]) = _$AddToCartWrap;
+}
+abstract class RemoveItemWrap extends WrapEvent
+    implements Built<RemoveItemWrap, RemoveItemWrapBuilder> {
+
+  //fields go here
+
+  int get id;
+
+  RemoveItemWrap._();
+
+  factory RemoveItemWrap([updates(RemoveItemWrapBuilder b)]) = _$RemoveItemWrap;
+}

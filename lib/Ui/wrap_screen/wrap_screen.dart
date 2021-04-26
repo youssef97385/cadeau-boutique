@@ -1,4 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
+import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_event.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_bloc.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/bloc/product_event.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_event.dart';
@@ -6,6 +8,7 @@ import 'package:cadeaue_boutique/Ui/wrap_screen/bloc/wrap_state.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
+import 'package:cadeaue_boutique/model/cart_model/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +19,10 @@ import 'bloc/wrap_bloc.dart';
 class WrapScreen extends StatefulWidget {
 
   int id;
-
-  WrapScreen({this.id});
+  CartItem cartItem;
+  CartBloc bloc;
+  bool isFromCart;
+  WrapScreen({this.id,this.cartItem,this.isFromCart,this.bloc});
 
   @override
   _WrapScreenState createState() => _WrapScreenState();
@@ -54,6 +59,7 @@ class _WrapScreenState extends State<WrapScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     var size = MediaQuery
         .of(context)
         .size;
@@ -61,8 +67,18 @@ class _WrapScreenState extends State<WrapScreen> {
       cubit: _bloc,
       builder: (BuildContext context, WrapState state) {
         if (state.successAddToCart) {
+
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            showSuccsess();
+            if(widget.isFromCart!=null&&widget.isFromCart){
+              widget.bloc.add(GetCartInfo());
+              Navigator.pop(context);
+
+            }
+            else{
+               showSuccsess();
+            }
+
+
           });
         }
         // print("my product "+ (state.wrap.image == null).toString() + "   "+state.wrap.toString() );
@@ -186,6 +202,19 @@ class _WrapScreenState extends State<WrapScreen> {
                         height: 20,
                       ),
 
+                      ///description
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 24.0, right: 46),
+                        child: baseText(
+                            title: state.wrap.description == null ?"":state.wrap.description,
+                            color: AppColor.textColor,
+                            size: 16.0, height: 2.0),
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
 
                       ///size
                       state.wrap.sizes.isEmpty?Container():
@@ -212,15 +241,30 @@ class _WrapScreenState extends State<WrapScreen> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        selectedSize = index;
+                                        if(widget.isFromCart!=null&&widget.isFromCart){
+
+                                        }else{
+                                          selectedSize = index;
+                                        }
+
                                       });
                                     },
                                     child: Container(
                                       width: 40,
                                       height: 40,
                                       decoration: BoxDecoration(
-                                        color: selectedSize == index ? Color(
-                                            0xffF2D750) : Colors.white,
+                                        color:
+
+                                        widget.isFromCart?
+                                        widget.cartItem.wrapSizeId!=null?
+                                        widget.cartItem.wrapSizeId==state.wrap.sizes[index].id? Color(
+                                               0xffF2D750) :Colors.white
+                                            :Colors.white
+                                            :selectedSize!=index?Colors.white:
+                                        Color(
+                                            0xffF2D750),
+                                        // selectedSize == index ? Color(
+                                        //     0xffF2D750) : Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
                                         boxShadow: [
@@ -272,20 +316,35 @@ class _WrapScreenState extends State<WrapScreen> {
                                   child: GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          selectedColor = index;
-                                          selectedImage = state.wrap.colors[index].image;
-                                          imageChanged = true;
+                                          if(widget.isFromCart!=null&&widget.isFromCart){
+
+                                          }else{
+                                            selectedColor = index;
+                                            selectedImage = state.wrap.colors[index].image;
+                                            imageChanged = true;
+                                          }
+
                                         });
                                       },
                                       child: Container(
                                         width: 36,
                                         height: 36,
                                         decoration: BoxDecoration(
-                                            border: selectedColor != index
-                                                ? null
-                                                : Border.all(
+                                            border: widget.isFromCart?
+                                                widget.cartItem.wrapColor!=null?
+                                                    widget.cartItem.wrapColor.id==state.wrap.colors[index].id? Border.all(
+                                                        color: Color(0xff707070),
+                                                        width: 2):null
+                                                    :null
+                                                :selectedColor!=index?null:
+                                            Border.all(
                                                 color: Color(0xff707070),
                                                 width: 2),
+                                            // selectedColor != index
+                                            //     ? null
+                                            //     : Border.all(
+                                            //     color: Color(0xff707070),
+                                            //     width: 2),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.grey.withOpacity(
@@ -300,10 +359,25 @@ class _WrapScreenState extends State<WrapScreen> {
                                             color: hexToColor(state.wrap.colors[index].color)
 
                                         ),
-                                        child: selectedColor != index
-                                            ? Container()
-                                            : Center(child: Icon(Icons.check,
+                                        child:
+
+                                        widget.isFromCart?
+                                        widget.cartItem.wrapColor!=null?
+                                        widget.cartItem.wrapColor.id==state.wrap.colors[index].id? Center(child: Icon(Icons.check,
+                                          color: Color(0xff707070),)):null
+                                            :null
+                                            :selectedColor!=index?null:
+                                        Center(child: Icon(Icons.check,
                                           color: Color(0xff707070),)),
+
+                                        // ( widget.isFromCart!=null&&widget.isFromCart==false&&widget.cartItem!=null)
+                                        //     ?  widget.cartItem.wrapColor.id==state.wrap.colors[index].id?Center(child: Icon(Icons.check,
+                                        //   color: Color(0xff707070),)):
+                                        // selectedColor != index
+                                        //     ? Container()
+                                        //     : Center(child: Icon(Icons.check,
+                                        //   color: Color(0xff707070),)):Container()
+
                                       )
                                   ),
                                 );
@@ -317,7 +391,7 @@ class _WrapScreenState extends State<WrapScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 24),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
 
                           children: [
                             // Container(
@@ -382,16 +456,24 @@ class _WrapScreenState extends State<WrapScreen> {
                               child: FlatButton(
                                 // splashColor: Colors.red,
                                 onPressed: () {
-                                  _bloc.add(AddWrap((b) =>
-                                  b
-                                    ..wrapId = widget.id
-                                  ..wrapColorId = selectedColor==-1?null:state.wrap.colors[selectedColor].id
+                                  if(widget.isFromCart!=null&&widget.isFromCart){
+                                    _bloc.add(RemoveItemWrap((b)=>b..id=widget.cartItem.id));
+                                    _bloc.add(AddToCartWrap((b)=>b..giftId=widget.cartItem.gift.id ..giftColorId=widget.cartItem.giftColor==null?null:widget.cartItem.giftColor.id));
+                                  }else{
+                                    _bloc.add(AddWrap((b) =>
+                                    b
+                                      ..wrapId = widget.id
+                                      ..wrapColorId = selectedColor==-1?null:state.wrap.colors[selectedColor].id
                                       ..wrapSizeId = selectedSize==-1?null:state.wrap.sizes[selectedSize].id
 
-                                  ));
+                                    ));
+                                  }
+
+
                                 },
                                 child: Text(
-                                  'Add To Cart',
+                                  (widget.isFromCart!=null&&widget.isFromCart)?
+                                  'Remove Wrap':"Add To Cart",
                                   style: TextStyle(
                                     color: AppColor.textColor,
                                     fontSize: 13,

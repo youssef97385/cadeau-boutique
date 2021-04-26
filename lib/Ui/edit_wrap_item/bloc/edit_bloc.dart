@@ -46,7 +46,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     }
 
 
-    if(event is RemoveFavourite){
+    if(event is RemoveFavouriteEdit){
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
@@ -75,7 +75,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
       }
     }
-    if(event is AddToFavourite){
+    if(event is AddToFavouriteEdit){
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
@@ -106,7 +106,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     }
 
 
-    if(event is AddToCart){
+    if(event is AddToCartEdit){
       print("cart body4${event.giftSizeId}");
       try {
         yield state.rebuild((b) => b
@@ -175,7 +175,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       }
     }
 
-    if(event is ClearSuccess){
+    if(event is ClearSuccessEdit){
       try {
         yield state.rebuild((b) => b
           ..successAddToCart = false
@@ -191,7 +191,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       }
     }
 
-    if (event is RemoveItem) {
+    if (event is RemoveItemEdit) {
       try {
         yield state.rebuild((b) => b
           ..isLoading = true
