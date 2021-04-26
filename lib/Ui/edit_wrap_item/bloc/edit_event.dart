@@ -57,6 +57,8 @@ abstract class AddToCartEdit extends EditEvent
 
   AddToCartEdit._();
 
+
+
   factory AddToCartEdit([updates(AddToCartEditBuilder b)]) = _$AddToCartEdit;
 }
 

@@ -918,7 +918,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       fontSize: 26,
                                                       color: Color(0xff393741)),
                                                 ): Text(
-                                          state.mainGift.titleAr,
+                                          state.mainGift.titleEn,
                                           style: TextStyle(
                                               fontSize: 26,
                                               color: Color(0xff393741)),
@@ -934,7 +934,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 overflow:TextOverflow.ellipsis ,
                                               ):
                                               Text(
-                                                "${state.mainGift.textAr}",
+                                                "${state.mainGift.textEn}",
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     color: Color(0xff393741)),

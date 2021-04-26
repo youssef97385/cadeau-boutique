@@ -425,7 +425,7 @@ class Repository implements IRepository {
     else{
       final item=await _ihttpHelper.logoutRQ(token);
 
-      if(item!=null &&item) {_iprefHelper.logout();
+      if(item!=null &&item) {await _iprefHelper.logout();
 
       print("LOOOOGOOOOGGOOOOGOUUUUT");
       }
