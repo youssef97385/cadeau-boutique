@@ -143,17 +143,29 @@ class _CartScreenState extends State<CartScreen> {
                                                                               .3,
                                                                           // color: Colors.red,
                                                                           child:
-                                                                              ClipRRect(
+                                                                              Stack(
+                                                                                children: [
+                                                                                  ClipRRect(
                                                                             borderRadius:
-                                                                                BorderRadius.all(Radius.circular(12)),
+                                                                                    BorderRadius.all(Radius.circular(12)),
                                                                             child:
-                                                                                Image.network(
-                                                                              BaseImgUrl +
-                                                                                  state.cartList[index].gift.image,
-                                                                              fit:
-                                                                                  BoxFit.fill,
+                                                                                    Image.network(
+                                                                                  BaseImgUrl +
+                                                                                      state.cartList[index].gift.image,
+                                                                                  fit:
+                                                                                      BoxFit.fill,
                                                                             ),
                                                                           ),
+
+                                                                                  state.cartList[index].wrap != null?
+                                                                                  Positioned(
+
+
+                                                                                      child: SvgPicture.asset("assets/images/wrap.svg"
+                                                                                        ,width: 30,height: 30,
+                                                                                      )):Container()
+                                                                                ],
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                       SizedBox(
