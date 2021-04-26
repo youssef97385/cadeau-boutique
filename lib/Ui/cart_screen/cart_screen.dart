@@ -206,6 +206,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                   children: [
+
                                                                                     Row(
                                                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                                                       children: [
