@@ -62,6 +62,13 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
         ..add('gift_size_id')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.giftSize;
+    if (value != null) {
+      result
+        ..add('gift_size')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(GiftSize)));
+    }
     value = object.wrapSizeId;
     if (value != null) {
       result
@@ -110,6 +117,10 @@ class _$CartItemSerializer implements StructuredSerializer<CartItem> {
           result.giftSizeId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'gift_size':
+          result.giftSize.replace(serializers.deserialize(value,
+              specifiedType: const FullType(GiftSize)) as GiftSize);
+          break;
         case 'wrap_size_id':
           result.wrapSizeId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
@@ -137,6 +148,8 @@ class _$CartItem extends CartItem {
   @override
   final int giftSizeId;
   @override
+  final GiftSize giftSize;
+  @override
   final int wrapSizeId;
 
   factory _$CartItem([void Function(CartItemBuilder) updates]) =>
@@ -150,6 +163,7 @@ class _$CartItem extends CartItem {
       this.wrapColor,
       this.totalPrice,
       this.giftSizeId,
+      this.giftSize,
       this.wrapSizeId})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'CartItem', 'id');
@@ -173,6 +187,7 @@ class _$CartItem extends CartItem {
         wrapColor == other.wrapColor &&
         totalPrice == other.totalPrice &&
         giftSizeId == other.giftSizeId &&
+        giftSize == other.giftSize &&
         wrapSizeId == other.wrapSizeId;
   }
 
@@ -183,12 +198,14 @@ class _$CartItem extends CartItem {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, id.hashCode), gift.hashCode),
-                            giftColor.hashCode),
-                        wrap.hashCode),
-                    wrapColor.hashCode),
-                totalPrice.hashCode),
-            giftSizeId.hashCode),
+                        $jc(
+                            $jc($jc($jc(0, id.hashCode), gift.hashCode),
+                                giftColor.hashCode),
+                            wrap.hashCode),
+                        wrapColor.hashCode),
+                    totalPrice.hashCode),
+                giftSizeId.hashCode),
+            giftSize.hashCode),
         wrapSizeId.hashCode));
   }
 
@@ -202,6 +219,7 @@ class _$CartItem extends CartItem {
           ..add('wrapColor', wrapColor)
           ..add('totalPrice', totalPrice)
           ..add('giftSizeId', giftSizeId)
+          ..add('giftSize', giftSize)
           ..add('wrapSizeId', wrapSizeId))
         .toString();
   }
@@ -240,6 +258,10 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
   int get giftSizeId => _$this._giftSizeId;
   set giftSizeId(int giftSizeId) => _$this._giftSizeId = giftSizeId;
 
+  GiftSizeBuilder _giftSize;
+  GiftSizeBuilder get giftSize => _$this._giftSize ??= new GiftSizeBuilder();
+  set giftSize(GiftSizeBuilder giftSize) => _$this._giftSize = giftSize;
+
   int _wrapSizeId;
   int get wrapSizeId => _$this._wrapSizeId;
   set wrapSizeId(int wrapSizeId) => _$this._wrapSizeId = wrapSizeId;
@@ -256,6 +278,7 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
       _wrapColor = $v.wrapColor?.toBuilder();
       _totalPrice = $v.totalPrice;
       _giftSizeId = $v.giftSizeId;
+      _giftSize = $v.giftSize?.toBuilder();
       _wrapSizeId = $v.wrapSizeId;
       _$v = null;
     }
@@ -286,6 +309,7 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
               wrapColor: _wrapColor?.build(),
               totalPrice: totalPrice,
               giftSizeId: giftSizeId,
+              giftSize: _giftSize?.build(),
               wrapSizeId: wrapSizeId);
     } catch (_) {
       String _$failedField;
@@ -298,6 +322,9 @@ class CartItemBuilder implements Builder<CartItem, CartItemBuilder> {
         _wrap?.build();
         _$failedField = 'wrapColor';
         _wrapColor?.build();
+
+        _$failedField = 'giftSize';
+        _giftSize?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'CartItem', _$failedField, e.toString());

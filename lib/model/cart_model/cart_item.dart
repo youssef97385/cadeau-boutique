@@ -9,6 +9,7 @@ import 'package:cadeaue_boutique/model/color_model/color_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
+import 'package:cadeaue_boutique/model/gift_size/gift_size.dart';
 
 part 'cart_item.g.dart';
 
@@ -39,6 +40,12 @@ abstract class CartItem implements Built<CartItem, CartItemBuilder> {
   @BuiltValueField(wireName: "gift_size_id")
   @nullable
   int get giftSizeId;
+
+
+
+  @BuiltValueField(wireName: "gift_size")
+  @nullable
+  GiftSize get giftSize;
 
   @BuiltValueField(wireName: "wrap_size_id")
   @nullable

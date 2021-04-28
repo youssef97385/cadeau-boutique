@@ -511,4 +511,61 @@ class ClearSuccessBuilder
   }
 }
 
+class _$InitStateProduct extends InitStateProduct {
+  factory _$InitStateProduct(
+          [void Function(InitStateProductBuilder) updates]) =>
+      (new InitStateProductBuilder()..update(updates)).build();
+
+  _$InitStateProduct._() : super._();
+
+  @override
+  InitStateProduct rebuild(void Function(InitStateProductBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  InitStateProductBuilder toBuilder() =>
+      new InitStateProductBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is InitStateProduct;
+  }
+
+  @override
+  int get hashCode {
+    return 1057496573;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('InitStateProduct').toString();
+  }
+}
+
+class InitStateProductBuilder
+    implements Builder<InitStateProduct, InitStateProductBuilder> {
+  _$InitStateProduct _$v;
+
+  InitStateProductBuilder();
+
+  @override
+  void replace(InitStateProduct other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$InitStateProduct;
+  }
+
+  @override
+  void update(void Function(InitStateProductBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$InitStateProduct build() {
+    final _$result = _$v ?? new _$InitStateProduct._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

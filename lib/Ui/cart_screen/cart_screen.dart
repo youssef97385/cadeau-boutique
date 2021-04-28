@@ -13,6 +13,7 @@ import 'package:cadeaue_boutique/injectoin.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_bloc.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_state.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/bloc/cart_event.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'empty_cart.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -149,12 +150,21 @@ class _CartScreenState extends State<CartScreen> {
                                                                             borderRadius:
                                                                                     BorderRadius.all(Radius.circular(12)),
                                                                             child:
+
+                                                                            (state.cartList[index].giftColor==null ||
+                                                                                state.cartList[index].giftColor.image==null)?
                                                                                     Image.network(
                                                                                   BaseImgUrl +
                                                                                       state.cartList[index].gift.image,
                                                                                   fit:
                                                                                       BoxFit.fill,
-                                                                            ),
+                                                                            ):      Image.network(
+                                                                              BaseImgUrl +
+                                                                                  state.cartList[index].giftColor.image,
+                                                                              fit:
+                                                                              BoxFit.fill,
+                                                                            )
+                                                                                    ,
                                                                           ),
 
                                                                                   state.cartList[index].wrap != null?
@@ -196,7 +206,10 @@ class _CartScreenState extends State<CartScreen> {
                                                                                     SizedBox(
                                                                                       height: size.height * 0.005,
                                                                                     ),
-                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0),
+
+                                                                                    state.cartList[index].giftSizeId==null?
+                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0):
+                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].giftSize.price, size: 16.0),
                                                                                   ],
                                                                                 ),
 
@@ -1653,7 +1666,16 @@ class _CartScreenState extends State<CartScreen> {
                                             // splashColor: Colors.red,
                                             onPressed: () {
                                               if (songController.text.isEmpty) {
-                                              } else {
+                                              }
+
+                                              else if(!Uri.parse(songController.text).isAbsolute
+                                              ){
+
+                                                error("you have to enter valid link");
+
+                                              }
+
+                                              else {
                                                 _bloc.add(AddSong((b) => b
                                                   ..song =
                                                       songController.text));
@@ -1884,6 +1906,20 @@ class _CartScreenState extends State<CartScreen> {
         });
   }
 
+
+  void error(String errorCode) {
+    if (errorCode.isNotEmpty) {
+      Fluttertoast.showToast(
+          msg: errorCode,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          //timeInSecForIos: 1,
+          backgroundColor: Colors.red.withOpacity(0.8),
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+    }
+  }
   showSuccsess() {
     _bloc.add(ClearSuccess());
     AwesomeDialog(

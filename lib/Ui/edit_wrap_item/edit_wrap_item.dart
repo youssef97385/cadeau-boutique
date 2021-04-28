@@ -587,21 +587,47 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                       widget.bloc.add(GetCartInfo());
                                       // print("wrap id test ${myWrapId}");
                                       if(myWrapId == -1){
-
-                                        _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id
+                                        print("000000000000000");
+                                     /*   _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id
                                           ..giftSizeId=selectedSize==-1?
                                           null:
                                           state.product.sizes[selectedSize].id
                                           ..giftColorId = selectedColor==-1?
                                           null:
                                           state.product.colors[selectedColor].id
+                                        ));*/
+
+
+                                         _bloc.add(RemoveItemEdit((b)=> b..giftId = widget.cartItem.gift.id
+                                          ..giftSizeId=selectedSize==-1?
+                                          null:
+                                          state.product.sizes[selectedSize].id
+                                          ..giftColorId = selectedColor==-1?
+                                          null:
+                                          state.product.colors[selectedColor].id
+                                           ..id=widget.cartItem.id
                                         ));
 
                                       }else{
 
-                                        _bloc.add(RemoveItemEdit((b)=>b..id=widget.cartItem.id));
+                                        print("2222222222222");
+                                        _bloc.add(RemoveItemEdit((b)=>b..id=widget.cartItem.id
+                                          ..giftId = widget.cartItem.gift.id ..wrapId = myWrapId
+                                          ..giftSizeId=selectedSize==-1?
+                                          null:
+                                          state.product.sizes[selectedSize].id
 
-                                        _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id ..wrapId = myWrapId
+                                          ..giftColorId = selectedColor==-1?
+                                          null:
+                                          state.product.colors[selectedColor].id
+                                          ..wrapColorId=myWrapColorId==-1?
+                                          null:
+                                          myWrapColorId
+                                          ..wrapSizeId=myWrapSizeId==-1?
+                                          null:
+                                          myWrapSizeId));
+
+                                    /*    _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id ..wrapId = myWrapId
                                           ..giftSizeId=selectedSize==-1?
                                           null:
                                           state.product.sizes[selectedSize].id
@@ -615,7 +641,7 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                           ..wrapSizeId=myWrapSizeId==-1?
                                           null:
                                           myWrapSizeId
-                                        ));
+                                        ));*/
                                       }
 
                                       // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));

@@ -376,7 +376,7 @@ class HttpHelper implements IHttpHelper {
     try {
       print("prid$id");
       _dio.interceptors.add(CookieManager(cookieJar));
-      final response = await _dio.get('app/gift/$id/get',  options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      final response = await _dio.get('app/gift/$id/get');
       print('product Response StatusCode ${response.statusCode}');
 
       if (response.statusCode == 200) {

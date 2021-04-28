@@ -213,7 +213,8 @@ class Repository implements IRepository {
 
   @override
   Future<ProductModel> getProductByid({int id}) async {
-    final token = await _iprefHelper.getToken();
+  //  final token = await _iprefHelper.getToken();
+    final token = "";
     final product = await _ihttpHelper.getProductByid(id: id,token:token);
     return product;
   }

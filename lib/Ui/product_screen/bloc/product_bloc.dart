@@ -18,6 +18,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   Stream<ProductState> mapEventToState(
     ProductEvent event,
   ) async* {
+
+
+    if(event is InitStateProduct){
+      final result = await _iRepository.getIsLogin();
+      yield state.rebuild((b) => b
+        ..isLogin = result
+      );
+
+    }
     if(event is GetProduct){
       try {
         yield state.rebuild((b) => b

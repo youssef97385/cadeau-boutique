@@ -39,6 +39,7 @@ import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
+import 'package:cadeaue_boutique/model/gift_size/gift_size.dart';
 
 
 
@@ -71,7 +72,8 @@ part 'serializer.g.dart';
   CheckBody,
   DetailsUser,
   MainGift,
-  SmsResponse
+  SmsResponse,
+  GiftSize
 
 
 

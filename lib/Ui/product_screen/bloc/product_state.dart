@@ -18,6 +18,8 @@ implements Built<ProductState, ProductStateBuilder> {
   bool get isLoading;
   String get error;
   ProductModel get product;
+
+  bool get isLogin;
   ///hassan edit here
   ///*********/////
   // BuiltList<WrapItem> get wraps;
@@ -39,6 +41,8 @@ implements Built<ProductState, ProductStateBuilder> {
       ..removed = false
         ..wraps.replace([])
       ..successAddToCart = false
+      ..isLogin=false
+
     );
   }
 }

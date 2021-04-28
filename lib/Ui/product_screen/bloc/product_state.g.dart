@@ -16,6 +16,8 @@ class _$ProductState extends ProductState {
   @override
   final ProductModel product;
   @override
+  final bool isLogin;
+  @override
   final BuiltList<WrapModel> wraps;
   @override
   final bool removed;
@@ -30,6 +32,7 @@ class _$ProductState extends ProductState {
       this.isLoading,
       this.error,
       this.product,
+      this.isLogin,
       this.wraps,
       this.removed,
       this.successAddToCart})
@@ -39,6 +42,7 @@ class _$ProductState extends ProductState {
         isLoading, 'ProductState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'ProductState', 'error');
     BuiltValueNullFieldError.checkNotNull(product, 'ProductState', 'product');
+    BuiltValueNullFieldError.checkNotNull(isLogin, 'ProductState', 'isLogin');
     BuiltValueNullFieldError.checkNotNull(wraps, 'ProductState', 'wraps');
     BuiltValueNullFieldError.checkNotNull(removed, 'ProductState', 'removed');
     BuiltValueNullFieldError.checkNotNull(
@@ -60,6 +64,7 @@ class _$ProductState extends ProductState {
         isLoading == other.isLoading &&
         error == other.error &&
         product == other.product &&
+        isLogin == other.isLogin &&
         wraps == other.wraps &&
         removed == other.removed &&
         successAddToCart == other.successAddToCart;
@@ -71,9 +76,11 @@ class _$ProductState extends ProductState {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
-                        error.hashCode),
-                    product.hashCode),
+                    $jc(
+                        $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                            error.hashCode),
+                        product.hashCode),
+                    isLogin.hashCode),
                 wraps.hashCode),
             removed.hashCode),
         successAddToCart.hashCode));
@@ -86,6 +93,7 @@ class _$ProductState extends ProductState {
           ..add('isLoading', isLoading)
           ..add('error', error)
           ..add('product', product)
+          ..add('isLogin', isLogin)
           ..add('wraps', wraps)
           ..add('removed', removed)
           ..add('successAddToCart', successAddToCart))
@@ -114,6 +122,10 @@ class ProductStateBuilder
       _$this._product ??= new ProductModelBuilder();
   set product(ProductModelBuilder product) => _$this._product = product;
 
+  bool _isLogin;
+  bool get isLogin => _$this._isLogin;
+  set isLogin(bool isLogin) => _$this._isLogin = isLogin;
+
   ListBuilder<WrapModel> _wraps;
   ListBuilder<WrapModel> get wraps =>
       _$this._wraps ??= new ListBuilder<WrapModel>();
@@ -137,6 +149,7 @@ class ProductStateBuilder
       _isLoading = $v.isLoading;
       _error = $v.error;
       _product = $v.product.toBuilder();
+      _isLogin = $v.isLogin;
       _wraps = $v.wraps.toBuilder();
       _removed = $v.removed;
       _successAddToCart = $v.successAddToCart;
@@ -169,6 +182,8 @@ class ProductStateBuilder
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'ProductState', 'error'),
               product: product.build(),
+              isLogin: BuiltValueNullFieldError.checkNotNull(
+                  isLogin, 'ProductState', 'isLogin'),
               wraps: wraps.build(),
               removed: BuiltValueNullFieldError.checkNotNull(
                   removed, 'ProductState', 'removed'),
@@ -179,6 +194,7 @@ class ProductStateBuilder
       try {
         _$failedField = 'product';
         product.build();
+
         _$failedField = 'wraps';
         wraps.build();
       } catch (e) {

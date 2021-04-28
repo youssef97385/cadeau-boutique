@@ -521,11 +521,31 @@ class ClearSuccessEditBuilder
 class _$RemoveItemEdit extends RemoveItemEdit {
   @override
   final int id;
+  @override
+  final int giftId;
+  @override
+  final int giftColorId;
+  @override
+  final int wrapId;
+  @override
+  final int wrapColorId;
+  @override
+  final int wrapSizeId;
+  @override
+  final int giftSizeId;
 
   factory _$RemoveItemEdit([void Function(RemoveItemEditBuilder) updates]) =>
       (new RemoveItemEditBuilder()..update(updates)).build();
 
-  _$RemoveItemEdit._({this.id}) : super._() {
+  _$RemoveItemEdit._(
+      {this.id,
+      this.giftId,
+      this.giftColorId,
+      this.wrapId,
+      this.wrapColorId,
+      this.wrapSizeId,
+      this.giftSizeId})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'RemoveItemEdit', 'id');
   }
 
@@ -540,17 +560,40 @@ class _$RemoveItemEdit extends RemoveItemEdit {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is RemoveItemEdit && id == other.id;
+    return other is RemoveItemEdit &&
+        id == other.id &&
+        giftId == other.giftId &&
+        giftColorId == other.giftColorId &&
+        wrapId == other.wrapId &&
+        wrapColorId == other.wrapColorId &&
+        wrapSizeId == other.wrapSizeId &&
+        giftSizeId == other.giftSizeId;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, id.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, id.hashCode), giftId.hashCode),
+                        giftColorId.hashCode),
+                    wrapId.hashCode),
+                wrapColorId.hashCode),
+            wrapSizeId.hashCode),
+        giftSizeId.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('RemoveItemEdit')..add('id', id))
+    return (newBuiltValueToStringHelper('RemoveItemEdit')
+          ..add('id', id)
+          ..add('giftId', giftId)
+          ..add('giftColorId', giftColorId)
+          ..add('wrapId', wrapId)
+          ..add('wrapColorId', wrapColorId)
+          ..add('wrapSizeId', wrapSizeId)
+          ..add('giftSizeId', giftSizeId))
         .toString();
   }
 }
@@ -563,12 +606,42 @@ class RemoveItemEditBuilder
   int get id => _$this._id;
   set id(int id) => _$this._id = id;
 
+  int _giftId;
+  int get giftId => _$this._giftId;
+  set giftId(int giftId) => _$this._giftId = giftId;
+
+  int _giftColorId;
+  int get giftColorId => _$this._giftColorId;
+  set giftColorId(int giftColorId) => _$this._giftColorId = giftColorId;
+
+  int _wrapId;
+  int get wrapId => _$this._wrapId;
+  set wrapId(int wrapId) => _$this._wrapId = wrapId;
+
+  int _wrapColorId;
+  int get wrapColorId => _$this._wrapColorId;
+  set wrapColorId(int wrapColorId) => _$this._wrapColorId = wrapColorId;
+
+  int _wrapSizeId;
+  int get wrapSizeId => _$this._wrapSizeId;
+  set wrapSizeId(int wrapSizeId) => _$this._wrapSizeId = wrapSizeId;
+
+  int _giftSizeId;
+  int get giftSizeId => _$this._giftSizeId;
+  set giftSizeId(int giftSizeId) => _$this._giftSizeId = giftSizeId;
+
   RemoveItemEditBuilder();
 
   RemoveItemEditBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
+      _giftId = $v.giftId;
+      _giftColorId = $v.giftColorId;
+      _wrapId = $v.wrapId;
+      _wrapColorId = $v.wrapColorId;
+      _wrapSizeId = $v.wrapSizeId;
+      _giftSizeId = $v.giftSizeId;
       _$v = null;
     }
     return this;
@@ -590,7 +663,13 @@ class RemoveItemEditBuilder
     final _$result = _$v ??
         new _$RemoveItemEdit._(
             id: BuiltValueNullFieldError.checkNotNull(
-                id, 'RemoveItemEdit', 'id'));
+                id, 'RemoveItemEdit', 'id'),
+            giftId: giftId,
+            giftColorId: giftColorId,
+            wrapId: wrapId,
+            wrapColorId: wrapColorId,
+            wrapSizeId: wrapSizeId,
+            giftSizeId: giftSizeId);
     replace(_$result);
     return _$result;
   }

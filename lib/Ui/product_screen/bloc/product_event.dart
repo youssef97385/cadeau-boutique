@@ -93,3 +93,20 @@ abstract class ClearSuccess extends ProductEvent
 
   factory ClearSuccess([updates(ClearSuccessBuilder b)]) = _$ClearSuccess;
 }
+
+
+
+abstract class InitStateProduct  extends ProductEvent implements Built<InitStateProduct, InitStateProductBuilder> {
+// fields go here
+InitStateProduct._();
+
+factory InitStateProduct([updates(InitStateProductBuilder b)]) = _$InitStateProduct;
+}
+
+/*
+abstract class InitStateProduct  extends ProductEvent implements Built<InitStateProduct, InitStateProductBuilder> {
+// fields go here
+InitStateProduct._();
+
+factory InitStateProduct([updates(InitStateProductBuilder b)]) = _$InitStateProduct;
+}*/

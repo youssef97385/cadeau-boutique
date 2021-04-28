@@ -103,6 +103,25 @@ abstract class RemoveItemEdit extends EditEvent
 
   int get id;
 
+
+  @nullable
+  int get giftId;
+
+  @nullable
+  int get giftColorId;
+
+  @nullable
+  int get wrapId;
+
+  @nullable
+  int get wrapColorId;
+
+  @nullable
+  int get wrapSizeId;
+
+  @nullable
+  int get giftSizeId;
+
   RemoveItemEdit._();
 
   factory RemoveItemEdit([updates(RemoveItemEditBuilder b)]) = _$RemoveItemEdit;

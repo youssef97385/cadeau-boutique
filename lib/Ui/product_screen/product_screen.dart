@@ -63,6 +63,8 @@ class _ProductScreenState extends State<ProductScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _bloc.add(InitStateProduct());
     _bloc.add(GetWrapByGift((b)=>b..giftId = widget.id));
     _bloc.add(GetProduct((b) =>
     b
@@ -189,7 +191,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                GestureDetector(
                                  onTap: (){
-                                   if(state.wraps.isEmpty){
+                                   if(!state.isLogin){
                                      AwesomeDialog(
                                        context: context,
                                        customHeader: Container(
@@ -463,7 +465,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                    // splashColor: Colors.red,
                                    onPressed: () {
-                                    if(state.wraps.isEmpty){
+                                    if(!state.isLogin){
                                       AwesomeDialog(
                                         context: context,
                                         customHeader: Container(
@@ -553,7 +555,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                                      // print("wrap id test ${myWrapId}");
 
-                                     if(state.wraps.isEmpty){
+                                     if(!state.isLogin){
                                        AwesomeDialog(
                                          context: context,
                                          customHeader: Container(

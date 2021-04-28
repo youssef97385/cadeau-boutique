@@ -206,6 +206,24 @@ class EditBloc extends Bloc<EditEvent, EditState> {
           ..error = ""
           ..success = true
           );
+
+
+        add(AddToCartEdit((b)=> b..giftId = event.giftId ..wrapId = event.wrapId
+          ..giftSizeId=event.giftSizeId==-1?
+          null:
+          event.giftSizeId
+
+          ..giftColorId = event.giftColorId==-1?
+          null:
+          event.giftColorId
+          ..wrapColorId=event.wrapColorId==-1?
+          null:
+          event.wrapColorId
+          ..wrapSizeId=event.wrapSizeId==-1?
+          null:
+          event.wrapSizeId
+        ));
+
       } catch (e) {
         print('remove Error $e');
         yield state.rebuild((b) => b
