@@ -587,7 +587,6 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                       widget.bloc.add(GetCartInfo());
                                       // print("wrap id test ${myWrapId}");
                                       if(myWrapId == -1){
-
                                         _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id
                                           ..giftSizeId=selectedSize==-1?
                                           null:
@@ -598,7 +597,6 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                         ));
 
                                       }else{
-
                                         _bloc.add(RemoveItemEdit((b)=>b..id=widget.cartItem.id));
 
                                         _bloc.add(AddToCartEdit((b)=> b..giftId = widget.cartItem.gift.id ..wrapId = myWrapId

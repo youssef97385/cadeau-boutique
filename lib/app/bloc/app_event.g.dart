@@ -8,14 +8,12 @@ part of app_event;
 
 class _$IniEvent extends IniEvent {
   @override
-  final String langDevice;
+  final int lang;
 
   factory _$IniEvent([void Function(IniEventBuilder) updates]) =>
       (new IniEventBuilder()..update(updates)).build();
 
-  _$IniEvent._({this.langDevice}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(langDevice, 'IniEvent', 'langDevice');
-  }
+  _$IniEvent._({this.lang}) : super._();
 
   @override
   IniEvent rebuild(void Function(IniEventBuilder) updates) =>
@@ -27,18 +25,17 @@ class _$IniEvent extends IniEvent {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is IniEvent && langDevice == other.langDevice;
+    return other is IniEvent && lang == other.lang;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, langDevice.hashCode));
+    return $jf($jc(0, lang.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('IniEvent')
-          ..add('langDevice', langDevice))
+    return (newBuiltValueToStringHelper('IniEvent')..add('lang', lang))
         .toString();
   }
 }
@@ -46,16 +43,16 @@ class _$IniEvent extends IniEvent {
 class IniEventBuilder implements Builder<IniEvent, IniEventBuilder> {
   _$IniEvent _$v;
 
-  String _langDevice;
-  String get langDevice => _$this._langDevice;
-  set langDevice(String langDevice) => _$this._langDevice = langDevice;
+  int _lang;
+  int get lang => _$this._lang;
+  set lang(int lang) => _$this._lang = lang;
 
   IniEventBuilder();
 
   IniEventBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _langDevice = $v.langDevice;
+      _lang = $v.lang;
       _$v = null;
     }
     return this;
@@ -74,10 +71,7 @@ class IniEventBuilder implements Builder<IniEvent, IniEventBuilder> {
 
   @override
   _$IniEvent build() {
-    final _$result = _$v ??
-        new _$IniEvent._(
-            langDevice: BuiltValueNullFieldError.checkNotNull(
-                langDevice, 'IniEvent', 'langDevice'));
+    final _$result = _$v ?? new _$IniEvent._(lang: lang);
     replace(_$result);
     return _$result;
   }

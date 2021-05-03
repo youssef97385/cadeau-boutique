@@ -25,6 +25,8 @@ class _AppState extends State<App> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   final _AppBloc = sl<AppBloc>();
+
+  int lang ;
  // final _blocTrack = sl<TrackScreenBloc>();
   @override
   void initState() {
@@ -58,19 +60,23 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
   //  var lang=Localizations.localeOf(context).toString();
-    _AppBloc.add(IniEvent((b)=>b ..langDevice="en"));
+  //   _AppBloc.add(IniEvent((b)=>b ..langDevice="en"));
+    _AppBloc.add(IniEvent());
     return BlocBuilder(
         cubit: _AppBloc,
         builder: (BuildContext context, AppState state) {
           print('LoginState : ${state.loginState}');
           print('Language App : ${state.appLanguage}');
           return  StreamBuilder(
-              stream: localeSubjectAppLanguage.stream.distinct(),
-              initialData: state.appLanguage == AppLanguageKeys.AR
-                  ? Locale('ar', '')
-                  : Locale('en', ''),
+               stream: localeSubjectAppLanguage.stream.distinct(),
+              // initialData: state.appLanguage == AppLanguageKeys.AR
+              //     ? Locale('ar', '')
+              //     : Locale('en', ''),
               builder: (context, snapshotLanguage) {
               return MaterialApp(
+                locale: snapshotLanguage.data == -1? null:snapshotLanguage.data ==AppLanguageKeys.AR
+                  ? Locale('ar', '')
+                    : Locale('en', ''),
                   debugShowCheckedModeBanner: false,
 
                   title: "App",color: Color.fromRGBO(16, 150, 141, 1),
@@ -87,18 +93,31 @@ class _AppState extends State<App> {
                 password: state.password,phoneNumber: state.phoneNumber,
                 socialToken: state.socialToken),
                 // SplashScreen(state.loginState),
-                  locale: snapshotLanguage.data == AppLanguageKeys.AR
-                      ? Locale('ar', '')
-                      : Locale('en', ''),
+                //   locale: snapshotLanguage.data == AppLanguageKeys.AR
+                //       ? Locale('ar', '')
+                //       : Locale('en', ''),
                   localizationsDelegates: [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
                   ],
                   supportedLocales: [
                     const Locale('en', ''), // English
                     const Locale('ar', ''), // Arabic
-                  ]
+                  ],
+                localeResolutionCallback: (locale, supportedLocales) {
+                    print("test11 $locale");
+                  // Check if the current device locale is supported
+                  for (var supportedLocale in supportedLocales) {
+                    if (supportedLocale.languageCode == locale.languageCode) {
+                      return supportedLocale;
+                    }
+                  }
+                  // If the locale of the device is not supported, use the first one
+                  // from the list (English, in this case).
+                  return supportedLocales.first;
+                },
               );
             }
           );

@@ -25,18 +25,21 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       yield state.rebuild((b) => b..loginState = result);
 
 
-      print("LLLLLLLLLLLLL ${event.langDevice}");
-      if(event.langDevice.contains("en")){
-       langNumber=AppLanguageKeys.EN;
-      print("lang 0");}
-      else if(event.langDevice.contains("ar")) { langNumber=AppLanguageKeys.AR;
-      print("lang 1");}
+      // print("LLLLLLLLLLLLL ${event.langDevice}");
+      // if(event.langDevice.contains("en")){
+      //  langNumber=AppLanguageKeys.EN;
+      // print("lang 0");}
+      // else if(event.langDevice.contains("ar")) { langNumber=AppLanguageKeys.AR;
+      // print("lang 1");}
 
-      else   langNumber=AppLanguageKeys.EN;
-     await _repository.setAppLanguage(langNumber);
+      // else   langNumber=AppLanguageKeys.EN;
+     // await _repository.setAppLanguage(langNumber);
 
-      final language = await _repository.getAppLanguage();
-      // yield state.rebuild((b) => b..appLanguage = language);
+      ///****
+       final language = await _repository.getAppLanguage();
+
+
+      yield state.rebuild((b) => b..appLanguage = language);
       // changeAppLanguage(state.appLanguage);
 
       final loginType=await _repository.getLoginType();
@@ -53,8 +56,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         ..password=password
         ..countryCode=countryCode
         ..phoneNumber=phoneNumber.toString()
-        ..appLanguage = language
-        ..appLanguageString="${event.langDevice}"
+
+        // ..appLanguageString="${event.langDevice}"
       );
        changeAppLanguage(state.appLanguage);
 
