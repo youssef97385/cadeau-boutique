@@ -477,8 +477,8 @@ class _EditWrapItemState extends State<EditWrapItem> {
 
                                 Container(
                                   // margin: EdgeInsets.only(bottom: 80),
-                                  height: size.height * 0.07,
-                                  width: size.width * .3,
+                                  height: size.height * 0.06,
+                                  width: size.width * .4,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     boxShadow: [
@@ -560,8 +560,8 @@ class _EditWrapItemState extends State<EditWrapItem> {
                                 SizedBox(width: 20,),
                                 Container(
                                   // margin: EdgeInsets.only(bottom: 80),
-                                  height: size.height * 0.07,
-                                  width: size.width * .5,
+                                  height: size.height * 0.06,
+                                  width: size.width * .4,
                                   decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(

@@ -438,16 +438,16 @@ class _ProductScreenState extends State<ProductScreen> {
 
                          ///buttons
                          Padding(
-                           padding: const EdgeInsets.only(left: 24),
+                           padding: const EdgeInsets.symmetric(horizontal: 20),
                            child: Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
+                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                              children: [
 
                                Container(
                                  // margin: EdgeInsets.only(bottom: 80),
-                                 height: size.height * 0.07,
-                                 width: size.width * .3,
+                                 height: size.height * 0.06,
+                                 width: size.width * .4,
                                  decoration: BoxDecoration(
                                    color: Colors.white,
                                    boxShadow: [
@@ -525,12 +525,11 @@ class _ProductScreenState extends State<ProductScreen> {
                                    ),
                                  ),
                                ),
-
                                SizedBox(width: 20,),
                                Container(
                                  // margin: EdgeInsets.only(bottom: 80),
-                                 height: size.height * 0.07,
-                                 width: size.width * .5,
+                                 height: size.height * 0.06,
+                                 width: size.width * .4,
                                  decoration: BoxDecoration(
                                    boxShadow: [
                                      BoxShadow(

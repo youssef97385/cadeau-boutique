@@ -282,7 +282,7 @@ class Repository implements IRepository {
   @override
   Future<CartModel> addSong({String song}) async {
     final token = await _iprefHelper.getToken();
-    final cart = await _ihttpHelper.addSong(token: token);
+    final cart = await _ihttpHelper.addSong(song: song,token: token);
     return cart;
   }
 

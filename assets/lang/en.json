@@ -89,7 +89,35 @@
   "something_wrong": "Something went wrong",
   "error_code":"wrong code",
   "searchText":"Search",
-  "select_code": "Select your country code"
+  "select_code": "Select your country code",
+  "add_song_link": "Add A Song Link:",
+  "remove_song": "Remove Song",
+  "add_song": "Add Song",
+  "you_have_to_enter_valid_link": "you have to enter valid link",
+  "total":"Total",
+  "edit":"Edit",
+  "add_wrap_for_all":"Add Wrap For All Gifts",
+  "add_wrap":"Add Wrap",
+  "please_choose_wrap_first":"Please Choose Wrap First",
+  "product":"Product",
+  "wrap":"Wrap",
+  "global_wrap": "Global Wrap",
+  "song":"Song",
+  "successfully_added_to_cart":"Successfully Added To Cart",
+  "home": "Home",
+  "my_card": "My Cards",
+  "sent": "Sent",
+  "received": "Received",
+  "press_to_scan": "Press To Scan",
+  "card_number": "Card Number",
+  "date": "Date",
+  "details": "Details",
+  "status": "Status",
+  "from_txt": "From",
+  "to_txt": "To",
+  "coupons": "Coupons"
+
+
 
 
 }

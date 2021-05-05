@@ -1,4 +1,7 @@
 import 'package:cadeaue_boutique/Ui/checkout_address/bloc/checkout_bloc.dart';
+import 'package:cadeaue_boutique/Ui/home/page/home.dart';
+import 'package:cadeaue_boutique/Ui/home_screen/home_Screen.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
@@ -129,7 +132,61 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
                           height: 20,
                         ),
 
-                        Image.asset("assets/images/gift box.png",fit: BoxFit.fill,)
+                        Image.asset("assets/images/gift box.png",fit: BoxFit.fill,),
+
+
+                        Container(
+                          // margin: EdgeInsets.only(bottom: 80),
+                          height: size.height * 0.06,
+                          width: size.width * .4,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(1, 1),
+                                color: Colors.grey.withOpacity(0.6),
+                                blurRadius: 5,
+                                spreadRadius: 3,
+                              ),
+                            ],
+                            gradient: LinearGradient(
+                              colors: [
+                                AppColor.darkYellow,
+                                AppColor.lightYellow
+                              ],
+                              stops: [0.1, 0.96],
+                            ),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: FlatButton(
+                            // splashColor: Colors.red,
+                            onPressed: () {
+
+                              // print("wrap id test ${myWrapId}");
+
+
+
+
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Home()
+                                  ),
+                                  ModalRoute.withName("/home_screen")
+                              );
+
+
+                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                            },
+                            child: Text(
+                              AppLocalizations.of(context).translate("home"),
+                              style: TextStyle(
+                                color: AppColor.textColor,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
 
 
                       ],

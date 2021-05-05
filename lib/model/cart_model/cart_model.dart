@@ -30,7 +30,7 @@ abstract class CartModel implements Built<CartModel, CartModelBuilder> {
 
   @nullable
   @BuiltValueField(wireName: "song_price")
-  int get songPrice;
+  String get songPrice;
   @nullable
   @BuiltValueField(wireName: "total_price")
   int get totalPrice;

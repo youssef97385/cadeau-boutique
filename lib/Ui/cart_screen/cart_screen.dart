@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/edit_wrap_item/edit_wrap_item.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -63,7 +64,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     _bloc.add(GetCartInfo());
     _bloc.add(GetGlobalWraps());
@@ -112,6 +113,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>EditWrapItem(cartItem: state.cartList[index],bloc: _bloc,)));
                                               },
                                               child: Container(
+
                                                 child: Column(
                                                   children: [
                                                     ///Gift item ********
@@ -120,16 +122,35 @@ class _CartScreenState extends State<CartScreen> {
                                                         ? Container()
                                                         : Container(
                                                             width:
-                                                                size.width * 0.9,
+                                                                size.width * 1.2,
                                                             height:
                                                                 size.height * 0.3,
                                                             // color: Colors.red,
                                                             child: Column(
+                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                               children: [
+
+                                                                Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  mainAxisSize: MainAxisSize.max,
+
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child: Text(state.cartList[index].gift.nameEn,style: TextStyle(
+                                                                        fontSize: size.width * 0.06,
+
+                                                                          fontWeight: FontWeight.bold,color: AppColor.darkTextColor
+                                                                        
+                                                                      ),
+                                                                        textAlign: TextAlign.center,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
                                                                 Container(
                                                                   height:
                                                                       size.height *
-                                                                          0.18,
+                                                                          0.2,
                                                                   // color: Colors.green,
                                                                   child: Row(
                                                                     children: [
@@ -142,6 +163,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                             Container(
                                                                           width: size.width *
                                                                               .3,
+
                                                                           // color: Colors.red,
                                                                           child:
                                                                               Stack(
@@ -199,60 +221,101 @@ class _CartScreenState extends State<CartScreen> {
                                                                                   MainAxisAlignment.spaceAround,
                                                                               children: [
                                                                                 Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   children: [
-                                                                                    baseText(color: AppColor.darkTextColor, title: state.cartList[index].gift.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                    baseText(color: AppColor.darkTextColor, title: "price", size: size.width * 0.04, fontWeight: FontWeight.normal),
                                                                                     SizedBox(
                                                                                       height: size.height * 0.005,
+                                                                                        width: size.width*0.19,
                                                                                     ),
 
                                                                                     state.cartList[index].giftSizeId==null?
-                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0):
-                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].giftSize.price, size: 16.0),
+                                                                                    baseText(color: AppColor.darkTextColor, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0,
+                                                                                    textAlign: TextAlign.start):
+                                                                                    baseText(color: AppColor.darkTextColor, title: " \$" + state.cartList[index].giftSize.price, size: 16.0,
+                                                                                        textAlign: TextAlign.start),
+
                                                                                   ],
                                                                                 ),
 
                                                                                 state.cartList[index].wrap == null
-                                                                                    ? Container()
-                                                                                    : Row(
+                                                                                    ? Row(
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                                                   children: [
 
                                                                                     Row(
                                                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                                                       children: [
-                                                                                        baseText(color: AppColor.darkTextColor, title: state.cartList[index].wrap.nameEn, size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                        baseText(color: AppColor.darkTextColor, title:"wrap", size: size.width * 0.04, fontWeight: FontWeight.normal),
                                                                                       ],
                                                                                     ),
                                                                                     SizedBox(
                                                                                       height: size.height * 0.005,
+                                                                                      width: size.width*0.19,
                                                                                     ),
                                                                                     baseText(
-                                                                                      color: AppColor.darkYellow,
+                                                                                      color: AppColor.darkTextColor,
+                                                                                      title: "\$ 0" ,
+                                                                                      size: size.width * 0.04,
+                                                                                        textAlign: TextAlign.start
+                                                                                    ),
+                                                                                  ],
+                                                                                )
+                                                                                    : Row(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  children: [
+
+                                                                                    Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                      children: [
+                                                                                        baseText(color: AppColor.darkTextColor, title: "wrap", size: size.width * 0.04, fontWeight: FontWeight.normal,
+                                                                                        textAlign: TextAlign.start),
+                                                                                      ],
+                                                                                    ),
+                                                                                    SizedBox(
+                                                                                      height: size.height * 0.005,
+                                                                                      width: size.width*0.19,
+                                                                                    ),
+                                                                                    baseText(
+                                                                                      color: AppColor.darkTextColor,
                                                                                       title: " \$" + state.cartList[index].wrap.mainPrice,
                                                                                       size: size.width * 0.04,
+                                                                                        textAlign: TextAlign.end
                                                                                     ),
                                                                                   ],
                                                                                 ),
+
+
+
+
                                                                                 (state.cartList[index].totalPrice ==
                                                                                     null ||
                                                                                     state.cartList[index]
                                                                                         .totalPrice ==
                                                                                         0)?Container():
+
+
+
+
+                                                                                    SizedBox(height: size.height*0.01,),
                                                                                 Row(
                                                                                   crossAxisAlignment: CrossAxisAlignment.start
                                                                                   ,
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                                                   children: [
-                                                                                    baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                    baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.05, fontWeight: FontWeight.bold),
                                                                                     SizedBox(
                                                                                       height: size.height * 0.005,
+                                                                                      width: size.width*0.17,
                                                                                     ),
-                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 16.0),
+                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 18.0,fontWeight: FontWeight.bold),
                                                                                   ],
                                                                                 ),
+
+
 
 
 
@@ -262,14 +325,10 @@ class _CartScreenState extends State<CartScreen> {
                                                                             )),
                                                                       ),
 
-
-
-                                                                      ///delete and fav icons
-
-
                                                                     ],
                                                                   ),
                                                                 ),
+                                                                //button
                                                                 Row(
                                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                   children: [
@@ -291,9 +350,9 @@ class _CartScreenState extends State<CartScreen> {
                                                                             },
                                                                             child:
                                                                                 Container(
-                                                                              width: 24,
+                                                                              width: 30,
                                                                               height:
-                                                                                  24,
+                                                                                  30,
                                                                               decoration:
                                                                                   BoxDecoration(
                                                                                 boxShadow: [
@@ -346,9 +405,9 @@ class _CartScreenState extends State<CartScreen> {
                                                                             },
                                                                             child:
                                                                             Container(
-                                                                              width: 24,
+                                                                              width: 30,
                                                                               height:
-                                                                              24,
+                                                                              30,
                                                                               decoration:
                                                                               BoxDecoration(
                                                                                 boxShadow: [
@@ -392,8 +451,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => WrapScreen(id: state.cartList[index].wrap.id,cartItem: state.cartList[index],isFromCart: true,bloc: _bloc,)));
                                                                           },
                                                                           child: Container(
-                                                                                height: 26,
-                                                                                width: 26,
+                                                                                height: 30,
+                                                                                width: 30,
                                                                                 child: Container(
 // color: Colors.blueAccent,
                                                                                     child: Padding(
@@ -430,8 +489,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                                   .id));
                                                                           },
                                                                           child: Container(
-                                                                            height: 26,
-                                                                            width: 26,
+                                                                            height: 30,
+                                                                            width: 30,
                                                                             child: Container(
 // color: Colors.blueAccent,
                                                                                 child: Padding(
@@ -547,7 +606,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                     crossAxisAlignment:
                                                                                     CrossAxisAlignment.start,
                                                                                     mainAxisAlignment:
-                                                                                    MainAxisAlignment.spaceAround,
+                                                                                    MainAxisAlignment.start,
                                                                                     children: [
 
                                                                                       state.cartList[index].wrap == null
@@ -582,7 +641,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                         ,
                                                                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                         children: [
-                                                                                          baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.04, fontWeight: FontWeight.bold),
+                                                                                          baseText(color: AppColor.darkTextColor, title: AppLocalizations.of(context).translate("total"), size: size.width * 0.04, fontWeight: FontWeight.bold),
                                                                                           SizedBox(
                                                                                             height: size.height * 0.005,
                                                                                           ),
@@ -1098,8 +1157,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                 //     !editGlobalWrap
                                                                 state
                                                                     .isGlobalWrab)
-                                                            ? "Edit"
-                                                            : 'Add Wrap For All Gifts ',
+                                                            ? AppLocalizations.of(context).translate("edit")
+                                                            :AppLocalizations.of(context).translate("add_wrap_for_all"),
                                                         style: TextStyle(
                                                           color: AppColor
                                                               .textColor,
@@ -1341,9 +1400,9 @@ class _CartScreenState extends State<CartScreen> {
                                                                       .INFO,
                                                               animType: AnimType
                                                                   .BOTTOMSLIDE,
-                                                              title: 'Add Wrap',
+                                                              title:AppLocalizations.of(context).translate("add_wrap"),
                                                               desc:
-                                                                  'Please Choose Wrap First',
+                                                              AppLocalizations.of(context).translate("please_choose_wrap_first"),
                                                               btnCancelOnPress:
                                                                   () {},
                                                               btnOkOnPress: () {
@@ -1373,8 +1432,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                   //     !editGlobalWrap
                                                                   state
                                                                       .isGlobalWrab)
-                                                              ? "Edit"
-                                                              : 'Add Wrap For All Gifts ',
+                                                              ? AppLocalizations.of(context).translate("Edit")
+                                                              : AppLocalizations.of(context).translate("add_wrap_for_all"),
                                                           style: TextStyle(
                                                             color: AppColor
                                                                 .textColor,
@@ -1572,7 +1631,7 @@ class _CartScreenState extends State<CartScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       baseText(
-                                          title: "Add A Song Link:",
+                                          title:AppLocalizations.of(context).translate("add_song_link"),
                                           color: AppColor.lightTextColor,
                                           size: 17.0),
                                       Row(
@@ -1643,6 +1702,7 @@ class _CartScreenState extends State<CartScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
+                                      state.cart.songLink==null?
                                       Center(
                                         child: Container(
                                           // margin: EdgeInsets.only(bottom: 80),
@@ -1665,20 +1725,33 @@ class _CartScreenState extends State<CartScreen> {
                                           child: FlatButton(
                                             // splashColor: Colors.red,
                                             onPressed: () {
+
+                                              if( state.cart.songLink==null){
+
+                                                print("NNNNNNNNNNUUUUUUUUUUULLLLLLLLLLLL");
                                               if (songController.text.isEmpty) {
+
                                               }
 
                                               else if(!Uri.parse(songController.text).isAbsolute
                                               ){
 
-                                                error("you have to enter valid link");
+                                                error( AppLocalizations.of(context).translate("you_have_to_enter_valid_link"));
 
                                               }
 
                                               else {
+
+
                                                 _bloc.add(AddSong((b) => b
                                                   ..song =
                                                       songController.text));
+                                              }}
+                                              else {
+                                                print("NOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+                                                _bloc.add(AddSong((b) => b
+                                                  ..song =
+                                                      ""));
                                               }
                                             },
                                             child: Padding(
@@ -1686,7 +1759,9 @@ class _CartScreenState extends State<CartScreen> {
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 20.0),
                                               child: Text(
-                                                'Add The Song',
+
+                                                AppLocalizations.of(context).translate("add_song"),
+
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 13,
@@ -1696,7 +1771,7 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ):Container(),
                                       baseText(
                                           title:
                                               "\$${state.cart.songPriceBeforAdd ?? 0}",
@@ -1728,7 +1803,7 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         baseText(
-                                            title: "Product",
+                                            title: AppLocalizations.of(context).translate("product"),
                                             color: AppColor.darkTextColor,
                                             size: 16.0),
                                         baseText(
@@ -1752,7 +1827,7 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         baseText(
-                                            title: "Wrap",
+                                            title: AppLocalizations.of(context).translate("wrap"),
                                             color: AppColor.darkTextColor,
                                             size: 16.0),
                                         baseText(
@@ -1774,7 +1849,7 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         baseText(
-                                            title: "Global Wrap",
+                                            title: AppLocalizations.of(context).translate("global_wrap"),
                                             color: AppColor.darkTextColor,
                                             size: 16.0),
                                         baseText(
@@ -1800,7 +1875,7 @@ class _CartScreenState extends State<CartScreen> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             baseText(
-                                                title: "Song",
+                                                title:AppLocalizations.of(context).translate("song"),
                                                 color: AppColor.darkTextColor,
                                                 size: 16.0),
                                             baseText(
@@ -1827,7 +1902,7 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         baseText(
-                                            title: "Total",
+                                            title:AppLocalizations.of(context).translate("total"),
                                             color: AppColor.darkTextColor,
                                             size: 26.0),
                                         baseText(
@@ -1934,7 +2009,7 @@ class _CartScreenState extends State<CartScreen> {
       btnOkColor: AppColor.darkYellow,
       dialogType: DialogType.SUCCES,
       animType: AnimType.BOTTOMSLIDE,
-      title: 'Successfully Added To Cart',
+      title: AppLocalizations.of(context).translate("successfully_added_to_cart"),
       desc: '',
     )..show();
   }

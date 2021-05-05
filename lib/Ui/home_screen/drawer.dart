@@ -16,12 +16,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/Ui/categories_screen/categories_screen.dart';
+import 'package:cadeaue_boutique/Ui/coupons_details/coupons_detaisl.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
 import 'package:cadeaue_boutique/Ui/Dialog/WaitDilaog/WaitDialog.dart';
+import 'package:cadeaue_boutique/Ui/my_card_tabs/my_card_tabs.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cadeaue_boutique/model/category_model/category_model.dart';
 import '../../injectoin.dart';
 import 'package:built_collection/built_collection.dart';
+
 class MainDrawer extends StatefulWidget {
   bool isLogin;
 
@@ -258,6 +261,52 @@ class _MainDrawerState extends State<MainDrawer> {
                             //   ));
                             // },
                             child: singleDrawerItem("assets/images/drawer/settings.svg", AppLocalizations.of(context).translate("settings"))),
+                        SizedBox(
+                          height: 30,
+                        ),
+
+                        GestureDetector(
+
+
+                            onTap: (){
+
+                              if(state.loginState)
+
+
+                         /*     Navigator.push(context, MaterialPageRoute(
+                                  builder: (context)=>CouponsDetails()
+                              ));*/
+
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context)=>MyCardTabs()
+                              ));
+
+                              else{
+                                AwesomeDialog(
+                                  context: context,
+                                  customHeader: Container(
+                                    child: Icon(
+                                      Icons.error_outline,
+                                      size: 100,
+                                      color: AppColor.darkYellow,
+                                    ),
+                                  ),
+                                  btnOkColor: AppColor.darkYellow,
+                                  dialogType: DialogType.INFO,
+                                  animType: AnimType.BOTTOMSLIDE,
+                                  title: AppLocalizations.of(context).translate('login'),
+                                  desc: AppLocalizations.of(context).translate('you_must_logged_in'),
+                                  btnCancelOnPress: () { },
+                                  btnOkOnPress: () {
+                                    Navigator.of(context).pop();
+                                    WidgetsBinding.instance.addPostFrameCallback((_) =>
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(builder: (context) => SigninScreen())));
+                                  },
+                                )..show();
+                              }
+                            },
+                            child: singleDrawerItem("assets/images/gift_card.svg", AppLocalizations.of(context).translate("my_card"))),
                         SizedBox(
                           height: 30,
                         ),

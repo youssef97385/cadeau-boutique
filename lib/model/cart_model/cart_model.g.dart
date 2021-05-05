@@ -43,7 +43,8 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
     if (value != null) {
       result
         ..add('song_price')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.totalPrice;
     if (value != null) {
@@ -138,7 +139,7 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
           break;
         case 'song_price':
           result.songPrice = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'total_price':
           result.totalPrice = serializers.deserialize(value,
@@ -197,7 +198,7 @@ class _$CartModel extends CartModel {
   @override
   final String songPriceBeforAdd;
   @override
-  final int songPrice;
+  final String songPrice;
   @override
   final int totalPrice;
   @override
@@ -333,9 +334,9 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
   set songPriceBeforAdd(String songPriceBeforAdd) =>
       _$this._songPriceBeforAdd = songPriceBeforAdd;
 
-  int _songPrice;
-  int get songPrice => _$this._songPrice;
-  set songPrice(int songPrice) => _$this._songPrice = songPrice;
+  String _songPrice;
+  String get songPrice => _$this._songPrice;
+  set songPrice(String songPrice) => _$this._songPrice = songPrice;
 
   int _totalPrice;
   int get totalPrice => _$this._totalPrice;

@@ -50,6 +50,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ..error = ""
           ..success = false);
 
+
+
         final data = await _iRepository.addSong(song: event.song);
 
         print('add song Success data ${data}');

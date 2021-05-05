@@ -748,10 +748,26 @@ class HttpHelper implements IHttpHelper {
   @override
   Future<CartModel> addSong({String song, String token}) async {
     try {
-      final formData = {
+      Map formData={
+        "song_price":100,
+
+      };
+   /*   if(song==null)
+        final formData = {
+          "song_link": song,
+          "song_price":100
+        };
+      else*/
+      if(song!=null && !song.isEmpty){
+
+      }else{
+        formData['song_link']="";
+      }
+
+    /*  final formData = {
         "song_link": song,
         "song_price":100
-      };
+      };*/
 
       _dio.interceptors.add(CookieManager(cookieJar));
 

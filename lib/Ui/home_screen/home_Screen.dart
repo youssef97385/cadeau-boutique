@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/Ui/coupons_details/coupons_detaisl.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
@@ -167,6 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
+
                       baseAppBar(size, context, openDrawer,true),
                       Center(
                         child: Directionality(
@@ -174,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              SizedBox(height: 16),
+                              SizedBox(height: 0),
                               state.sliders.isEmpty
                                   ? Container(
                                       height: 210,
@@ -1996,16 +1998,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "Coupons",
+                                          AppLocalizations.of(context).translate("coupons"),
                                             style: TextStyle(
                                                 fontSize: 22,
                                                 color: Color(0xff393741)),
                                           ),
-                                          Text(
-                                             AppLocalizations.of(context).translate("more"),
-                                            style: TextStyle(
-                                                color: AppColor.darkYellow,
-                                                fontSize: 18),
+                                          GestureDetector(
+                                          onTap:(){
+                                            Navigator.push(context, MaterialPageRoute(
+                                                builder: (context)=>CouponsDetails()
+                                            ));
+                                          },
+                                            child: Text(
+                                               AppLocalizations.of(context).translate("more"),
+                                              style: TextStyle(
+                                                  color: AppColor.darkYellow,
+                                                  fontSize: 18),
+                                            ),
                                           )
                                         ],
                                       ),

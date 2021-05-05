@@ -89,7 +89,36 @@
   "something_wrong": "حدث خطأ حاول لاحقا",
   "error_code":"كود غير صحيح",
   "searchText":"بحث",
-  "select_code": "اختر كود الدولة"
+  "select_code": "اختر كود الدولة",
+  "add_song_link": "اضافة رابط للأغنية",
+  "remove_song": "حذف اغنية",
+  "add_song": "اضافة اغنية",
+  "you_have_to_enter_valid_link": "يجب عليك ان تدخل رابط صحيح",
+  "total":"الكلي",
+  "edit": "تعديل",
+  "add_wrap_for_all":"اضافة تغليف للكل",
+  "add_wrap":"اضف تغليف",
+  "please_choose_wrap_first":"الرجاء اختيار تغليف اولا",
+  "product":"المنتج",
+  "wrap":"تغليف",
+  "global_wrap":"تغليف عام",
+  "song":"اغنية",
+  "successfully_added_to_cart":"تم اضافة الى السلة بنجاح",
+  "home": "الرئيسية",
+  "my_card":"بطاقاتي",
+  "sent": "المرسلة",
+  "received": "المستلمة",
+  "press_to_scan": "اضغط للمسح",
+  "card_number": "رقم البطاقة",
+  "date": "التاريخ",
+  "details": "التفاصيل",
+  "status": "الحالة",
+  "from_txt": "من قبل",
+  "to_txt": "الى",
+  "coupons": "الكوبونات"
+
+
+
 
 
 

@@ -1,5 +1,7 @@
 
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+import 'package:cadeaue_boutique/Ui/home/page/home.dart';
+import 'package:cadeaue_boutique/Ui/home_screen/home_Screen.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_bloc.dart';
 import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_event.dart';
 import 'package:cadeaue_boutique/app/bloc/app_bloc.dart';
@@ -78,7 +80,8 @@ class _AppState extends State<App> {
                     fontFamily: 'FontsFree-Net-SFProDisplay'),
 
                   routes: <String,WidgetBuilder>{
-                    '/signin_screen': (BuildContext context) => new SigninScreen()
+                    '/signin_screen': (BuildContext context) => new SigninScreen(),
+                    '/home_screen': (BuildContext context) => new Home()
 
                   },
                // home:  SplashScreen(false),

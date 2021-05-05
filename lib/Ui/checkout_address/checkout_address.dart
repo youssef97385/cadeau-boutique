@@ -517,7 +517,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                   Container(
                     // margin: EdgeInsets.only(bottom: 80),
                     height: size.height * 0.07,
-                    width: size.width * .85,
+                    width: size.width * .4,
                     decoration: BoxDecoration(
                       color: Color(0xffB1B1B1),
                       boxShadow: [
@@ -631,7 +631,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                             // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
                           },
                           child: Text(
-                            AppLocalizations.of(context).translate('save'),
+                            "Send",
                             style: TextStyle(
                               color: AppColor.textColor,
                               fontSize: 13,

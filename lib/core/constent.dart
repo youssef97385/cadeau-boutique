@@ -55,6 +55,9 @@ class AppColor {
   static const lightGreenColor = Color(0xee3ECE7E);
 
   static const greyContainerColor = Color(0xFFF0F0F3);
+  static const selectedCardColor = Color(0xFFE3E3E3);
+  static const gradiant1Color = Color(0xFFE9E9E9);
+  static const gradiant2Color = Color(0xFFEAEAEA);
 }
 
 class ErrorCode {
