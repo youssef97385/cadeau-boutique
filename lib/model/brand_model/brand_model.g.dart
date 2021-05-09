@@ -20,19 +20,35 @@ class _$BrandModelSerializer implements StructuredSerializer<BrandModel> {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
-      'number',
-      serializers.serialize(object.number, specifiedType: const FullType(int)),
-      'media_path',
-      serializers.serialize(object.image,
-          specifiedType: const FullType(String)),
-      'name_ar',
-      serializers.serialize(object.arName,
-          specifiedType: const FullType(String)),
-      'name_en',
-      serializers.serialize(object.enName,
-          specifiedType: const FullType(String)),
     ];
-
+    Object value;
+    value = object.number;
+    if (value != null) {
+      result
+        ..add('number')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.image;
+    if (value != null) {
+      result
+        ..add('media_path')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.arName;
+    if (value != null) {
+      result
+        ..add('name_ar')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.enName;
+    if (value != null) {
+      result
+        ..add('name_en')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -92,10 +108,6 @@ class _$BrandModel extends BrandModel {
   _$BrandModel._({this.id, this.number, this.image, this.arName, this.enName})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'BrandModel', 'id');
-    BuiltValueNullFieldError.checkNotNull(number, 'BrandModel', 'number');
-    BuiltValueNullFieldError.checkNotNull(image, 'BrandModel', 'image');
-    BuiltValueNullFieldError.checkNotNull(arName, 'BrandModel', 'arName');
-    BuiltValueNullFieldError.checkNotNull(enName, 'BrandModel', 'enName');
   }
 
   @override
@@ -190,14 +202,10 @@ class BrandModelBuilder implements Builder<BrandModel, BrandModelBuilder> {
     final _$result = _$v ??
         new _$BrandModel._(
             id: BuiltValueNullFieldError.checkNotNull(id, 'BrandModel', 'id'),
-            number: BuiltValueNullFieldError.checkNotNull(
-                number, 'BrandModel', 'number'),
-            image: BuiltValueNullFieldError.checkNotNull(
-                image, 'BrandModel', 'image'),
-            arName: BuiltValueNullFieldError.checkNotNull(
-                arName, 'BrandModel', 'arName'),
-            enName: BuiltValueNullFieldError.checkNotNull(
-                enName, 'BrandModel', 'enName'));
+            number: number,
+            image: image,
+            arName: arName,
+            enName: enName);
     replace(_$result);
     return _$result;
   }

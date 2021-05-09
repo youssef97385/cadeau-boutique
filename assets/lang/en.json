@@ -115,7 +115,9 @@
   "status": "Status",
   "from_txt": "From",
   "to_txt": "To",
-  "coupons": "Coupons"
+  "coupons": "Coupons",
+  "card_name": "Card Name",
+  "brand": "Brand"
 
 
 

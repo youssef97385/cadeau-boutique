@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:built_collection/built_collection.dart';
+import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
@@ -22,6 +23,7 @@ import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/track_home_model/TrackHomeModel.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
+import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 
@@ -183,4 +185,6 @@ Future<bool>checkoutPhoneNumber({String countryCode,String phone});
 
 Future<SmsResponse>sendSms({String countryCode,String phone});
 
+
+Future<BuiltList<CouponListModel>> getCouponsList();
 }

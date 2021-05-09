@@ -16,7 +16,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/Ui/categories_screen/categories_screen.dart';
-import 'package:cadeaue_boutique/Ui/coupons_details/coupons_detaisl.dart';
+import 'package:cadeaue_boutique/Ui/coupons_list_details/coupons_list_details.dart';
 import 'package:cadeaue_boutique/Ui/wishlist_screen/wishlist_screen.dart';
 import 'package:cadeaue_boutique/Ui/Dialog/WaitDilaog/WaitDialog.dart';
 import 'package:cadeaue_boutique/Ui/my_card_tabs/my_card_tabs.dart';

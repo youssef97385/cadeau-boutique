@@ -9,6 +9,7 @@ import 'package:cadeaue_boutique/data/prefs_helper/iprefs_helper.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
 import 'package:cadeaue_boutique/model/category_model/base_category.dart';
+import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
@@ -569,6 +570,13 @@ class Repository implements IRepository {
   Future<SmsResponse>sendSms({String countryCode, String phone}) async{
     var item=await _ihttpHelper.sendSms(
         countryCode: countryCode,phone: phone);
+    return item;
+  }
+
+  @override
+  Future<BuiltList<CouponListModel>> getCouponsList() async {
+
+    var item=await _ihttpHelper.getCouponsList();
     return item;
   }
 }

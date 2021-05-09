@@ -1,4 +1,4 @@
-import 'package:cadeaue_boutique/Ui/coupons_details/coupons_detaisl.dart';
+import 'package:cadeaue_boutique/Ui/coupons_list_details/coupons_list_details.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
@@ -2006,7 +2006,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           GestureDetector(
                                           onTap:(){
                                             Navigator.push(context, MaterialPageRoute(
-                                                builder: (context)=>CouponsDetails()
+                                                builder: (context)=>CouponsListDetails()
                                             ));
                                           },
                                             child: Text(

@@ -14,15 +14,19 @@ abstract class BrandModel implements Built<BrandModel, BrandModelBuilder> {
 
   int get id;
 
+  @nullable
   int get number;
 
   @BuiltValueField(wireName: "media_path")
+  @nullable
   String get image;
 
   @BuiltValueField(wireName: "name_ar")
+  @nullable
   String get arName;
 
   @BuiltValueField(wireName: "name_en")
+  @nullable
   String get enName;
 
 

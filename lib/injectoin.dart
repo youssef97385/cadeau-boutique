@@ -1,4 +1,5 @@
 import 'package:cadeaue_boutique/Ui/all_products_screen/bloc/products_bloc.dart';
+import 'package:cadeaue_boutique/Ui/coupons_list_details/coupons_list_details.dart';
 import 'package:cadeaue_boutique/Ui/filter_result/bloc/search_bloc.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_bloc.dart';
 import 'package:cadeaue_boutique/Ui/profile_addresses/bloc/profile_address_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import 'Ui/checkout_address/bloc/checkout_bloc.dart';
+import 'Ui/coupons_list_details/bloc/coupons_list_details_bloc.dart';
 import 'app/bloc/app_bloc.dart';
 import 'core/constent.dart';
 import 'data/http_helper/Ihttp_helper.dart';
@@ -118,4 +120,8 @@ Future iniGetIt() async {
 
   ///  EditBloc
   sl.registerFactory(() => EditBloc(sl()));
+
+
+  ///  CouponsListDetails
+  sl.registerFactory(() => CouponsListDetaislBloc(sl()));
 }

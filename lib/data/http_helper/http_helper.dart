@@ -6,6 +6,7 @@ import 'package:built_value/serializer.dart';
 import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/checkout_body/check_body.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
@@ -1398,7 +1399,7 @@ class HttpHelper implements IHttpHelper {
               ],
             ));
 
-        print("all product list status : ${baseResponse}");
+        print(" status : ${baseResponse}");
         if (baseResponse != null) {
           return baseResponse.data;
         } else {
@@ -1469,4 +1470,45 @@ class HttpHelper implements IHttpHelper {
     }
   }
 
-}
+  @override
+  Future<BuiltList<CouponListModel>> getCouponsList() async {
+      try {
+        _dio.interceptors.add(CookieManager(cookieJar));
+        String myType;
+
+        final response = await _dio.get('cadue/cards/all2');
+        print('all products Response StatusCode ${response.statusCode}');
+
+        if (response.statusCode == 200) {
+          final BaseResponse<BuiltList<CouponListModel>> baseResponse =
+          serializers.deserialize(json.decode(response.data),
+              specifiedType: FullType(
+                BaseResponse,
+                [
+                  FullType(
+                    BuiltList,
+                    [
+                      const FullType(CouponListModel),
+                    ],
+                  ),
+                ],
+              ));
+
+          print(" status : ${baseResponse}");
+          if (baseResponse != null) {
+            return baseResponse.data;
+          } else {
+            throw NetworkException();
+          }
+        } else {
+          throw NetworkException();
+        }
+      } catch (e) {
+        print(e.toString());
+        throw NetworkException();
+      }
+    }
+
+  }
+
+

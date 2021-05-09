@@ -1,4 +1,5 @@
 
+import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
@@ -175,6 +176,8 @@ abstract class IRepository {
   Future<bool>checkoutPhoneNumber({String countryCode,String phone});
 
   Future<SmsResponse>sendSms({String countryCode,String phone});
+
+  Future<BuiltList<CouponListModel>> getCouponsList();
 }
 
 ///
