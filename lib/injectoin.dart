@@ -8,7 +8,9 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import 'Ui/checkout_address/bloc/checkout_bloc.dart';
+import 'Ui/checkout_coupons/bloc/checkout_coupons_bloc.dart';
 import 'Ui/coupons_list_details/bloc/coupons_list_details_bloc.dart';
+import 'Ui/my_card_tabs/bloc/tabs_card_bloc.dart';
 import 'app/bloc/app_bloc.dart';
 import 'core/constent.dart';
 import 'data/http_helper/Ihttp_helper.dart';
@@ -124,4 +126,11 @@ Future iniGetIt() async {
 
   ///  CouponsListDetails
   sl.registerFactory(() => CouponsListDetaislBloc(sl()));
+
+
+
+  sl.registerFactory(() => CheckoutCouponsBloc());
+
+  //tabs cards
+  sl.registerFactory(() => TabsCardBloc(sl()));
 }

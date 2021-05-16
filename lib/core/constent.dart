@@ -101,3 +101,5 @@ const String LOGIN_TYPE_NORMAL="normal";
 const String PASSWORD="password";
 
 const String TOP_SELLER="top_seller";
+const String SENT="sent";
+const String RECEVIED="recevied";

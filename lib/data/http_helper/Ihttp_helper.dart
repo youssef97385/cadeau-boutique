@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:built_collection/built_collection.dart';
 import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
+import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
@@ -26,6 +27,7 @@ import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
+import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
 
 
 
@@ -187,4 +189,19 @@ Future<SmsResponse>sendSms({String countryCode,String phone});
 
 
 Future<BuiltList<CouponListModel>> getCouponsList();
+
+Future<bool> checkoutMultieGiftCoupons({
+
+  BuiltList<ReciverCouponsModel> recieverModel ,
+  String token,
+  BuiltList<String> giftTo ,
+  BuiltList<String> countryCode ,
+  BuiltList<String> phone,
+  int brandId,
+  int itemId
+});
+
+
+
+Future<MyCardModel> getMyCard({String token});
 }

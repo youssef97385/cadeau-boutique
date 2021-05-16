@@ -270,16 +270,15 @@ class _MainDrawerState extends State<MainDrawer> {
 
                             onTap: (){
 
-                              if(state.loginState)
-
-
-                         /*     Navigator.push(context, MaterialPageRoute(
-                                  builder: (context)=>CouponsDetails()
-                              ));*/
-
+                              if(state.loginState){
+                                var sent=AppLocalizations.of(context).translate("sent");
+                                var recived=AppLocalizations.of(context).translate("received");
                               Navigator.push(context, MaterialPageRoute(
-                                builder: (context)=>MyCardTabs()
+                                builder: (context)=>MyCardTabs(txtSent: sent,
+                                txtRevevied: recived,)
                               ));
+
+                              }
 
                               else{
                                 AwesomeDialog(

@@ -30,7 +30,46 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
 
         );
 
-        final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: "100",phone: event.phoneNumber,countryCode: event.countryCode,deliveryDate: event.deliveryDate,giftTo: event.giftTo , address: event.address);
+        final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: event.total,phone: event.phoneNumber,countryCode: event.countryCode,deliveryDate: event.deliveryDate,giftTo: event.giftTo , address: event.address);
+
+        print('check Success data ${data}');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = ""
+          ..success = true
+
+        );
+
+      } catch (e) {
+        print('check Error $e');
+        yield state.rebuild((b) => b
+          ..isLoading = false
+          ..error = "Something went wrong"
+          ..success = false
+
+        );
+
+      }
+    }
+
+    if(event is TryCheckOutCoupons){
+      try {
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+
+        );
+
+
+        print("the brand idbloc = ${event.bradnId}");
+        print("the  idbloc = ${event.itemId}");
+
+        final data = await _iRepository.checkoutMultieGiftCoupons(
+            recieverModel: event.recievers
+            ,phone: event.phoneNumber,countryCode: event.countryCode,
+            giftTo: event.giftTo ,brandId: event.bradnId,
+        itemId: event.itemId);
 
         print('check Success data ${data}');
         yield state.rebuild((b) => b

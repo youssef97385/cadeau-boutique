@@ -5,7 +5,8 @@ import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
-import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
+import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
+
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/utils/utils.dart';
 
@@ -13,19 +14,19 @@ import 'package:flutter/material.dart';
 
 import '../MyCountryPicker.dart';
 
-class EditRecieverDialog extends StatefulWidget {
+class EditRecieverCouponsDialog extends StatefulWidget {
 
-  RecieverModel recieverModel ;
+  ReciverCouponsModel recieverModel ;
   int index;
   final Function recieverCallBack;
 
-  EditRecieverDialog({this.recieverModel,this.index,this.recieverCallBack});
+  EditRecieverCouponsDialog({this.recieverModel,this.index,this.recieverCallBack});
 
   @override
-  _EditRecieverDialogState createState() => _EditRecieverDialogState();
+  _EditRecieverCouponsDialogState createState() => _EditRecieverCouponsDialogState();
 }
 
-class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTickerProviderStateMixin {
+class _EditRecieverCouponsDialogState extends State<EditRecieverCouponsDialog>   with SingleTickerProviderStateMixin {
 
 
   int selectedWrap = -1;
@@ -37,7 +38,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
 
 
   DateTime selectedDate =DateTime.now();
-  String giftTo , deliveryAddress , state , zipCode , city ;
+  String giftTo , state , zipCode , city ;
 
   bool _dateSelected = false;
 
@@ -52,7 +53,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
 
   var _giftToController = TextEditingController();
   var _phoneController = TextEditingController();
-  var _addressController = TextEditingController();
+
 
 
   void _onCountryChange(String countryCode) {
@@ -141,7 +142,6 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
 
     _giftToController.text = widget.recieverModel.giftTo;
     _phoneController.text = widget.recieverModel.phoneNumber;
-     _addressController.text = widget.recieverModel.address;
     selectedCountry=initCountry(widget.recieverModel.countryCode);
   }
 
@@ -324,98 +324,8 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: size.height * 0.04,
-                      ),
 
-                      ///dateOfBirth
-                      Container(
-                        height: size.height * 0.07,
-                        width:
-                        MediaQuery.of(context).size.width * .85,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.6),
-                                blurRadius: 5,
-                                spreadRadius: 3,
-                              ),
-                            ]),
-                        child: Center(
-                          child:  GestureDetector(
-                            onTap: () {
-                              _selectDate(context);
-                            },
-                            child: Container(
-                              width: size.width*0.85,
-                              height: size.height*0.07,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding:  EdgeInsets.only(left:16.0 ,top: size.height*0.02),
-                                child: Text(
-                                  _dateSelected? selectedDate.toString().substring(0, 10):AppLocalizations.of(context).translate("Delivery_Date")
-                                  ,style: TextStyle(color: AppColor.textColor ,fontSize: 14),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height*0.04,
-                      ),
-                      ///deliveryAddress
-                      Container(
-                        height: size.height * 0.07,
-                        width:
-                        MediaQuery.of(context).size.width * .85,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.6),
-                                blurRadius: 1,
-                                spreadRadius: 2,
-                              ),
-                            ]),
-                        child: Center(
-                          child: TextFormField(
-                            controller: _addressController,
 
-                            validator: emptyFieldVAlidator(deliveryAddress,context),
-                            keyboardType: TextInputType.name,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              hintText: AppLocalizations.of(context).translate("delevery_address") ,
-                              contentPadding:
-                              EdgeInsets.only(left:16 , top:size.height*0.02 , ),
-                              suffixIcon: false
-                                  ? Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.red,
-                              )
-                                  : Container(
-                                width: 10,
-                              ),
-                            ),
-                            onChanged: (val) {
-                              setState(() => deliveryAddress = val);
-                            },
-                            onSaved: (value) => deliveryAddress = value,
-                          ),
-                        ),
-                      ),
 
                       SizedBox(
                         height: size.height * 0.04,
@@ -446,13 +356,14 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                           // splashColor: Colors.red,
                           onPressed: () {
                             setState(() {
-                              widget.recieverCallBack(widget.index , RecieverModel(
+                              widget.recieverCallBack(widget.index , ReciverCouponsModel(
                                   (b)=>b..giftTo = _giftToController.text
-                                      ..address = _addressController.text
                                       ..phoneNumber = _phoneController.text
                                       ..countryCode = countryCode
-                                      ..deliveryDate = _dateSelected.toString()
-                              ),"delete");
+                              ),_giftToController.text ,
+                                  _phoneController.text,
+                                  countryCode,
+                                  "delete");
                             });
                             Navigator.pop(context);
                           },
@@ -491,13 +402,19 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                           // splashColor: Colors.red,
                           onPressed: () {
                             setState(() {
-                              widget.recieverCallBack(widget.index , RecieverModel(
+                              widget.recieverCallBack(widget.index , ReciverCouponsModel(
                                       (b)=>b..giftTo = _giftToController.text
-                                    ..address = _addressController.text
                                     ..phoneNumber = _phoneController.text
                                     ..countryCode = countryCode
-                                    ..deliveryDate = _dateSelected.toString()
-                              ).toBuilder(),"update");
+
+                              ).toBuilder(),
+                                  _giftToController.text,
+                                  _phoneController.text,
+                                  countryCode,
+
+
+
+                                  "update");
                             });
                             Navigator.pop(context);
 

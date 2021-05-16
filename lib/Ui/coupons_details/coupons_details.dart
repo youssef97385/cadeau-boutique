@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/Ui/checkout_coupons/checkout_coupons.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -192,13 +193,23 @@ class _CouponsDetailsState extends State<CouponsDetails> {
                     onPressed: () async {
 
 
+                      print("the brand id= ${widget.item.brandId}");
+                      print("the  id= ${widget.item.id}");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CheckoutCoupons(
+                                   itemId: widget.item.id,
+                                    brandId: widget.item.brandId,
+                                  )));
 
                      // await openDetails(context);
 
 
                     },
                     child: Text(
-                      AppLocalizations.of(context).translate('press_to_scan'),
+                      AppLocalizations.of(context).translate('check_out'),
                       style: TextStyle(
                         color: AppColor.textColor,
                         fontSize: 13,

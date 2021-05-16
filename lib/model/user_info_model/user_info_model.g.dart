@@ -75,6 +75,12 @@ class _$UserInfoModelSerializer implements StructuredSerializer<UserInfoModel> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.brandID;
+    if (value != null) {
+      result
+        ..add('brand_id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -122,6 +128,10 @@ class _$UserInfoModelSerializer implements StructuredSerializer<UserInfoModel> {
           result.dateBirth = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'brand_id':
+          result.brandID = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -146,6 +156,8 @@ class _$UserInfoModel extends UserInfoModel {
   final int phoneNumber;
   @override
   final String dateBirth;
+  @override
+  final int brandID;
 
   factory _$UserInfoModel([void Function(UserInfoModelBuilder) updates]) =>
       (new UserInfoModelBuilder()..update(updates)).build();
@@ -158,7 +170,8 @@ class _$UserInfoModel extends UserInfoModel {
       this.countryCode,
       this.accountStatus,
       this.phoneNumber,
-      this.dateBirth})
+      this.dateBirth,
+      this.brandID})
       : super._();
 
   @override
@@ -179,7 +192,8 @@ class _$UserInfoModel extends UserInfoModel {
         countryCode == other.countryCode &&
         accountStatus == other.accountStatus &&
         phoneNumber == other.phoneNumber &&
-        dateBirth == other.dateBirth;
+        dateBirth == other.dateBirth &&
+        brandID == other.brandID;
   }
 
   @override
@@ -189,13 +203,15 @@ class _$UserInfoModel extends UserInfoModel {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, name.hashCode), email.hashCode),
-                            userType.hashCode),
-                        gender.hashCode),
-                    countryCode.hashCode),
-                accountStatus.hashCode),
-            phoneNumber.hashCode),
-        dateBirth.hashCode));
+                        $jc(
+                            $jc($jc($jc(0, name.hashCode), email.hashCode),
+                                userType.hashCode),
+                            gender.hashCode),
+                        countryCode.hashCode),
+                    accountStatus.hashCode),
+                phoneNumber.hashCode),
+            dateBirth.hashCode),
+        brandID.hashCode));
   }
 
   @override
@@ -208,7 +224,8 @@ class _$UserInfoModel extends UserInfoModel {
           ..add('countryCode', countryCode)
           ..add('accountStatus', accountStatus)
           ..add('phoneNumber', phoneNumber)
-          ..add('dateBirth', dateBirth))
+          ..add('dateBirth', dateBirth)
+          ..add('brandID', brandID))
         .toString();
   }
 }
@@ -250,6 +267,10 @@ class UserInfoModelBuilder
   String get dateBirth => _$this._dateBirth;
   set dateBirth(String dateBirth) => _$this._dateBirth = dateBirth;
 
+  int _brandID;
+  int get brandID => _$this._brandID;
+  set brandID(int brandID) => _$this._brandID = brandID;
+
   UserInfoModelBuilder();
 
   UserInfoModelBuilder get _$this {
@@ -263,6 +284,7 @@ class UserInfoModelBuilder
       _accountStatus = $v.accountStatus;
       _phoneNumber = $v.phoneNumber;
       _dateBirth = $v.dateBirth;
+      _brandID = $v.brandID;
       _$v = null;
     }
     return this;
@@ -290,7 +312,8 @@ class UserInfoModelBuilder
             countryCode: countryCode,
             accountStatus: accountStatus,
             phoneNumber: phoneNumber,
-            dateBirth: dateBirth);
+            dateBirth: dateBirth,
+            brandID: brandID);
     replace(_$result);
     return _$result;
   }

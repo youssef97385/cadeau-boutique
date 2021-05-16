@@ -12,10 +12,12 @@ import 'package:cadeaue_boutique/model/category_model/base_category.dart';
 import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
+import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
+import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
 import 'package:cadeaue_boutique/model/slider_model/slider_model.dart';
@@ -578,5 +580,23 @@ class Repository implements IRepository {
 
     var item=await _ihttpHelper.getCouponsList();
     return item;
+  }
+
+  @override
+  Future<bool> checkoutMultieGiftCoupons({BuiltList<ReciverCouponsModel> recieverModel, BuiltList<String> giftTo, BuiltList<String> countryCode, BuiltList<String> phone, int brandId, int itemId})
+  async{
+    final token = await _iprefHelper.getToken();
+    final succsess = await _ihttpHelper.checkoutMultieGiftCoupons(token: token , recieverModel: recieverModel  , giftTo: giftTo  ,countryCode: countryCode,phone: phone,itemId: itemId,brandId: brandId );
+    return succsess;
+  }
+
+  @override
+  Future<MyCardModel> getMyCard({String token})async {
+    final token = await _iprefHelper.getToken();
+
+    print("my token=$token");
+    final item = await _ihttpHelper.getMyCard(token: token);
+    return item;
+
   }
 }

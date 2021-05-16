@@ -41,6 +41,10 @@ import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 import 'package:cadeaue_boutique/model/gift_size/gift_size.dart';
 import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
+import 'package:cadeaue_boutique/model/checkout_coupons/checkout_coupons_model.dart';
+import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
+import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
+import 'package:cadeaue_boutique/model/sent_cards_model/sent_cards_model.dart';
 
 
 
@@ -75,7 +79,11 @@ part 'serializer.g.dart';
   MainGift,
   SmsResponse,
   GiftSize,
-  CouponListModel
+  CouponListModel,
+  CheckoutCoupnsModel,
+  ReciverCouponsModel,
+  MyCardModel,
+  SentCardModel
 
 
 
@@ -435,4 +443,13 @@ final Serializers serializers =
       )),
           () => ListBuilder<CouponListModel>())
 
+
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          const FullType(MyCardModel),
+        ],
+      )),
+          () => BaseResponseBuilder<MyCardModel>())
 ).build();

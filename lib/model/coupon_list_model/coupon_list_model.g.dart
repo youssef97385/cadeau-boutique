@@ -19,7 +19,10 @@ class _$CouponListModelSerializer
   @override
   Iterable<Object> serialize(Serializers serializers, CouponListModel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
+    final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+    ];
     Object value;
     value = object.image;
     if (value != null) {
@@ -104,6 +107,10 @@ class _$CouponListModelSerializer
       iterator.moveNext();
       final Object value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'media_path':
           result.image = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -153,6 +160,8 @@ class _$CouponListModelSerializer
 
 class _$CouponListModel extends CouponListModel {
   @override
+  final int id;
+  @override
   final String image;
   @override
   final String arName;
@@ -177,7 +186,8 @@ class _$CouponListModel extends CouponListModel {
       (new CouponListModelBuilder()..update(updates)).build();
 
   _$CouponListModel._(
-      {this.image,
+      {this.id,
+      this.image,
       this.arName,
       this.enName,
       this.brandId,
@@ -187,7 +197,9 @@ class _$CouponListModel extends CouponListModel {
       this.descrptionAr,
       this.descrptionEn,
       this.expireDate})
-      : super._();
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(id, 'CouponListModel', 'id');
+  }
 
   @override
   CouponListModel rebuild(void Function(CouponListModelBuilder) updates) =>
@@ -201,6 +213,7 @@ class _$CouponListModel extends CouponListModel {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is CouponListModel &&
+        id == other.id &&
         image == other.image &&
         arName == other.arName &&
         enName == other.enName &&
@@ -223,7 +236,9 @@ class _$CouponListModel extends CouponListModel {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, image.hashCode),
+                                    $jc(
+                                        $jc($jc(0, id.hashCode),
+                                            image.hashCode),
                                         arName.hashCode),
                                     enName.hashCode),
                                 brandId.hashCode),
@@ -238,6 +253,7 @@ class _$CouponListModel extends CouponListModel {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('CouponListModel')
+          ..add('id', id)
           ..add('image', image)
           ..add('arName', arName)
           ..add('enName', enName)
@@ -255,6 +271,10 @@ class _$CouponListModel extends CouponListModel {
 class CouponListModelBuilder
     implements Builder<CouponListModel, CouponListModelBuilder> {
   _$CouponListModel _$v;
+
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   String _image;
   String get image => _$this._image;
@@ -301,6 +321,7 @@ class CouponListModelBuilder
   CouponListModelBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _id = $v.id;
       _image = $v.image;
       _arName = $v.arName;
       _enName = $v.enName;
@@ -333,6 +354,8 @@ class CouponListModelBuilder
     try {
       _$result = _$v ??
           new _$CouponListModel._(
+              id: BuiltValueNullFieldError.checkNotNull(
+                  id, 'CouponListModel', 'id'),
               image: image,
               arName: arName,
               enName: enName,

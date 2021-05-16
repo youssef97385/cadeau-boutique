@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
+import 'package:cadeaue_boutique/Ui/checkout_coupons/edit_reciever_coupons_dialog.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/utils/utils.dart';
@@ -14,6 +15,7 @@ import 'package:cadeaue_boutique/Ui/checkout_payment/checkout_payment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/Ui/checkout_address/checkout_address.dart';
+import 'package:cadeaue_boutique/Ui/checkout_coupons_susccess/checkout_coupons_success.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
@@ -21,23 +23,25 @@ import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../injectoin.dart';
 import '../MyCountryPicker.dart';
-import 'bloc/checkout_state.dart';
-import 'bloc/checkout_bloc.dart';
-import 'bloc/checkout_event.dart';
+import 'bloc/checkout_coupons_state.dart';
+import 'bloc/checkout_coupons_bloc.dart';
+import 'bloc/checkout_coupons_event.dart';
 import 'package:cadeaue_boutique/Ui/checkout_address/edit_reciever_dialog.dart';
 
-class CheckoutAddress extends StatefulWidget {
-  final int ticks;
-  String total;
+class CheckoutCoupons extends StatefulWidget {
 
-  CheckoutAddress({@required this.ticks, this.total});
+  int brandId;
+  int itemId;
+
+
+  CheckoutCoupons({this.brandId,this.itemId});
 
   @override
-  _CheckoutAddressState createState() => _CheckoutAddressState();
+  _CheckoutCouponsState createState() => _CheckoutCouponsState();
 }
 
-class _CheckoutAddressState extends State<CheckoutAddress> {
-  String giftTo, deliveryAddress, state, zipCode, city;
+class _CheckoutCouponsState extends State<CheckoutCoupons> {
+  String giftTo, state, zipCode, city;
 
   DateTime selectedDate =DateTime.now();
   bool _dateSelected = false;
@@ -45,11 +49,10 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
   String countryCode = '966',
       phone;
 
-  final _bloc = sl<CheckoutBloc>();
+  final _bloc = sl<CheckoutCouponsBloc>();
 
   var _giftToController = TextEditingController();
   var _phoneController = TextEditingController();
-  var _addressController = TextEditingController();
 
   void _onCountryChange(String countryCode) {
     //TODO : manipulate the selected country code here
@@ -133,7 +136,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
         .size;
     return BlocBuilder(
         cubit: _bloc,
-        builder: (BuildContext context, CheckoutState state) {
+        builder: (BuildContext context, CheckoutCouponsState state) {
           return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
@@ -189,25 +192,31 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                                       showDialog(
                                         context: context,
                                         builder: (_) =>
-                                            EditRecieverDialog(
+                                            EditRecieverCouponsDialog(
                                                 recieverModel: state
                                                     .recievers[index],
                                                 index: index,
                                                 recieverCallBack: (index,
-                                                     reciever,
-                                                     type) {
+                                                    reciever,
+                                                    giftToDialog,
+                                                    phoneNumberDialog,
+                                                    countryCodeDilaog,
+                                                    type) {
                                                   if (type == "delete") {
                                                     _bloc.add(DeleteReciever(
                                                             (b) =>
                                                         b
                                                           ..index = index
-                                                          ));
+                                                    ));
                                                   } else {
                                                     _bloc.add(
                                                         EditReciever((b) =>
                                                         b
                                                           ..index = index
-                                                          ..recieverModel = reciever));
+                                                          ..recieverModel = reciever
+                                                        ..giftTo=giftToDialog
+                                                        ..phoneNumber=phoneNumberDialog
+                                                        ..countryCode=countryCodeDilaog));
                                                   }
                                                 }),
                                       );
@@ -406,7 +415,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                       ),
                     ),
                   ),
-                  SizedBox(
+       /*           SizedBox(
                     height: size.height * 0.04,
                   ),
 
@@ -454,65 +463,11 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                   SizedBox(
                     height: size.height * 0.04,
                   ),
 
-                  ///deliveryAddress
-                  Container(
-                    height: size.height * 0.07,
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * .85,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(1, 1),
-                            color: Colors.grey.withOpacity(0.6),
-                            blurRadius: 1,
-                            spreadRadius: 2,
-                          ),
-                        ]),
-                    child: Center(
-                      child: TextFormField(
-                        controller: _addressController,
-                        validator:
-                        emptyFieldVAlidator(deliveryAddress, context),
-                        keyboardType: TextInputType.name,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: AppLocalizations.of(context).translate("delevery_address"),
-                          contentPadding: EdgeInsets.only(
-                            left: 16,
-                            top: size.height * 0.02,
-                          ),
-                          suffixIcon: false
-                              ? Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.red,
-                          )
-                              : Container(
-                            width: 10,
-                          ),
-                        ),
-                        onChanged: (val) {
-                          setState(() => deliveryAddress = val);
-                        },
-                        onSaved: (value) => deliveryAddress = value,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: size.height * 0.04,
-                  ),
 
                   Container(
                     // margin: EdgeInsets.only(bottom: 80),
@@ -533,7 +488,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                     child: FlatButton(
                       // splashColor: Colors.red,
                       onPressed: () {
-                        if (giftTo == null || !_dateSelected || phone == null) {
+                        if (giftTo == null || phone == null) {
                           AwesomeDialog(
                             context: context,
                             customHeader: Container(
@@ -557,12 +512,9 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           b
                             ..giftTo = giftTo
                             ..countryCode = countryCode
-                            ..deliveryDate =
-                            selectedDate.toString().substring(0, 10)
                             ..phoneNumber = phone
-                            ..address = deliveryAddress));
+                           ));
                           _giftToController.clear();
-                          _addressController.clear();
                           _phoneController.clear();
                         }
                       },
@@ -609,24 +561,50 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           // splashColor: Colors.red,
                           onPressed: () {
 
-                            if(state.recievers.isEmpty){
+
+
+                            print("size state  ${state.giftTo.length}");
+                           for(var i in state.giftTo){
+                             print("item  ${i}");
+                           }
+                            if(state.giftTo.isEmpty||
+                                state.phoneNumber.isEmpty||
+                                state.countryCode.isEmpty){
 
 
                               error(AppLocalizations.of(context).translate(("Please_add_receivers_to_continue")));
-                            }else
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) =>
-                                      CheckoutSuccess(
-                                        gifftTo: state.giftTo,
-                                        countryCode: state.countryCode,
-                                        deleviryDate: state.deliveryDate,
-                                        phone: state.phoneNumber,
-                                        address: state.address,
-                                        total: widget.total,
-                                      )),
-                            );
+                            }else{
+
+
+
+
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        CheckoutCouponsSuccess(
+                                          gifftTo: state.giftTo,
+                                          countryCode: state.countryCode,
+                                          phone: state.phoneNumber,
+                                          brandId: widget.brandId,
+                                          itemId:widget.itemId,
+                                        )),
+                              );
+                              
+                            }
+                              /*Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        CheckoutSuccess(
+                                          gifftTo: state.giftTo,
+                                          countryCode: state.countryCode,
+                                          deleviryDate: state.deliveryDate,
+                                          phone: state.phoneNumber,
+                                          address: state.address,
+                                          total: widget.total,
+                                        )),
+                              );*/
                             // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
                           },
                           child: Text(

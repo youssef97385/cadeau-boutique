@@ -1,12 +1,24 @@
 
+import 'package:cadeaue_boutique/Ui/my_card_tabs/bloc/tabs_card_bloc.dart';
+import 'package:cadeaue_boutique/Ui/my_card_tabs/received_card.dart';
 import 'package:cadeaue_boutique/Ui/my_card_tabs/sent_card.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../injectoin.dart';
+import 'bloc/tabs_card_event.dart';
+
 
 
 class MyCardTabs extends StatefulWidget {
+
+  String txtSent;
+  String txtRevevied;
+
+
+  MyCardTabs({this.txtSent, this.txtRevevied});
+
   @override
   _MyCardTabsState createState() => _MyCardTabsState();
 }
@@ -18,11 +30,15 @@ class _MyCardTabsState extends State<MyCardTabs> with TickerProviderStateMixin {
   List<Widget> _generalWidgets = [];
   TabController _tabController;
 
+  final _bloc = sl<TabsCardBloc>();
+
   @override
   void initState() {
     _tabs = getTabs(_startingTabCount);
     _tabController = getTabController();
     super.initState();
+
+    _bloc.add(GetSentEvent());
   }
 
   @override
@@ -40,7 +56,7 @@ class _MyCardTabsState extends State<MyCardTabs> with TickerProviderStateMixin {
         bottom: TabBar(
           tabs: _tabs,
           controller: _tabController,
-          unselectedLabelColor: Colors.redAccent,
+          unselectedLabelColor: Colors.grey,
           indicatorSize: TabBarIndicatorSize.label,
           indicatorColor: Colors.yellow,
           labelColor: Colors.yellow,
@@ -61,17 +77,20 @@ class _MyCardTabsState extends State<MyCardTabs> with TickerProviderStateMixin {
   Tab getTab(int widgetNumber) {
     if(widgetNumber==0)
     return Tab(
-      text: "sent",
+      text: widget.txtSent,
     );
     else if(widgetNumber==1)
       return Tab(
-        text: "received",
+        text: widget.txtRevevied,
       );
   }
 
-  Widget getWidget(int widgetNumber) {
+  Widget getWidget(int widgetNumber,) {
 
-     return SentCards();
+    if(widgetNumber==0)
+     return SentCards(_bloc);
+    else     return ReceviedCards(_bloc);
+
   /*  return Center(
       child: Text("Widget nr: $widgetNumber"),
     );*/

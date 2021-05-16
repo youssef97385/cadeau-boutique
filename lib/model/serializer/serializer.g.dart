@@ -18,15 +18,19 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CartModel.serializer)
       ..add(CategoryModel.serializer)
       ..add(CheckBody.serializer)
+      ..add(CheckoutCoupnsModel.serializer)
       ..add(ColorModel.serializer)
       ..add(CouponListModel.serializer)
       ..add(CouponModel.serializer)
       ..add(DetailsUser.serializer)
       ..add(GiftSize.serializer)
       ..add(MainGift.serializer)
+      ..add(MyCardModel.serializer)
       ..add(OccasionModel.serializer)
       ..add(ProductModel.serializer)
+      ..add(ReciverCouponsModel.serializer)
       ..add(RelationModel.serializer)
+      ..add(SentCardModel.serializer)
       ..add(SignupResponse.serializer)
       ..add(SizeModel.serializer)
       ..add(SliderModel.serializer)
@@ -51,6 +55,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(OccasionModel)]),
           () => new ListBuilder<OccasionModel>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SentCardModel)]),
+          () => new ListBuilder<SentCardModel>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SentCardModel)]),
+          () => new ListBuilder<SentCardModel>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SizeModel)]),
           () => new ListBuilder<SizeModel>())
       ..addBuilderFactory(
@@ -62,6 +72,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ColorModel)]),
           () => new ListBuilder<ColorModel>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())

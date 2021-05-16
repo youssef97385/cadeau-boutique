@@ -1953,7 +1953,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 )));
                                   },
                                   child: Text(
-                                    'Check Out',
+                                    AppLocalizations.of(context).translate('check_out'),
                                     style: TextStyle(
                                       color: AppColor.textColor,
                                       fontSize: 13,

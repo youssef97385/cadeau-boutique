@@ -204,4 +204,188 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
   }
 }
 
+class _$TryCheckOutCoupons extends TryCheckOutCoupons {
+  @override
+  final BuiltList<String> giftTo;
+  @override
+  final BuiltList<ReciverCouponsModel> recievers;
+  @override
+  final BuiltList<String> countryCode;
+  @override
+  final BuiltList<String> phoneNumber;
+  @override
+  final int bradnId;
+  @override
+  final int itemId;
+
+  factory _$TryCheckOutCoupons(
+          [void Function(TryCheckOutCouponsBuilder) updates]) =>
+      (new TryCheckOutCouponsBuilder()..update(updates)).build();
+
+  _$TryCheckOutCoupons._(
+      {this.giftTo,
+      this.recievers,
+      this.countryCode,
+      this.phoneNumber,
+      this.bradnId,
+      this.itemId})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        giftTo, 'TryCheckOutCoupons', 'giftTo');
+    BuiltValueNullFieldError.checkNotNull(
+        recievers, 'TryCheckOutCoupons', 'recievers');
+    BuiltValueNullFieldError.checkNotNull(
+        countryCode, 'TryCheckOutCoupons', 'countryCode');
+    BuiltValueNullFieldError.checkNotNull(
+        phoneNumber, 'TryCheckOutCoupons', 'phoneNumber');
+    BuiltValueNullFieldError.checkNotNull(
+        bradnId, 'TryCheckOutCoupons', 'bradnId');
+    BuiltValueNullFieldError.checkNotNull(
+        itemId, 'TryCheckOutCoupons', 'itemId');
+  }
+
+  @override
+  TryCheckOutCoupons rebuild(
+          void Function(TryCheckOutCouponsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  TryCheckOutCouponsBuilder toBuilder() =>
+      new TryCheckOutCouponsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is TryCheckOutCoupons &&
+        giftTo == other.giftTo &&
+        recievers == other.recievers &&
+        countryCode == other.countryCode &&
+        phoneNumber == other.phoneNumber &&
+        bradnId == other.bradnId &&
+        itemId == other.itemId;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc($jc($jc(0, giftTo.hashCode), recievers.hashCode),
+                    countryCode.hashCode),
+                phoneNumber.hashCode),
+            bradnId.hashCode),
+        itemId.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('TryCheckOutCoupons')
+          ..add('giftTo', giftTo)
+          ..add('recievers', recievers)
+          ..add('countryCode', countryCode)
+          ..add('phoneNumber', phoneNumber)
+          ..add('bradnId', bradnId)
+          ..add('itemId', itemId))
+        .toString();
+  }
+}
+
+class TryCheckOutCouponsBuilder
+    implements Builder<TryCheckOutCoupons, TryCheckOutCouponsBuilder> {
+  _$TryCheckOutCoupons _$v;
+
+  ListBuilder<String> _giftTo;
+  ListBuilder<String> get giftTo =>
+      _$this._giftTo ??= new ListBuilder<String>();
+  set giftTo(ListBuilder<String> giftTo) => _$this._giftTo = giftTo;
+
+  ListBuilder<ReciverCouponsModel> _recievers;
+  ListBuilder<ReciverCouponsModel> get recievers =>
+      _$this._recievers ??= new ListBuilder<ReciverCouponsModel>();
+  set recievers(ListBuilder<ReciverCouponsModel> recievers) =>
+      _$this._recievers = recievers;
+
+  ListBuilder<String> _countryCode;
+  ListBuilder<String> get countryCode =>
+      _$this._countryCode ??= new ListBuilder<String>();
+  set countryCode(ListBuilder<String> countryCode) =>
+      _$this._countryCode = countryCode;
+
+  ListBuilder<String> _phoneNumber;
+  ListBuilder<String> get phoneNumber =>
+      _$this._phoneNumber ??= new ListBuilder<String>();
+  set phoneNumber(ListBuilder<String> phoneNumber) =>
+      _$this._phoneNumber = phoneNumber;
+
+  int _bradnId;
+  int get bradnId => _$this._bradnId;
+  set bradnId(int bradnId) => _$this._bradnId = bradnId;
+
+  int _itemId;
+  int get itemId => _$this._itemId;
+  set itemId(int itemId) => _$this._itemId = itemId;
+
+  TryCheckOutCouponsBuilder();
+
+  TryCheckOutCouponsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _giftTo = $v.giftTo.toBuilder();
+      _recievers = $v.recievers.toBuilder();
+      _countryCode = $v.countryCode.toBuilder();
+      _phoneNumber = $v.phoneNumber.toBuilder();
+      _bradnId = $v.bradnId;
+      _itemId = $v.itemId;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(TryCheckOutCoupons other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$TryCheckOutCoupons;
+  }
+
+  @override
+  void update(void Function(TryCheckOutCouponsBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$TryCheckOutCoupons build() {
+    _$TryCheckOutCoupons _$result;
+    try {
+      _$result = _$v ??
+          new _$TryCheckOutCoupons._(
+              giftTo: giftTo.build(),
+              recievers: recievers.build(),
+              countryCode: countryCode.build(),
+              phoneNumber: phoneNumber.build(),
+              bradnId: BuiltValueNullFieldError.checkNotNull(
+                  bradnId, 'TryCheckOutCoupons', 'bradnId'),
+              itemId: BuiltValueNullFieldError.checkNotNull(
+                  itemId, 'TryCheckOutCoupons', 'itemId'));
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'giftTo';
+        giftTo.build();
+        _$failedField = 'recievers';
+        recievers.build();
+        _$failedField = 'countryCode';
+        countryCode.build();
+        _$failedField = 'phoneNumber';
+        phoneNumber.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'TryCheckOutCoupons', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -89,8 +89,8 @@ class _SigninScreenState extends State<SigninScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return MyCountryPickerDialog(searchHint: search,selectHint: selectedHint,onValuePicked: onValuePicked,);
-      },
-    );
+      },    );
+
   }
 
   Widget initAddCountryPrefixIcon(){

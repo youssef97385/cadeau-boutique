@@ -6,13 +6,16 @@ import 'package:built_value/serializer.dart';
 import 'package:cadeaue_boutique/model/base_response/base_response_model.dart';
 import 'package:cadeaue_boutique/model/brand_model/base_brand.dart';
 import 'package:cadeaue_boutique/model/cart_model/cart_model.dart';
+import 'package:cadeaue_boutique/model/checkout_coupons/checkout_coupons_model.dart';
 import 'package:cadeaue_boutique/model/coupon_list_model/coupon_list_model.dart';
 import 'package:cadeaue_boutique/model/coupon_model/base_coupon.dart';
 import 'package:cadeaue_boutique/model/checkout_body/check_body.dart';
+import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
+import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
 import 'package:cadeaue_boutique/model/relation_model/relation_model.dart';
 import 'package:cadeaue_boutique/model/serializer/serializer.dart';
 import 'package:cadeaue_boutique/model/signup_response/signup_response_model.dart';
@@ -32,6 +35,7 @@ import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
 import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/model/checkout_body/checkout_body.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
+import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
 
 import '../../model/wrap_model/wrap_item.dart';
 import 'Ihttp_helper.dart';
@@ -1292,11 +1296,7 @@ class HttpHelper implements IHttpHelper {
 
       if (response.statusCode == 200) {
 
-        if (response.statusCode == 200) {
-          return true;
-        } else {
-          throw NetworkException();
-        }
+
       } else {
         throw NetworkException();
       }
@@ -1509,6 +1509,84 @@ class HttpHelper implements IHttpHelper {
       }
     }
 
+  @override
+  Future<bool> checkoutMultieGiftCoupons({
+    BuiltList<ReciverCouponsModel> recieverModel,
+    String token, BuiltList<String> giftTo,
+    BuiltList<String> countryCode, BuiltList<String> phone, int brandId,
+    int itemId}) async{
+    try {
+
+      _dio.interceptors.add(CookieManager(cookieJar));
+
+      print("check vars: ${brandId}");
+      // CheckoutBody checkoutBody = CheckoutBody(total: total,
+      // countryCode: countryCode,deliveryDate: deliveryDate,giftTo: giftTo,phoneNumber: phone);
+
+      CheckoutCoupnsModel checkBody = CheckoutCoupnsModel((b)=>b
+        ..gift_to = giftTo.toBuilder()
+        ..country_code = countryCode.toBuilder()
+        ..phone_number = phone.toBuilder()
+        ..brandID=brandId
+        ..cardID=itemId
+
+
+      );
+
+      var body = checkBody.toJson();
+      // var body =checkoutBody.toJson();
+      //
+      print("json body"+body.toString());
+
+      final response = await _dio.post('auth/cadue/cards/pay',data: body,  options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print('checkout Response StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+
+
+        return true;
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+
+  }
+
+  @override
+  Future<MyCardModel> getMyCard({String token}) async {
+    try {
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.get('auth/cadue/cards/my',
+          options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print(' StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<MyCardModel> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                const FullType(MyCardModel),
+              ],
+            ));
+
+        print(" status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
   }
 
 

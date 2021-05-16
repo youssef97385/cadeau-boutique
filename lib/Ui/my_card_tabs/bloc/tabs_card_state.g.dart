@@ -14,18 +14,28 @@ class _$TabsCardState extends TabsCardState {
   @override
   final String error;
   @override
-  final BuiltList<TrackModel> tracks;
+  final BuiltList<SentCardModel> sentCard;
+  @override
+  final BuiltList<SentCardModel> revivedCard;
 
   factory _$TabsCardState([void Function(TabsCardStateBuilder) updates]) =>
       (new TabsCardStateBuilder()..update(updates)).build();
 
-  _$TabsCardState._({this.success, this.isLoading, this.error, this.tracks})
+  _$TabsCardState._(
+      {this.success,
+      this.isLoading,
+      this.error,
+      this.sentCard,
+      this.revivedCard})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(success, 'TabsCardState', 'success');
     BuiltValueNullFieldError.checkNotNull(
         isLoading, 'TabsCardState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(error, 'TabsCardState', 'error');
-    BuiltValueNullFieldError.checkNotNull(tracks, 'TabsCardState', 'tracks');
+    BuiltValueNullFieldError.checkNotNull(
+        sentCard, 'TabsCardState', 'sentCard');
+    BuiltValueNullFieldError.checkNotNull(
+        revivedCard, 'TabsCardState', 'revivedCard');
   }
 
   @override
@@ -42,14 +52,18 @@ class _$TabsCardState extends TabsCardState {
         success == other.success &&
         isLoading == other.isLoading &&
         error == other.error &&
-        tracks == other.tracks;
+        sentCard == other.sentCard &&
+        revivedCard == other.revivedCard;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode),
-        tracks.hashCode));
+        $jc(
+            $jc($jc($jc(0, success.hashCode), isLoading.hashCode),
+                error.hashCode),
+            sentCard.hashCode),
+        revivedCard.hashCode));
   }
 
   @override
@@ -58,7 +72,8 @@ class _$TabsCardState extends TabsCardState {
           ..add('success', success)
           ..add('isLoading', isLoading)
           ..add('error', error)
-          ..add('tracks', tracks))
+          ..add('sentCard', sentCard)
+          ..add('revivedCard', revivedCard))
         .toString();
   }
 }
@@ -79,10 +94,17 @@ class TabsCardStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
-  ListBuilder<TrackModel> _tracks;
-  ListBuilder<TrackModel> get tracks =>
-      _$this._tracks ??= new ListBuilder<TrackModel>();
-  set tracks(ListBuilder<TrackModel> tracks) => _$this._tracks = tracks;
+  ListBuilder<SentCardModel> _sentCard;
+  ListBuilder<SentCardModel> get sentCard =>
+      _$this._sentCard ??= new ListBuilder<SentCardModel>();
+  set sentCard(ListBuilder<SentCardModel> sentCard) =>
+      _$this._sentCard = sentCard;
+
+  ListBuilder<SentCardModel> _revivedCard;
+  ListBuilder<SentCardModel> get revivedCard =>
+      _$this._revivedCard ??= new ListBuilder<SentCardModel>();
+  set revivedCard(ListBuilder<SentCardModel> revivedCard) =>
+      _$this._revivedCard = revivedCard;
 
   TabsCardStateBuilder();
 
@@ -92,7 +114,8 @@ class TabsCardStateBuilder
       _success = $v.success;
       _isLoading = $v.isLoading;
       _error = $v.error;
-      _tracks = $v.tracks.toBuilder();
+      _sentCard = $v.sentCard.toBuilder();
+      _revivedCard = $v.revivedCard.toBuilder();
       _$v = null;
     }
     return this;
@@ -121,12 +144,15 @@ class TabsCardStateBuilder
                   isLoading, 'TabsCardState', 'isLoading'),
               error: BuiltValueNullFieldError.checkNotNull(
                   error, 'TabsCardState', 'error'),
-              tracks: tracks.build());
+              sentCard: sentCard.build(),
+              revivedCard: revivedCard.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'tracks';
-        tracks.build();
+        _$failedField = 'sentCard';
+        sentCard.build();
+        _$failedField = 'revivedCard';
+        revivedCard.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'TabsCardState', _$failedField, e.toString());

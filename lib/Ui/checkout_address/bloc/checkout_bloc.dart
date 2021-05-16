@@ -51,21 +51,12 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     }
     if(event is EditReciever){
       try {
-
         yield state.rebuild((b) => b
         ..recievers.replaceRange(event.index, event.index, [event.recieverModel])
             ..recievers.removeAt(event.index+1)
-
-
           );
-
-
-
-
       } catch (e) {
         print('edit  Error $e');
-
-
       }
     }
     if(event is DeleteReciever){

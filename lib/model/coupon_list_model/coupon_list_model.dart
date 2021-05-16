@@ -10,6 +10,10 @@ part 'coupon_list_model.g.dart';
 
 
 abstract class CouponListModel implements Built<CouponListModel, CouponListModelBuilder> {
+
+
+  int get id;
+
   @BuiltValueField(wireName: "media_path")
   @nullable
   String get image;

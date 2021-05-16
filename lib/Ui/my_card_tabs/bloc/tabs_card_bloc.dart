@@ -27,19 +27,21 @@ class TabsCardBloc extends Bloc<TabsCardEvent,TabsCardState>{
           ..isLoading = true
           ..error = ""
           ..success = false
-          ..tracks.replace([])
+          ..sentCard.replace([])
+          ..revivedCard.replace([])
 
         );
 
-        final data = await _iRepository.getTracksHome();
+        final data = await _iRepository.getMyCard();
 
-        print('get products Success data ${data}');
+        print('Success data ${data}');
 
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = ""
           ..success = true
-          ..tracks.replace(data)
+          ..sentCard.replace(data.sentCard)
+          ..revivedCard.replace(data.revicedCard)
         );
 
       } catch (e) {
@@ -48,7 +50,8 @@ class TabsCardBloc extends Bloc<TabsCardEvent,TabsCardState>{
           ..isLoading = false
           ..error = "Something went wrong"
           ..success = false
-          ..tracks.replace([])
+          ..sentCard.replace([])
+          ..revivedCard.replace([])
         );
 
       }

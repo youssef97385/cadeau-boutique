@@ -38,6 +38,11 @@ abstract class UserInfoModel implements Built<UserInfoModel, UserInfoModelBuilde
   @nullable
   String get dateBirth;
 
+  @BuiltValueField(wireName: "brand_id")
+  @nullable
+  int get brandID;
+
+
 
 // fields go here
 UserInfoModel._();
