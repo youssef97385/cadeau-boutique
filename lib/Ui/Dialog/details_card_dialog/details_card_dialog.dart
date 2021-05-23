@@ -120,9 +120,9 @@ class _DetailsCardDialogState extends State<DetailsCardDialog> {
                     baseText(title: "${AppLocalizations.of(context).translate("to_txt")}:",
                         color: AppColor.textColor,size: 18.0,fontWeight: FontWeight.w600),
 
-                    widget.item.revicer!=null?
+               /*     widget.item.revicer!=null?
                     Flexible(child: baseText(title: widget.item.revicer.name, color: AppColor.darkYellow,size: 18.0,fontWeight: FontWeight.w600))
-                    :Container(),
+                    :Container(),*/
                   ],
                 ):Container(),
 

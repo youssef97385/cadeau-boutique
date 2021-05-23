@@ -37,6 +37,10 @@ abstract class CartItem implements Built<CartItem, CartItemBuilder> {
   @nullable
   int get totalPrice;
 
+
+
+
+
   @BuiltValueField(wireName: "gift_size_id")
   @nullable
   int get giftSizeId;

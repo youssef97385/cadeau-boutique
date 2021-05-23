@@ -121,9 +121,11 @@
   "send": "Send",
   "fill_out_all_fields": "Please fill all the fields",
   "thank_you": "Thank You",
-  "try_again": "Sorry Try Again Later"
+  "try_again": "Sorry Try Again Later",
 
-
+  "shipping_charges": "Shipping Charges",
+  "valet": "Valet",
+  "final_total_price": "Final Total Price "
 
 
 }

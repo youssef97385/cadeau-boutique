@@ -12,8 +12,7 @@ part 'sent_cards_model.g.dart';
 
 
 abstract class SentCardModel implements Built<SentCardModel, SentCardModelBuilder> {
-
-
+ @nullable
 int get id;
 
 @BuiltValueField(wireName: "sender_id")

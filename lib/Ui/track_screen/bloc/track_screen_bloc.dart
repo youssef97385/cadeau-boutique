@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_event.dart';
-import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_state.dart';
+
+import 'track_screen_state.dart';
 import 'package:cadeaue_boutique/data/repository/irepository.dart';
+
+import 'track_screen_event.dart';
 
 
 

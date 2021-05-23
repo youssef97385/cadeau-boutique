@@ -103,6 +103,25 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(ColorModel)));
     }
+    value = object.shippingCharges;
+    if (value != null) {
+      result
+        ..add('shipping_charges')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.valet;
+    if (value != null) {
+      result
+        ..add('valet')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.finalTotalPrice;
+    if (value != null) {
+      result
+        ..add('final_total_price')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.details;
     if (value != null) {
       result
@@ -177,6 +196,18 @@ class _$CartModelSerializer implements StructuredSerializer<CartModel> {
           result.globalWrapColor.replace(serializers.deserialize(value,
               specifiedType: const FullType(ColorModel)) as ColorModel);
           break;
+        case 'shipping_charges':
+          result.shippingCharges = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'valet':
+          result.valet = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'final_total_price':
+          result.finalTotalPrice = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
         case 'details':
           result.details.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -218,6 +249,12 @@ class _$CartModel extends CartModel {
   @override
   final ColorModel globalWrapColor;
   @override
+  final int shippingCharges;
+  @override
+  final int valet;
+  @override
+  final double finalTotalPrice;
+  @override
   final BuiltList<CartItem> details;
 
   factory _$CartModel([void Function(CartModelBuilder) updates]) =>
@@ -237,6 +274,9 @@ class _$CartModel extends CartModel {
       this.wrapColor,
       this.globalWrap,
       this.globalWrapColor,
+      this.shippingCharges,
+      this.valet,
+      this.finalTotalPrice,
       this.details})
       : super._();
 
@@ -264,6 +304,9 @@ class _$CartModel extends CartModel {
         wrapColor == other.wrapColor &&
         globalWrap == other.globalWrap &&
         globalWrapColor == other.globalWrapColor &&
+        shippingCharges == other.shippingCharges &&
+        valet == other.valet &&
+        finalTotalPrice == other.finalTotalPrice &&
         details == other.details;
   }
 
@@ -281,19 +324,31 @@ class _$CartModel extends CartModel {
                                         $jc(
                                             $jc(
                                                 $jc(
-                                                    $jc($jc(0, id.hashCode),
-                                                        songLink.hashCode),
-                                                    songPriceBeforAdd.hashCode),
-                                                songPrice.hashCode),
-                                            totalPrice.hashCode),
-                                        productsPrice.hashCode),
-                                    wrapsPrice.hashCode),
-                                status.hashCode),
-                            allCartWrapped.hashCode),
-                        wrapId.hashCode),
-                    wrapColor.hashCode),
-                globalWrap.hashCode),
-            globalWrapColor.hashCode),
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    $jc(
+                                                                        0,
+                                                                        id
+                                                                            .hashCode),
+                                                                    songLink
+                                                                        .hashCode),
+                                                                songPriceBeforAdd
+                                                                    .hashCode),
+                                                            songPrice.hashCode),
+                                                        totalPrice.hashCode),
+                                                    productsPrice.hashCode),
+                                                wrapsPrice.hashCode),
+                                            status.hashCode),
+                                        allCartWrapped.hashCode),
+                                    wrapId.hashCode),
+                                wrapColor.hashCode),
+                            globalWrap.hashCode),
+                        globalWrapColor.hashCode),
+                    shippingCharges.hashCode),
+                valet.hashCode),
+            finalTotalPrice.hashCode),
         details.hashCode));
   }
 
@@ -313,6 +368,9 @@ class _$CartModel extends CartModel {
           ..add('wrapColor', wrapColor)
           ..add('globalWrap', globalWrap)
           ..add('globalWrapColor', globalWrapColor)
+          ..add('shippingCharges', shippingCharges)
+          ..add('valet', valet)
+          ..add('finalTotalPrice', finalTotalPrice)
           ..add('details', details))
         .toString();
   }
@@ -378,6 +436,20 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
   set globalWrapColor(ColorModelBuilder globalWrapColor) =>
       _$this._globalWrapColor = globalWrapColor;
 
+  int _shippingCharges;
+  int get shippingCharges => _$this._shippingCharges;
+  set shippingCharges(int shippingCharges) =>
+      _$this._shippingCharges = shippingCharges;
+
+  int _valet;
+  int get valet => _$this._valet;
+  set valet(int valet) => _$this._valet = valet;
+
+  double _finalTotalPrice;
+  double get finalTotalPrice => _$this._finalTotalPrice;
+  set finalTotalPrice(double finalTotalPrice) =>
+      _$this._finalTotalPrice = finalTotalPrice;
+
   ListBuilder<CartItem> _details;
   ListBuilder<CartItem> get details =>
       _$this._details ??= new ListBuilder<CartItem>();
@@ -401,6 +473,9 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
       _wrapColor = $v.wrapColor;
       _globalWrap = $v.globalWrap?.toBuilder();
       _globalWrapColor = $v.globalWrapColor?.toBuilder();
+      _shippingCharges = $v.shippingCharges;
+      _valet = $v.valet;
+      _finalTotalPrice = $v.finalTotalPrice;
       _details = $v.details?.toBuilder();
       _$v = null;
     }
@@ -437,6 +512,9 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
               wrapColor: wrapColor,
               globalWrap: _globalWrap?.build(),
               globalWrapColor: _globalWrapColor?.build(),
+              shippingCharges: shippingCharges,
+              valet: valet,
+              finalTotalPrice: finalTotalPrice,
               details: _details?.build());
     } catch (_) {
       String _$failedField;
@@ -445,6 +523,7 @@ class CartModelBuilder implements Builder<CartModel, CartModelBuilder> {
         _globalWrap?.build();
         _$failedField = 'globalWrapColor';
         _globalWrapColor?.build();
+
         _$failedField = 'details';
         _details?.build();
       } catch (e) {

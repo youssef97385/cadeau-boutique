@@ -45,7 +45,7 @@ class TabsCardBloc extends Bloc<TabsCardEvent,TabsCardState>{
         );
 
       } catch (e) {
-        print('GetPRoduct Error $e');
+        print('GetPRoduct Error \n ${e.toString()}');
         yield state.rebuild((b) => b
           ..isLoading = false
           ..error = "Something went wrong"

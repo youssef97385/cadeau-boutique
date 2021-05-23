@@ -121,5 +121,9 @@
   "send": "ارسل",
   "fill_out_all_fields": "الرجاء تعبئة جميع الحقول",
   "thank_you": "شكرا لك",
-  "try_again": "الرجاء المحاولة لاحقا"
+  "try_again": "الرجاء المحاولة لاحقا",
+
+  "shipping_charges": "سعر الشحن",
+  "valet": "سعر الضريبة",
+  "final_total_price": "السعر النهائي "
 }

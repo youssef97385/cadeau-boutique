@@ -72,11 +72,16 @@ var size = MediaQuery.of(context).size;
             ));
       }
 
-      if(!widget.isLogin)
+      if(!widget.isLogin){
+        print("not login");
         Timer(
             Duration(seconds: 4),
                 () => Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (BuildContext context) => WelcomePage())));
+
+      }else{
+        print("login");
+      }
 
    /*   else{
         if(widget.loginType==LOGIN_TYPE_SOCIAL&&state.isLoading==false ){

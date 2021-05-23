@@ -631,6 +631,11 @@ class _CartScreenState extends State<CartScreen> {
                                                                                           ),
                                                                                         ],
                                                                                       ),
+
+
+
+
+
                                                                                       (state.cartList[index].totalPrice ==
                                                                                           null ||
                                                                                           state.cartList[index]
@@ -1817,6 +1822,60 @@ class _CartScreenState extends State<CartScreen> {
                             SizedBox(
                               height: 10,
                             ),
+
+                            state.cart.shippingCharges == 0
+                                ? Container()
+                                : Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.06),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  baseText(
+                                      title: AppLocalizations.of(context).translate("shipping_charges"),
+                                      color: AppColor.darkTextColor,
+                                      size: 16.0),
+                                  baseText(
+                                      title:
+                                      "\$ ${state.cart.shippingCharges}",
+                                      color: AppColor.darkYellow,
+                                      size: 16.0),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+
+
+                            state.cart.valet == 0
+                                ? Container()
+                                : Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.06),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  baseText(
+                                      title: AppLocalizations.of(context).translate("valet"),
+                                      color: AppColor.darkTextColor,
+                                      size: 16.0),
+                                  baseText(
+                                      title:
+                                      "\$ ${state.cart.valet}",
+                                      color: AppColor.darkYellow,
+                                      size: 16.0),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+
+
+
                             state.cart.wrapsPrice == 0
                                 ? Container()
                                 : Padding(
@@ -1905,14 +1964,43 @@ class _CartScreenState extends State<CartScreen> {
                                             title:AppLocalizations.of(context).translate("total"),
                                             color: AppColor.darkTextColor,
                                             size: 26.0),
-                                        baseText(
-                                            title:
-                                                "\$ ${state.cart.totalPrice}",
-                                            color: AppColor.darkYellow,
-                                            size: 26.0),
+                                        Flexible(
+                                          child: baseText(
+                                              title:
+                                                  "\$ ${state.cart.totalPrice}",
+                                              color: AppColor.darkYellow,
+                                              size: 26.0),
+                                        ),
                                       ],
                                     ),
                                   ),
+
+                            SizedBox(
+                              height: 10,
+                            ),
+                            (state.cart.finalTotalPrice == 0)
+                                ? Container()
+                                : Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.06),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  baseText(
+                                      title:AppLocalizations.of(context).translate("final_total_price"),
+                                      color: AppColor.darkTextColor,
+                                      size: 26.0),
+                                  Flexible(
+                                    child: baseText(
+                                        title:
+                                        "\$ ${state.cart.finalTotalPrice}",
+                                        color: AppColor.darkYellow,
+                                        size: 26.0),
+                                  ),
+                                ],
+                              ),
+                            ),
                             SizedBox(
                               height: 20,
                             ),

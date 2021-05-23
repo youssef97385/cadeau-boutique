@@ -60,6 +60,20 @@ abstract class CartModel implements Built<CartModel, CartModelBuilder> {
   @BuiltValueField(wireName: "global_wrap_color")
   ColorModel get globalWrapColor;
 
+  @BuiltValueField(wireName: "shipping_charges")
+  @nullable
+  int get shippingCharges;
+
+
+  @BuiltValueField(wireName: "valet")
+  @nullable
+  int get valet;
+
+
+  @BuiltValueField(wireName: "final_total_price")
+  @nullable
+  double get finalTotalPrice;
+
   @nullable
   BuiltList<CartItem> get details;
 
