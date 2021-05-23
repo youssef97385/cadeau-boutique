@@ -17,7 +17,8 @@ class PrefsHelper implements IPrefsHelper {
 
   @override
   Future<int> getAppLanguage() async {
-    return (await getPrefs()).getInt(APP_LANGUAGE) ?? AppLanguageKeys.EN;
+
+    return (await getPrefs()).getInt(APP_LANGUAGE) ??-1;
   }
 
   @override

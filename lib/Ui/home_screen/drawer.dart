@@ -24,6 +24,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cadeaue_boutique/model/category_model/category_model.dart';
 import '../../injectoin.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:cadeaue_boutique/core/app_language.dart';
 
 class MainDrawer extends StatefulWidget {
   bool isLogin;
@@ -253,6 +254,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         GestureDetector(
 
                             onTap: (){
+                              // changeAppLanguage(1);
                               showComingSoonDialog();
                             },
                             // onTap: (){
