@@ -145,7 +145,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(left:30.0),
+                    padding:  EdgeInsets.symmetric(horizontal:30.0),
                     child: Column(
                       children: [
                         GestureDetector(
@@ -253,15 +253,15 @@ class _MainDrawerState extends State<MainDrawer> {
 
                         GestureDetector(
 
-                            onTap: (){
-                              // changeAppLanguage(1);
+                       /*     onTap: (){
+                             //  changeAppLanguage(1);
                               showComingSoonDialog();
+                            },*/
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context)=>SettingsScreen()
+                              ));
                             },
-                            // onTap: (){
-                            //   Navigator.push(context, MaterialPageRoute(
-                            //     builder: (context)=>SettingsScreen()
-                            //   ));
-                            // },
                             child: singleDrawerItem("assets/images/drawer/settings.svg", AppLocalizations.of(context).translate("settings"))),
                         SizedBox(
                           height: 30,

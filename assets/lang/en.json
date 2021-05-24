@@ -70,6 +70,7 @@
   "find_now": "Find Now",
   "back": "Back",
   "tow_out_five": "2 out of 5",
+  "four_out_five": "4 out of 5",
   "next": "Next",
   "choose_relation": "Choose Relation",
   "three_out_five": "three_out_five",
@@ -125,7 +126,12 @@
 
   "shipping_charges": "Shipping Charges",
   "valet": "Valet",
-  "final_total_price": "Final Total Price "
-
+  "final_total_price": "Final Total Price ",
+  "starts_from": "Starts From",
+  "size_hint": "Size : ",
+  "add_to_cart": "Add To Cart",
+  "choose_wrap": "Choose a Wrap",
+  "avalible_size": "Available Size:",
+  "colors_hint": "Colors : "
 
 }

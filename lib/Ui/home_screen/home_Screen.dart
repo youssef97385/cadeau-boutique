@@ -4,6 +4,7 @@ import 'package:cadeaue_boutique/Ui/home/page/bloc/home_state.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
+import 'package:cadeaue_boutique/app/App.dart';
 import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
@@ -106,6 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    print("Home LANG ${AppColor.AppLang}  /${AppLanguageKeys.EN}");
+    if(AppColor.AppLang==AppLanguageKeys.EN)
+      print("Home EN");
+    else  print("Home AR");
     // print ("home state "+state2.categories.toString());
     _bloc.add(IniEvent());
     _bloc.add(GetMainGift());
@@ -306,9 +312,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   )));
                                                     },
                                                     child: singleOccasion(
-                                                        title: state
-                                                            .occasions[index]
-                                                            .enName,
+                                                        title:AppColor.AppLang==AppLanguageKeys.EN?state.occasions[index].enName
+                                                            :state.occasions[index].arName,
+
+
                                                         image: state
                                                             .occasions[index]
                                                             .miniImage),
@@ -416,10 +423,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       Container(
                                                                     height: 24,
                                                                     child: Text(
+                                                                        AppColor.AppLang==AppLanguageKeys.EN?
                                                                       firstCharacterUpper(state
-                                                                          .nearbyOccasions[
-                                                                      0]
-                                                                          .enName),
+                                                                          .nearbyOccasions[0].enName):
+                                                                        firstCharacterUpper(state
+                                                                            .nearbyOccasions[0].arName,
+                                                                        en: false),
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               22,
@@ -432,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   child: Container(
                                                                       height:
                                                                           112,
-                                                                      child: Image.network(BaseImgUrl +
+                                                                  child: Image.network(BaseImgUrl +
                                                                           state
                                                                               .nearbyOccasions[0]
                                                                               .image)),
@@ -557,11 +566,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     Container(
                                                                   height: 24,
                                                                   child: Text(
-                                                                    firstCharacterUpper(
-                                                                    state
-                                                                        .nearbyOccasions[
-                                                                            1]
-                                                                        .enName),
+                                                                    AppColor.AppLang==AppLanguageKeys.EN?
+                                                                    firstCharacterUpper(state
+                                                                        .nearbyOccasions[1].enName):
+                                                                    firstCharacterUpper(state
+                                                                        .nearbyOccasions[1].arName,
+                                                                    en: false),
+
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             22,
@@ -638,9 +649,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   Container(
                                                     child: Text(
-                                                      firstCharacterUpper(
-                                                      state.nearbyOccasions[2]
-                                                          .enName),
+                                                      AppColor.AppLang==AppLanguageKeys.EN?
+                                                      firstCharacterUpper(state
+                                                          .nearbyOccasions[2].enName):
+                                                      firstCharacterUpper(state
+                                                          .nearbyOccasions[2].arName,
+                                                      en: false),
                                                       style: TextStyle(
                                                         fontSize: 22,
                                                         color:
@@ -719,9 +733,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : Padding(
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 10.0,
+                                        
                                       ),
                                       child: Container(
-                                        height: 200,
+                                        height: 210,
                                         child: ListView.builder(
                                             scrollDirection: Axis.horizontal,
                                             itemCount: state.products.length,
@@ -729,8 +744,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 int index) {
                                               return Padding(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
+                                                     EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                    vertical: 4.0),
                                                 child: GestureDetector(
                                                   onTap: (){
                                                     Navigator.push(
@@ -749,7 +765,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     children: [
                                                       Container(
                                                         width: 160,
-                                                        height: 180,
+                                                        height: 190,
                                                         decoration: BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius.all(
@@ -807,15 +823,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left: 8.0),
+                                                                   EdgeInsets
+                                                                          .symmetric(
+                                                                      horizontal: 4.0),
                                                               child: Text(
+
+                                                                  AppColor.AppLang==AppLanguageKeys.EN?
                                                                 firstCharacterUpper(
                                                                 state
                                                                     .products[
                                                                         index]
-                                                                    .nameEn),
+                                                                    .nameEn):
+                                                                  firstCharacterUpper(
+                                                                      state
+                                                                          .products[
+                                                                      index]
+                                                                          .nameAr,en: false),
                                                                 style: TextStyle(
                                                                     color: Color(
                                                                         0xff393741),
@@ -827,7 +850,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   const EdgeInsets
                                                                           .only(
                                                                       left: 8.0,
-                                                                      top: 8,
+
+                                                                      top: 4,
                                                                       right: 8.0),
                                                               child: Row(
                                                                 mainAxisAlignment:
@@ -847,15 +871,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   //             15,
                                                                   //         decoration:
                                                                   //             TextDecoration.lineThrough)),
-                                                                  Text(
-                                                                    state.products[index]
-                                                                            .salePrice +
-                                                                        "\$",
-                                                                    style: TextStyle(
-                                                                        color: AppColor
-                                                                            .darkYellow,
-                                                                        fontSize:
-                                                                            15),
+                                                                  Flexible(
+                                                                    child: Text(
+                                                                      state.products[index]
+                                                                              .salePrice +
+                                                                          "SAR",
+                                                                      style: TextStyle(
+                                                                          color: AppColor
+                                                                              .darkYellow,
+                                                                          fontSize:
+                                                                              14),
+                                                                    ),
                                                                   )
                                                                 ],
                                                               ),
@@ -914,19 +940,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 16.0),
-                                                child:state.lang==AppLanguageKeys.EN? Text(
+                                                child:AppColor.AppLang==AppLanguageKeys.EN? Text(
                                                   state.mainGift.titleEn,
                                                   style: TextStyle(
                                                       fontSize: 26,
                                                       color: Color(0xff393741)),
                                                 ): Text(
-                                          state.mainGift.titleEn,
+                                          state.mainGift.titleAr,
                                           style: TextStyle(
                                               fontSize: 26,
                                               color: Color(0xff393741)),
                                         ),
                                               ),
-                                              state.lang==AppLanguageKeys.EN?
+                                              AppColor.AppLang==AppLanguageKeys.EN?
                                               Text(
                                                 "${state.mainGift.textEn}",
                                                 style: TextStyle(
@@ -936,7 +962,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 overflow:TextOverflow.ellipsis ,
                                               ):
                                               Text(
-                                                "${state.mainGift.textEn}",
+                                                "${state.mainGift.textAr}",
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     color: Color(0xff393741)),
@@ -1089,9 +1115,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   )));
                                                     },
                                                     child: singleCategory(
-                                                        title: firstCharacterUpper(state
+
+                                                        title:AppColor.AppLang==AppLanguageKeys.EN?
+                                                        firstCharacterUpper(state
                                                             .categories[index]
-                                                            .enName),
+                                                            .enName):
+                                                        firstCharacterUpper(state
+                                                            .categories[index]
+                                                            .arName,en: false),
                                                         image: state
                                                             .categories[index]
                                                             .image),
@@ -1232,7 +1263,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       MainAxisAlignment
                                                                           .spaceBetween,
                                                                   children: [
+                                                                    AppColor.AppLang==AppLanguageKeys.EN?
                                                                     Text(
+
                                                                       getCapitalizeString(str:state
                                                                           .products[
                                                                       0]
@@ -1243,11 +1276,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               0xff393741),
                                                                           fontSize:
                                                                               18),
+                                                                    ):
+                                                                    Text(
+
+                                                                      getCapitalizeString(str:state
+                                                                          .products[
+                                                                      0]
+                                                                          .nameAr,en: false),
+
+                                                                      style: TextStyle(
+                                                                          color: Color(
+                                                                              0xff393741),
+                                                                          fontSize:
+                                                                          18),
                                                                     ),
                                                                     Text(
                                                                       state.products[0]
                                                                               .mainPrice +
-                                                                          "\$",
+                                                                          "$CurrencyApp",
                                                                       style: TextStyle(
                                                                           color: AppColor
                                                                               .darkYellow,
@@ -1358,6 +1404,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       MainAxisAlignment
                                                                           .spaceBetween,
                                                                   children: [
+                                                                    AppColor.AppLang==AppLanguageKeys.EN?
                                                                     Text(
                                                                       firstCharacterUpper(
                                                                       state
@@ -1369,11 +1416,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               0xff393741),
                                                                           fontSize:
                                                                               18),
+                                                                    ):
+                                                                    Text(
+                                                                      firstCharacterUpper(
+                                                                          state
+                                                                              .products[
+                                                                          1]
+                                                                              .nameAr,en:false),
+                                                                      style: TextStyle(
+                                                                          color: Color(
+                                                                              0xff393741),
+                                                                          fontSize:
+                                                                          18),
                                                                     ),
                                                                     Text(
                                                                       state.products[1]
                                                                               .mainPrice +
-                                                                          "\$",
+                                                                          CurrencyApp,
                                                                       style: TextStyle(
                                                                           color: AppColor
                                                                               .darkYellow,
@@ -1489,6 +1548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       MainAxisAlignment
                                                                           .spaceBetween,
                                                                   children: [
+                                                                    AppColor.AppLang==AppLanguageKeys.EN?
                                                                     Text(
                                                                       firstCharacterUpper(
                                                                       state
@@ -1500,11 +1560,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               0xff393741),
                                                                           fontSize:
                                                                               18),
+                                                                    ):
+                                                                    Text(
+                                                                      firstCharacterUpper(
+                                                                          state
+                                                                              .products[
+                                                                          2]
+                                                                              .nameAr,en: false),
+                                                                      style: TextStyle(
+                                                                          color: Color(
+                                                                              0xff393741),
+                                                                          fontSize:
+                                                                          18),
                                                                     ),
                                                                     Text(
                                                                       state.products[2]
                                                                               .mainPrice +
-                                                                          "\$",
+                                                                          CurrencyApp,
                                                                       style: TextStyle(
                                                                           color: AppColor
                                                                               .darkYellow,
@@ -1615,8 +1687,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       MainAxisAlignment
                                                                           .spaceBetween,
                                                                   children: [
+                                                                    AppColor.AppLang==AppLanguageKeys.EN?
                                                                     Text(
-                                                                      firstCharacterUpper(
+                                                                        firstCharacterUpper(
                                                                       state
                                                                           .products[
                                                                               3]
@@ -1626,11 +1699,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               0xff393741),
                                                                           fontSize:
                                                                               18),
+                                                                    ):
+                                                                    Text(
+                                                                      firstCharacterUpper(
+                                                                          state
+                                                                              .products[
+                                                                          3]
+                                                                              .nameEn,en:false),
+                                                                      style: TextStyle(
+                                                                          color: Color(
+                                                                              0xff393741),
+                                                                          fontSize:
+                                                                          18),
                                                                     ),
                                                                     Text(
                                                                       state.products[3]
                                                                               .mainPrice +
-                                                                          "\$",
+                                                                          CurrencyApp,
                                                                       style: TextStyle(
                                                                           color: AppColor
                                                                               .darkYellow,
@@ -1957,7 +2042,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       Text(
                                                                         state.wraps[wrapIndex].wrapItems[index]
                                                                                 .mainPrice +
-                                                                            "\$",
+                                                                            CurrencyApp,
                                                                         style: TextStyle(
                                                                             color: Colors
                                                                                 .white,
@@ -2042,7 +2127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Column(
                                                   children: [
                                                     Container(
-                                                      width: 160,
+                                                      width: 180,
                                                       height: 170,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -2075,7 +2160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         8.0),
                                                             child: Container(
                                                               // color: Colors.blue,
-                                                              width: 160,
+                                                              width: 180,
                                                               height: 100,
                                                               decoration:
                                                                   BoxDecoration(
@@ -2104,12 +2189,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 const EdgeInsets
                                                                         .only(
                                                                     left: 8.0),
-                                                            child: Text(
+                                                            child:
+                                                            AppColor.AppLang==AppLanguageKeys.EN?
+                                                            Text(
                                                               firstCharacterUpper(
                                                               state
                                                                   .coupons[
                                                                       index]
                                                                   .enName),
+                                                              style: TextStyle(
+                                                                  color: Color(
+                                                                      0xff393741),
+                                                                  fontSize: 18),
+                                                            ):
+                                                            Text(
+                                                              firstCharacterUpper(
+                                                                  state
+                                                                      .coupons[
+                                                                  index]
+                                                                      .arName,en: false),
                                                               style: TextStyle(
                                                                   color: Color(
                                                                       0xff393741),
@@ -2128,24 +2226,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                Text(
-                                                                    "Starts From",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Color(
-                                                                          0xff393741),
-                                                                      fontSize:
-                                                                          15,
-                                                                    )),
-                                                                Text(
-                                                                  state.coupons[index]
-                                                                          .mainPrice +
-                                                                      "\$",
-                                                                  style: TextStyle(
-                                                                      color: AppColor
-                                                                          .darkYellow,
-                                                                      fontSize:
-                                                                          15),
+                                                                Flexible(
+                                                                  child: Text(
+                                                                      AppLocalizations.of(context).translate("starts_from"),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Color(
+                                                                            0xff393741),
+                                                                        fontSize:
+                                                                            14,
+                                                                      )),
+                                                                ),
+                                                                Flexible(
+                                                                  child: Text(
+                                                                    state.coupons[index]
+                                                                            .mainPrice +
+                                                                        CurrencyApp,
+                                                                    style: TextStyle(
+                                                                        color: AppColor
+                                                                            .darkYellow,
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
                                                                 )
                                                               ],
                                                             ),
@@ -2274,29 +2376,41 @@ Widget singleCategory({String title, String image}) {
 
 }
 
-String getCapitalizeString({String str}) {
-  if (str.length <= 1) { return str.toUpperCase(); }
+String getCapitalizeString({String str,bool en=true}) {
+
+  if(en){
+    if (str.length <= 1) { return str.toUpperCase(); }
   return '${str[0].toUpperCase()}${str.substring(1)}';
+  }
+
+  else return str;
+
+
 }
 
-firstCharacterUpper(String text) {
-  List arrayPieces = List();
+firstCharacterUpper(String text,{bool en=true}) {
 
-  String outPut = '';
+  if(en){
+    List arrayPieces = List();
 
-  // text = 'this is only a example'; // This is not necessary, is only for the example. The text here is that one is passed in parameter.
+    String outPut = '';
 
-  text.split(' ').forEach((sepparetedWord) {
-    arrayPieces.add(sepparetedWord);
-  });
+    // text = 'this is only a example'; // This is not necessary, is only for the example. The text here is that one is passed in parameter.
 
-  arrayPieces.forEach((word) {
-    word =
-    "${word[0].toString().toUpperCase()}${word.toString().substring(1)} ";
-    outPut += word;
-  });
+    text.split(' ').forEach((sepparetedWord) {
+      arrayPieces.add(sepparetedWord);
+    });
 
-  return outPut;
+    arrayPieces.forEach((word) {
+      word =
+      "${word[0].toString().toUpperCase()}${word.toString().substring(1)} ";
+      outPut += word;
+    });
+
+    return outPut;
+  }
+  else return text;
+
 }
 
 // Container(

@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/model/wrap_model/wrap_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -99,7 +100,7 @@ class FunkyOverlayState extends State<FunkyOverlay>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  baseText(title: "Choose a Wrap" , size: 30.0,color:AppColor.textColor ),
+                  baseText(title: AppLocalizations.of(context).translate("choose_wrap") , size: 30.0,color:AppColor.textColor ),
                  Container(
                    height: size.height*0.22,
                    child: ListView.builder(
@@ -155,7 +156,7 @@ class FunkyOverlayState extends State<FunkyOverlay>
                                              height:100 ,
                                              child: Image.network(BaseImgUrl+widget.wraps[index].image,fit: BoxFit.fill,)),
                                        ),
-                                       Text(widget.wraps[index].mainPrice+"\$",style: TextStyle(
+                                       Text(widget.wraps[index].mainPrice+"$CurrencyApp",style: TextStyle(
                                            color: Colors.white,
                                            fontSize: 24,
                                            fontWeight: FontWeight.bold
@@ -178,7 +179,7 @@ class FunkyOverlayState extends State<FunkyOverlay>
 
                   Column(
                     children: [
-                      baseText(title: "Available Size:", color: Color(0xff393741) , size: 18.0),
+                      baseText(title: AppLocalizations.of(context).translate("avalible_size"), color: Color(0xff393741) , size: 18.0),
                       Center(
                         child: Container(
                           height: 40,
@@ -225,7 +226,7 @@ class FunkyOverlayState extends State<FunkyOverlay>
                   (selectedWrap != -1 && widget.wraps[selectedWrap].colors.isNotEmpty)?
                   Column(
                     children: [
-                      baseText(title: "Colors:", color: Color(0xff393741) , size: 18.0),
+                      baseText(title: AppLocalizations.of(context).translate("colors_hint"), color: Color(0xff393741) , size: 18.0),
                       Container(
                         height: 40,
                         child: ListView.builder(

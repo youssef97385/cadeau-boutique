@@ -7,6 +7,8 @@ import 'package:cadeaue_boutique/Ui/track_screen/bloc/track_screen_event.dart';
 import 'package:cadeaue_boutique/app/bloc/app_bloc.dart';
 import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
+import 'package:cadeaue_boutique/core/constent.dart';
+import 'package:cadeaue_boutique/data/prefs_helper/prefs_helper.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +63,8 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-  //  var lang=Localizations.localeOf(context).toString();
+
+  //  print("MY LANG  $lang");
   //   _AppBloc.add(IniEvent((b)=>b ..langDevice="en"));
     _AppBloc.add(IniEvent());
     return BlocBuilder(
@@ -109,8 +112,18 @@ class _AppState extends State<App> {
                     const Locale('en', ''), // English
                     const Locale('ar', ''), // Arabic
                   ],
-                localeResolutionCallback: (locale, supportedLocales) {
+                localeResolutionCallback: (locale, supportedLocales){
                     print("test11 $locale");
+
+                    if(locale.toString().contains("ar")){
+                      print("AAAAARRRRRRRRRRR");
+                      AppColor.AppLang=AppLanguageKeys.AR;}
+                    else {AppColor.AppLang=AppLanguageKeys.EN;
+                    print("EEEENNNN");
+                    }
+
+
+
                   // Check if the current device locale is supported
                   for (var supportedLocale in supportedLocales) {
                     if (supportedLocale.languageCode == locale.languageCode) {

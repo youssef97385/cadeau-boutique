@@ -1,6 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/cart_screen/cart_screen.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
+import 'package:cadeaue_boutique/core/app_language.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
@@ -288,10 +290,18 @@ class _ProductScreenState extends State<ProductScreen> {
 
                          ///description
 
+                         AppColor.AppLang==AppLanguageKeys.EN?
                          Padding(
                            padding: const EdgeInsets.only(left: 24.0, right: 46),
                            child: baseText(
                                title: state.product.description == null ?"":state.product.description,
+                               color: AppColor.textColor,
+                               size: 16.0, height: 2.0),
+                         ):
+                         Padding(
+                           padding: const EdgeInsets.only(left: 24.0, right: 46),
+                           child: baseText(
+                               title: state.product.descriptionAr == null ?"":state.product.descriptionAr,
                                color: AppColor.textColor,
                                size: 16.0, height: 2.0),
                          ),
@@ -305,7 +315,7 @@ class _ProductScreenState extends State<ProductScreen> {
                          state.product.sizes.isEmpty?Container():
                          Padding(
                            padding: const EdgeInsets.only(left: 24.0),
-                           child: baseText(title: "Size:",
+                           child: baseText(title: AppLocalizations.of(context).translate("size_hint"),
                              size: 18.0,
                              fontWeight: FontWeight.bold,
                              color: AppColor.darkTextColor,),
@@ -478,8 +488,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                         btnOkColor: AppColor.darkYellow,
                                         dialogType: DialogType.INFO,
                                         animType: AnimType.BOTTOMSLIDE,
-                                        title: 'Login',
-                                        desc: 'You must be logged in',
+                                        title: AppLocalizations.of(context).translate('login'),
+                                        desc: AppLocalizations.of(context).translate('you_must_logged_in'),
                                         btnCancelOnPress: () { },
                                         btnOkOnPress: () {
                                           WidgetsBinding.instance.addPostFrameCallback((_) =>
@@ -516,7 +526,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     }
                                    },
                                    child: Text(
-                                     'Add Wrap',
+                                     AppLocalizations.of(context).translate('add_wrap'),
                                      style: TextStyle(
                                        color: AppColor.textColor,
                                        fontSize: 13,
@@ -567,8 +577,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                          btnOkColor: AppColor.darkYellow,
                                          dialogType: DialogType.INFO,
                                          animType: AnimType.BOTTOMSLIDE,
-                                         title: 'Login',
-                                         desc: 'You must be logged in',
+                                         title: AppLocalizations.of(context).translate('login'),
+                                         desc: AppLocalizations.of(context).translate('you_must_logged_in'),
                                          btnCancelOnPress: () { },
                                          btnOkOnPress: () {
                                            WidgetsBinding.instance.addPostFrameCallback((_) =>
@@ -612,7 +622,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
                                    },
                                    child: Text(
-                                     'Add To Cart',
+                                     AppLocalizations.of(context).translate('add_to_cart'),
                                      style: TextStyle(
                                        color: AppColor.textColor,
                                        fontSize: 13,

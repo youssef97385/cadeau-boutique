@@ -1,4 +1,5 @@
 
+import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -35,12 +36,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _myRadioButton(
                       title: "Arabic",
                       value: 0,
-                      onChanged: (newValue) => setState(() => _groupValue = newValue),
+                      onChanged: (newValue) {
+                        AppColor.AppLang=AppLanguageKeys.AR;
+                        changeAppLanguage(1);
+                        setState(() => _groupValue = newValue);
+                      }
                     ),
                     _myRadioButton(
                       title: "English",
                       value: 1,
-                      onChanged: (newValue) => setState(() => _groupValue = newValue),
+                      onChanged: (newValue) {
+                        AppColor.AppLang=AppLanguageKeys.EN;
+                        changeAppLanguage(0);
+                        setState(() => _groupValue = newValue);
+                      }
                     ),
 
                     SizedBox(height: 20,),

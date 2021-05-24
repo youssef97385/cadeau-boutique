@@ -310,7 +310,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             errorBorder:  InputBorder.none,
                                             hintText: AppLocalizations.of(context).translate("full_name"),
                                             contentPadding:
-                                            EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                                            EdgeInsets.only(left:16 ,right: 16, top:size.height*0.02 , ),
                                             suffixIcon: false
                                                 ? Icon(
                                               Icons.arrow_drop_down,
@@ -347,7 +347,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ]),
                                       child: Center(
                                         child: Padding(
-                                          padding: const EdgeInsets.only(left:8.0),
+                                          padding: const EdgeInsets.only(left:8.0,right: 8),
                                           child: Row(
                                             children: [
                                              /* Container(
@@ -405,7 +405,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                       // labelText: "Phone Number",
                                                       hintText: AppLocalizations.of(context).translate("phone_number"),
                                                       contentPadding:
-                                                      EdgeInsets.only(left: 16 , top: size.height*0.02 ),
+                                                      EdgeInsets.only(left: 16 ,right: 16, top: size.height*0.02 ),
                                                       suffixIcon: false
                                                           ? Icon(
                                                         Icons.arrow_drop_down,
@@ -474,7 +474,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             disabledBorder: InputBorder.none,
                                             hintText: AppLocalizations.of(context).translate("email_address"),
                                             contentPadding:
-                                            EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                                            EdgeInsets.only(left:16 ,right: 16, top:size.height*0.02 , ),
                                             suffixIcon: false
                                                 ? Icon(
                                               Icons.arrow_drop_down,
@@ -522,7 +522,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             child: Padding(
-                                              padding:  EdgeInsets.only(left:16.0 ,top: size.height*0.02),
+                                              padding:  EdgeInsets.only(left:16.0,right: 16 ,top: size.height*0.02),
                                               // child: Text(
                                               //   _dateSelected? selectedDate.toString().substring(0, 10):AppLocalizations.of(context).translate("date_Of_birth")
                                               //   ,style: TextStyle(color: AppColor.textColor ,fontSize: 14),

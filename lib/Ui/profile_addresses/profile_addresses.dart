@@ -141,7 +141,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                 Container(
                                   width: size.width,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left:16.0),
+                                    padding: const EdgeInsets.only(left:16.0,right: 16),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -166,7 +166,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                           height: size.height*0.04,
                                         ),*/
                                         Padding(
-                                          padding: const EdgeInsets.only(left:8.0),
+                                          padding: const EdgeInsets.only(left:8.0,right: 8),
                                           child: Container(
                                             height: size.height*0.07,
                                             child: baseText(title: "" , color: AppColor.textColor , size:18.0 ),
@@ -216,7 +216,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                               disabledBorder: InputBorder.none,
                                               hintText: AppLocalizations.of(context).translate("city"),
                                               contentPadding:
-                                              EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                                              EdgeInsets.only(left:16 ,right: 16, top:size.height*0.02 , ),
                                               suffixIcon: false
                                                   ? Icon(
                                                 Icons.arrow_drop_down,
@@ -267,7 +267,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                               disabledBorder: InputBorder.none,
                                               hintText: AppLocalizations.of(context).translate("state"),
                                               contentPadding:
-                                              EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                                              EdgeInsets.only(left:16 ,right: 16, top:size.height*0.02 , ),
                                               suffixIcon: false
                                                   ? Icon(
                                                 Icons.arrow_drop_down,
@@ -321,7 +321,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                               disabledBorder: InputBorder.none,
                                               hintText: AppLocalizations.of(context).translate("address_details"),
                                               contentPadding:
-                                              EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                                              EdgeInsets.only(left:16 ,right: 16, top:size.height*0.02 , ),
                                               suffixIcon: false
                                                   ? Icon(
                                                 Icons.arrow_drop_down,
@@ -371,7 +371,7 @@ class _ProfileAddressesScreenState extends State<ProfileAddressesScreen> {
                                               disabledBorder: InputBorder.none,
                                               hintText:AppLocalizations.of(context).translate("zip_code"),
                                               contentPadding:
-                                              EdgeInsets.only(left:16 , top:size.height*0.02 , ),
+                                              EdgeInsets.only(left:16,right: 16 , top:size.height*0.02 , ),
                                               suffixIcon: false
                                                   ? Icon(
                                                 Icons.arrow_drop_down,

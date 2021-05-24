@@ -50,6 +50,10 @@ abstract class ProductModel implements Built<ProductModel, ProductModelBuilder> 
   @nullable
   String get description;
 
+  @BuiltValueField(wireName: "description_ar")
+  @nullable
+  String get descriptionAr;
+
   @nullable
   int get likes;
 

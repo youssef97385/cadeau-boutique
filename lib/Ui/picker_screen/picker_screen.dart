@@ -888,7 +888,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context).translate("4 out of 5"),
+                        AppLocalizations.of(context).translate("4_out_of_5"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),

@@ -55,7 +55,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
 
-
+    var lang=Localizations.localeOf(context).toString();
+    print("MY LANG  $lang");
 var size = MediaQuery.of(context).size;
 
 

@@ -70,6 +70,7 @@
   "find_now": "بحث الان",
   "back": "رجوع",
   "tow_out_five": "2 من اصل 5",
+  "four_out_five": "4 من اصل 5",
   "next": "التالي",
   "choose_relation": "اختر العلاقة",
   "three_out_five": "3 من اصل 5",
@@ -125,5 +126,11 @@
 
   "shipping_charges": "سعر الشحن",
   "valet": "سعر الضريبة",
-  "final_total_price": "السعر النهائي "
+  "final_total_price": "السعر النهائي ",
+  "starts_from": "يبدأ من",
+  "size_hint": "الحجم : ",
+  "add_to_cart": "اضافة الى السلة",
+  "choose_wrap": "اختر تغليف",
+  "avalible_size": "الاحجام المتاحة: ",
+  "colors_hint": "الالوان : "
 }

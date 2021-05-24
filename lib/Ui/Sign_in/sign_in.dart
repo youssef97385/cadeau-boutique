@@ -597,7 +597,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                           hintText: AppLocalizations.of(context).translate("phone_number"),
                                                           contentPadding:
                                                               EdgeInsets.only(
-                                                                   left:8 , top:size.height*0.02 ),
+                                                                  right: 8, left:8 , top:size.height*0.02 ),
 
                                                         ),
                                                         onChanged: (val) {
@@ -644,7 +644,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                                   disabledBorder: InputBorder.none,
                                                   hintText: AppLocalizations.of(context).translate("password"),
                                                   contentPadding:
-                                                      EdgeInsets.only(left:16,top:size.height*0.02),
+                                                      EdgeInsets.only(left:16,right: 16,top:size.height*0.02),
                                                   suffixIcon: false
                                                       ? Icon(
                                                           Icons.arrow_drop_down,

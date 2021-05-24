@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
@@ -151,7 +152,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                           const EdgeInsets.only(bottom: 8.0),
                                           child: Container(
                                               width: 160,
-                                              height: 121,
+                                              height: 130,
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.all(Radius.circular(12)),
                                                 child: Image.network(
@@ -163,12 +164,21 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                         Padding(
                                           padding:
                                           const EdgeInsets.only(left: 8.0),
-                                          child: Text(
+                                          child: 
+                                          
+                                              AppColor.AppLang==AppLanguageKeys.EN?
+                                          Text(
                                             state.products[index].nameEn,
                                             style: TextStyle(
                                                 color: Color(0xff393741),
                                                 fontSize: 18),
-                                          ),
+                                          ):
+                                              Text(
+                                                state.products[index].nameAr,
+                                                style: TextStyle(
+                                                    color: Color(0xff393741),
+                                                    fontSize: 18),
+                                              ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
@@ -179,17 +189,19 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                             children: [
                                               // Text(
                                               //     state.products[index].mainPrice +
-                                              //         "\$",
+                                              //         "CurrencyApp",
                                               //     style: TextStyle(
                                               //         color: Color(0xff393741),
                                               //         fontSize: 15,
                                               //         decoration: TextDecoration
                                               //             .lineThrough)),
-                                              Text(
-                                                state.products[index].salePrice + "\$",
-                                                style: TextStyle(
-                                                    color: AppColor.darkYellow,
-                                                    fontSize: 15),
+                                              Flexible(
+                                                child: Text(
+                                                  state.products[index].salePrice + "$CurrencyApp",
+                                                  style: TextStyle(
+                                                      color: AppColor.darkYellow,
+                                                      fontSize: 15),
+                                                ),
                                               )
                                             ],
                                           ),

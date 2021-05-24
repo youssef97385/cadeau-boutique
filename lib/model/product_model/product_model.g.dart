@@ -80,6 +80,13 @@ class _$ProductModelSerializer implements StructuredSerializer<ProductModel> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.descriptionAr;
+    if (value != null) {
+      result
+        ..add('description_ar')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.likes;
     if (value != null) {
       result
@@ -180,6 +187,10 @@ class _$ProductModelSerializer implements StructuredSerializer<ProductModel> {
           result.description = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'description_ar':
+          result.descriptionAr = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'likes':
           result.likes = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
@@ -239,6 +250,8 @@ class _$ProductModel extends ProductModel {
   @override
   final String description;
   @override
+  final String descriptionAr;
+  @override
   final int likes;
   @override
   final String gender;
@@ -266,6 +279,7 @@ class _$ProductModel extends ProductModel {
       this.categoryId,
       this.salePrice,
       this.description,
+      this.descriptionAr,
       this.likes,
       this.gender,
       this.isFavourite,
@@ -295,6 +309,7 @@ class _$ProductModel extends ProductModel {
         categoryId == other.categoryId &&
         salePrice == other.salePrice &&
         description == other.description &&
+        descriptionAr == other.descriptionAr &&
         likes == other.likes &&
         gender == other.gender &&
         isFavourite == other.isFavourite &&
@@ -321,16 +336,22 @@ class _$ProductModel extends ProductModel {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                $jc(0,
-                                                                    id.hashCode),
-                                                                nameAr.hashCode),
-                                                            nameEn.hashCode),
-                                                        image.hashCode),
-                                                    mainPrice.hashCode),
-                                                brandId.hashCode),
-                                            categoryId.hashCode),
-                                        salePrice.hashCode),
-                                    description.hashCode),
+                                                                $jc(
+                                                                    $jc(
+                                                                        0,
+                                                                        id
+                                                                            .hashCode),
+                                                                    nameAr
+                                                                        .hashCode),
+                                                                nameEn
+                                                                    .hashCode),
+                                                            image.hashCode),
+                                                        mainPrice.hashCode),
+                                                    brandId.hashCode),
+                                                categoryId.hashCode),
+                                            salePrice.hashCode),
+                                        description.hashCode),
+                                    descriptionAr.hashCode),
                                 likes.hashCode),
                             gender.hashCode),
                         isFavourite.hashCode),
@@ -352,6 +373,7 @@ class _$ProductModel extends ProductModel {
           ..add('categoryId', categoryId)
           ..add('salePrice', salePrice)
           ..add('description', description)
+          ..add('descriptionAr', descriptionAr)
           ..add('likes', likes)
           ..add('gender', gender)
           ..add('isFavourite', isFavourite)
@@ -403,6 +425,11 @@ class ProductModelBuilder
   String get description => _$this._description;
   set description(String description) => _$this._description = description;
 
+  String _descriptionAr;
+  String get descriptionAr => _$this._descriptionAr;
+  set descriptionAr(String descriptionAr) =>
+      _$this._descriptionAr = descriptionAr;
+
   int _likes;
   int get likes => _$this._likes;
   set likes(int likes) => _$this._likes = likes;
@@ -448,6 +475,7 @@ class ProductModelBuilder
       _categoryId = $v.categoryId;
       _salePrice = $v.salePrice;
       _description = $v.description;
+      _descriptionAr = $v.descriptionAr;
       _likes = $v.likes;
       _gender = $v.gender;
       _isFavourite = $v.isFavourite;
@@ -486,6 +514,7 @@ class ProductModelBuilder
               categoryId: categoryId,
               salePrice: salePrice,
               description: description,
+              descriptionAr: descriptionAr,
               likes: likes,
               gender: gender,
               isFavourite: isFavourite,

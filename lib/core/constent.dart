@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/model/user_info_model/user_info_model.dart';
 import 'package:cadeaue_boutique/model/UserInfoV2.dart';
 import 'package:cadeaue_boutique/model/DetailsUserV2.dart';
@@ -11,9 +12,15 @@ const String BaseImgUrl = "http://apis.cadeauboutique.com/";
 
 const String ImageUrl = "";
 
+const String CurrencyApp="SAR";
+
+
 
 
 class AppColor {
+
+  static int AppLang=AppLanguageKeys.EN;
+
 
   static UserInfoV2 UserInfoModelGlobal=UserInfoV2();
   static DetailsUserV2 UserAddressV2=DetailsUserV2();
