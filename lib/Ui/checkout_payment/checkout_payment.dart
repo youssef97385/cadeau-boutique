@@ -7,12 +7,27 @@ import 'package:cadeaue_boutique/Ui/checkout_payment/checkout_payment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
+import 'package:built_collection/built_collection.dart';
 class CheckoutPayment extends StatefulWidget {
+
+  BuiltList<String> gifftTo;
+  BuiltList<String> countryCode;
+  BuiltList<String> phone;
+  BuiltList<String> deleviryDate;
+  BuiltList<String> address;
+  String total;
+
+
+  CheckoutPayment({this.gifftTo, this.countryCode, this.phone, this.deleviryDate,
+      this.address, this.total});
+
   @override
   _CheckoutPaymentState createState() => _CheckoutPaymentState();
 }
 
 class _CheckoutPaymentState extends State<CheckoutPayment> {
+
+  int numberIndex=1;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -57,127 +72,210 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                 SizedBox(
                   height: size.height * 0.07,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:24.0),
-                  child: Container(
-                    height: size.height * 0.15,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(12)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(1, 1),
-                            color: Colors.grey.withOpacity(0.6),
-                            blurRadius: 5,
-                            spreadRadius: 3,
-                          ),
-                        ]),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: size.height * 0.025,
-                          horizontal: size.width * 0.03),
-                      child: Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/images/profile/visa.svg",
-                                fit: BoxFit.fill,
-                              ),
-                              SvgPicture.asset(
-                                  "assets/images/profile/edit.svg"),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: size.width * 0.05),
-                            child: Row(
+                GestureDetector(
+                  onTap: (){
+
+                    setState(() {
+                      numberIndex=1;
+                    });
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:24.0),
+                    child: Container(
+                      height: size.height * 0.11,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(16)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.6),
+                              blurRadius: 5,
+                              spreadRadius: 3,
+                            ),
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: size.height * 0.025,
+                            horizontal: size.width * 0.03),
+                        child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
-                                baseText(
-                                    title: "Card Number:",
-                                    color: Color(0xff393741),
-                                    size: 16.0),
+                                SvgPicture.asset(
+                                  "assets/images/profile/visa.svg",
+                                  fit: BoxFit.fill,
 
-                                baseText(
-                                    title: "************ 5555",
-                                    color: Color(0xff393741),
-                                    size: 16.0),
+                                ),
+
+                                numberIndex==1?
+                                SvgPicture.asset(
+                                  "assets/images/checked.svg",
+                                  fit: BoxFit.fill,
+                                  height: 40,
+                                  width: 40,
+                                )
+                                    :SvgPicture.asset(
+                                  "assets/images/unchecked.svg",
+                                  fit: BoxFit.fill,
+                                  height: 40,
+                                  width: 40,
+                                ),
+
                               ],
                             ),
-                          ),
 
-                        ],
+
+
+
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:24.0),
-                  child: Container(
-                    height: size.height * 0.15,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(12)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(1, 1),
-                            color: Colors.grey.withOpacity(0.6),
-                            blurRadius: 5,
-                            spreadRadius: 3,
-                          ),
-                        ]),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: size.height * 0.025,
-                          horizontal: size.width * 0.03),
-                      child: Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/images/profile/visa.svg",
-                                fit: BoxFit.fill,
-                              ),
-                              SvgPicture.asset(
-                                  "assets/images/profile/edit.svg"),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: size.width * 0.05),
-                            child: Row(
+                GestureDetector(
+                  onTap: (){
+
+                    setState(() {
+                      numberIndex=2;
+                    });
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:24.0),
+                    child: Container(
+                      height: size.height * 0.11,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(16)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.6),
+                              blurRadius: 5,
+                              spreadRadius: 3,
+                            ),
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: size.height * 0.025,
+                            horizontal: size.width * 0.03),
+                        child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
-                                baseText(
-                                    title: "Card Number:",
-                                    color: Color(0xff393741),
-                                    size: 16.0),
+                                SvgPicture.asset(
+                                  "assets/images/mc_hrz_pos.svg",
+                                  fit: BoxFit.fill,
+                                  height: 30,
+                                  width: 30,
+                                ),
 
-                                baseText(
-                                    title: "************ 5555",
-                                    color: Color(0xff393741),
-                                    size: 16.0),
+                                numberIndex==2?
+                                SvgPicture.asset(
+                                  "assets/images/checked.svg",
+                                  fit: BoxFit.fill,
+                                  height: 40,
+                                  width: 40,
+                                )
+                                    :SvgPicture.asset(
+                                  "assets/images/unchecked.svg",
+                                  fit: BoxFit.fill,
+                                  height: 40,
+                                  width: 40,
+                                ),
+
                               ],
                             ),
-                          ),
 
-                        ],
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                GestureDetector(
+                  onTap: (){
+
+                    setState(() {
+                      numberIndex=3;
+                    });
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:24.0),
+                    child: Container(
+                      height: size.height * 0.11,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(16)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.6),
+                              blurRadius: 5,
+                              spreadRadius: 3,
+                            ),
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: size.height * 0.025,
+                            horizontal: size.width * 0.03),
+                        child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/images/mada.svg",
+                                  fit: BoxFit.fill,
+                                  height: 30,
+                                  width: 30,
+                                ),
+
+
+                                numberIndex==3?
+                                SvgPicture.asset(
+                                  "assets/images/checked.svg",
+                                  fit: BoxFit.fill,
+                                  height: 40,
+                                  width: 40,
+                                )
+                                :SvgPicture.asset(
+                                  "assets/images/unchecked.svg",
+                                  fit: BoxFit.fill,
+                                  height: 40,
+                                  width: 40,
+                                ),
+
+                              ],
+                            ),
+
+
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -215,10 +313,10 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                       child: FlatButton(
                         // splashColor: Colors.red,
                         onPressed: () {
-                          Navigator.push(
+                        /*  Navigator.push(
                             context,
                             PageRouteBuilder(pageBuilder: (_, __, ___) => CheckoutPayment()),
-                          );
+                          );*/
                           // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
                         },
                         child: Text(
@@ -236,14 +334,14 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                 SizedBox(
                   height: size.height*0.05,
                 ),
-                Padding(
+             /*   Padding(
                   padding: const EdgeInsets.symmetric(horizontal:24.0),
                   child: Container(
                     height: size.height * 0.18,
                     width: size.width,
                     decoration: BoxDecoration(
                       borderRadius:
-                      BorderRadius.all(Radius.circular(12)),
+                      BorderRadius.all(Radius.circular(16)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -365,7 +463,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                 ),
                 SizedBox(
                   height: 20,
-                )
+                )*/
               ],
             ),
 

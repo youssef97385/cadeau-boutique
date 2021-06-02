@@ -176,7 +176,8 @@ class _CheckoutCouponsState extends State<CheckoutCoupons> {
                         height: size.height * 0.05,
                       ),
                       Container(
-                        height: 70,
+
+                        height: 80,
                         child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
@@ -300,6 +301,7 @@ class _CheckoutCouponsState extends State<CheckoutCoupons> {
                           hintText: AppLocalizations.of(context).translate("gift_to"),
                           contentPadding: EdgeInsets.only(
                             left: 16,
+                            right: 16,
                             top: size.height * 0.02,
                           ),
                           suffixIcon: false

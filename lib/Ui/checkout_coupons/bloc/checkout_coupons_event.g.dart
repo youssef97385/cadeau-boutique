@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of checkout_event;
+part of checkout_coupons_event;
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -10,32 +10,20 @@ class _$AddReciever extends AddReciever {
   @override
   final String giftTo;
   @override
-  final String deliveryDate;
-  @override
   final String countryCode;
   @override
   final String phoneNumber;
-  @override
-  final String address;
 
   factory _$AddReciever([void Function(AddRecieverBuilder) updates]) =>
       (new AddRecieverBuilder()..update(updates)).build();
 
-  _$AddReciever._(
-      {this.giftTo,
-      this.deliveryDate,
-      this.countryCode,
-      this.phoneNumber,
-      this.address})
+  _$AddReciever._({this.giftTo, this.countryCode, this.phoneNumber})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(giftTo, 'AddReciever', 'giftTo');
-    BuiltValueNullFieldError.checkNotNull(
-        deliveryDate, 'AddReciever', 'deliveryDate');
     BuiltValueNullFieldError.checkNotNull(
         countryCode, 'AddReciever', 'countryCode');
     BuiltValueNullFieldError.checkNotNull(
         phoneNumber, 'AddReciever', 'phoneNumber');
-    BuiltValueNullFieldError.checkNotNull(address, 'AddReciever', 'address');
   }
 
   @override
@@ -50,30 +38,22 @@ class _$AddReciever extends AddReciever {
     if (identical(other, this)) return true;
     return other is AddReciever &&
         giftTo == other.giftTo &&
-        deliveryDate == other.deliveryDate &&
         countryCode == other.countryCode &&
-        phoneNumber == other.phoneNumber &&
-        address == other.address;
+        phoneNumber == other.phoneNumber;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc($jc($jc(0, giftTo.hashCode), deliveryDate.hashCode),
-                countryCode.hashCode),
-            phoneNumber.hashCode),
-        address.hashCode));
+    return $jf($jc($jc($jc(0, giftTo.hashCode), countryCode.hashCode),
+        phoneNumber.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AddReciever')
           ..add('giftTo', giftTo)
-          ..add('deliveryDate', deliveryDate)
           ..add('countryCode', countryCode)
-          ..add('phoneNumber', phoneNumber)
-          ..add('address', address))
+          ..add('phoneNumber', phoneNumber))
         .toString();
   }
 }
@@ -85,10 +65,6 @@ class AddRecieverBuilder implements Builder<AddReciever, AddRecieverBuilder> {
   String get giftTo => _$this._giftTo;
   set giftTo(String giftTo) => _$this._giftTo = giftTo;
 
-  String _deliveryDate;
-  String get deliveryDate => _$this._deliveryDate;
-  set deliveryDate(String deliveryDate) => _$this._deliveryDate = deliveryDate;
-
   String _countryCode;
   String get countryCode => _$this._countryCode;
   set countryCode(String countryCode) => _$this._countryCode = countryCode;
@@ -97,20 +73,14 @@ class AddRecieverBuilder implements Builder<AddReciever, AddRecieverBuilder> {
   String get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String phoneNumber) => _$this._phoneNumber = phoneNumber;
 
-  String _address;
-  String get address => _$this._address;
-  set address(String address) => _$this._address = address;
-
   AddRecieverBuilder();
 
   AddRecieverBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _giftTo = $v.giftTo;
-      _deliveryDate = $v.deliveryDate;
       _countryCode = $v.countryCode;
       _phoneNumber = $v.phoneNumber;
-      _address = $v.address;
       _$v = null;
     }
     return this;
@@ -133,14 +103,10 @@ class AddRecieverBuilder implements Builder<AddReciever, AddRecieverBuilder> {
         new _$AddReciever._(
             giftTo: BuiltValueNullFieldError.checkNotNull(
                 giftTo, 'AddReciever', 'giftTo'),
-            deliveryDate: BuiltValueNullFieldError.checkNotNull(
-                deliveryDate, 'AddReciever', 'deliveryDate'),
             countryCode: BuiltValueNullFieldError.checkNotNull(
                 countryCode, 'AddReciever', 'countryCode'),
             phoneNumber: BuiltValueNullFieldError.checkNotNull(
-                phoneNumber, 'AddReciever', 'phoneNumber'),
-            address: BuiltValueNullFieldError.checkNotNull(
-                address, 'AddReciever', 'address'));
+                phoneNumber, 'AddReciever', 'phoneNumber'));
     replace(_$result);
     return _$result;
   }
@@ -148,7 +114,7 @@ class AddRecieverBuilder implements Builder<AddReciever, AddRecieverBuilder> {
 
 class _$EditReciever extends EditReciever {
   @override
-  final RecieverModel recieverModel;
+  final ReciverCouponsModel recieverModel;
   @override
   final int index;
   @override
@@ -156,11 +122,7 @@ class _$EditReciever extends EditReciever {
   @override
   final String countryCode;
   @override
-  final String address;
-  @override
   final String phoneNumber;
-  @override
-  final String deliveryDate;
 
   factory _$EditReciever([void Function(EditRecieverBuilder) updates]) =>
       (new EditRecieverBuilder()..update(updates)).build();
@@ -170,9 +132,7 @@ class _$EditReciever extends EditReciever {
       this.index,
       this.giftTo,
       this.countryCode,
-      this.address,
-      this.phoneNumber,
-      this.deliveryDate})
+      this.phoneNumber})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         recieverModel, 'EditReciever', 'recieverModel');
@@ -180,11 +140,8 @@ class _$EditReciever extends EditReciever {
     BuiltValueNullFieldError.checkNotNull(giftTo, 'EditReciever', 'giftTo');
     BuiltValueNullFieldError.checkNotNull(
         countryCode, 'EditReciever', 'countryCode');
-    BuiltValueNullFieldError.checkNotNull(address, 'EditReciever', 'address');
     BuiltValueNullFieldError.checkNotNull(
         phoneNumber, 'EditReciever', 'phoneNumber');
-    BuiltValueNullFieldError.checkNotNull(
-        deliveryDate, 'EditReciever', 'deliveryDate');
   }
 
   @override
@@ -202,23 +159,17 @@ class _$EditReciever extends EditReciever {
         index == other.index &&
         giftTo == other.giftTo &&
         countryCode == other.countryCode &&
-        address == other.address &&
-        phoneNumber == other.phoneNumber &&
-        deliveryDate == other.deliveryDate;
+        phoneNumber == other.phoneNumber;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc(
-                $jc(
-                    $jc($jc($jc(0, recieverModel.hashCode), index.hashCode),
-                        giftTo.hashCode),
-                    countryCode.hashCode),
-                address.hashCode),
-            phoneNumber.hashCode),
-        deliveryDate.hashCode));
+            $jc($jc($jc(0, recieverModel.hashCode), index.hashCode),
+                giftTo.hashCode),
+            countryCode.hashCode),
+        phoneNumber.hashCode));
   }
 
   @override
@@ -228,9 +179,7 @@ class _$EditReciever extends EditReciever {
           ..add('index', index)
           ..add('giftTo', giftTo)
           ..add('countryCode', countryCode)
-          ..add('address', address)
-          ..add('phoneNumber', phoneNumber)
-          ..add('deliveryDate', deliveryDate))
+          ..add('phoneNumber', phoneNumber))
         .toString();
   }
 }
@@ -239,10 +188,10 @@ class EditRecieverBuilder
     implements Builder<EditReciever, EditRecieverBuilder> {
   _$EditReciever _$v;
 
-  RecieverModelBuilder _recieverModel;
-  RecieverModelBuilder get recieverModel =>
-      _$this._recieverModel ??= new RecieverModelBuilder();
-  set recieverModel(RecieverModelBuilder recieverModel) =>
+  ReciverCouponsModelBuilder _recieverModel;
+  ReciverCouponsModelBuilder get recieverModel =>
+      _$this._recieverModel ??= new ReciverCouponsModelBuilder();
+  set recieverModel(ReciverCouponsModelBuilder recieverModel) =>
       _$this._recieverModel = recieverModel;
 
   int _index;
@@ -257,17 +206,9 @@ class EditRecieverBuilder
   String get countryCode => _$this._countryCode;
   set countryCode(String countryCode) => _$this._countryCode = countryCode;
 
-  String _address;
-  String get address => _$this._address;
-  set address(String address) => _$this._address = address;
-
   String _phoneNumber;
   String get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String phoneNumber) => _$this._phoneNumber = phoneNumber;
-
-  String _deliveryDate;
-  String get deliveryDate => _$this._deliveryDate;
-  set deliveryDate(String deliveryDate) => _$this._deliveryDate = deliveryDate;
 
   EditRecieverBuilder();
 
@@ -278,9 +219,7 @@ class EditRecieverBuilder
       _index = $v.index;
       _giftTo = $v.giftTo;
       _countryCode = $v.countryCode;
-      _address = $v.address;
       _phoneNumber = $v.phoneNumber;
-      _deliveryDate = $v.deliveryDate;
       _$v = null;
     }
     return this;
@@ -310,12 +249,8 @@ class EditRecieverBuilder
                   giftTo, 'EditReciever', 'giftTo'),
               countryCode: BuiltValueNullFieldError.checkNotNull(
                   countryCode, 'EditReciever', 'countryCode'),
-              address: BuiltValueNullFieldError.checkNotNull(
-                  address, 'EditReciever', 'address'),
               phoneNumber: BuiltValueNullFieldError.checkNotNull(
-                  phoneNumber, 'EditReciever', 'phoneNumber'),
-              deliveryDate: BuiltValueNullFieldError.checkNotNull(
-                  deliveryDate, 'EditReciever', 'deliveryDate'));
+                  phoneNumber, 'EditReciever', 'phoneNumber'));
     } catch (_) {
       String _$failedField;
       try {
@@ -334,7 +269,7 @@ class EditRecieverBuilder
 
 class _$DeleteReciever extends DeleteReciever {
   @override
-  final RecieverModel reciever;
+  final ReciverCouponsModel reciever;
   @override
   final int index;
 
@@ -379,10 +314,11 @@ class DeleteRecieverBuilder
     implements Builder<DeleteReciever, DeleteRecieverBuilder> {
   _$DeleteReciever _$v;
 
-  RecieverModelBuilder _reciever;
-  RecieverModelBuilder get reciever =>
-      _$this._reciever ??= new RecieverModelBuilder();
-  set reciever(RecieverModelBuilder reciever) => _$this._reciever = reciever;
+  ReciverCouponsModelBuilder _reciever;
+  ReciverCouponsModelBuilder get reciever =>
+      _$this._reciever ??= new ReciverCouponsModelBuilder();
+  set reciever(ReciverCouponsModelBuilder reciever) =>
+      _$this._reciever = reciever;
 
   int _index;
   int get index => _$this._index;

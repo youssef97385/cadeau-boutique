@@ -253,15 +253,15 @@ class _MainDrawerState extends State<MainDrawer> {
 
                         GestureDetector(
 
-                       /*     onTap: (){
+                            onTap: (){
                              //  changeAppLanguage(1);
                               showComingSoonDialog();
-                            },*/
-                            onTap: (){
+                            },
+                        /*    onTap: (){
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context)=>SettingsScreen()
                               ));
-                            },
+                            },*/
                             child: singleDrawerItem("assets/images/drawer/settings.svg", AppLocalizations.of(context).translate("settings"))),
                         SizedBox(
                           height: 30,

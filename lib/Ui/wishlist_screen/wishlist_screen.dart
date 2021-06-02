@@ -1,5 +1,6 @@
  import 'package:cadeaue_boutique/Ui/empty_page/empty_page.dart';
 import 'package:cadeaue_boutique/Ui/product_screen/product_screen.dart';
+import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:cadeaue_boutique/injectoin.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,6 @@ class _WishlistScreenState extends State<WishlistScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _bloc.add(GetFavourites());
   }
@@ -118,7 +118,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            baseText(color: AppColor.darkTextColor , title: state.products[index].nameEn , size: 18.0 , fontWeight: FontWeight.bold ),
+                                            AppColor.AppLang==AppLanguageKeys.EN?
+                                            baseText(color: AppColor.darkTextColor , title: state.products[index].nameEn , size: 18.0 , fontWeight: FontWeight.bold ):
+                                            baseText(color: AppColor.darkTextColor , title: state.products[index].nameAr , size: 18.0 , fontWeight: FontWeight.bold ),
                                             baseText(color: AppColor.darkYellow , title: "\$ "+state.products[index].salePrice , size: 20.0 ),
                                             Container(
                                               // margin: EdgeInsets.only(bottom: 80),
@@ -148,7 +150,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                                                   _bloc.add(AddToCart((b)=> b..giftId  = state.products[index].id ));
                                                 },
                                                 child: Text(
-                                                  'Add To Cart',
+                                                  AppLocalizations.of(context).translate('add_to_cart'),
                                                   style: TextStyle(
                                                     color: AppColor.textColor,
                                                     fontSize: 12,

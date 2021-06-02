@@ -132,6 +132,15 @@
   "add_to_cart": "Add To Cart",
   "choose_wrap": "Choose a Wrap",
   "avalible_size": "Available Size:",
-  "colors_hint": "Colors : "
+  "colors_hint": "Colors : ",
+  "price": "Price",
+  "card_hint1": "One Wrap For All Gifts",
+  "card_hint_2": "Add One Wrap For All Gifts",
+  "success_hint1": "Your order has been placed Successfully",
+  "welcome_hint1":"Let's Find You a Gift",
+  "no_result": "No Result Found",
+  "try_another_choices": "Try Another Choices"
+
+
 
 }

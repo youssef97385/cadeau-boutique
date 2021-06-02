@@ -173,7 +173,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                         height: size.height * 0.05,
                       ),
                       Container(
-                        height: 70,
+                        height: 80,
                         child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
@@ -195,6 +195,11 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                                                 index: index,
                                                 recieverCallBack: (index,
                                                      reciever,
+                                                    giftToDialog,
+                                                    addressDialog,
+                                                    phoneNumberDialog,
+                                                    countryCodeDilaog,
+                                                    dateDialog,
                                                      type) {
                                                   if (type == "delete") {
                                                     _bloc.add(DeleteReciever(
@@ -207,7 +212,12 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                                                         EditReciever((b) =>
                                                         b
                                                           ..index = index
-                                                          ..recieverModel = reciever));
+                                                          ..recieverModel = reciever
+                                                          ..giftTo=  giftToDialog
+                                                          ..address=addressDialog
+                                                          ..phoneNumber=phoneNumberDialog
+                                                          ..countryCode=countryCodeDilaog
+                                                        ..deliveryDate=dateDialog.toString()));
                                                   }
                                                 }),
                                       );
@@ -291,6 +301,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           hintText: AppLocalizations.of(context).translate("gift_to"),
                           contentPadding: EdgeInsets.only(
                             left: 16,
+                            right: 16,
                             top: size.height * 0.02,
                           ),
                           suffixIcon: false
@@ -442,7 +453,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           ),
                           child: Padding(
                             padding: EdgeInsets.only(
-                                left: 16.0, top: size.height * 0.02),
+                                left: 16.0,right: 16, top: size.height * 0.02),
                             child: Text(
                               _dateSelected
                                   ? selectedDate.toString().substring(0, 10)
@@ -491,6 +502,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           hintText: AppLocalizations.of(context).translate("delevery_address"),
                           contentPadding: EdgeInsets.only(
                             left: 16,
+                            right: 16,
                             top: size.height * 0.02,
                           ),
                           suffixIcon: false
@@ -564,6 +576,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                           _giftToController.clear();
                           _addressController.clear();
                           _phoneController.clear();
+
                         }
                       },
                       child: Text(
@@ -614,7 +627,7 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
 
                               error(AppLocalizations.of(context).translate(("Please_add_receivers_to_continue")));
                             }else
-                            Navigator.push(
+                           /* Navigator.push(
                               context,
                               PageRouteBuilder(
                                   pageBuilder: (_, __, ___) =>
@@ -625,8 +638,28 @@ class _CheckoutAddressState extends State<CheckoutAddress> {
                                         phone: state.phoneNumber,
                                         address: state.address,
                                         total: widget.total,
-                                      )),
-                            );
+                                      ))
+
+                                       );*/
+
+
+                             Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      CheckoutPayment(
+                                        gifftTo: state.giftTo,
+                                        countryCode: state.countryCode,
+                                        deleviryDate: state.deliveryDate,
+                                        phone: state.phoneNumber,
+                                        address: state.address,
+                                        total: widget.total,
+                                      ))
+
+                                       );
+
+
+
                             // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
                           },
                           child: Text(

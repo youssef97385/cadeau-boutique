@@ -1,6 +1,7 @@
 import 'package:cadeaue_boutique/Ui/filter_result/filter_result.dart';
 import 'package:cadeaue_boutique/Ui/home/page/bloc/home_event.dart';
 import 'package:cadeaue_boutique/Ui/home_screen/home_Screen.dart';
+import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -220,11 +221,16 @@ class _PickerScreenState extends State<PickerScreen> {
                               setState(() {
                                 pickedOccasion = index;
                                 occasionId = state.occasions[index].id;
-                                selectedOccasion = state.occasions[index].enName;
+                                selectedOccasion = AppColor.AppLang==AppLanguageKeys.EN?state.occasions[index].enName:state.occasions[index].arName;
                               });
                             },
-                            child: singleOccasion(
+                            child:AppColor.AppLang==AppLanguageKeys.EN?singleOccasion(
                                 title: state.occasions[index].enName,
+                                image: state.occasions[index].miniImage,
+                                color: pickedOccasion == index
+                                    ? AppColor.lightYellow
+                                    : Colors.white):singleOccasion(
+                                title: state.occasions[index].arName,
                                 image: state.occasions[index].miniImage,
                                 color: pickedOccasion == index
                                     ? AppColor.lightYellow
@@ -388,11 +394,17 @@ class _PickerScreenState extends State<PickerScreen> {
                               setState(() {
                                 pickedRelation = index;
                                 relationId = state.relations[index].id;
-                                selectedRelation = state.relations[index].enName;
+                                selectedRelation = AppColor.AppLang==AppLanguageKeys.EN?state.relations[index].enName:state.relations[index].arName;
                               });
                             },
-                            child: singleOccasion(
+                            child:AppColor.AppLang==AppLanguageKeys.EN?singleOccasion(
                                 title: state.relations[index].enName,
+                                image: state.relations[index].miniImage,
+                                color: pickedRelation == index
+                                    ? AppColor.lightYellow
+                                    : Colors.white):
+                            singleOccasion(
+                                title: state.relations[index].arName,
                                 image: state.relations[index].miniImage,
                                 color: pickedRelation == index
                                     ? AppColor.lightYellow
@@ -537,7 +549,7 @@ class _PickerScreenState extends State<PickerScreen> {
                           onTap: () {
                             setState(() {
                               picked = 1;
-                              genderValue = "male";
+                              genderValue = AppLocalizations.of(context).translate("male");
                             });
                           },
                           child: Container(
@@ -584,7 +596,7 @@ class _PickerScreenState extends State<PickerScreen> {
                           onTap: () {
                             setState(() {
                               picked = 2;
-                              genderValue = "female";
+                              genderValue = AppLocalizations.of(context).translate("female");
 
                             });
                           },
@@ -888,7 +900,7 @@ class _PickerScreenState extends State<PickerScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context).translate("4_out_of_5"),
+                        AppLocalizations.of(context).translate("four_out_five"),
                         style:
                             TextStyle(fontSize: 11, color: Color(0xff515A6B)),
                       ),

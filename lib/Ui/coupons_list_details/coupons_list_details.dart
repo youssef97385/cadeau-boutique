@@ -22,7 +22,7 @@ class _CouponsListDetailsState extends State<CouponsListDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
 
     _bloc.add(GetCouponsEvent());

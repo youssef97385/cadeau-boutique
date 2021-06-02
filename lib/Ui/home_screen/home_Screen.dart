@@ -2114,7 +2114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         vertical: 10.0,
                                       ),
                                       child: Container(
-                                        height: 200,
+                                        height: 220,
                                         child: ListView.builder(
                                             scrollDirection: Axis.horizontal,
                                             itemCount: state.coupons.length,

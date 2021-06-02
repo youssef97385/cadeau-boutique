@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
@@ -306,7 +307,7 @@ class _FilterResultState extends State<FilterResult> {
                                 },
                               ),
                             )
-                          : EmptyWidget(size: size , image: "assets/images/empty box.png",title: "No Result Found",subTitle: "Try Another Choices")
+                          : EmptyWidget(size: size , image: "assets/images/empty box.png",title: AppLocalizations.of(context).translate("no_result"),subTitle:  AppLocalizations.of(context).translate("try_another_choices"))
                     ],
                   ),
                 ),

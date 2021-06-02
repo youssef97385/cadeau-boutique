@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/picker_screen/picker_screen.dart';
@@ -99,7 +100,7 @@ class _WelcomePageState extends State<WelcomePage>  with TickerProviderStateMixi
                 SizedBox(
                   height: size.height*0.05,
                 ),
-                Text("Let's Find You a Gift",
+                Text(AppLocalizations.of(context).translate("welcome_hint1"),
                 style: TextStyle(
                   color: Color(0xff596273),
                   fontSize: 35,
@@ -137,7 +138,7 @@ class _WelcomePageState extends State<WelcomePage>  with TickerProviderStateMixi
                             Column(
                               children: [
                                 Text(
-                                  "WELCOME TO",
+                                  AppLocalizations.of(context).translate("welcome_to"),
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Color(0xff515A6B),
@@ -158,7 +159,7 @@ class _WelcomePageState extends State<WelcomePage>  with TickerProviderStateMixi
                                 padding: const EdgeInsets.all(20.0),
                                 child: Center(
                                   child: Text(
-                                    "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing.",
+                                    "",
                                     style: TextStyle(
 
                                       fontSize: 12,

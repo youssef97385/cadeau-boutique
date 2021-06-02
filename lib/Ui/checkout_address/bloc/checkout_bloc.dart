@@ -50,11 +50,27 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       }
     }
     if(event is EditReciever){
-      try {
+   /*   try {
         yield state.rebuild((b) => b
         ..recievers.replaceRange(event.index, event.index, [event.recieverModel])
             ..recievers.removeAt(event.index+1)
           );
+      } catch (e) {
+        print('edit  Error $e');
+      }*/
+
+      try {
+
+        add(DeleteReciever(
+                (b) =>b
+              ..index = event.index
+        ));
+        add(AddReciever((b) =>b..giftTo = event.giftTo
+          ..countryCode =event.countryCode
+          ..address=event.address
+          ..phoneNumber =event.phoneNumber
+            ..deliveryDate=event.deliveryDate
+        ));
       } catch (e) {
         print('edit  Error $e');
       }

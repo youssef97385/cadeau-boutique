@@ -43,7 +43,7 @@
   "update": "تعديل",
   "gift_to": "هديه الى",
   "Number_of_added_people": "عدد الاشخاص المضافين",
-  "check_out": "check out",
+  "check_out": "تحقق",
   "Please_add_receivers_to_continue": "الرجاء اضافة مستلمين للمتابعة",
   "Delivery_Date": "وقت التوصيل",
   "address": "العنوان",
@@ -132,5 +132,12 @@
   "add_to_cart": "اضافة الى السلة",
   "choose_wrap": "اختر تغليف",
   "avalible_size": "الاحجام المتاحة: ",
-  "colors_hint": "الالوان : "
+  "colors_hint": "الالوان : ",
+  "price": "السعر",
+  "card_hint1": "تغليف واحد لكل الهدايا",
+  "card_hint_2": "اضف تغليف لكل الهدايا",
+  "success_hint1": "تم تقديم طلبك بنجاح",
+  "welcome_hint1":"لنجد لك هدية",
+  "no_result": "لا يوجد نتائج",
+  "try_another_choices": "جرب خيارات اخرى"
 }

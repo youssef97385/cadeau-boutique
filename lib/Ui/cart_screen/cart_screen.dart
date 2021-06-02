@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/edit_wrap_item/edit_wrap_item.dart';
 import 'package:cadeaue_boutique/Ui/wrap_screen/wrap_screen.dart';
+import 'package:cadeaue_boutique/core/app_language.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/model/static/occasions_model.dart';
@@ -135,6 +136,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                   mainAxisSize: MainAxisSize.max,
 
                                                                   children: [
+                                                                   AppColor.AppLang==AppLanguageKeys.EN?
                                                                     Expanded(
                                                                       child: Text(state.cartList[index].gift.nameEn,style: TextStyle(
                                                                         fontSize: size.width * 0.06,
@@ -144,7 +146,17 @@ class _CartScreenState extends State<CartScreen> {
                                                                       ),
                                                                         textAlign: TextAlign.center,
                                                                       ),
-                                                                    )
+                                                                    ):
+                                                                   Expanded(
+                                                                     child: Text(state.cartList[index].gift.nameAr,style: TextStyle(
+                                                                         fontSize: size.width * 0.06,
+
+                                                                         fontWeight: FontWeight.bold,color: AppColor.darkTextColor
+
+                                                                     ),
+                                                                       textAlign: TextAlign.center,
+                                                                     ),
+                                                                   )
                                                                   ],
                                                                 ),
                                                                 Container(
@@ -224,16 +236,16 @@ class _CartScreenState extends State<CartScreen> {
                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   children: [
-                                                                                    baseText(color: AppColor.darkTextColor, title: "price", size: size.width * 0.04, fontWeight: FontWeight.normal),
+                                                                                    baseText(color: AppColor.darkTextColor, title: AppLocalizations.of(context).translate("price"), size: size.width * 0.04, fontWeight: FontWeight.normal),
                                                                                     SizedBox(
                                                                                       height: size.height * 0.005,
                                                                                         width: size.width*0.19,
                                                                                     ),
 
                                                                                     state.cartList[index].giftSizeId==null?
-                                                                                    baseText(color: AppColor.darkTextColor, title: " \$" + state.cartList[index].gift.salePrice, size: 16.0,
+                                                                                    baseText(color: AppColor.darkTextColor, title: " SAR" + state.cartList[index].gift.salePrice, size: 16.0,
                                                                                     textAlign: TextAlign.start):
-                                                                                    baseText(color: AppColor.darkTextColor, title: " \$" + state.cartList[index].giftSize.price, size: 16.0,
+                                                                                    baseText(color: AppColor.darkTextColor, title: " SAR" + state.cartList[index].giftSize.price, size: 16.0,
                                                                                         textAlign: TextAlign.start),
 
                                                                                   ],
@@ -248,7 +260,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                     Row(
                                                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                                                       children: [
-                                                                                        baseText(color: AppColor.darkTextColor, title:"wrap", size: size.width * 0.04, fontWeight: FontWeight.normal),
+                                                                                        baseText(color: AppColor.darkTextColor, title:AppLocalizations.of(context).translate("wrap"), size: size.width * 0.04, fontWeight: FontWeight.normal),
                                                                                       ],
                                                                                     ),
                                                                                     SizedBox(
@@ -257,7 +269,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                     ),
                                                                                     baseText(
                                                                                       color: AppColor.darkTextColor,
-                                                                                      title: "\$ 0" ,
+                                                                                      title: "SAR 0" ,
                                                                                       size: size.width * 0.04,
                                                                                         textAlign: TextAlign.start
                                                                                     ),
@@ -271,7 +283,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                     Row(
                                                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                                                       children: [
-                                                                                        baseText(color: AppColor.darkTextColor, title: "wrap", size: size.width * 0.04, fontWeight: FontWeight.normal,
+                                                                                        baseText(color: AppColor.darkTextColor, title: AppLocalizations.of(context).translate("wrap"), size: size.width * 0.04, fontWeight: FontWeight.normal,
                                                                                         textAlign: TextAlign.start),
                                                                                       ],
                                                                                     ),
@@ -281,7 +293,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                     ),
                                                                                     baseText(
                                                                                       color: AppColor.darkTextColor,
-                                                                                      title: " \$" + state.cartList[index].wrap.mainPrice,
+                                                                                      title: " SAR" + state.cartList[index].wrap.mainPrice,
                                                                                       size: size.width * 0.04,
                                                                                         textAlign: TextAlign.end
                                                                                     ),
@@ -306,12 +318,12 @@ class _CartScreenState extends State<CartScreen> {
                                                                                   ,
                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                   children: [
-                                                                                    baseText(color: AppColor.darkTextColor, title: "Total", size: size.width * 0.05, fontWeight: FontWeight.bold),
+                                                                                    baseText(color: AppColor.darkTextColor, title: AppLocalizations.of(context).translate("total"), size: size.width * 0.05, fontWeight: FontWeight.bold),
                                                                                     SizedBox(
                                                                                       height: size.height * 0.005,
                                                                                       width: size.width*0.17,
                                                                                     ),
-                                                                                    baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 18.0,fontWeight: FontWeight.bold),
+                                                                                    baseText(color: AppColor.darkYellow, title: " SAR" + state.cartList[index].totalPrice.toString(), size: 18.0,fontWeight: FontWeight.bold),
                                                                                   ],
                                                                                 ),
 
@@ -626,7 +638,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                           ),
                                                                                           baseText(
                                                                                             color: AppColor.darkYellow,
-                                                                                            title: " \$" + state.cartList[index].wrap.mainPrice,
+                                                                                            title: " SAR" + state.cartList[index].wrap.mainPrice,
                                                                                             size: size.width * 0.04,
                                                                                           ),
                                                                                         ],
@@ -650,7 +662,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                           SizedBox(
                                                                                             height: size.height * 0.005,
                                                                                           ),
-                                                                                          baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 16.0),
+                                                                                          baseText(color: AppColor.darkYellow, title: " SAR" + state.cartList[index].totalPrice.toString(), size: 16.0),
                                                                                         ],
                                                                                       ),
 
@@ -686,7 +698,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                             //               SizedBox(
                                                                             //                 height: size.height * 0.005,
                                                                             //               ),
-                                                                            //               baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].wrap.mainPrice, size: 16.0),
+                                                                            //               baseText(color: AppColor.darkYellow, title: " SAR" + state.cartList[index].wrap.mainPrice, size: 16.0),
                                                                             //             ],
                                                                             //           ),
                                                                             //           Row(
@@ -701,7 +713,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                             //               SizedBox(
                                                                             //                 height: size.height * 0.005,
                                                                             //               ),
-                                                                            //               baseText(color: AppColor.darkYellow, title: " \$" + state.cartList[index].totalPrice.toString(), size: 16.0),
+                                                                            //               baseText(color: AppColor.darkYellow, title: " SAR" + state.cartList[index].totalPrice.toString(), size: 16.0),
                                                                             //             ],
                                                                             //           ),
                                                                             //
@@ -899,8 +911,8 @@ class _CartScreenState extends State<CartScreen> {
                                             // state.cart.globalWrap != null &&
                                             //     !editGlobalWrap
                                             state.isGlobalWrab)
-                                        ? "One Wrap For All Gifts"
-                                        : "Add One Wrap For All Gifts",
+                                        ? AppLocalizations.of(context).translate("card_hint1")
+                                        : AppLocalizations.of(context).translate("card_hint_2"),
                                     color: AppColor.lightTextColor,
                                     size: 17.0),
                                 SizedBox(
@@ -1011,7 +1023,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                     baseText(
                                                                         color: AppColor
                                                                             .darkYellow,
-                                                                        title: " \$" +
+                                                                        title: " SAR" +
                                                                             state
                                                                                 .cart.globalWrap.mainPrice,
                                                                         size:
@@ -1239,7 +1251,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   //                         height:100 ,
                                                   //                         child: Image.asset("assets/images/wrap.png",fit: BoxFit.fill,)),
                                                   //                   ),
-                                                  //                   Text("200\$",style: TextStyle(
+                                                  //                   Text("200SAR",style: TextStyle(
                                                   //                       color: Colors.white,
                                                   //                       fontSize: 24,
                                                   //                       fontWeight: FontWeight.bold
@@ -1333,7 +1345,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                                   )),
                                                                             ),
                                                                             Text(
-                                                                              state.wraps[0].wrapItems[index].mainPrice + "\$",
+                                                                              state.wraps[0].wrapItems[index].mainPrice + "SAR",
                                                                               style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
                                                                             )
                                                                           ],
@@ -1531,7 +1543,7 @@ class _CartScreenState extends State<CartScreen> {
                                 //                                     )),
                                 //                               ),
                                 //                               Text(
-                                //                                  state.wraps[0] .wrapItems[index].mainPrice+ "\$",
+                                //                                  state.wraps[0] .wrapItems[index].mainPrice+ "SAR",
                                 //                                 style: TextStyle(
                                 //                                     color: Colors.white,
                                 //                                     fontSize: 24,
@@ -1813,7 +1825,7 @@ class _CartScreenState extends State<CartScreen> {
                                             size: 16.0),
                                         baseText(
                                             title:
-                                                "\$ ${state.cart.productsPrice}",
+                                                "SAR ${state.cart.productsPrice}",
                                             color: AppColor.darkYellow,
                                             size: 16.0),
                                       ],
@@ -1838,7 +1850,7 @@ class _CartScreenState extends State<CartScreen> {
                                       size: 16.0),
                                   baseText(
                                       title:
-                                      "\$ ${state.cart.shippingCharges}",
+                                      "SAR ${state.cart.shippingCharges}",
                                       color: AppColor.darkYellow,
                                       size: 16.0),
                                 ],
@@ -1864,7 +1876,7 @@ class _CartScreenState extends State<CartScreen> {
                                       size: 16.0),
                                   baseText(
                                       title:
-                                      "\$ ${state.cart.valet}",
+                                      "SAR ${state.cart.valet}",
                                       color: AppColor.darkYellow,
                                       size: 16.0),
                                 ],
@@ -1891,7 +1903,7 @@ class _CartScreenState extends State<CartScreen> {
                                             size: 16.0),
                                         baseText(
                                             title:
-                                                "\$ ${state.cart.wrapsPrice}",
+                                                "SAR ${state.cart.wrapsPrice}",
                                             color: AppColor.darkYellow,
                                             size: 16.0),
                                       ],
@@ -1913,7 +1925,7 @@ class _CartScreenState extends State<CartScreen> {
                                             size: 16.0),
                                         baseText(
                                             title:
-                                                "\$ ${state.cart.globalWrap.mainPrice}",
+                                                "SAR ${state.cart.globalWrap.mainPrice}",
                                             color: AppColor.darkYellow,
                                             size: 16.0),
                                       ],
@@ -1938,7 +1950,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 color: AppColor.darkTextColor,
                                                 size: 16.0),
                                             baseText(
-                                                title: "\$ " +
+                                                title: "SAR " +
                                                     state.cart.songPriceBeforAdd
                                                         .toString(),
                                                 color: AppColor.darkYellow,
@@ -1963,13 +1975,13 @@ class _CartScreenState extends State<CartScreen> {
                                         baseText(
                                             title:AppLocalizations.of(context).translate("total"),
                                             color: AppColor.darkTextColor,
-                                            size: 26.0),
+                                            size: 22.0),
                                         Flexible(
                                           child: baseText(
                                               title:
-                                                  "\$ ${state.cart.totalPrice}",
+                                                  "SAR ${state.cart.totalPrice}",
                                               color: AppColor.darkYellow,
-                                              size: 26.0),
+                                              size: 22.0),
                                         ),
                                       ],
                                     ),
@@ -1990,13 +2002,13 @@ class _CartScreenState extends State<CartScreen> {
                                   baseText(
                                       title:AppLocalizations.of(context).translate("final_total_price"),
                                       color: AppColor.darkTextColor,
-                                      size: 26.0),
+                                      size: 22.0),
                                   Flexible(
                                     child: baseText(
                                         title:
-                                        "\$ ${state.cart.finalTotalPrice}",
+                                        "SAR ${state.cart.finalTotalPrice}",
                                         color: AppColor.darkYellow,
-                                        size: 26.0),
+                                        size: 22.0),
                                   ),
                                 ],
                               ),

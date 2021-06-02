@@ -39,7 +39,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
   DateTime selectedDate =DateTime.now();
   String giftTo , deliveryAddress , state , zipCode , city ;
 
-  bool _dateSelected = false;
+  bool _dateSelected = true;
 
 
 
@@ -133,6 +133,9 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
     scaleAnimation =
         CurvedAnimation(parent: controller, curve: Curves.elasticInOut);
 
+    selectedDate=DateTime.parse(widget.recieverModel.deliveryDate);
+
+    print("------------------$selectedDate");
     controller.addListener(() {
       setState(() {});
     });
@@ -143,6 +146,7 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
     _phoneController.text = widget.recieverModel.phoneNumber;
      _addressController.text = widget.recieverModel.address;
     selectedCountry=initCountry(widget.recieverModel.countryCode);
+
   }
 
   @override
@@ -446,13 +450,20 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                           // splashColor: Colors.red,
                           onPressed: () {
                             setState(() {
-                              widget.recieverCallBack(widget.index , RecieverModel(
+                              widget.recieverCallBack(widget.index ,
+                                  RecieverModel(
                                   (b)=>b..giftTo = _giftToController.text
                                       ..address = _addressController.text
                                       ..phoneNumber = _phoneController.text
                                       ..countryCode = countryCode
                                       ..deliveryDate = _dateSelected.toString()
-                              ),"delete");
+                              ),
+                                  _giftToController.text ,
+                                  _addressController.text,
+                                  _phoneController.text,
+                                  countryCode,
+                                _dateSelected.toString(),
+                                  "delete");
                             });
                             Navigator.pop(context);
                           },
@@ -497,7 +508,14 @@ class _EditRecieverDialogState extends State<EditRecieverDialog>   with SingleTi
                                     ..phoneNumber = _phoneController.text
                                     ..countryCode = countryCode
                                     ..deliveryDate = _dateSelected.toString()
-                              ).toBuilder(),"update");
+
+                              ).toBuilder(),
+                                  _giftToController.text,
+                                  _addressController.text,
+                                  _phoneController.text,
+                                  countryCode,
+                                  _dateSelected.toString(),
+                                  "update");
                             });
                             Navigator.pop(context);
 

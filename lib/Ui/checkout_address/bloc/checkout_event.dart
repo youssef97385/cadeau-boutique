@@ -35,6 +35,14 @@ abstract class EditReciever extends CheckoutEvent
 
 
   int get index;
+  String get giftTo;
+  String get countryCode;
+  String get address;
+  String get phoneNumber;
+  String get deliveryDate;
+
+
+
 
   EditReciever._();
 
