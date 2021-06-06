@@ -4,15 +4,20 @@ import 'package:cadeaue_boutique/model/UserInfoV2.dart';
 import 'package:cadeaue_boutique/model/DetailsUserV2.dart';
 import 'package:flutter/material.dart';
 
-const String BaseUrl = "http://apis.cadeauboutique.com/api/";
-// const String BaseUrl = "http://192.168.1.108:7000/api/";
+//const String BaseUrl = "http://apis.cadeauboutique.com/api/";
+ const String BaseUrl = "http://192.168.1.106:8000/api/";
 
-const String BaseImgUrl = "http://apis.cadeauboutique.com/";
- //const String BaseImgUrl = "http://192.168.1.108:7000/";
+//const String BaseImgUrl = "http://apis.cadeauboutique.com/";
+const String BaseImgUrl = "http://192.168.1.106:8000/";
 
 const String ImageUrl = "";
 
 const String CurrencyApp="SAR";
+
+
+const String MadaType="mada";
+const String VisaType="visa";
+const String MasterType="master";
 
 
 

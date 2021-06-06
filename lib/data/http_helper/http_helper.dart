@@ -13,6 +13,7 @@ import 'package:cadeaue_boutique/model/checkout_body/check_body.dart';
 import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
 import 'package:cadeaue_boutique/model/occasion_model/base_occassion.dart';
 import 'package:cadeaue_boutique/model/occasion_model/occasion_model.dart';
+import 'package:cadeaue_boutique/model/payment_hyperpay/hyper_pay_model.dart';
 import 'package:cadeaue_boutique/model/product_model/product_model.dart';
 import 'package:cadeaue_boutique/model/reciever_model/reciever_model.dart';
 import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
@@ -1570,6 +1571,44 @@ class HttpHelper implements IHttpHelper {
               BaseResponse,
               [
                 const FullType(MyCardModel),
+              ],
+            ));
+
+        print(" status : ${baseResponse}");
+        if (baseResponse != null) {
+          return baseResponse.data;
+        } else {
+          throw NetworkException();
+        }
+      } else {
+        throw NetworkException();
+      }
+    } catch (e) {
+      print(e.toString());
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<HyperPayModel> payHyperPay({String token,String type,String total,String numOfPeople}) async {
+    try {
+
+      final formData = {
+        "final_total": total,
+        "number_of_person": numOfPeople,
+      };
+      _dio.interceptors.add(CookieManager(cookieJar));
+      final response = await _dio.post('payment/pay/$type',data: formData,
+          options: Options(headers: {"Authorization": 'Bearer ' + token}));
+      print(' StatusCode ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        final BaseResponse<HyperPayModel> baseResponse =
+        serializers.deserialize(json.decode(response.data),
+            specifiedType: FullType(
+              BaseResponse,
+              [
+                const FullType(HyperPayModel),
               ],
             ));
 

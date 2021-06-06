@@ -22,6 +22,8 @@ import 'package:cadeaue_boutique/model/track_model/track_model.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 import 'package:cadeaue_boutique/core/response_hassan.dart'as response_hassan;
+
+import 'package:cadeaue_boutique/model/payment_hyperpay/hyper_pay_model.dart';
 abstract class IRepository {
 
   Future<bool> getIsLogin();
@@ -193,6 +195,9 @@ abstract class IRepository {
   });
 
   Future<MyCardModel> getMyCard();
+
+  Future<HyperPayModel> payHyperPay({String type,String total,String numOfPeople});
+
 }
 
 ///

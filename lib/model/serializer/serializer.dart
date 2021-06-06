@@ -45,6 +45,8 @@ import 'package:cadeaue_boutique/model/checkout_coupons/checkout_coupons_model.d
 import 'package:cadeaue_boutique/model/reciver_checkout_coupons_model/reciver_coupons_model.dart';
 import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
 import 'package:cadeaue_boutique/model/sent_cards_model/sent_cards_model.dart';
+import 'package:cadeaue_boutique/model/payment_hyperpay/result_hyper_pay.dart';
+import 'package:cadeaue_boutique/model/payment_hyperpay/hyper_pay_model.dart';
 
 
 
@@ -83,7 +85,9 @@ part 'serializer.g.dart';
   CheckoutCoupnsModel,
   ReciverCouponsModel,
   MyCardModel,
-  SentCardModel
+  SentCardModel,
+  ResultHyperPay,
+  HyperPayModel
 
 
 
@@ -452,4 +456,14 @@ final Serializers serializers =
         ],
       )),
           () => BaseResponseBuilder<MyCardModel>())
+
+
+  ..addBuilderFactory(
+      (FullType(
+        BaseResponse,
+        [
+          const FullType(HyperPayModel),
+        ],
+      )),
+          () => BaseResponseBuilder<HyperPayModel>())
 ).build();

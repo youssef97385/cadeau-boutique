@@ -1,3 +1,4 @@
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cadeaue_boutique/core/base_widget/appBar.dart';
 import 'package:cadeaue_boutique/core/base_widget/base_text.dart';
@@ -5,6 +6,7 @@ import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
 import 'package:cadeaue_boutique/Ui/checkout_payment/checkout_payment.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cadeaue_boutique/Ui/checkout_success/checkout_success.dart';
 import 'package:built_collection/built_collection.dart';
@@ -18,6 +20,7 @@ class CheckoutPayment extends StatefulWidget {
   String total;
 
 
+
   CheckoutPayment({this.gifftTo, this.countryCode, this.phone, this.deleviryDate,
       this.address, this.total});
 
@@ -28,6 +31,36 @@ class CheckoutPayment extends StatefulWidget {
 class _CheckoutPaymentState extends State<CheckoutPayment> {
 
   int numberIndex=1;
+  static const platform = const MethodChannel('Hyperpay.demo.fultter/channel');
+  Future<void> _checkoutpage(String checkoutID) async {
+
+
+
+    String transactionStatus;
+    try {
+      final String result = await platform.invokeMethod('gethyperpayresponse',
+          {"type": "ReadyUI", "mode": "TEST", "checkoutid": "260C8DE71759D8557E2406277449C872.uat01-vm-tx04","brand": "credit",
+          });
+      transactionStatus = '$result';
+    } on PlatformException catch (e) {
+      transactionStatus = "${e.message}";
+    }
+
+    if (transactionStatus != null ||
+        transactionStatus == "success" ||
+        transactionStatus == "SYNC") {
+      print(transactionStatus);
+      // getpaymentstatus();
+    } else {
+      /*    setState(() {
+          _resultText = transactionStatus;
+        });*/
+
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -67,7 +100,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                   height: 20,
                 ),
                 baseText(
-                    title: "Payment",color: AppColor.darkTextColor,size:20.0
+                    title: AppLocalizations.of(context).translate("payment"),color: AppColor.darkTextColor,size:20.0
                 ),
                 SizedBox(
                   height: size.height * 0.07,
@@ -313,14 +346,39 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                       child: FlatButton(
                         // splashColor: Colors.red,
                         onPressed: () {
-                        /*  Navigator.push(
-                            context,
-                            PageRouteBuilder(pageBuilder: (_, __, ___) => CheckoutPayment()),
-                          );*/
-                          // Navigator.of(context).push(CupertinoPageRoute(builder: (context) => CheckoutPayment()));
+
+                          var paymentType=MadaType;
+                          if(numberIndex==1)
+                            paymentType=VisaType;
+                          else if(numberIndex==2)
+                            paymentType=MasterType;
+                           Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      CheckoutSuccess(
+                                        gifftTo: widget.gifftTo,
+                                        countryCode: widget.countryCode,
+                                        deleviryDate: widget.deleviryDate,
+                                        phone: widget.phone,
+                                        address: widget.address,
+                                        total: widget.total,
+                                        paymentType: paymentType,
+                                      ))
+
+                                       );
+
+
+                       //   _checkoutpage(in);
+
+
+
+
+
+
                         },
                         child: Text(
-                          'Add New Card',
+                          AppLocalizations.of(context).translate('pay'),
                           style: TextStyle(
                             color: AppColor.textColor,
                             fontSize: 13,

@@ -9,8 +9,10 @@ import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/core/validators.dart';
 import 'package:cadeaue_boutique/Ui/checkout_payment/checkout_payment.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../injectoin.dart';
 import 'bloc/successCheck_event.dart';
 import 'bloc/successCheck_event.dart';
@@ -25,8 +27,9 @@ class CheckoutSuccess extends StatefulWidget {
   BuiltList<String> deleviryDate;
   BuiltList<String> address;
   String total;
+  String paymentType;
 
-  CheckoutSuccess({this.gifftTo , this.countryCode , this.phone , this.deleviryDate ,this.address , this.total});
+  CheckoutSuccess({this.gifftTo , this.countryCode , this.phone , this.deleviryDate ,this.address , this.total,this.paymentType});
 
   @override
   _CheckoutSuccessState createState() => _CheckoutSuccessState();
@@ -35,12 +38,20 @@ class CheckoutSuccess extends StatefulWidget {
 class _CheckoutSuccessState extends State<CheckoutSuccess> {
   final _bloc = sl<SuccessCheckBloc>();
 
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _bloc.add(TryCheckout((b)=>b
+
+    _bloc.add(GetCheckoutID((b)=>b..totla=widget.total
+    ..people=widget.gifftTo.length.toString()
+    ..paymentType=widget.paymentType));
+
+
+/*    _bloc.add(TryCheckout((b)=>b
 
       ..giftTo=widget.gifftTo.toBuilder()
     ..deliveryDate = widget.deleviryDate.toBuilder()
@@ -49,8 +60,59 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
       ..address = widget.address.toBuilder()
         ..total = widget.total
 
-    ));
+    ));*/
 
+  }
+
+
+  static const platform = const MethodChannel('Hyperpay.demo.fultter/channel');
+
+  Future<void> _checkoutpage(String checkoutID) async {
+
+
+    var realPayType=MadaType;
+
+    if(widget.paymentType==VisaType||widget.paymentType==MasterType)
+      realPayType="credit";
+
+
+    String transactionStatus;
+    try {
+      final String result = await platform.invokeMethod('gethyperpayresponse',
+          {"type": "ReadyUI", "mode": "TEST", "checkoutid": checkoutID,"brand": widget.paymentType,
+          });
+      transactionStatus = '$result';
+    } on PlatformException catch (e) {
+      transactionStatus = "${e.message}";
+    }
+
+    if (transactionStatus != null ||
+        transactionStatus == "success" ||
+        transactionStatus == "SYNC") {
+
+
+
+      print("the response of payment  $transactionStatus");
+
+
+      _bloc.add(TryCheckout((b)=>b
+
+        ..giftTo=widget.gifftTo.toBuilder()
+        ..deliveryDate = widget.deleviryDate.toBuilder()
+        ..countryCode = widget.countryCode.toBuilder()
+        ..phoneNumber = widget.phone.toBuilder()
+        ..address = widget.address.toBuilder()
+        ..total = widget.total
+
+      ));
+
+      // getpaymentstatus();
+    } else {
+      /*    setState(() {
+          _resultText = transactionStatus;
+        });*/
+
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -58,6 +120,17 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
     return BlocBuilder(
         cubit: _bloc,
         builder: (BuildContext context , SuccessCheckoutState state){
+
+
+          error(state.error);
+
+          if(state.successGetCheckoutID){
+
+
+            _checkoutpage(state.transactionPayment.ndc);
+
+
+          }
       return Scaffold(
           backgroundColor: Colors.white,
           body: Stack(
@@ -115,16 +188,24 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
                           height: 20,
                         ),
                         baseText(
-                            title: "Thank You",color: AppColor.darkTextColor,size:20.0
+                            title: AppLocalizations.of(context).translate("thank_you"),color: AppColor.darkTextColor,size:20.0
                         ),
                         SizedBox(
                           height: size.height * 0.07,
                         ),
 
+                        (state.isLoading)?
                         Container(
                             width: size.width,
 
-                            child: Center(child: baseText(title: state.error.isEmpty?"Your order has been placed Successfully ":"Sorry Try Again Later" ,
+                            child: Center(child: baseText(title: AppLocalizations.of(context).translate("success_hint1") ,
+                                size: 24.0 ,
+                                color: AppColor.darkTextColor,
+                                textAlign: TextAlign.center))):
+                        Container(
+                            width: size.width,
+
+                            child: Center(child: baseText(title: state.error.isEmpty?AppLocalizations.of(context).translate("success_hint1"):AppLocalizations.of(context).translate("try_again") ,
                                 size: 24.0 ,
                                 color: AppColor.darkTextColor,
                                 textAlign: TextAlign.center))),
@@ -224,6 +305,20 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
     return Container(
       width: 5.0,
     );
+  }
+
+  void error(String errorCode) {
+    if (errorCode!=null && errorCode.isNotEmpty) {
+      Fluttertoast.showToast(
+          msg: errorCode,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          //timeInSecForIos: 1,
+          backgroundColor: Colors.red.withOpacity(0.8),
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+    }
   }
 
   Widget line(Size size , bool isChecked) {

@@ -139,5 +139,7 @@
   "success_hint1": "تم تقديم طلبك بنجاح",
   "welcome_hint1":"لنجد لك هدية",
   "no_result": "لا يوجد نتائج",
-  "try_another_choices": "جرب خيارات اخرى"
+  "try_another_choices": "جرب خيارات اخرى",
+  "payment": "الدفع",
+  "pay": "ادفع"
 }

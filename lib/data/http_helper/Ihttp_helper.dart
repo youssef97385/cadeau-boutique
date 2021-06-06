@@ -28,6 +28,7 @@ import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/main_gift/main_gift.dart';
 import 'package:cadeaue_boutique/model/sms_response/sms_response.dart';
 import 'package:cadeaue_boutique/model/my_card_model/my_card_model.dart';
+import 'package:cadeaue_boutique/model/payment_hyperpay/hyper_pay_model.dart';
 
 
 
@@ -204,4 +205,7 @@ Future<bool> checkoutMultieGiftCoupons({
 
 
 Future<MyCardModel> getMyCard({String token});
+
+
+Future<HyperPayModel> payHyperPay({String token,String type,String total,String numOfPeople});
 }

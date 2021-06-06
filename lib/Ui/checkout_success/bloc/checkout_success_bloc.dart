@@ -27,8 +27,11 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
           ..isLoading = true
           ..error = ""
           ..success = false
+            ..successGetCheckoutID=false
 
         );
+
+      //  var paymentData=await _iRepository.payHyperPay(type: event.paymentType);
 
         final data = await _iRepository.checkoutMultieGift(recieverModel: event.recievers,total: event.total,phone: event.phoneNumber,countryCode: event.countryCode,deliveryDate: event.deliveryDate,giftTo: event.giftTo , address: event.address);
 
@@ -37,6 +40,7 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
           ..isLoading = false
           ..error = ""
           ..success = true
+          ..successGetCheckoutID=false
 
         );
 
@@ -46,11 +50,59 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
           ..isLoading = false
           ..error = "Something went wrong"
           ..success = false
+          ..successGetCheckoutID=false
 
         );
 
       }
     }
+
+
+
+
+
+    if(event is GetCheckoutID){
+
+
+      try{
+
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+          ..transactionPayment=null
+          ..successGetCheckoutID=false
+        );
+
+
+        var paymentData=await _iRepository.payHyperPay(type: event.paymentType,numOfPeople: event.people,total: event.totla);
+
+
+        yield state.rebuild((b) => b
+          ..isLoading = true
+          ..error = ""
+          ..success = false
+          ..transactionPayment.replace(paymentData)
+          ..successGetCheckoutID=true
+        );
+
+
+    } catch (e) {
+    print('check Error $e');
+    yield state.rebuild((b) => b
+    ..isLoading = false
+    ..error = "Something went wrong"
+    ..success = false
+      ..successGetCheckoutID=false
+      ..transactionPayment=null
+
+    );
+
+    }
+
+    }
+
+
 
     if(event is TryCheckOutCoupons){
       try {

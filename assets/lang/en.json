@@ -139,7 +139,9 @@
   "success_hint1": "Your order has been placed Successfully",
   "welcome_hint1":"Let's Find You a Gift",
   "no_result": "No Result Found",
-  "try_another_choices": "Try Another Choices"
+  "try_another_choices": "Try Another Choices",
+  "payment": "Payment",
+  "pay": "Pay"
 
 
 

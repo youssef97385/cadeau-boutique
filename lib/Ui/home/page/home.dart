@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cadeaue_boutique/Ui/Sign_in/sign_in.dart';
+import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -209,8 +210,8 @@ class _HomeState extends State<Home> {
         btnOkColor: AppColor.darkYellow,
         dialogType: DialogType.INFO,
         animType: AnimType.BOTTOMSLIDE,
-        title: 'Login',
-        desc: 'You must be logged in',
+        title: AppLocalizations.of(context).translate('login'),
+        desc: AppLocalizations.of(context).translate('you_must_logged_in'),
         btnCancelOnPress: () { },
         btnOkOnPress: () {
           WidgetsBinding.instance.addPostFrameCallback((_) =>

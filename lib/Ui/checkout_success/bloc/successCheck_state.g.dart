@@ -10,22 +10,35 @@ class _$SuccessCheckoutState extends SuccessCheckoutState {
   @override
   final bool success;
   @override
+  final bool successGetCheckoutID;
+  @override
   final bool isLoading;
   @override
   final String error;
+  @override
+  final HyperPayModel transactionPayment;
 
   factory _$SuccessCheckoutState(
           [void Function(SuccessCheckoutStateBuilder) updates]) =>
       (new SuccessCheckoutStateBuilder()..update(updates)).build();
 
-  _$SuccessCheckoutState._({this.success, this.isLoading, this.error})
+  _$SuccessCheckoutState._(
+      {this.success,
+      this.successGetCheckoutID,
+      this.isLoading,
+      this.error,
+      this.transactionPayment})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         success, 'SuccessCheckoutState', 'success');
     BuiltValueNullFieldError.checkNotNull(
+        successGetCheckoutID, 'SuccessCheckoutState', 'successGetCheckoutID');
+    BuiltValueNullFieldError.checkNotNull(
         isLoading, 'SuccessCheckoutState', 'isLoading');
     BuiltValueNullFieldError.checkNotNull(
         error, 'SuccessCheckoutState', 'error');
+    BuiltValueNullFieldError.checkNotNull(
+        transactionPayment, 'SuccessCheckoutState', 'transactionPayment');
   }
 
   @override
@@ -42,22 +55,30 @@ class _$SuccessCheckoutState extends SuccessCheckoutState {
     if (identical(other, this)) return true;
     return other is SuccessCheckoutState &&
         success == other.success &&
+        successGetCheckoutID == other.successGetCheckoutID &&
         isLoading == other.isLoading &&
-        error == other.error;
+        error == other.error &&
+        transactionPayment == other.transactionPayment;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, success.hashCode), isLoading.hashCode), error.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc($jc($jc(0, success.hashCode), successGetCheckoutID.hashCode),
+                isLoading.hashCode),
+            error.hashCode),
+        transactionPayment.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SuccessCheckoutState')
           ..add('success', success)
+          ..add('successGetCheckoutID', successGetCheckoutID)
           ..add('isLoading', isLoading)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('transactionPayment', transactionPayment))
         .toString();
   }
 }
@@ -70,6 +91,11 @@ class SuccessCheckoutStateBuilder
   bool get success => _$this._success;
   set success(bool success) => _$this._success = success;
 
+  bool _successGetCheckoutID;
+  bool get successGetCheckoutID => _$this._successGetCheckoutID;
+  set successGetCheckoutID(bool successGetCheckoutID) =>
+      _$this._successGetCheckoutID = successGetCheckoutID;
+
   bool _isLoading;
   bool get isLoading => _$this._isLoading;
   set isLoading(bool isLoading) => _$this._isLoading = isLoading;
@@ -78,14 +104,22 @@ class SuccessCheckoutStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  HyperPayModelBuilder _transactionPayment;
+  HyperPayModelBuilder get transactionPayment =>
+      _$this._transactionPayment ??= new HyperPayModelBuilder();
+  set transactionPayment(HyperPayModelBuilder transactionPayment) =>
+      _$this._transactionPayment = transactionPayment;
+
   SuccessCheckoutStateBuilder();
 
   SuccessCheckoutStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _success = $v.success;
+      _successGetCheckoutID = $v.successGetCheckoutID;
       _isLoading = $v.isLoading;
       _error = $v.error;
+      _transactionPayment = $v.transactionPayment.toBuilder();
       _$v = null;
     }
     return this;
@@ -104,14 +138,32 @@ class SuccessCheckoutStateBuilder
 
   @override
   _$SuccessCheckoutState build() {
-    final _$result = _$v ??
-        new _$SuccessCheckoutState._(
-            success: BuiltValueNullFieldError.checkNotNull(
-                success, 'SuccessCheckoutState', 'success'),
-            isLoading: BuiltValueNullFieldError.checkNotNull(
-                isLoading, 'SuccessCheckoutState', 'isLoading'),
-            error: BuiltValueNullFieldError.checkNotNull(
-                error, 'SuccessCheckoutState', 'error'));
+    _$SuccessCheckoutState _$result;
+    try {
+      _$result = _$v ??
+          new _$SuccessCheckoutState._(
+              success: BuiltValueNullFieldError.checkNotNull(
+                  success, 'SuccessCheckoutState', 'success'),
+              successGetCheckoutID: BuiltValueNullFieldError.checkNotNull(
+                  successGetCheckoutID,
+                  'SuccessCheckoutState',
+                  'successGetCheckoutID'),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, 'SuccessCheckoutState', 'isLoading'),
+              error: BuiltValueNullFieldError.checkNotNull(
+                  error, 'SuccessCheckoutState', 'error'),
+              transactionPayment: transactionPayment.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'transactionPayment';
+        transactionPayment.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SuccessCheckoutState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

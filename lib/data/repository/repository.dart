@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-
+import 'package:cadeaue_boutique/model/payment_hyperpay/hyper_pay_model.dart';
 import 'package:built_collection/src/list.dart';
 import 'package:cadeaue_boutique/core/constent.dart';
 import 'package:cadeaue_boutique/data/db_helper/Idb_helper.dart';
@@ -598,5 +598,13 @@ class Repository implements IRepository {
     final item = await _ihttpHelper.getMyCard(token: token);
     return item;
 
+  }
+
+  @override
+  Future<HyperPayModel> payHyperPay({String type,String total,String numOfPeople}) async {
+    final token = await _iprefHelper.getToken();
+    print("my token=$token");
+    final item = await _ihttpHelper.payHyperPay(token: token,type: type,total: total,numOfPeople: numOfPeople);
+    return item;
   }
 }
