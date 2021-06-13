@@ -1334,19 +1334,21 @@ class _CartScreenState extends State<CartScreen> {
                                                                         child:
                                                                             Column(
                                                                           children: [
-                                                                            Padding(
-                                                                              padding: const EdgeInsets.only(bottom: 16.0),
-                                                                              child: Container(
-                                                                                  width: 122,
-                                                                                  height: 100,
-                                                                                  child: Image.network(
-                                                                                    BaseImgUrl + state.wraps[0].wrapItems[index].image,
-                                                                                    fit: BoxFit.fill,
-                                                                                  )),
+                                                                            Flexible(
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.only(bottom: 16.0),
+                                                                                child: Container(
+                                                                                    width: 122,
+                                                                                    height: 100,
+                                                                                    child: Image.network(
+                                                                                      BaseImgUrl + state.wraps[0].wrapItems[index].image,
+                                                                                      fit: BoxFit.fill,
+                                                                                    )),
+                                                                              ),
                                                                             ),
                                                                             Text(
                                                                               state.wraps[0].wrapItems[index].mainPrice + "SAR",
-                                                                              style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                                                                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                                                                             )
                                                                           ],
                                                                         ),

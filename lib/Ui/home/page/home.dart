@@ -132,45 +132,37 @@ class _HomeState extends State<Home> {
           items: [
             BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/bottom-icons/bottom-bag.svg',color: Colors.black,),
-              title: Text(
-                '',
-                style: TextStyle(color: _currentIndex==0? AppColor.darkGreenColor:Colors.grey),
-              ),
+              label:
+                ''
+
+              ,
               activeIcon: SvgPicture.asset('assets/bottom-icons/bottom-bag.svg',color: AppColor.darkYellow,),
             ),
 
             BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/bottom-icons/bottom-tracking.svg',color: Colors.black,),
-              title: Text(
-                '',
-                style: TextStyle(color: _currentIndex==0? AppColor.darkGreenColor:Colors.grey),
-              ),
+              label:
+              '',
               activeIcon: SvgPicture.asset('assets/bottom-icons/bottom-tracking.svg',color: AppColor.darkYellow,),
             ),
 
             BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/bottom-icons/bottom-home.svg',color: Colors.black,),
-              title: Text(
-                '',
-                style: TextStyle(color: _currentIndex==0? AppColor.darkGreenColor:Colors.grey),
-              ),
+              label:
+              '',
               activeIcon: SvgPicture.asset('assets/bottom-icons/bottom-home.svg',color: AppColor.darkYellow,),
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/bottom-icons/bottom-user.svg',color: Colors.black,),
-              title: Text(
-                '',
-                style: TextStyle(color: _currentIndex==0? AppColor.darkGreenColor:Colors.grey),
-              ),
+              label:
+              '',
               activeIcon: SvgPicture.asset('assets/bottom-icons/bottom-user.svg',color: AppColor.darkYellow,),
             ),
 
             BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/bottom-icons/bottom-gift.svg',color: Colors.black,),
-              title: Text(
-                '',
-                style: TextStyle(color: _currentIndex==0? AppColor.darkGreenColor:Colors.grey),
-              ),
+              label:
+              '',
               activeIcon: SvgPicture.asset('assets/bottom-icons/bottom-gift.svg',color: AppColor.darkYellow,),
             ),
 
