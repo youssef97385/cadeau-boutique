@@ -76,10 +76,13 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
       realPayType="credit";
 
 
+
+    print("checkoutID $checkoutID");
+    print("brand ${widget.paymentType}");
     String transactionStatus;
     try {
       final String result = await platform.invokeMethod('gethyperpayresponse',
-          {"type": "ReadyUI", "mode": "TEST", "checkoutid": checkoutID,"brand": widget.paymentType,
+          {"type": "ReadyUI", "mode": "TEST", "checkoutid": checkoutID,"brand": realPayType,
           });
       transactionStatus = '$result';
     } on PlatformException catch (e) {
@@ -108,6 +111,8 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
 
       // getpaymentstatus();
     } else {
+
+      error(AppLocalizations.of(context).translate("payment_failed"));
       /*    setState(() {
           _resultText = transactionStatus;
         });*/
@@ -127,7 +132,10 @@ class _CheckoutSuccessState extends State<CheckoutSuccess> {
           if(state.successGetCheckoutID){
 
 
+            _bloc.add(ClearSuccessID());
             _checkoutpage(state.transactionPayment.ndc);
+
+
 
 
           }

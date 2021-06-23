@@ -25,7 +25,7 @@ abstract class TryCheckout extends SuccessCheckEvent
   BuiltList<String> get phoneNumber;
   BuiltList<String> get address;
   String get total;
-  String get paymentType;
+
 
   TryCheckout._();
 
@@ -59,5 +59,13 @@ abstract class GetCheckoutID extends SuccessCheckEvent implements Built<GetCheck
 GetCheckoutID._();
 
 factory GetCheckoutID([updates(GetCheckoutIDBuilder b)]) = _$GetCheckoutID;
+}
+
+
+abstract class ClearSuccessID extends SuccessCheckEvent implements Built<ClearSuccessID, ClearSuccessIDBuilder> {
+
+ClearSuccessID._();
+
+factory ClearSuccessID([updates(ClearSuccessIDBuilder b)]) = _$ClearSuccessID;
 }
 

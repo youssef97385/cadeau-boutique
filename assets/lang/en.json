@@ -141,7 +141,9 @@
   "no_result": "No Result Found",
   "try_another_choices": "Try Another Choices",
   "payment": "Payment",
-  "pay": "Pay"
+  "pay": "Pay",
+  "payment_failed": "Payment failed",
+  "or_txt": "or"
 
 
 

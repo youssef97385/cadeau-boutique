@@ -198,11 +198,11 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
 
 
         CheckoutSettings checkoutSettings =  new CheckoutSettings(checkoutId,paymentBrands,
-                Connect.ProviderMode.TEST).setShopperResultUrl("com.mosab.demohyperpayapp://result");
+                Connect.ProviderMode.TEST).setShopperResultUrl("com.smarttouch.cadeaue_boutique://result");
 
         if (mode.equals("LIVE")) {
             checkoutSettings =  new CheckoutSettings(checkoutId,paymentBrands,
-                    Connect.ProviderMode.LIVE).setShopperResultUrl("com.mosab.demohyperpayapp://result");
+                    Connect.ProviderMode.LIVE).setShopperResultUrl("com.smarttouch.cadeaue_boutique://result");
         }
 
 
@@ -228,7 +228,7 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
 
             try {
                 PaymentParams paymentParams = new PaymentParams(checkoutid,"STC_PAY");
-                paymentParams.setShopperResultUrl("com.mosab.demohyperpayapp://result");
+                paymentParams.setShopperResultUrl("com.smarttouch.cadeaue_boutique://result");
                 Transaction transaction = new Transaction(paymentParams);
                 binder.submitTransaction(transaction);
             } catch (PaymentException e) {
@@ -308,7 +308,7 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
                             year,
                             cvv
                     );
-                    paymentParams.setShopperResultUrl("com.mosab.demohyperpayapp://result");
+                    paymentParams.setShopperResultUrl("com.smarttouch.cadeaue_boutique://result");
 
                     Transaction transaction = new Transaction(paymentParams);
                     binder.submitTransaction(transaction);

@@ -21,8 +21,6 @@ class _$TryCheckout extends TryCheckout {
   final BuiltList<String> address;
   @override
   final String total;
-  @override
-  final String paymentType;
 
   factory _$TryCheckout([void Function(TryCheckoutBuilder) updates]) =>
       (new TryCheckoutBuilder()..update(updates)).build();
@@ -34,8 +32,7 @@ class _$TryCheckout extends TryCheckout {
       this.countryCode,
       this.phoneNumber,
       this.address,
-      this.total,
-      this.paymentType})
+      this.total})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         recievers, 'TryCheckout', 'recievers');
@@ -48,8 +45,6 @@ class _$TryCheckout extends TryCheckout {
         phoneNumber, 'TryCheckout', 'phoneNumber');
     BuiltValueNullFieldError.checkNotNull(address, 'TryCheckout', 'address');
     BuiltValueNullFieldError.checkNotNull(total, 'TryCheckout', 'total');
-    BuiltValueNullFieldError.checkNotNull(
-        paymentType, 'TryCheckout', 'paymentType');
   }
 
   @override
@@ -69,8 +64,7 @@ class _$TryCheckout extends TryCheckout {
         countryCode == other.countryCode &&
         phoneNumber == other.phoneNumber &&
         address == other.address &&
-        total == other.total &&
-        paymentType == other.paymentType;
+        total == other.total;
   }
 
   @override
@@ -79,14 +73,12 @@ class _$TryCheckout extends TryCheckout {
         $jc(
             $jc(
                 $jc(
-                    $jc(
-                        $jc($jc($jc(0, recievers.hashCode), giftTo.hashCode),
-                            deliveryDate.hashCode),
-                        countryCode.hashCode),
-                    phoneNumber.hashCode),
-                address.hashCode),
-            total.hashCode),
-        paymentType.hashCode));
+                    $jc($jc($jc(0, recievers.hashCode), giftTo.hashCode),
+                        deliveryDate.hashCode),
+                    countryCode.hashCode),
+                phoneNumber.hashCode),
+            address.hashCode),
+        total.hashCode));
   }
 
   @override
@@ -98,8 +90,7 @@ class _$TryCheckout extends TryCheckout {
           ..add('countryCode', countryCode)
           ..add('phoneNumber', phoneNumber)
           ..add('address', address)
-          ..add('total', total)
-          ..add('paymentType', paymentType))
+          ..add('total', total))
         .toString();
   }
 }
@@ -145,10 +136,6 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
   String get total => _$this._total;
   set total(String total) => _$this._total = total;
 
-  String _paymentType;
-  String get paymentType => _$this._paymentType;
-  set paymentType(String paymentType) => _$this._paymentType = paymentType;
-
   TryCheckoutBuilder();
 
   TryCheckoutBuilder get _$this {
@@ -161,7 +148,6 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
       _phoneNumber = $v.phoneNumber.toBuilder();
       _address = $v.address.toBuilder();
       _total = $v.total;
-      _paymentType = $v.paymentType;
       _$v = null;
     }
     return this;
@@ -191,9 +177,7 @@ class TryCheckoutBuilder implements Builder<TryCheckout, TryCheckoutBuilder> {
               phoneNumber: phoneNumber.build(),
               address: address.build(),
               total: BuiltValueNullFieldError.checkNotNull(
-                  total, 'TryCheckout', 'total'),
-              paymentType: BuiltValueNullFieldError.checkNotNull(
-                  paymentType, 'TryCheckout', 'paymentType'));
+                  total, 'TryCheckout', 'total'));
     } catch (_) {
       String _$failedField;
       try {
@@ -504,6 +488,62 @@ class GetCheckoutIDBuilder
                 people, 'GetCheckoutID', 'people'),
             paymentType: BuiltValueNullFieldError.checkNotNull(
                 paymentType, 'GetCheckoutID', 'paymentType'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ClearSuccessID extends ClearSuccessID {
+  factory _$ClearSuccessID([void Function(ClearSuccessIDBuilder) updates]) =>
+      (new ClearSuccessIDBuilder()..update(updates)).build();
+
+  _$ClearSuccessID._() : super._();
+
+  @override
+  ClearSuccessID rebuild(void Function(ClearSuccessIDBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ClearSuccessIDBuilder toBuilder() =>
+      new ClearSuccessIDBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ClearSuccessID;
+  }
+
+  @override
+  int get hashCode {
+    return 862782567;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('ClearSuccessID').toString();
+  }
+}
+
+class ClearSuccessIDBuilder
+    implements Builder<ClearSuccessID, ClearSuccessIDBuilder> {
+  _$ClearSuccessID _$v;
+
+  ClearSuccessIDBuilder();
+
+  @override
+  void replace(ClearSuccessID other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ClearSuccessID;
+  }
+
+  @override
+  void update(void Function(ClearSuccessIDBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ClearSuccessID build() {
+    final _$result = _$v ?? new _$ClearSuccessID._();
     replace(_$result);
     return _$result;
   }

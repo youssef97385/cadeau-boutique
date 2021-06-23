@@ -141,5 +141,7 @@
   "no_result": "لا يوجد نتائج",
   "try_another_choices": "جرب خيارات اخرى",
   "payment": "الدفع",
-  "pay": "ادفع"
+  "pay": "ادفع",
+  "payment_failed": "فشلت عملية الدفع",
+  "or_txt": "أو"
 }

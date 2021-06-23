@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cadeaue_boutique/Ui/Dialog/DialogCode/MyCountryPickerDialog.dart';
 import 'package:cadeaue_boutique/core/app_localizations.dart';
 import 'package:country_pickers/country.dart';
@@ -828,31 +830,13 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 SizedBox(
                                                   width: 20,
                                                 ),
-                                                Container(
-                                                    height: 38,
-                                                    width: 38,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          AppColor.darkYellow,
-                                                          AppColor.lightYellow
-                                                        ],
-                                                        stops: [0.1, 0.96],
-                                                      ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(4.0),
-                                                      child: SvgPicture.asset(
-                                                        "assets/images/apple-logo.svg",
-                                                        height: 38,
-                                                        width: 38,
-                                                      ),
-                                                    )),
+
                                               ],
                                             ),
-                                          )
+                                          ),
+
+
+
                                         ],
                                       ),
                                     ),

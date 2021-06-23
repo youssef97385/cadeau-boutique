@@ -113,7 +113,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: state.products.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9,crossAxisSpacing: 20,mainAxisSpacing: 20),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.6,crossAxisSpacing: 20,mainAxisSpacing: 20),
                         itemBuilder: (context, index){
                           return GestureDetector(
                             onTap: (){
@@ -128,7 +128,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                 children: [
                                   Container(
                                     width: 160,
-                                    height: 180,
+                                    height: 190,
                                     decoration: BoxDecoration(
                                       borderRadius:
                                       BorderRadius.all(Radius.circular(12)),
@@ -152,7 +152,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                                           const EdgeInsets.only(bottom: 8.0),
                                           child: Container(
                                               width: 160,
-                                              height: 130,
+                                              height: 120,
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.all(Radius.circular(12)),
                                                 child: Image.network(

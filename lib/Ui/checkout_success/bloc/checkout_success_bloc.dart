@@ -21,6 +21,14 @@ class SuccessCheckBloc extends Bloc<SuccessCheckEvent, SuccessCheckoutState> {
   Stream<SuccessCheckoutState> mapEventToState(
       SuccessCheckEvent event,
       ) async* {
+
+    if(event is ClearSuccessID){
+      yield state.rebuild((b) => b
+        ..isLoading = false
+        ..error = ""
+        ..success = false
+        ..successGetCheckoutID=false);
+    }
     if(event is TryCheckout){
       try {
         yield state.rebuild((b) => b
